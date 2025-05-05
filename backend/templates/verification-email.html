@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+        .verification-code {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            letter-spacing: 3px;
+        }
+        .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #666;
+        }
+        .divider {
+            border-top: 1px solid #ddd;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://your-logo-url.com/logo.png" alt="Company Logo" class="logo">
+            <h1>Verify Your Email Address</h1>
+        </div>
+        
+        <p>Hello {{displayName}},</p>
+        
+        <p>Thank you for registering with us. To complete your registration, please verify your email address using one of the methods below:</p>
+
+        <div class="verification-code">
+            Verification Code: {{verificationCode}}
+        </div>
+
+        <p>Or click the button below to verify your email:</p>
+        
+        <div style="text-align: center;">
+            <a href="{{verificationLink}}" class="button">Verify Email Address</a>
+        </div>
+
+        <div class="divider"></div>
+
+        <p>If you did not create an account, you can safely ignore this email.</p>
+        
+        <div class="footer">
+            <p>This email was sent to {{email}}. Please do not reply to this email.</p>
+            <p>&copy; {{currentYear}} Your Company Name. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html> 

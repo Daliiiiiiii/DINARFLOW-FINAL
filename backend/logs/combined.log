@@ -1,0 +1,849 @@
+2025-04-22T17:31:33.336Z [INFO]: GridFS bucket initialized
+2025-04-22T17:31:33.339Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-22T17:31:45.064Z [INFO]: GridFS bucket initialized
+2025-04-22T17:31:45.067Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-22T17:39:22.148Z [INFO]: GridFS bucket initialized
+2025-04-22T17:39:22.151Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-22T17:40:57.914Z [INFO]: GridFS bucket initialized
+2025-04-22T17:40:57.917Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-22T17:47:24.848Z [INFO]: GridFS bucket initialized
+2025-04-22T17:47:24.851Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-22T17:47:49.201Z [INFO]: GridFS bucket initialized
+2025-04-22T17:47:49.204Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-22T17:49:03.998Z [INFO]: GridFS bucket initialized
+2025-04-22T17:49:04.002Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-22T17:52:54.407Z [INFO]: GridFS bucket initialized
+2025-04-22T17:52:54.414Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-22T18:07:20.096Z [INFO]: GridFS bucket initialized
+2025-04-22T18:07:20.098Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-22T18:11:12.329Z [INFO]: GridFS bucket initialized
+2025-04-22T18:11:12.332Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-22T18:12:26.231Z [INFO]: GridFS bucket initialized
+2025-04-22T18:12:26.234Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-22T18:14:07.436Z [INFO]: GridFS bucket initialized
+2025-04-22T18:14:07.439Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-22T18:23:59.660Z [INFO]: GridFS bucket initialized
+2025-04-22T18:23:59.663Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-22T18:24:48.627Z [INFO]: GridFS bucket initialized
+2025-04-22T18:24:48.630Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-22T18:30:06.418Z [INFO]: GridFS bucket initialized
+2025-04-22T18:30:06.421Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-22T18:35:17.377Z [INFO]: GridFS bucket initialized
+2025-04-22T18:35:17.380Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-22T18:39:12.346Z [INFO]: GridFS bucket initialized
+2025-04-22T18:39:12.352Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-22T18:39:44.649Z [INFO]: GridFS bucket initialized
+2025-04-22T18:39:44.652Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-22T18:44:03.216Z [INFO]: GridFS bucket initialized
+2025-04-22T18:44:03.220Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-22T18:45:54.249Z [INFO]: GridFS bucket initialized
+2025-04-22T18:45:54.252Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-22T18:50:20.120Z [INFO]: GridFS bucket initialized
+2025-04-22T18:50:20.123Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-22T18:50:52.545Z [INFO]: GridFS bucket initialized
+2025-04-22T18:50:52.548Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-22T18:53:39.191Z [INFO]: GridFS bucket initialized
+2025-04-22T18:53:39.195Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-22T18:59:38.467Z [INFO]: GridFS bucket initialized
+2025-04-22T18:59:38.470Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-22T19:04:26.239Z [INFO]: GridFS bucket initialized
+2025-04-22T19:04:26.242Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-22T19:04:54.965Z [INFO]: KYC verification submitted
+	Metadata: {
+  "userId": "6806e15c47fc32ab0f6678ea"
+}
+2025-04-22T19:08:00.945Z [INFO]: GridFS bucket initialized
+2025-04-22T19:08:00.948Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-22T19:08:30.907Z [INFO]: KYC verification submitted
+	Metadata: {
+  "userId": "6806e15c47fc32ab0f6678ea"
+}
+2025-04-22T19:10:05.917Z [INFO]: GridFS bucket initialized
+2025-04-22T19:10:05.928Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-22T19:10:21.412Z [INFO]: GridFS bucket initialized
+2025-04-22T19:10:21.415Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-22T19:10:45.115Z [INFO]: KYC verification submitted
+	Metadata: {
+  "userId": "6806e15c47fc32ab0f6678ea"
+}
+2025-04-22T19:12:05.224Z [INFO]: GridFS bucket initialized
+2025-04-22T19:12:05.227Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-22T19:12:28.272Z [INFO]: KYC verification submitted
+	Metadata: {
+  "userId": "6806e15c47fc32ab0f6678ea"
+}
+2025-04-22T19:14:27.722Z [INFO]: GridFS bucket initialized
+2025-04-22T19:14:27.728Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-22T19:15:02.091Z [ERROR]: Image validation failed: Invalid input
+	Metadata: {
+  "stack": "Error: Invalid input\n    at Sharp (C:\\Users\\Dali\\Downloads\\project\\node_modules\\sharp\\lib\\constructor.js:200:11)\n    at FileStorageService.validateImage (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:132:27)\n    at FileStorageService.validateFile (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:126:21)\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:205:82)\n    at file:///C:/Users/Dali/Downloads/project/server/routes/kyc.js:135:19\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:157:11"
+}
+2025-04-22T19:15:02.093Z [ERROR]: Image validation failed: Invalid input
+	Metadata: {
+  "stack": "Error: Invalid input\n    at Sharp (C:\\Users\\Dali\\Downloads\\project\\node_modules\\sharp\\lib\\constructor.js:200:11)\n    at FileStorageService.validateImage (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:132:27)\n    at FileStorageService.validateFile (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:126:21)\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:205:82)\n    at file:///C:/Users/Dali/Downloads/project/server/routes/kyc.js:136:19\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:157:11"
+}
+2025-04-22T19:15:02.094Z [ERROR]: Image validation failed: Invalid input
+	Metadata: {
+  "stack": "Error: Invalid input\n    at Sharp (C:\\Users\\Dali\\Downloads\\project\\node_modules\\sharp\\lib\\constructor.js:200:11)\n    at FileStorageService.validateImage (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:132:27)\n    at FileStorageService.validateFile (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:126:21)\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:205:82)\n    at file:///C:/Users/Dali/Downloads/project/server/routes/kyc.js:137:19\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:157:11"
+}
+2025-04-22T19:15:02.094Z [ERROR]: File storage error: Invalid image file: Invalid input
+	Metadata: {
+  "stack": "Error: Invalid image file: Invalid input\n    at FileStorageService.validateImage (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:194:19)\n    at FileStorageService.validateFile (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:126:21)\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:205:82)\n    at file:///C:/Users/Dali/Downloads/project/server/routes/kyc.js:135:19\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\storage\\disk.js:43:9)"
+}
+2025-04-22T19:15:02.095Z [ERROR]: File storage error: Invalid image file: Invalid input
+	Metadata: {
+  "stack": "Error: Invalid image file: Invalid input\n    at FileStorageService.validateImage (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:194:19)\n    at FileStorageService.validateFile (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:126:21)\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:205:82)\n    at file:///C:/Users/Dali/Downloads/project/server/routes/kyc.js:136:19\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\storage\\disk.js:43:9)"
+}
+2025-04-22T19:15:02.095Z [ERROR]: File storage error: Invalid image file: Invalid input
+	Metadata: {
+  "stack": "Error: Invalid image file: Invalid input\n    at FileStorageService.validateImage (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:194:19)\n    at FileStorageService.validateFile (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:126:21)\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/server/services/fileStorage.js:205:82)\n    at file:///C:/Users/Dali/Downloads/project/server/routes/kyc.js:137:19\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\node_modules\\multer\\storage\\disk.js:43:9)"
+}
+2025-04-22T19:15:02.095Z [ERROR]: Error in KYC verification:
+	Metadata: {
+  "error": {},
+  "userId": "6806e15c47fc32ab0f6678ea"
+}
+2025-04-22T19:15:52.943Z [INFO]: GridFS bucket initialized
+2025-04-22T19:15:52.947Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-22T19:16:01.347Z [INFO]: GridFS bucket initialized
+2025-04-22T19:16:01.350Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-22T19:16:31.311Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T19:16:31.313Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T19:16:31.315Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T19:16:31.871Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "6807eb0f1899bb34923c3890",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T19:16:31.898Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "6807eb0f1899bb34923c3892",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T19:16:32.172Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "6807eb0f1899bb34923c3894",
+  "originalFileId": "6807eb0f1899bb34923c3890"
+}
+2025-04-22T19:16:32.198Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "6807eb0f1899bb34923c3896",
+  "originalFileId": "6807eb0f1899bb34923c3892"
+}
+2025-04-22T19:16:32.616Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "6807eb0f1899bb34923c388f",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T19:16:32.919Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "6807eb101899bb34923c3899",
+  "originalFileId": "6807eb0f1899bb34923c388f"
+}
+2025-04-22T19:16:33.065Z [INFO]: KYC verification submitted
+	Metadata: {
+  "userId": "6806e15c47fc32ab0f6678ea"
+}
+2025-04-22T21:29:02.568Z [INFO]: GridFS bucket initialized
+2025-04-22T21:29:02.573Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-22T21:32:06.495Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T21:32:06.500Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T21:32:06.503Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T21:32:06.937Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "68080ad6fa1aa4a939ad667a",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T21:32:06.955Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "68080ad6fa1aa4a939ad6679",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T21:32:06.972Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "68080ad6fa1aa4a939ad667c",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T21:32:07.097Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "68080ad6fa1aa4a939ad667f",
+  "originalFileId": "68080ad6fa1aa4a939ad667a"
+}
+2025-04-22T21:32:07.122Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "68080ad6fa1aa4a939ad6681",
+  "originalFileId": "68080ad6fa1aa4a939ad6679"
+}
+2025-04-22T21:32:07.149Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "68080ad6fa1aa4a939ad6683",
+  "originalFileId": "68080ad6fa1aa4a939ad667c"
+}
+2025-04-22T21:32:07.245Z [INFO]: KYC verification submitted
+	Metadata: {
+  "userId": "6806e15c47fc32ab0f6678ea"
+}
+2025-04-22T21:35:43.818Z [INFO]: GridFS bucket initialized
+2025-04-22T21:35:43.821Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-22T21:36:05.238Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T21:36:05.240Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T21:36:05.242Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T21:36:05.651Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "68080bc51bf3794ec5703c1b",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T21:36:05.684Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "68080bc51bf3794ec5703c1d",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T21:36:05.705Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "68080bc51bf3794ec5703c1a",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T21:36:05.801Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "68080bc51bf3794ec5703c20",
+  "originalFileId": "68080bc51bf3794ec5703c1b"
+}
+2025-04-22T21:36:05.850Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "68080bc51bf3794ec5703c22",
+  "originalFileId": "68080bc51bf3794ec5703c1d"
+}
+2025-04-22T21:36:05.866Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "68080bc51bf3794ec5703c24",
+  "originalFileId": "68080bc51bf3794ec5703c1a"
+}
+2025-04-22T21:36:06.055Z [INFO]: KYC verification submitted
+	Metadata: {
+  "userId": "6806e15c47fc32ab0f6678ea",
+  "kycId": "68080bc51bf3794ec5703c26"
+}
+2025-04-22T21:38:11.012Z [INFO]: GridFS bucket initialized
+2025-04-22T21:38:11.016Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-22T21:38:31.977Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T21:38:31.978Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T21:38:31.980Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T21:38:32.401Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "68080c576c4206d5521e031f",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T21:38:32.435Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "68080c576c4206d5521e0321",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T21:38:32.456Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "68080c576c4206d5521e031e",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T21:38:32.565Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "68080c586c4206d5521e0324",
+  "originalFileId": "68080c576c4206d5521e031f"
+}
+2025-04-22T21:38:32.605Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "68080c586c4206d5521e0326",
+  "originalFileId": "68080c576c4206d5521e0321"
+}
+2025-04-22T21:38:32.629Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "68080c586c4206d5521e0328",
+  "originalFileId": "68080c576c4206d5521e031e"
+}
+2025-04-22T21:38:32.856Z [INFO]: KYC verification submitted
+	Metadata: {
+  "userId": "6806e15c47fc32ab0f6678ea",
+  "kycId": "68080c586c4206d5521e032a"
+}
+2025-04-22T22:08:00.298Z [INFO]: GridFS bucket initialized
+2025-04-22T22:08:00.301Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-22T22:08:24.084Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T22:08:24.087Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T22:08:24.089Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T22:08:24.505Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "68081358d4b6f00c09198b16",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T22:08:24.539Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "68081358d4b6f00c09198b18",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T22:08:24.558Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "68081358d4b6f00c09198b15",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T22:08:24.664Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "68081358d4b6f00c09198b1b",
+  "originalFileId": "68081358d4b6f00c09198b16"
+}
+2025-04-22T22:08:24.711Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "68081358d4b6f00c09198b1d",
+  "originalFileId": "68081358d4b6f00c09198b18"
+}
+2025-04-22T22:08:24.741Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "68081358d4b6f00c09198b1f",
+  "originalFileId": "68081358d4b6f00c09198b15"
+}
+2025-04-22T22:08:24.954Z [INFO]: KYC verification submitted
+	Metadata: {
+  "userId": "6806e15c47fc32ab0f6678ea",
+  "kycId": "68081358d4b6f00c09198b21"
+}
+2025-04-22T22:13:04.566Z [INFO]: GridFS bucket initialized
+2025-04-22T22:13:04.573Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-22T23:02:13.045Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T23:02:13.048Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T23:02:13.051Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T23:02:13.339Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "68081ff53a056dfc3d5ab24c",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T23:02:13.449Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "68081ff53a056dfc3d5ab24e",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T23:02:13.454Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "68081ff53a056dfc3d5ab24b",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T23:02:13.477Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "68081ff53a056dfc3d5ab251",
+  "originalFileId": "68081ff53a056dfc3d5ab24c"
+}
+2025-04-22T23:02:13.548Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "68081ff53a056dfc3d5ab253",
+  "originalFileId": "68081ff53a056dfc3d5ab24e"
+}
+2025-04-22T23:02:13.567Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "68081ff53a056dfc3d5ab255",
+  "originalFileId": "68081ff53a056dfc3d5ab24b"
+}
+2025-04-22T23:02:13.669Z [INFO]: KYC verification submitted
+	Metadata: {
+  "userId": "6806e15c47fc32ab0f6678ea",
+  "kycId": "68081ff53a056dfc3d5ab257"
+}
+2025-04-22T23:02:59.888Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 79951,
+  "previewSize": 17180,
+  "dimensions": "736x726",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T23:02:59.905Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 76460,
+  "processedSize": 63940,
+  "previewSize": 11256,
+  "dimensions": "943x2048",
+  "format": "jpeg",
+  "cropped": false
+}
+2025-04-22T23:02:59.906Z [INFO]: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 1000019,
+  "processedSize": 133830,
+  "previewSize": 30092,
+  "dimensions": "596x768",
+  "format": "png",
+  "cropped": false
+}
+2025-04-22T23:03:00.326Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "680820233a056dfc3d5ab266",
+  "filename": "e91f360f-47e0-4ccb-938b-6f37bf5321de.jpg",
+  "type": "general",
+  "size": 63940,
+  "cropped": false
+}
+2025-04-22T23:03:00.363Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "680820233a056dfc3d5ab264",
+  "filename": "9a451574ee3e2fdb8dc5a16a82d27b21.jpg",
+  "type": "general",
+  "size": 79951,
+  "cropped": false
+}
+2025-04-22T23:03:00.372Z [INFO]: File uploaded successfully
+	Metadata: {
+  "fileId": "680820233a056dfc3d5ab268",
+  "filename": "Screenshot 2025-04-06 174605.png",
+  "type": "general",
+  "size": 133830,
+  "cropped": false
+}
+2025-04-22T23:03:00.464Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "680820243a056dfc3d5ab26a",
+  "originalFileId": "680820233a056dfc3d5ab266"
+}
+2025-04-22T23:03:00.480Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "680820243a056dfc3d5ab26c",
+  "originalFileId": "680820233a056dfc3d5ab264"
+}
+2025-04-22T23:03:00.509Z [INFO]: Preview uploaded successfully
+	Metadata: {
+  "previewId": "680820243a056dfc3d5ab26e",
+  "originalFileId": "680820233a056dfc3d5ab268"
+}
+2025-04-22T23:03:00.659Z [INFO]: KYC verification submitted
+	Metadata: {
+  "userId": "6806e15c47fc32ab0f6678ea",
+  "kycId": "680820243a056dfc3d5ab270"
+}
+2025-04-22T23:14:53.075Z [INFO]: GridFS bucket initialized
+2025-04-22T23:14:53.078Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-23T00:35:40.929Z [INFO]: GridFS bucket initialized
+2025-04-23T00:35:40.933Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-23T00:36:19.697Z [INFO]: GridFS bucket initialized
+2025-04-23T00:36:19.700Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-23T00:36:40.485Z [INFO]: GridFS bucket initialized
+2025-04-23T00:36:40.489Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-23T00:38:36.302Z [INFO]: GridFS bucket initialized
+2025-04-23T00:38:36.305Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-23T00:41:22.517Z [INFO]: GridFS bucket initialized
+2025-04-23T00:41:22.521Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-23T00:44:31.205Z [INFO]: GridFS bucket initialized
+2025-04-23T00:44:31.209Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-23T00:50:37.182Z [INFO]: GridFS bucket initialized
+2025-04-23T00:50:37.186Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-23T00:53:28.369Z [INFO]: GridFS bucket initialized
+2025-04-23T00:53:28.372Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-23T18:21:39.662Z [ERROR]: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-04-23T18:23:01.057Z [INFO]: GridFS bucket initialized
+2025-04-23T18:23:01.061Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-23T18:36:13.507Z [INFO]: GridFS bucket initialized
+2025-04-23T18:36:13.511Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-23T18:37:25.829Z [INFO]: GridFS bucket initialized
+2025-04-23T18:37:25.832Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-23T18:47:55.733Z [INFO]: GridFS bucket initialized
+2025-04-23T18:47:55.736Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-23T18:49:00.399Z [INFO]: GridFS bucket initialized
+2025-04-23T18:49:00.402Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-23T18:51:10.392Z [INFO]: GridFS bucket initialized
+2025-04-23T18:51:10.395Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-23T18:54:11.958Z [INFO]: GridFS bucket initialized
+2025-04-23T18:54:11.962Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-23T18:56:07.724Z [INFO]: GridFS bucket initialized
+2025-04-23T18:56:07.728Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-23T19:02:00.415Z [INFO]: GridFS bucket initialized
+2025-04-23T19:02:00.418Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-23T19:38:53.585Z [INFO]: GridFS bucket initialized
+2025-04-23T19:38:53.593Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-24T00:00:20.260Z [INFO]: GridFS bucket initialized
+2025-04-24T00:00:20.263Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-24T00:00:49.923Z [INFO]: GridFS bucket initialized
+2025-04-24T00:00:49.926Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-24T00:05:13.507Z [INFO]: GridFS bucket initialized
+2025-04-24T00:05:13.510Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-24T00:37:19.497Z [INFO]: GridFS bucket initialized
+2025-04-24T00:37:19.501Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-24T00:37:28.273Z [INFO]: GridFS bucket initialized
+2025-04-24T00:37:28.277Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-24T00:48:38.030Z [INFO]: GridFS bucket initialized
+2025-04-24T00:48:38.034Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-24T13:22:21.362Z [ERROR]: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-04-24T13:52:45.813Z [ERROR]: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-04-24T14:36:54.514Z [INFO]: GridFS bucket initialized
+2025-04-24T14:36:54.517Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-24T15:36:35.626Z [INFO]: GridFS bucket initialized
+2025-04-24T15:36:35.630Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-24T18:41:32.514Z [INFO]: GridFS bucket initialized
+2025-04-24T18:41:32.519Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-24T18:49:45.391Z [INFO]: GridFS bucket initialized
+2025-04-24T18:49:45.394Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-24T18:50:10.222Z [INFO]: GridFS bucket initialized
+2025-04-24T18:50:10.226Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-24T18:50:36.964Z [INFO]: GridFS bucket initialized
+2025-04-24T18:50:36.968Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-24T18:57:08.198Z [INFO]: GridFS bucket initialized
+2025-04-24T18:57:08.201Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-24T19:11:09.362Z [INFO]: GridFS bucket initialized
+2025-04-24T19:11:09.365Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-24T21:11:16.905Z [INFO]: GridFS bucket initialized
+2025-04-24T21:11:16.911Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-24T21:15:05.949Z [INFO]: GridFS bucket initialized
+2025-04-24T21:15:05.953Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-24T21:15:38.799Z [INFO]: GridFS bucket initialized
+2025-04-24T21:15:38.803Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-24T21:23:04.733Z [INFO]: GridFS bucket initialized
+2025-04-24T21:23:04.739Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-04-24T21:23:23.671Z [INFO]: GridFS bucket initialized
+2025-04-24T21:23:23.677Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-04-24T21:24:48.001Z [INFO]: GridFS bucket initialized
+2025-04-24T21:24:48.005Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-24T21:25:08.878Z [INFO]: GridFS bucket initialized
+2025-04-24T21:25:08.883Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-24T21:40:06.120Z [INFO]: GridFS bucket initialized
+2025-04-24T21:40:06.124Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-04-25T17:09:20.031Z [ERROR]: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-04-25T17:09:38.412Z [INFO]: GridFS bucket initialized
+2025-04-25T17:09:38.415Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T16:03:45.147Z [INFO]: GridFS bucket initialized
+2025-05-04T16:03:45.150Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T16:15:56.154Z [INFO]: GridFS bucket initialized
+2025-05-04T16:15:56.157Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T16:17:27.974Z [INFO]: GridFS bucket initialized
+2025-05-04T16:17:27.979Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T16:18:24.795Z [INFO]: GridFS bucket initialized
+2025-05-04T16:18:24.798Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T16:37:52.067Z [INFO]: GridFS bucket initialized
+2025-05-04T16:37:52.070Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T16:39:33.404Z [INFO]: GridFS bucket initialized
+2025-05-04T16:39:33.408Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T16:41:46.495Z [INFO]: GridFS bucket initialized
+2025-05-04T16:41:46.498Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T16:43:18.412Z [INFO]: GridFS bucket initialized
+2025-05-04T16:43:18.416Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T16:44:33.954Z [INFO]: GridFS bucket initialized
+2025-05-04T16:44:33.957Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T16:45:32.824Z [INFO]: GridFS bucket initialized
+2025-05-04T16:45:32.827Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T16:45:37.064Z [INFO]: GridFS bucket initialized
+2025-05-04T16:45:37.067Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T16:46:21.157Z [INFO]: GridFS bucket initialized
+2025-05-04T16:46:21.160Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T16:46:29.541Z [INFO]: GridFS bucket initialized
+2025-05-04T16:46:29.545Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-04T16:46:43.458Z [INFO]: GridFS bucket initialized
+2025-05-04T16:46:43.462Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T17:09:21.701Z [INFO]: GridFS bucket initialized
+2025-05-04T17:09:21.704Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T18:42:33.678Z [INFO]: GridFS bucket initialized
+2025-05-04T18:42:33.682Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T18:48:08.921Z [INFO]: GridFS bucket initialized
+2025-05-04T18:48:08.926Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-04T18:48:38.091Z [INFO]: GridFS bucket initialized
+2025-05-04T18:48:38.095Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T18:49:30.914Z [INFO]: GridFS bucket initialized
+2025-05-04T18:49:30.918Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T18:52:27.746Z [INFO]: GridFS bucket initialized
+2025-05-04T18:52:27.750Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T18:55:13.196Z [INFO]: GridFS bucket initialized
+2025-05-04T18:55:13.200Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-04T18:56:28.343Z [INFO]: GridFS bucket initialized
+2025-05-04T18:56:28.346Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-04T18:56:38.577Z [INFO]: GridFS bucket initialized
+2025-05-04T18:56:38.581Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-04T18:56:46.446Z [INFO]: GridFS bucket initialized
+2025-05-04T18:56:46.449Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T18:58:22.655Z [INFO]: GridFS bucket initialized
+2025-05-04T18:58:22.660Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T18:58:35.569Z [INFO]: GridFS bucket initialized
+2025-05-04T18:58:35.572Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T19:07:06.875Z [ERROR]: Error connecting to MongoDB: Server selection timed out after 5000 ms
+2025-05-04T19:10:33.337Z [INFO]: GridFS bucket initialized
+2025-05-04T19:10:33.343Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T19:13:32.337Z [INFO]: GridFS bucket initialized
+2025-05-04T19:13:32.341Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T19:32:17.217Z [INFO]: GridFS bucket initialized
+2025-05-04T19:32:17.220Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T19:34:46.630Z [INFO]: GridFS bucket initialized
+2025-05-04T19:34:46.633Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T19:37:04.881Z [INFO]: GridFS bucket initialized
+2025-05-04T19:37:04.884Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-04T19:41:41.336Z [INFO]: GridFS bucket initialized
+2025-05-04T19:41:41.339Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T19:46:22.925Z [INFO]: GridFS bucket initialized
+2025-05-04T19:46:22.930Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-04T19:50:20.230Z [INFO]: GridFS bucket initialized
+2025-05-04T19:50:20.233Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T20:31:58.012Z [INFO]: GridFS bucket initialized
+2025-05-04T20:31:58.015Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T20:34:22.447Z [INFO]: GridFS bucket initialized
+2025-05-04T20:34:22.452Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-04T20:35:30.240Z [INFO]: GridFS bucket initialized
+2025-05-04T20:35:30.243Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T20:36:50.150Z [INFO]: GridFS bucket initialized
+2025-05-04T20:36:50.156Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-04T20:39:03.975Z [INFO]: GridFS bucket initialized
+2025-05-04T20:39:03.978Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-04T20:43:54.470Z [INFO]: GridFS bucket initialized
+2025-05-04T20:43:54.475Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T20:44:46.186Z [INFO]: GridFS bucket initialized
+2025-05-04T20:44:46.190Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T20:45:01.292Z [INFO]: GridFS bucket initialized
+2025-05-04T20:45:01.295Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-04T20:46:06.996Z [INFO]: GridFS bucket initialized
+2025-05-04T20:46:06.999Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T20:46:36.306Z [INFO]: GridFS bucket initialized
+2025-05-04T20:46:36.310Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T20:47:37.046Z [INFO]: GridFS bucket initialized
+2025-05-04T20:47:37.051Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-04T20:47:47.213Z [INFO]: GridFS bucket initialized
+2025-05-04T20:47:47.219Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T20:56:48.978Z [INFO]: GridFS bucket initialized
+2025-05-04T20:56:48.982Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T21:14:59.881Z [INFO]: GridFS bucket initialized
+2025-05-04T21:14:59.885Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T21:25:48.212Z [INFO]: GridFS bucket initialized
+2025-05-04T21:25:48.216Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T21:29:57.636Z [INFO]: GridFS bucket initialized
+2025-05-04T21:29:57.640Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-04T22:31:08.013Z [INFO]: GridFS bucket initialized
+2025-05-04T22:31:08.016Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-04T22:50:43.242Z [INFO]: GridFS bucket initialized
+2025-05-04T22:50:43.246Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T22:58:05.955Z [INFO]: GridFS bucket initialized
+2025-05-04T22:58:05.959Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T23:02:02.404Z [INFO]: GridFS bucket initialized
+2025-05-04T23:02:02.408Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T23:11:48.783Z [INFO]: GridFS bucket initialized
+2025-05-04T23:11:48.788Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-04T23:12:03.704Z [INFO]: GridFS bucket initialized
+2025-05-04T23:12:03.709Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-04T23:14:23.157Z [INFO]: GridFS bucket initialized
+2025-05-04T23:14:23.161Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-05T00:56:58.393Z [INFO]: GridFS bucket initialized
+2025-05-05T00:56:58.398Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-05T03:51:05.412Z [INFO]: GridFS bucket initialized
+2025-05-05T03:51:05.415Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-05T04:40:22.839Z [INFO]: GridFS bucket initialized
+2025-05-05T04:40:22.843Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-05T19:11:22.989Z [ERROR]: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-05-05T21:21:40.052Z [ERROR]: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-05-05T21:32:03.890Z [ERROR]: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-05-05T22:18:05.323Z [INFO]: GridFS bucket initialized
+2025-05-05T22:18:05.327Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
