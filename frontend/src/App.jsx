@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { useAuth } from './contexts/AuthContext'
+import { useTranslation } from 'react-i18next'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import PropTypes from 'prop-types'
@@ -19,6 +20,8 @@ import Profile from './pages/Profile'
 import Settings from './pages/Settings'
 import NotFound from './pages/NotFound'
 import Landing from './pages/Landing'
+import LoadingSpinner from './assets/animations/LoadingSpinner'
+import Support from './pages/Support'
 
 // Layouts
 import AuthLayout from './layouts/AuthLayout'
@@ -32,14 +35,34 @@ import History from './pages/History'
 import AdminDashboard from './pages/AdminDashboard'
 import BankTransfer from './pages/BankTransfer'
 
-// Components
-import LoadingScreen from './components/ui/LoadingScreen'
-
 const AppContent = () => {
   const { currentUser, loading } = useAuth()
+  const { i18n } = useTranslation()
   const [appReady, setAppReady] = useState(false)
   const [notificationLoading, setNotificationLoading] = useState(true)
   const location = useLocation()
+
+  // Handle language change
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('i18nextLng') || 'en'
+    i18n.changeLanguage(savedLanguage)
+    document.documentElement.dir = savedLanguage === 'ar' ? 'rtl' : 'ltr'
+    document.documentElement.lang = savedLanguage
+  }, [])
+
+  // Listen for language changes
+  useEffect(() => {
+    const handleLanguageChange = (lng) => {
+      document.documentElement.dir = lng === 'ar' ? 'rtl' : 'ltr'
+      document.documentElement.lang = lng
+    }
+
+    i18n.on('languageChanged', handleLanguageChange)
+
+    return () => {
+      i18n.off('languageChanged', handleLanguageChange)
+    }
+  }, [i18n])
 
   useEffect(() => {
     // Simulate app initialization time to prevent flashing screens
@@ -60,7 +83,7 @@ const AppContent = () => {
   }, [])
 
   if (loading || !appReady || notificationLoading) {
-    return <LoadingScreen />
+    return <LoadingSpinner />
   }
 
   // Protected route component
@@ -89,67 +112,67 @@ const AppContent = () => {
 
   return (
     <ErrorBoundary>
-        <AnimatePresence mode="wait">
-          <Routes location={location} key={location.pathname}>
-            {/* Landing Page */}
-            <Route index element={<Landing />} />
-            <Route path="landing" element={<Landing />} />
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          {/* Landing Page */}
+          <Route index element={<Landing />} />
+          <Route path="landing" element={<Landing />} />
 
-            {/* Auth Routes */}
-            <Route element={<AuthLayout />}>
-              <Route 
-                path="login" 
-                element={
-                  <AuthRoute>
-                    <Login />
-                  </AuthRoute>
-                } 
-              />
-              <Route 
-                path="register" 
-                element={
-                  <AuthRoute>
-                    <Register />
-                  </AuthRoute>
-                } 
-              />
-              <Route 
-                path="verify-email" 
-                element={<EmailVerification />} 
-              />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-            </Route>
-
-            {/* Dashboard Routes */}
+          {/* Auth Routes */}
+          <Route element={<AuthLayout />}>
             <Route 
+              path="login" 
               element={
-                <ProtectedRoute>
-                  <DashboardLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="wallet" element={<Wallet />} />
-              <Route path="transfer" element={<Transfer />} />
-              <Route path="crypto" element={<Crypto />} />
-              <Route path="history" element={<History />} />
-              <Route path="profile" element={<Profile />} />
-              <Route path="settings" element={<Settings />} />
-              <Route path="admin" element={<AdminDashboard />} />
-              <Route path="bank-transfer" element={<BankTransfer />} />
-            </Route>
+                <AuthRoute>
+                  <Login />
+                </AuthRoute>
+              } 
+            />
+            <Route 
+              path="register" 
+              element={
+                <AuthRoute>
+                  <Register />
+                </AuthRoute>
+              } 
+            />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+          </Route>
 
-            {/* Not Found */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </AnimatePresence>
+          {/* Standalone verify-email route (no AuthLayout) */}
+          <Route path="verify-email" element={<EmailVerification />} />
+
+          {/* Dashboard Routes */}
+          <Route 
+            element={
+              <ProtectedRoute>
+                <DashboardLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="wallet" element={<Wallet />} />
+            <Route path="transfer" element={<Transfer />} />
+            <Route path="crypto" element={<Crypto />} />
+            <Route path="history" element={<History />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="admin" element={<AdminDashboard />} />
+            <Route path="bank-transfer" element={<BankTransfer />} />
+            <Route path="support" element={<Support />} />
+          </Route>
+
+          {/* Not Found */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </AnimatePresence>
       <ToastContainer 
         position="bottom-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop
         closeOnClick
-        rtl={false}
+        rtl={i18n.language === 'ar'}
         pauseOnFocusLoss
         draggable
         pauseOnHover

@@ -11,6 +11,8 @@ import {
 import { useTransactions } from '../../contexts/TransactionContext'
 import { useAuth } from '../../contexts/AuthContext'
 import { useNotification } from '../../contexts/NotificationContext'
+import { useTheme } from '../../contexts/ThemeContext'
+import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 import './CryptoExchange.css'
 
@@ -18,8 +20,11 @@ const CryptoTransfer = () => {
   const { transferCrypto } = useTransactions()
   const { userProfile } = useAuth()
   const { showError } = useNotification()
+  const { theme } = useTheme()
+  const { t } = useTranslation()
+  const isDark = theme === 'dark'
   
-  const [recipient, setRecipient] = useState('')
+  const [recipientEmail, setRecipientEmail] = useState('')
   const [amount, setAmount] = useState('')
   const [description, setDescription] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -31,7 +36,7 @@ const CryptoTransfer = () => {
   
   // Transaction limits
   const limits = {
-    minAmount: 1,
+    minAmount: 0.1,
     maxAmount: 1000,
     dailyLimit: 10000
   }
@@ -62,7 +67,7 @@ const CryptoTransfer = () => {
   // Handle recipient input change
   const handleRecipientChange = (e) => {
     const value = e.target.value
-    setRecipient(value)
+    setRecipientEmail(value)
     searchRecipient(value)
   }
   
@@ -79,19 +84,23 @@ const CryptoTransfer = () => {
     const parsedAmount = parseFloat(amount)
     
     if (isNaN(parsedAmount) || parsedAmount <= 0) {
-      return 'Please enter a valid amount'
+      return t('crypto.transfer.errors.invalidAmount')
     }
     
     if (parsedAmount < limits.minAmount) {
-      return `Minimum amount is ${limits.minAmount} DFLOW`
+      return t('crypto.transfer.errors.minAmount', { amount: limits.minAmount })
     }
     
     if (parsedAmount > limits.maxAmount) {
-      return `Maximum amount is ${limits.maxAmount} DFLOW`
+      return t('crypto.transfer.errors.maxAmount', { amount: limits.maxAmount })
+    }
+    
+    if (parsedAmount > limits.dailyLimit) {
+      return t('crypto.transfer.errors.dailyLimit', { amount: limits.dailyLimit })
     }
     
     if (parsedAmount > userProfile?.cryptoBalance) {
-      return 'Insufficient DFLOW balance'
+      return t('crypto.transfer.errors.insufficientBalance')
     }
     
     return null
@@ -104,8 +113,8 @@ const CryptoTransfer = () => {
     setSuccess(false)
     
     // Input validation
-    if (!recipient) {
-      setError('Please enter recipient email')
+    if (!recipientEmail) {
+      setError(t('crypto.transfer.errors.recipientRequired'))
       return
     }
     
@@ -115,33 +124,34 @@ const CryptoTransfer = () => {
       return
     }
     
-    const transferAmount = parseFloat(amount)
+    const parsedAmount = parseFloat(amount)
     
     setIsSubmitting(true)
     
     try {
-      await transferCrypto(recipient, transferAmount, description)
+      await transferCrypto(recipientEmail, parsedAmount, description)
       setSuccess(true)
-      // Reset form
-      setRecipient('')
+      setRecipientEmail('')
       setAmount('')
       setDescription('')
       setRecipientInfo(null)
     } catch (error) {
-      setError(error.message || 'An error occurred during the transfer')
+      setError(error.message || t('crypto.transfer.errors.error'))
     } finally {
       setIsSubmitting(false)
     }
   }
   
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl p-6">
+    <div className={`${isDark ? 'bg-gray-900/50 backdrop-blur-sm border-gray-800' : 'bg-white border-gray-200'} border rounded-xl p-6`}>
       <div className="flex justify-between items-center mb-6">
         <div className="flex items-center">
-          <div className="w-10 h-10 rounded-full bg-primary-100 dark:bg-primary-900/20 flex items-center justify-center mr-3">
-            <RiSendPlaneLine className="text-primary-600 dark:text-primary-400" size={24} />
+          <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center mr-3">
+            <RiSendPlaneLine className="text-blue-600 dark:text-blue-400" size={24} />
           </div>
-          <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Transfer DFLOW</h2>
+          <h2 className={`text-xl font-semibold ${isDark ? 'text-gray-100' : 'text-gray-900'}`}>
+            {t('crypto.transfer.title')}
+          </h2>
         </div>
         <button
           onClick={() => setShowLimits(!showLimits)}
@@ -157,7 +167,7 @@ const CryptoTransfer = () => {
           animate={{ opacity: 1, y: 0 }}
           className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 rounded-lg"
         >
-          Your crypto transfer was successful!
+          {t('crypto.transfer.success')}
         </motion.div>
       )}
       
@@ -171,27 +181,27 @@ const CryptoTransfer = () => {
         </motion.div>
       )}
       
-      <div className="bg-gray-50 dark:bg-gray-900/50 p-4 rounded-lg mb-6">
-        <div className="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400">
-          <span>Your DFLOW Balance</span>
-          <span className="font-medium text-gray-800 dark:text-gray-200">{userProfile?.cryptoBalance?.toFixed(4) || '0.0000'} DFLOW</span>
+      <div className={`${isDark ? 'bg-gray-900/50' : 'bg-white'} p-4 rounded-lg mb-6 border ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
+        <div className={`flex justify-between items-center text-sm ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>
+          <span>{t('crypto.transfer.balanceLabel')}</span>
+          <span className={`font-medium ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>{userProfile?.cryptoBalance?.toFixed(4) || '0.0000'} DFLOW</span>
         </div>
       </div>
       
       <form onSubmit={handleSubmit} className="relative">
         <div className="space-y-4">
           <div>
-            <label htmlFor="recipient" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Recipient Email *
+            <label htmlFor="recipient" className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-800'}`}>
+              {t('crypto.transfer.recipientEmail')}
             </label>
             <div className="relative">
             <input
               type="email"
               id="recipient"
-              value={recipient}
-                onChange={handleRecipientChange}
-              placeholder="recipient@example.com"
-                className="w-full px-4 py-3 pl-10 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:border-primary-500 dark:focus:border-primary-400 focus:ring focus:ring-primary-200 dark:focus:ring-primary-900 focus:ring-opacity-50 transition-all duration-200 shadow-sm hover:border-gray-300 dark:hover:border-gray-600 text-gray-800 dark:text-gray-200 text-lg"
+              value={recipientEmail}
+              onChange={handleRecipientChange}
+              placeholder={t('crypto.transfer.recipientPlaceholder')}
+              className={`w-full px-4 py-3 pl-10 rounded-xl ${isDark ? 'bg-gray-900 border-gray-700 text-gray-200' : 'bg-white border-gray-200 text-gray-800'} focus:border-primary-500 dark:focus:border-primary-400 focus:ring focus:ring-primary-200 dark:focus:ring-primary-900 focus:ring-opacity-50 transition-all duration-200 shadow-sm hover:border-gray-300 dark:hover:border-gray-600 text-lg`}
               required
             />
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 dark:text-gray-500">
@@ -215,8 +225,8 @@ const CryptoTransfer = () => {
           </div>
           
           <div>
-            <label htmlFor="amount" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Amount (DFLOW) *
+            <label htmlFor="amount" className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-800'}`}>
+              {t('crypto.transfer.amountLabel')}
             </label>
             <div className="relative">
               <input
@@ -224,8 +234,8 @@ const CryptoTransfer = () => {
                 id="amount"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                placeholder="0.0000"
-                className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:border-primary-500 dark:focus:border-primary-400 focus:ring focus:ring-primary-200 dark:focus:ring-primary-900 focus:ring-opacity-50 transition-all duration-200 shadow-sm hover:border-gray-300 dark:hover:border-gray-600 text-gray-800 dark:text-gray-200 text-lg font-medium tracking-wide no-spinners"
+                placeholder={t('crypto.transfer.amountPlaceholder')}
+                className={`w-full px-4 py-3 rounded-xl ${isDark ? 'bg-gray-900 border-gray-700 text-gray-200' : 'bg-white border-gray-200 text-gray-800'} focus:border-primary-500 dark:focus:border-primary-400 focus:ring focus:ring-primary-200 dark:focus:ring-primary-900 focus:ring-opacity-50 transition-all duration-200 shadow-sm hover:border-gray-300 dark:hover:border-gray-600 text-lg font-medium tracking-wide no-spinners`}
                 step="0.0001"
                 min="0"
                 required
@@ -254,15 +264,15 @@ const CryptoTransfer = () => {
           </div>
           
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Description (Optional)
+            <label htmlFor="description" className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-800'}`}>
+              {t('crypto.transfer.descriptionLabel')}
             </label>
             <textarea
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Add a note to your transfer"
-              className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:border-primary-500 dark:focus:border-primary-400 focus:ring focus:ring-primary-200 dark:focus:ring-primary-900 focus:ring-opacity-50 transition-all duration-200 shadow-sm hover:border-gray-300 dark:hover:border-gray-600 text-gray-800 dark:text-gray-200 text-lg resize-none"
+              placeholder={t('crypto.transfer.descriptionPlaceholder')}
+              className={`w-full px-4 py-3 rounded-xl ${isDark ? 'bg-gray-900 border-gray-700 text-gray-200' : 'bg-white border-gray-200 text-gray-800'} focus:border-primary-500 dark:focus:border-primary-400 focus:ring focus:ring-primary-200 dark:focus:ring-primary-900 focus:ring-opacity-50 transition-all duration-200 shadow-sm hover:border-gray-300 dark:hover:border-gray-600 text-lg resize-none`}
               rows={3}
             />
           </div>
@@ -271,18 +281,18 @@ const CryptoTransfer = () => {
         <div className="mt-6">
           <button
             type="submit"
-            disabled={isSubmitting || !recipient || !amount}
+            disabled={isSubmitting || !recipientEmail || !amount}
             className="w-full flex items-center justify-center px-4 py-3 rounded-lg font-medium text-white bg-primary-600 hover:bg-primary-700 disabled:bg-primary-300 transition-colors"
           >
             {isSubmitting ? (
               <>
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                Processing...
+                {t('crypto.transfer.processing')}
               </>
             ) : (
               <>
                 <RiSendPlaneLine className="mr-2" size={20} />
-                Send DFLOW
+                {t('crypto.transfer.sendButton')}
               </>
             )}
           </button>
@@ -305,7 +315,7 @@ const CryptoTransfer = () => {
               className="bg-white rounded-xl shadow-xl max-w-md w-full p-6"
             >
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-gray-900">Transaction Limits</h2>
+                <h2 className="text-xl font-semibold text-gray-900">{t('crypto.transfer.limitsTitle')}</h2>
                 <button
                   onClick={() => setShowLimits(false)}
                   className="text-gray-500 hover:text-gray-700 transition-colors"
@@ -315,11 +325,11 @@ const CryptoTransfer = () => {
               </div>
               <div className="space-y-4 text-gray-600">
                 <div className="space-y-2">
-                  <h3 className="font-medium text-gray-900">Transfer Limits</h3>
+                  <h3 className="font-medium text-gray-900">{t('crypto.transfer.limitsHeader')}</h3>
                   <ul className="space-y-1 text-sm">
-                    <li>• Minimum amount: {limits.minAmount} DFLOW</li>
-                    <li>• Maximum amount: {limits.maxAmount} DFLOW</li>
-                    <li>• Daily limit: {limits.dailyLimit} DFLOW</li>
+                    <li>• {t('crypto.transfer.minAmount')}: {limits.minAmount} DFLOW</li>
+                    <li>• {t('crypto.transfer.maxAmount')}: {limits.maxAmount} DFLOW</li>
+                    <li>• {t('crypto.transfer.dailyLimit')}: {limits.dailyLimit} DFLOW</li>
                   </ul>
                 </div>
               </div>

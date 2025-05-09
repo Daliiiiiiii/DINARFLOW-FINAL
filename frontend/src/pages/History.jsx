@@ -17,6 +17,8 @@ import { format } from 'date-fns'
 import Card from '../components/ui/Card'
 import Button from '../components/ui/Button'
 import { typography } from '../styles/typography'
+import { useTranslation } from 'react-i18next'
+import ActionLoader from '../assets/animations/ActionLoader'
 
 const History = () => {
   const { transactions = [], loading, getFilteredTransactions } = useTransactions()
@@ -30,6 +32,7 @@ const History = () => {
   })
   const [showFilters, setShowFilters] = useState(false)
   const [sortOrder, setSortOrder] = useState('desc')
+  const { t, i18n } = useTranslation()
   
   // Apply filters to get filtered transactions
   const filteredTransactions = loading ? [] : getFilteredTransactions(filters)
@@ -61,6 +64,8 @@ const History = () => {
   }
   
   return (
+    <>
+      <ActionLoader isLoading={loading} />
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -74,8 +79,8 @@ const History = () => {
             <RiHistoryLine className="text-primary-600 dark:text-primary-400" size={24} />
           </div>
           <div>
-            <h1 className={typography.h1}>Transaction History</h1>
-            <p className={typography.muted.base}>View and filter all your transaction history in one place</p>
+            <h1 className={typography.h1}>{t('history.title')}</h1>
+            <p className={typography.muted.base}>{t('history.subtitle')}</p>
           </div>
         </div>
         <div className="flex items-center space-x-4">
@@ -85,7 +90,7 @@ const History = () => {
             icon={<RiRefreshLine size={16} />}
             onClick={() => window.location.reload()}
           >
-            Refresh
+            {t('history.refresh')}
           </Button>
           <Button
             variant="primary"
@@ -93,17 +98,17 @@ const History = () => {
             icon={<RiFileDownloadLine size={16} />}
             onClick={handleExport}
           >
-            Export
+            {t('history.export')}
           </Button>
         </div>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card>
+        <Card variant="transparent">
           <div className="p-6">
             <div className="flex items-center justify-between mb-2">
-              <h3 className={typography.muted.base}>Total Transactions</h3>
+              <h3 className={typography.muted.base}>{t('history.totalTransactions')}</h3>
               <div className="w-8 h-8 rounded-full bg-primary-50 dark:bg-primary-900/20 flex items-center justify-center">
                 <RiHistoryLine className="text-primary-600 dark:text-primary-400" size={16} />
               </div>
@@ -112,10 +117,10 @@ const History = () => {
           </div>
         </Card>
 
-        <Card>
+        <Card variant="transparent">
           <div className="p-6">
             <div className="flex items-center justify-between mb-2">
-              <h3 className={typography.muted.base}>Sent</h3>
+              <h3 className={typography.muted.base}>{t('history.sent')}</h3>
               <div className="w-8 h-8 rounded-full bg-red-50 dark:bg-red-900/20 flex items-center justify-center">
                 <RiArrowUpLine className="text-red-600 dark:text-red-400" size={16} />
               </div>
@@ -124,10 +129,10 @@ const History = () => {
           </div>
         </Card>
 
-        <Card>
+        <Card variant="transparent">
           <div className="p-6">
             <div className="flex items-center justify-between mb-2">
-              <h3 className={typography.muted.base}>Received</h3>
+              <h3 className={typography.muted.base}>{t('history.received')}</h3>
               <div className="w-8 h-8 rounded-full bg-green-50 dark:bg-green-900/20 flex items-center justify-center">
                 <RiArrowDownLine className="text-green-600 dark:text-green-400" size={16} />
               </div>
@@ -136,10 +141,10 @@ const History = () => {
           </div>
         </Card>
 
-        <Card>
+        <Card variant="transparent">
           <div className="p-6">
             <div className="flex items-center justify-between mb-2">
-              <h3 className={typography.muted.base}>Total Volume</h3>
+              <h3 className={typography.muted.base}>{t('history.totalVolume')}</h3>
               <div className="w-8 h-8 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center">
                 <RiHistoryLine className="text-blue-600 dark:text-blue-400" size={16} />
               </div>
@@ -150,17 +155,17 @@ const History = () => {
       </div>
       
       {/* Filters */}
-      <Card>
+      <Card variant="transparent">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
-            <h3 className={typography.h3}>Filters</h3>
+            <h3 className={typography.h3}>{t('history.filters')}</h3>
             <div className="flex space-x-4">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={handleResetFilters}
               >
-                Reset
+                {t('history.reset')}
               </Button>
               <Button
                 variant={showFilters ? 'primary' : 'ghost'}
@@ -168,7 +173,7 @@ const History = () => {
                 icon={<RiFilterLine size={16} />}
                 onClick={() => setShowFilters(!showFilters)}
               >
-                {showFilters ? 'Hide Filters' : 'Show Filters'}
+                {showFilters ? t('history.hideFilters') : t('history.showFilters')}
               </Button>
             </div>
           </div>
@@ -186,50 +191,50 @@ const History = () => {
                   {/* Transaction Type */}
                   <div>
                     <label className={`block mb-2 ${typography.label}`}>
-                      Transaction Type
+                      {t('history.transactionType')}
                     </label>
                     <select
-                      className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 hover:border-gray-300 dark:hover:border-gray-600 transition-colors appearance-none cursor-pointer"
+                      className="w-full px-4 py-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 hover:border-gray-300 dark:hover:border-gray-600 transition-colors appearance-none cursor-pointer"
                       value={filters.type}
                       onChange={(e) => setFilters(prev => ({ ...prev, type: e.target.value }))}
                     >
-                      <option value="">All Types</option>
-                      <option value="transfer">Transfer</option>
-                      <option value="crypto">Crypto</option>
+                      <option value="">{t('history.allTypes')}</option>
+                      <option value="transfer">{t('history.transfer')}</option>
+                      <option value="crypto">{t('history.crypto')}</option>
                     </select>
                   </div>
 
                   {/* Transaction Subtype */}
                   <div>
                     <label className={`block mb-2 ${typography.label}`}>
-                      Transaction Subtype
+                      {t('history.transactionSubtype')}
                     </label>
                     <select
-                      className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 hover:border-gray-300 dark:hover:border-gray-600 transition-colors appearance-none cursor-pointer"
+                      className="w-full px-4 py-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 hover:border-gray-300 dark:hover:border-gray-600 transition-colors appearance-none cursor-pointer"
                       value={filters.subtype}
                       onChange={(e) => setFilters(prev => ({ ...prev, subtype: e.target.value }))}
                     >
-                      <option value="">All Subtypes</option>
-                      <option value="send">Send</option>
-                      <option value="receive">Receive</option>
+                      <option value="">{t('history.allSubtypes')}</option>
+                      <option value="send">{t('history.send')}</option>
+                      <option value="receive">{t('history.receive')}</option>
                     </select>
                   </div>
 
                   {/* Date Range */}
                   <div>
                     <label className={`block mb-2 ${typography.label}`}>
-                      Date Range
+                      {t('history.dateRange')}
                     </label>
                     <div className="grid grid-cols-2 gap-4">
                       <input
                         type="date"
-                        className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
+                        className="w-full px-4 py-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
                         value={filters.startDate}
                         onChange={(e) => setFilters(prev => ({ ...prev, startDate: e.target.value }))}
                       />
                       <input
                         type="date"
-                        className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
+                        className="w-full px-4 py-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
                         value={filters.endDate}
                         onChange={(e) => setFilters(prev => ({ ...prev, endDate: e.target.value }))}
                       />
@@ -239,23 +244,31 @@ const History = () => {
                   {/* Amount Range */}
                   <div>
                     <label className={`block mb-2 ${typography.label}`}>
-                      Amount Range (TND)
+                      {t('history.amountRange')}
                     </label>
                     <div className="grid grid-cols-2 gap-4">
-                      <input
-                        type="number"
-                        placeholder="Min"
-                        className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
-                        value={filters.minAmount}
-                        onChange={(e) => setFilters(prev => ({ ...prev, minAmount: e.target.value }))}
-                      />
-                      <input
-                        type="number"
-                        placeholder="Max"
-                        className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
-                        value={filters.maxAmount}
-                        onChange={(e) => setFilters(prev => ({ ...prev, maxAmount: e.target.value }))}
-                      />
+                      <div className="flex items-center rounded-xl bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700">
+                        <button type="button" className="px-3 py-2 text-lg text-gray-500 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-l-xl" onClick={() => setFilters(prev => ({ ...prev, minAmount: Math.max(0, Number(prev.minAmount) - 1) }))}>-</button>
+                        <input
+                          type="number"
+                          placeholder="Min"
+                          className="w-full px-4 py-3 bg-transparent border-0 text-gray-700 dark:text-gray-200 font-medium focus:outline-none focus:ring-0 text-center"
+                          value={filters.minAmount}
+                          onChange={(e) => setFilters(prev => ({ ...prev, minAmount: e.target.value }))}
+                        />
+                        <button type="button" className="px-3 py-2 text-lg text-gray-500 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-r-xl" onClick={() => setFilters(prev => ({ ...prev, minAmount: Number(prev.minAmount) + 1 }))}>+</button>
+                      </div>
+                      <div className="flex items-center rounded-xl bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700">
+                        <button type="button" className="px-3 py-2 text-lg text-gray-500 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-l-xl" onClick={() => setFilters(prev => ({ ...prev, maxAmount: Math.max(0, Number(prev.maxAmount) - 1) }))}>-</button>
+                        <input
+                          type="number"
+                          placeholder="Max"
+                          className="w-full px-4 py-3 bg-transparent border-0 text-gray-700 dark:text-gray-200 font-medium focus:outline-none focus:ring-0 text-center"
+                          value={filters.maxAmount}
+                          onChange={(e) => setFilters(prev => ({ ...prev, maxAmount: e.target.value }))}
+                        />
+                        <button type="button" className="px-3 py-2 text-lg text-gray-500 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-r-xl" onClick={() => setFilters(prev => ({ ...prev, maxAmount: Number(prev.maxAmount) + 1 }))}>+</button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -269,15 +282,15 @@ const History = () => {
       <Card>
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
-            <h3 className={typography.h3}>Transactions</h3>
-            <div className="flex items-center space-x-4">
+            <h3 className={typography.h3}>{t('history.transactions')}</h3>
+            <div className={`flex items-center ${i18n.dir() === 'rtl' ? 'space-x-reverse space-x-4' : 'space-x-4'}`}>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
                 icon={sortOrder === 'asc' ? <RiArrowUpLine size={16} /> : <RiArrowDownLine size={16} />}
               >
-                {sortOrder === 'asc' ? 'Oldest First' : 'Newest First'}
+                {sortOrder === 'asc' ? t('history.oldestFirst') : t('history.newestFirst')}
               </Button>
             </div>
           </div>
@@ -290,16 +303,17 @@ const History = () => {
             <TransactionsList transactions={filteredTransactions} sortOrder={sortOrder} />
           ) : (
             <div className="text-center py-12">
-              <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
                 <RiHistoryLine className="text-gray-400" size={24} />
               </div>
-              <h3 className={typography.h4}>No transactions found</h3>
-              <p className={typography.muted.base}>Try adjusting your filters to see more results</p>
+              <h3 className={typography.h4}>{t('history.noTransactions')}</h3>
+              <p className={typography.muted.base}>{t('history.noResults')}</p>
             </div>
           )}
         </div>
       </Card>
     </motion.div>
+    </>
   )
 }
 

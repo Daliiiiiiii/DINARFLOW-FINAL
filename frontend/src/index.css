@@ -2,6 +2,171 @@
 @tailwind components;
 @tailwind utilities;
 
+/* RTL Support */
+[dir="rtl"] {
+  /* Flip icons */
+  /* .lucide {
+    transform: scaleX(-1);
+  } */
+
+  /* Adjust margins and paddings */
+  .ml-4 {
+    margin-left: 0;
+    margin-right: 1rem;
+  }
+
+  .mr-4 {
+    margin-right: 0;
+    margin-left: 1rem;
+  }
+
+  .pl-4 {
+    padding-left: 0;
+    padding-right: 1rem;
+  }
+
+  .pr-4 {
+    padding-right: 0;
+    padding-left: 1rem;
+  }
+
+  /* Adjust flex directions */
+  .flex-row {
+    flex-direction: row-reverse;
+  }
+
+  /* Adjust text alignment */
+  .text-left {
+    text-align: right;
+  }
+
+  .text-right {
+    text-align: left;
+  }
+
+  /* Keep toast position unchanged */
+  .Toastify__toast-container--bottom-right {
+    bottom: 1rem;
+    right: 1rem;
+    left: auto;
+  }
+
+  /* Adjust dropdown menus */
+  .dropdown-menu {
+    left: auto;
+    right: 0;
+  }
+
+  /* Adjust navigation arrows */
+  .chevron-right {
+    transform: rotate(180deg);
+  }
+
+  .chevron-left {
+    transform: rotate(180deg);
+  }
+
+  /* Fix sidebar positioning */
+  .fixed:not(.loading-spinner-overlay) {
+    left: 0 !important;
+    right: auto !important;
+  }
+
+  /* Adjust main content margin */
+  .ml-64 {
+    margin-left: 0;
+    margin-right: 16rem;
+  }
+
+  /* Fix layout direction */
+  .flex {
+    direction: ltr !important;
+  }
+
+  /* Fix header positioning */
+  header {
+    left: 16rem !important;
+    right: auto !important;
+  }
+
+  /* Fix main content positioning */
+  main {
+    margin-left: 16rem !important;
+    margin-right: 0 !important;
+  }
+
+  /* Fix container padding */
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Fix grid layouts */
+  .grid {
+    direction: ltr !important;
+  }
+
+  /* Fix space between items */
+  .space-x-4 > * + * {
+    margin-left: 0;
+    margin-right: 1rem;
+  }
+
+  .space-x-2 > * + * {
+    margin-left: 0;
+    margin-right: 0.5rem;
+  }
+
+  /* Fix gap utilities */
+  .gap-4 {
+    gap: 1rem;
+  }
+
+  .gap-2 {
+    gap: 0.5rem;
+  }
+
+  /* Keep toast notifications in original position */
+  .Toastify__toast {
+    direction: ltr;
+  }
+
+  /* Keep header components in original position */
+  header * {
+    direction: ltr !important;
+  }
+
+  /* Keep sidebar in original position */
+  aside * {
+    direction: ltr !important;
+  }
+
+  /* Keep dropdowns in original position */
+  .dropdown-menu {
+    direction: ltr !important;
+  }
+
+  /* Keep buttons in original position */
+  button {
+    direction: ltr !important;
+  }
+
+  /* Keep inputs in original position */
+  input {
+    direction: ltr !important;
+  }
+
+  /* Keep search bars in original position */
+  .search-bar {
+    direction: ltr !important;
+  }
+
+  /* Keep navigation items in original position */
+  nav * {
+    direction: ltr !important;
+  }
+}
+
 /* Global Styles */
 :root {
   --primary-color: #3b82f6;
@@ -19,6 +184,19 @@
 body:not(.landing-page) {
   @apply bg-gray-50 text-gray-900 antialiased;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Dark Mode Styles */
+.dark body:not(.landing-page) {
+  @apply bg-gray-900 text-gray-100;
+}
+
+.dark .form-input {
+  @apply bg-gray-800 border-gray-700 text-gray-100;
+}
+
+.dark .form-label {
+  @apply text-gray-300;
 }
 
 /* Component Styles */
@@ -131,4 +309,25 @@ body:not(.landing-page) {
   padding: 0 !important;
   margin: 0 !important;
   width: 100vw !important;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #3b82f6 #f3f4f6;
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #3b82f6 40%, #6366f1 100%);
+  border-radius: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #2563eb 40%, #a21caf 100%);
+}
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background: linear-gradient(135deg, #111827 60%, #1e293b 100%);
 }

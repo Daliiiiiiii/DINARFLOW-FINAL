@@ -25,8 +25,14 @@ export function AuthProvider({ children }) {
         }
 
         const { data } = await api.get('/api/auth/validate');
-        setCurrentUser(data.user);
-        setUserProfile(data.user);
+        const user = {
+          ...data.user,
+          displayName: data.user.displayName || data.user.name || data.user.email || 'User',
+          firstName: data.user.firstName || '',
+          lastName: data.user.lastName || ''
+        };
+        setCurrentUser(user);
+        setUserProfile(user);
       } catch (error) {
         console.error('Auth check error:', error);
         localStorage.removeItem('token');
@@ -51,13 +57,15 @@ export function AuthProvider({ children }) {
     return cleanPhone
   }
 
-  async function signup(email, password, displayName, phone) {
+  async function signup(email, password, firstName, lastName, displayName, phone) {
     try {
       const formattedPhone = validatePhoneNumber(phone)
 
       const { data } = await api.post('/api/auth/register', {
         email,
         password,
+        firstName,
+        lastName,
         displayName,
         phoneNumber: formattedPhone
       })
@@ -69,11 +77,17 @@ export function AuthProvider({ children }) {
       }
 
       localStorage.setItem('token', data.token)
-      setCurrentUser(data.user)
-      setUserProfile(data.user)
+      const user = {
+        ...data.user,
+        displayName: data.user.displayName || data.user.name || data.user.email || 'User',
+        firstName: data.user.firstName || '',
+        lastName: data.user.lastName || ''
+      };
+      setCurrentUser(user)
+      setUserProfile(user)
 
       toast.success('Account created successfully!')
-      return data.user
+      return user
     } catch (error) {
       console.error('Signup error:', error)
       const errorMessage = error.response?.data?.error || error.response?.data?.message || 'Failed to create account'
@@ -125,11 +139,17 @@ export function AuthProvider({ children }) {
         sessionStorage.setItem('user', JSON.stringify(data.user));
       }
       
-      setCurrentUser(data.user);
-      setUserProfile(data.user);
+      const user = {
+        ...data.user,
+        displayName: data.user.displayName || data.user.name || data.user.email || 'User',
+        firstName: data.user.firstName || '',
+        lastName: data.user.lastName || ''
+      };
+      setCurrentUser(user);
+      setUserProfile(user);
 
       toast.success('Logged in successfully!');
-      return data.user;
+      return user;
     } catch (error) {
       console.error('Login error:', error);
       toast.error(error.response?.data?.error || 'Failed to login');
@@ -157,25 +177,14 @@ export function AuthProvider({ children }) {
 
   async function resetPassword(email) {
     try {
-      const response = await fetch('/api/auth/reset-password', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email })
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error)
-      }
-
-      toast.success('Password reset email sent!')
+      const response = await api.post('/api/auth/forgot-password', { email });
+      toast.success('Password reset email sent!');
     } catch (error) {
-      console.error('Reset password error:', error)
-      toast.error(error.message)
-      throw error
+      console.error('Reset password error:', error);
+      if (error.response?.status === 404) {
+        throw new Error('No account found with this email address. Please check and try again.');
+      }
+      throw new Error(error.response?.data?.error || 'Failed to send password reset email. Please try again.');
     }
   }
 
@@ -196,7 +205,7 @@ export function AuthProvider({ children }) {
       let response;
       
       if (data instanceof FormData) {
-an        // Handle file upload - ensure the file field name matches backend expectation
+        // Handle file upload - ensure the file field name matches backend expectation
         const formData = new FormData();
         // If there's a profile image file, append it with the correct field name
         if (data.get('profileImage')) {
@@ -242,30 +251,17 @@ an        // Handle file upload - ensure the file field name matches backend exp
 
   async function acceptPrivacyPolicy() {
     try {
-      const response = await fetch('/api/users/privacy-policy', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error)
-      }
-
+      const response = await api.post('/api/users/privacy-policy');
       setUserProfile(prev => ({
         ...prev,
         privacyAccepted: true,
         privacyAcceptedAt: new Date()
-      }))
-
-      toast.success('Privacy policy accepted!')
+      }));
+      toast.success('Privacy policy accepted!');
     } catch (error) {
-      console.error('Accept privacy policy error:', error)
-      toast.error(error.message)
-      throw error
+      console.error('Accept privacy policy error:', error);
+      toast.error(error.response?.data?.error || error.message);
+      throw error;
     }
   }
 
@@ -275,33 +271,56 @@ an        // Handle file upload - ensure the file field name matches backend exp
       
       // Append form fields
       Object.keys(formData).forEach(key => {
-        formDataObj.append(key, formData[key])
+        if (key !== 'frontId' && key !== 'backId' && key !== 'selfieWithId') {
+          formDataObj.append(key, formData[key])
+        }
       })
+      
+      // Validate files before upload
+      const requiredFiles = ['frontId', 'backId', 'selfieWithId'];
+      const missingFiles = requiredFiles.filter(fileName => !files[fileName]);
+      
+      if (missingFiles.length > 0) {
+        throw new Error(`Missing required files: ${missingFiles.join(', ')}`);
+      }
 
-      // Append files
-      Object.keys(files).forEach(key => {
-        formDataObj.append(key, files[key])
-      })
+      // Append files with proper names
+      Object.entries(files).forEach(([key, file]) => {
+        if (file) {
+          // Validate file size (5MB limit)
+          if (file.size > 5 * 1024 * 1024) {
+            throw new Error(`File ${key} is too large. Maximum size is 5MB.`);
+          }
+          formDataObj.append(key, file);
+        }
+      });
 
-      const { data } = await api.post('/api/kyc/verify', formDataObj, {
+      const { data } = await api.post('/api/kyc/submit', formDataObj, {
         headers: {
           'Content-Type': 'multipart/form-data'
-        }
+        },
+        onUploadProgress: (progressEvent) => {
+          const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          console.log('Upload progress:', percentCompleted);
+        },
+        timeout: 30000 // 30 second timeout
       });
 
       // Update user profile with KYC status
       setUserProfile(prev => ({
         ...prev,
-        kycStatus: 'in_progress',
-        kycData: data.kycData
+        kyc: {
+          ...prev.kyc,
+          status: 'pending',
+          submittedAt: new Date()
+        }
       }));
-
-      toast.success('KYC verification submitted successfully!');
+      
       return data;
     } catch (error) {
       console.error('Start KYC verification error:', error);
-      toast.error(error.response?.data?.error || 'Failed to submit KYC verification');
-      throw error;
+      const errorMessage = error.response?.data?.error || error.message || 'Failed to submit KYC verification';
+      throw new Error(errorMessage);
     }
   }
 

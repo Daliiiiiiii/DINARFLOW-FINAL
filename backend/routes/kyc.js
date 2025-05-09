@@ -1,99 +1,162 @@
 import express from 'express';
 import { auth, isAdmin } from '../middleware/auth.js';
-import { upload } from '../middleware/upload.js';
-import { createKyc, getKyc, updateKycStatus, deleteKyc } from '../services/kycService.js';
+import { uploadKyc } from '../middleware/upload.js';
 import logger from '../services/logger.js';
 import User from '../models/User.js';
 import fileStorage from '../services/fileStorage.js';
+import KycService from '../services/kycService.js';
+import multer from 'multer';
+import fs from 'fs';
 
 const router = express.Router();
 
 // Get KYC status for current user
 router.get('/status', auth, async (req, res) => {
   try {
-    const kyc = await getKyc(req.user.id);
-    res.json(kyc);
+    const status = await KycService.getKycStatus(req.user._id);
+    res.json(status);
   } catch (error) {
-    logger.error('Error getting KYC status:', { error, userId: req.user.id });
-    res.status(500).json({ message: 'Error getting KYC status' });
+    logger.error('Error getting KYC status:', { error, userId: req.user._id });
+    res.status(500).json({ error: error.message || 'Error getting KYC status' });
   }
 });
 
-// Submit KYC documents
-router.post('/submit', auth, upload.array('documents', 5), async (req, res) => {
+// Submit KYC
+router.post('/submit', auth, async (req, res) => {
   try {
-    const documents = req.files.map(file => ({
-      type: file.fieldname,
-      url: file.path,
-      filename: file.filename
-    }));
+    // Log the request for debugging
+    logger.info('KYC submission request received');
 
-    const kyc = await createKyc({
-      userId: req.user.id,
-      documents,
-      status: 'pending'
+    // Handle the file upload
+    uploadKyc(req, res, async function (err) {
+      if (err instanceof multer.MulterError) {
+        // A Multer error occurred when uploading
+        logger.error('Multer error during KYC upload:', { error: err });
+        return res.status(400).json({
+          error: 'File upload error',
+          details: err.message
+        });
+      } else if (err) {
+        // An unknown error occurred
+        logger.error('Unknown error during KYC upload:', { error: err });
+        return res.status(500).json({
+          error: 'File upload failed',
+          details: err.message
+        });
+      }
+
+      try {
+        // Validate files
+        if (!req.files) {
+          return res.status(400).json({ error: 'No files uploaded' });
+        }
+
+        const requiredFiles = ['frontId', 'backId', 'selfieWithId'];
+        const missingFiles = requiredFiles.filter(fileName => !req.files[fileName]?.[0]);
+
+        if (missingFiles.length > 0) {
+          return res.status(400).json({
+            error: `Missing required files: ${missingFiles.join(', ')}`
+          });
+        }
+
+        // Process the submission
+        const result = await KycService.submitKyc(req.user._id, req.body, req.files);
+        res.status(200).json(result);
+      } catch (error) {
+        logger.error('Error processing KYC submission:', {
+          error: error.message,
+          stack: error.stack,
+          userId: req.user._id
+        });
+
+        // Clean up uploaded files in case of error
+        if (req.files) {
+          try {
+            await Promise.all(
+              Object.values(req.files).flat().map(file =>
+                fs.unlink(file.path).catch(err =>
+                  logger.error('Error cleaning up file:', { file: file.path, error: err })
+                )
+              )
+            );
+          } catch (cleanupError) {
+            logger.error('Error during file cleanup:', cleanupError);
+          }
+        }
+
+        // Send appropriate error response
+        if (error.message.includes('file size')) {
+          return res.status(400).json({ error: error.message });
+        }
+        if (error.message.includes('file type')) {
+          return res.status(400).json({ error: error.message });
+        }
+
+        res.status(500).json({ error: error.message || 'Failed to submit KYC' });
+      }
     });
-
-    logger.info('KYC submission created', { kycId: kyc._id, userId: req.user.id });
-    res.status(201).json(kyc);
   } catch (error) {
-    logger.error('Error submitting KYC:', { error, userId: req.user.id });
-    res.status(500).json({ message: 'Error submitting KYC documents' });
+    logger.error('Unexpected error in KYC submission:', {
+      error: error.message,
+      stack: error.stack,
+      userId: req.user._id
+    });
+    res.status(500).json({ error: 'An unexpected error occurred' });
+  }
+});
+
+// Get KYC documents
+router.get('/documents', auth, async (req, res) => {
+  try {
+    const documents = await KycService.getKycDocuments(req.user._id);
+    res.json(documents);
+  } catch (error) {
+    logger.error('Error getting KYC documents:', error);
+    res.status(500).json({ error: error.message || 'Failed to get KYC documents' });
+  }
+});
+
+// Get KYC audit trail
+router.get('/audit', auth, async (req, res) => {
+  try {
+    const auditTrail = await KycService.getAuditTrail(req.user._id);
+    res.json(auditTrail);
+  } catch (error) {
+    logger.error('Error getting KYC audit trail:', error);
+    res.status(500).json({ error: error.message || 'Failed to get KYC audit trail' });
   }
 });
 
 // Admin routes
 router.get('/admin/pending', auth, isAdmin, async (req, res) => {
   try {
-    const pendingKyc = await getKyc({ status: 'pending' });
-    res.json(pendingKyc);
-  } catch (error) {
-    logger.error('Error getting pending KYC:', { error, adminId: req.user.id });
-    res.status(500).json({ message: 'Error getting pending KYC requests' });
-  }
-});
-
-router.patch('/admin/:id/status', auth, isAdmin, async (req, res) => {
-  try {
-    const { status, comment } = req.body;
-    const kyc = await updateKycStatus(req.params.id, status, comment);
-
-    logger.info('KYC status updated', {
-      kycId: kyc._id,
-      status,
-      adminId: req.user.id
-    });
-
-    res.json(kyc);
-  } catch (error) {
-    logger.error('Error updating KYC status:', {
-      error,
-      kycId: req.params.id,
-      adminId: req.user.id
-    });
-    res.status(500).json({ message: 'Error updating KYC status' });
-  }
-});
-
-router.delete('/admin/:id', auth, isAdmin, async (req, res) => {
-  try {
-    await deleteKyc(req.params.id);
-    logger.info('KYC deleted', { kycId: req.params.id, adminId: req.user.id });
-    res.status(204).send();
-  } catch (error) {
-    logger.error('Error deleting KYC:', { error, kycId: req.params.id, adminId: req.user.id });
-    res.status(500).json({ message: 'Error deleting KYC' });
-  }
-});
-
-// Get pending KYC users
-router.get('/admin/pending', auth, isAdmin, async (req, res, next) => {
-  try {
-    const users = await User.find({ kycStatus: 'in_progress' });
+    const users = await User.find({ kycStatus: 'pending' }).select('email displayName firstName lastName kycStatus kycData');
     res.json({ users });
   } catch (error) {
     logger.error('Error fetching pending KYC users', { error: error.message });
-    next(error);
+    res.status(500).json({ message: 'Error fetching pending KYC users' });
+  }
+});
+
+router.post('/verify/:userId', auth, isAdmin, async (req, res) => {
+  try {
+    const { status, notes } = req.body;
+    const result = await KycService.verifyKyc(req.params.userId, status, notes);
+    res.json(result);
+  } catch (error) {
+    logger.error('Error verifying KYC:', error);
+    res.status(500).json({ error: error.message || 'Failed to verify KYC' });
+  }
+});
+
+router.delete('/admin/:userId', auth, isAdmin, async (req, res) => {
+  try {
+    await KycService.deleteKycData(req.params.userId);
+    res.status(204).send();
+  } catch (error) {
+    logger.error('Error deleting KYC data:', { error, adminId: req.user._id });
+    res.status(500).json({ error: 'Failed to delete KYC data' });
   }
 });
 
@@ -112,91 +175,14 @@ router.get('/documents/:fileId', auth, async (req, res, next) => {
   }
 });
 
-// Verify KYC documents
-router.post('/verify', auth, upload.fields([
-  { name: 'idFront', maxCount: 1 },
-  { name: 'idBack', maxCount: 1 },
-  { name: 'selfie', maxCount: 1 }
-]), async (req, res) => {
+// Get KYC audit trail for a user
+router.get('/audit/:userId', auth, isAdmin, async (req, res) => {
   try {
-    const { idType, idNumber, dateOfBirth } = req.body;
-
-    // Basic validation
-    if (!idType || !idNumber || !dateOfBirth) {
-      return res.status(400).json({ error: 'Missing required fields' });
-    }
-
-    if (!req.files?.idFront?.[0] || !req.files?.idBack?.[0] || !req.files?.selfie?.[0]) {
-      return res.status(400).json({ error: 'Missing required files' });
-    }
-
-    // Store files in GridFS
-    const [idFrontFile, idBackFile, selfieFile] = await Promise.all([
-      fileStorage.storeFile(req.files.idFront[0], { userId: req.user._id, type: 'id_front' }),
-      fileStorage.storeFile(req.files.idBack[0], { userId: req.user._id, type: 'id_back' }),
-      fileStorage.storeFile(req.files.selfie[0], { userId: req.user._id, type: 'selfie' })
-    ]);
-
-    // Create KYC document records
-    const documents = [
-      {
-        type: 'id_front',
-        url: idFrontFile.fileId,
-        filename: req.files.idFront[0].originalname
-      },
-      {
-        type: 'id_back',
-        url: idBackFile.fileId,
-        filename: req.files.idBack[0].originalname
-      },
-      {
-        type: 'selfie',
-        url: selfieFile.fileId,
-        filename: req.files.selfie[0].originalname
-      }
-    ];
-
-    // Create KYC record
-    const kyc = await createKyc({
-      userId: req.user._id,
-      documents,
-      status: 'pending'
-    });
-
-    // Update user's KYC data
-    const user = await User.findByIdAndUpdate(
-      req.user._id,
-      {
-        $set: {
-          'kycStatus': 'in_progress',
-          'kycData.idType': idType,
-          'kycData.idNumber': idNumber,
-          'kycData.dateOfBirth': new Date(dateOfBirth),
-          'kycData.idFrontUrl': idFrontFile.fileId,
-          'kycData.idBackUrl': idBackFile.fileId,
-          'kycData.selfieUrl': selfieFile.fileId
-        }
-      },
-      { new: true }
-    ).select('-password');
-
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-
-    logger.info('KYC verification submitted', {
-      userId: req.user._id,
-      kycId: kyc._id
-    });
-
-    res.json({
-      message: 'KYC verification submitted successfully',
-      user,
-      kycData: user.kycData
-    });
+    const audit = await KycService.getKycAudit(req.params.userId);
+    res.status(200).json({ audit });
   } catch (error) {
-    logger.error('Error in KYC verification:', { error, userId: req.user._id });
-    res.status(500).json({ error: 'Failed to process KYC verification' });
+    logger.error('Error fetching KYC audit:', { error, adminId: req.user._id });
+    res.status(500).json({ error: 'Failed to fetch KYC audit' });
   }
 });
 

@@ -35,3 +35,327 @@
 2025-05-05T19:11:22.989Z [ERROR]: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
 2025-05-05T21:21:40.052Z [ERROR]: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
 2025-05-05T21:32:03.890Z [ERROR]: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-05-09T04:03:03.915Z [ERROR]: KYC submission failed
+	Metadata: {
+  "userId": "681d6d5dc464ae9b966dcb4c",
+  "error": "Invalid input"
+}
+2025-05-09T04:03:03.917Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:03:04.392Z [ERROR]: KYC submission failed
+	Metadata: {
+  "userId": "681d6d5dc464ae9b966dcb4c",
+  "error": "Invalid input"
+}
+2025-05-09T04:03:04.393Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:03:15.421Z [ERROR]: KYC submission failed
+	Metadata: {
+  "userId": "681d6d5dc464ae9b966dcb4c",
+  "error": "Invalid input"
+}
+2025-05-09T04:03:15.421Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:03:20.176Z [ERROR]: KYC submission failed
+	Metadata: {
+  "userId": "681d6d5dc464ae9b966dcb4c",
+  "error": "Invalid input"
+}
+2025-05-09T04:03:20.177Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:07:49.675Z [ERROR]: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:07:49.676Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:08:14.578Z [ERROR]: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:08:14.579Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:08:32.838Z [ERROR]: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:08:32.840Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:08:40.729Z [ERROR]: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:08:40.730Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:08:48.207Z [ERROR]: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:08:48.208Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:09:02.309Z [ERROR]: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:09:02.310Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:09:44.458Z [ERROR]: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:09:44.459Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:10:26.673Z [ERROR]: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:10:26.674Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:10:38.158Z [ERROR]: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:10:38.159Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:14:35.189Z [ERROR]: File storage error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:14:35.190Z [ERROR]: KYC submission error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:14:35.191Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": "Image resolution too low. Minimum size is 800x600",
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:14:56.421Z [ERROR]: File storage error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:14:56.422Z [ERROR]: KYC submission error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:14:56.423Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": "Image resolution too low. Minimum size is 800x600",
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:15:48.124Z [ERROR]: File storage error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:15:48.129Z [ERROR]: KYC submission error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:15:48.130Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": "Image resolution too low. Minimum size is 800x600",
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:15:57.489Z [ERROR]: File storage error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:15:57.490Z [ERROR]: KYC submission error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:15:57.491Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": "Image resolution too low. Minimum size is 800x600",
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:16:16.111Z [ERROR]: File storage error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:16:16.111Z [ERROR]: KYC submission error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:16:16.112Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": "Image resolution too low. Minimum size is 800x600",
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:18:53.130Z [ERROR]: Error storing file:
+	Metadata: {
+  "error": "Image resolution too low. Minimum size is 800x600",
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:51:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:18:53.132Z [ERROR]: KYC submission error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:51:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:18:53.132Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": "Image resolution too low. Minimum size is 800x600",
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:51:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:29:03.570Z [ERROR]: Error processing image: Invalid input
+	Metadata: {
+  "stack": "Error: Invalid input\n    at Sharp (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\sharp\\lib\\constructor.js:175:11)\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:35:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:03.571Z [ERROR]: Error storing file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to process image. Please try again with a different file.\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:40:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:03.571Z [ERROR]: Error storing frontId file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to process image. Please try again with a different file.\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:40:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:03.572Z [ERROR]: Error submitting KYC: Failed to store frontId file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to store frontId file: Failed to process image. Please try again with a different file.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:03.572Z [ERROR]: Error processing KYC submission:
+	Metadata: {
+  "error": "Failed to store frontId file: Failed to process image. Please try again with a different file.",
+  "stack": "Error: Failed to store frontId file: Failed to process image. Please try again with a different file.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:29:03.577Z [ERROR]: Error during file cleanup: The "cb" argument must be of type function. Received undefined
+	Metadata: {
+  "code": "ERR_INVALID_ARG_TYPE",
+  "stack": "TypeError [ERR_INVALID_ARG_TYPE]: The \"cb\" argument must be of type function. Received undefined\n    at makeCallback (node:fs:186:3)\n    at Object.unlink (node:fs:1941:14)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:78:20\n    at Array.map (<anonymous>)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:77:47\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+}
+2025-05-09T04:29:16.906Z [ERROR]: Error processing image: Invalid input
+	Metadata: {
+  "stack": "Error: Invalid input\n    at Sharp (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\sharp\\lib\\constructor.js:175:11)\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:35:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:16.906Z [ERROR]: Error storing file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to process image. Please try again with a different file.\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:40:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:16.907Z [ERROR]: Error storing frontId file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to process image. Please try again with a different file.\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:40:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:16.907Z [ERROR]: Error submitting KYC: Failed to store frontId file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to store frontId file: Failed to process image. Please try again with a different file.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:16.907Z [ERROR]: Error processing KYC submission:
+	Metadata: {
+  "error": "Failed to store frontId file: Failed to process image. Please try again with a different file.",
+  "stack": "Error: Failed to store frontId file: Failed to process image. Please try again with a different file.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:29:16.908Z [ERROR]: Error during file cleanup: The "cb" argument must be of type function. Received undefined
+	Metadata: {
+  "code": "ERR_INVALID_ARG_TYPE",
+  "stack": "TypeError [ERR_INVALID_ARG_TYPE]: The \"cb\" argument must be of type function. Received undefined\n    at makeCallback (node:fs:186:3)\n    at Object.unlink (node:fs:1941:14)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:78:20\n    at Array.map (<anonymous>)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:77:47\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+}
+2025-05-09T04:29:27.892Z [ERROR]: Error processing image: Invalid input
+	Metadata: {
+  "stack": "Error: Invalid input\n    at Sharp (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\sharp\\lib\\constructor.js:175:11)\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:35:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:27.892Z [ERROR]: Error storing file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to process image. Please try again with a different file.\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:40:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:27.893Z [ERROR]: Error storing frontId file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to process image. Please try again with a different file.\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:40:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:27.893Z [ERROR]: Error submitting KYC: Failed to store frontId file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to store frontId file: Failed to process image. Please try again with a different file.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:27.893Z [ERROR]: Error processing KYC submission:
+	Metadata: {
+  "error": "Failed to store frontId file: Failed to process image. Please try again with a different file.",
+  "stack": "Error: Failed to store frontId file: Failed to process image. Please try again with a different file.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:29:27.893Z [ERROR]: Error during file cleanup: The "cb" argument must be of type function. Received undefined
+	Metadata: {
+  "code": "ERR_INVALID_ARG_TYPE",
+  "stack": "TypeError [ERR_INVALID_ARG_TYPE]: The \"cb\" argument must be of type function. Received undefined\n    at makeCallback (node:fs:186:3)\n    at Object.unlink (node:fs:1941:14)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:78:20\n    at Array.map (<anonymous>)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:77:47\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+}
+2025-05-09T04:29:41.472Z [ERROR]: Error processing image: Invalid input
+	Metadata: {
+  "stack": "Error: Invalid input\n    at Sharp (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\sharp\\lib\\constructor.js:175:11)\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:35:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:41.473Z [ERROR]: Error storing file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to process image. Please try again with a different file.\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:40:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:41.473Z [ERROR]: Error storing frontId file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to process image. Please try again with a different file.\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:40:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:41.473Z [ERROR]: Error submitting KYC: Failed to store frontId file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to store frontId file: Failed to process image. Please try again with a different file.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:41.474Z [ERROR]: Error processing KYC submission:
+	Metadata: {
+  "error": "Failed to store frontId file: Failed to process image. Please try again with a different file.",
+  "stack": "Error: Failed to store frontId file: Failed to process image. Please try again with a different file.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:29:41.474Z [ERROR]: Error during file cleanup: The "cb" argument must be of type function. Received undefined
+	Metadata: {
+  "code": "ERR_INVALID_ARG_TYPE",
+  "stack": "TypeError [ERR_INVALID_ARG_TYPE]: The \"cb\" argument must be of type function. Received undefined\n    at makeCallback (node:fs:186:3)\n    at Object.unlink (node:fs:1941:14)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:78:20\n    at Array.map (<anonymous>)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:77:47\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+}
+2025-05-09T14:22:40.524Z [ERROR]: Multer error during KYC upload:
+	Metadata: {
+  "error": {
+    "name": "MulterError",
+    "message": "Unexpected field",
+    "code": "LIMIT_UNEXPECTED_FILE",
+    "field": "frontId",
+    "storageErrors": []
+  }
+}

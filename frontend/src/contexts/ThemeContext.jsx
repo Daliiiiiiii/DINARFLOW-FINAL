@@ -2,52 +2,35 @@ import React, { createContext, useContext, useState, useEffect } from 'react'
 
 const ThemeContext = createContext()
 
-export const ThemeProvider = ({ children }) => {
-  const [isDark, setIsDark] = useState(() => {
-    // Check if user has a theme preference in localStorage
+export function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem('theme')
-    // Check if user prefers dark mode at OS level
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    
-    return savedTheme ? savedTheme === 'dark' : prefersDark
+    return savedTheme || 'dark'
   })
 
   useEffect(() => {
-    // Update document class and localStorage when theme changes
-    if (isDark) {
+    localStorage.setItem('theme', theme)
+    if (theme === 'dark') {
       document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
+      document.documentElement.classList.remove('light')
     } else {
       document.documentElement.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
+      document.documentElement.classList.add('light')
     }
-  }, [isDark])
-
-  // Listen for OS theme changes
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    const handleChange = (e) => {
-      if (!localStorage.getItem('theme')) {
-        setIsDark(e.matches)
-      }
-    }
-
-    mediaQuery.addEventListener('change', handleChange)
-    return () => mediaQuery.removeEventListener('change', handleChange)
-  }, [])
+  }, [theme])
 
   const toggleTheme = () => {
-    setIsDark(prev => !prev)
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark')
   }
 
   return (
-    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   )
 }
 
-export const useTheme = () => {
+export function useTheme() {
   const context = useContext(ThemeContext)
   if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider')

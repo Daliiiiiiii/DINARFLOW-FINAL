@@ -10,6 +10,16 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     index: { unique: true }
   },
+  firstName: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  lastName: {
+    type: String,
+    required: true,
+    trim: true
+  },
   password: {
     type: String,
     required: true
@@ -47,8 +57,8 @@ const userSchema = new mongoose.Schema({
   },
   kycStatus: {
     type: String,
-    enum: ['pending', 'in_progress', 'verified', 'rejected'],
-    default: 'pending'
+    enum: ['unverified', 'pending', 'verified', 'rejected'],
+    default: 'unverified'
   },
   kycData: {
     idType: String,
@@ -109,6 +119,47 @@ const userSchema = new mongoose.Schema({
   metadata: {
     type: Map,
     of: mongoose.Schema.Types.Mixed
+  },
+  kyc: {
+    status: {
+      type: String,
+      enum: ['unverified', 'pending', 'verified', 'rejected'],
+      default: 'unverified'
+    },
+    submittedAt: Date,
+    verifiedAt: Date,
+    verificationNotes: String,
+    documents: {
+      frontId: String,
+      backId: String,
+      selfieWithId: String
+    },
+    data: {
+      type: Map,
+      of: mongoose.Schema.Types.Mixed
+    },
+    auditTrail: [{
+      action: {
+        type: String,
+        required: true
+      },
+      details: {
+        type: Map,
+        of: mongoose.Schema.Types.Mixed
+      },
+      timestamp: {
+        type: Date,
+        default: Date.now
+      }
+    }]
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
   }
 }, {
   timestamps: true,

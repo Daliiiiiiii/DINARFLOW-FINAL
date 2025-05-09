@@ -1,33 +1,51 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAuth } from '../contexts/AuthContext'
+import { useTranslation } from 'react-i18next'
 import { 
-  RiLockLine, 
-  RiBellLine, 
-  RiShieldLine, 
-  RiUserSettingsLine,
-  RiDeleteBinLine,
-  RiInformationLine,
-  RiCheckLine,
-  RiCloseLine,
-  RiGlobalLine,
-  RiTimeLine
-} from 'react-icons/ri'
+  Bell, 
+  Moon, 
+  Sun, 
+  Globe, 
+  Lock, 
+  CreditCard, 
+  Smartphone,
+  Mail,
+  AlertTriangle,
+  X,
+  ChevronRight,
+  Shield,
+  LogOut,
+  Calendar,
+  Check
+} from 'lucide-react'
+import { useTheme } from '../contexts/ThemeContext'
 import { toast } from 'react-toastify'
 import PasswordUpdateForm from '../components/forms/PasswordUpdateForm'
 import { useNavigate } from 'react-router-dom'
 import Card from '../components/ui/Card'
 import Button from '../components/ui/Button'
 import { typography } from '../styles/typography'
+import { format } from 'date-fns'
+import ActionLoader from '../assets/animations/ActionLoader'
+import api from '../lib/axios'
 
 const Settings = () => {
+  const { t, i18n } = useTranslation()
+  const { theme, toggleTheme } = useTheme()
   const { userProfile, updateUserProfile, setUserProfile, logout } = useAuth()
   const navigate = useNavigate()
+  const isDark = theme === 'dark'
   
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [showPasswordModal, setShowPasswordModal] = useState(false)
   const [notifications, setNotifications] = useState({
-    emailNotifications: userProfile?.notificationsEnabled || false,
-    transactionAlerts: true,
-    marketingEmails: false
+    push: true,
+    email: true,
+    sms: false,
+    transactions: true,
+    marketing: false,
+    security: true
   })
   
   const [security, setSecurity] = useState({
@@ -41,11 +59,14 @@ const Settings = () => {
   const [success, setSuccess] = useState('')
   const [error, setError] = useState('')
   
-  const handleNotificationChange = (e) => {
-    const { name, checked } = e.target
+  const [selectedLanguage, setSelectedLanguage] = useState(i18n.language || 'en')
+  
+  const [isLoading, setIsLoading] = useState(false)
+  
+  const handleNotificationChange = (key) => {
     setNotifications(prev => ({
       ...prev,
-      [name]: checked
+      [key]: !prev[key]
     }))
   }
   
@@ -57,6 +78,16 @@ const Settings = () => {
     }))
   }
   
+  const handleLanguageChange = (language) => {
+    setSelectedLanguage(language)
+    i18n.changeLanguage(language).then(() => {
+      localStorage.setItem('i18nextLng', language)
+      document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr'
+      document.documentElement.lang = language
+      toast.success(t('settings.language.success'))
+    })
+  }
+  
   const saveNotificationSettings = async () => {
     try {
       setError('')
@@ -64,7 +95,7 @@ const Settings = () => {
       setUpdatingNotifications(true)
       
       await updateUserProfile({
-        notificationsEnabled: notifications.emailNotifications
+        notificationsEnabled: notifications.email
       })
       
       setSuccess('Notification preferences updated successfully!')
@@ -113,36 +144,19 @@ const Settings = () => {
     if (!confirmDelete) return
 
     try {
-      setError('')
-      
       if (!userProfile) {
-        setError('User profile not found.')
+        toast.error('User profile not found.')
         return
       }
 
-      const response = await fetch('/api/users/delete-account', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ action: 'request' })
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error)
-      }
-
-      toast.info(data.message)
+      const response = await api.post('/api/users/delete-account', { action: 'request' })
+      toast.info(response.data.message)
       
-      // Log out the user after requesting deletion
       await logout()
       navigate('/login')
     } catch (error) {
       console.error('Delete account error:', error)
-      setError('Failed to request account deletion: ' + error.message)
+      toast.error('Failed to request account deletion: ' + (error.response?.data?.error || error.message))
     }
   }
 
@@ -153,20 +167,7 @@ const Settings = () => {
         return
       }
 
-      const response = await fetch('/api/users/delete-account', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ action: 'cancel' })
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error)
-      }
+      const response = await api.post('/api/users/delete-account', { action: 'cancel' })
 
       // Update local state
       setUserProfile({
@@ -175,10 +176,10 @@ const Settings = () => {
         account_status: 'active'
       })
 
-      toast.success(data.message)
+      toast.success(response.data.message)
     } catch (error) {
       console.error('Cancel deletion error:', error)
-      setError('Failed to cancel account deletion: ' + error.message)
+      setError('Failed to cancel account deletion: ' + (error.response?.data?.error || error.message))
     }
   }
 
@@ -237,18 +238,16 @@ const Settings = () => {
   `
   
   const SettingSection = ({ icon: Icon, title, description, children }) => (
-    <Card className="mb-6">
-      <div className="p-6">
-        <div className="flex items-start">
-          <div className="flex-shrink-0">
-            <div className="w-10 h-10 rounded-full bg-primary-100 dark:bg-primary-900/50 flex items-center justify-center">
-              <Icon className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-            </div>
-          </div>
-          <div className="ml-4 flex-1">
-            <h3 className={`${typography.h3} text-gray-900 dark:text-gray-100`}>{title}</h3>
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{description}</p>
-            <div className="mt-4">{children}</div>
+    <Card className="p-6 mb-6">
+      <div className="flex items-start gap-4">
+        <div className="p-2 rounded-lg bg-primary/10">
+          <Icon className="w-6 h-6 text-primary" />
+        </div>
+        <div className="flex-1">
+          <h3 className={typography.h3}>{title}</h3>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">{description}</p>
+          <div className="mt-4">
+            {children}
           </div>
         </div>
       </div>
@@ -278,274 +277,465 @@ const Settings = () => {
               checked ? 'opacity-100' : 'opacity-0'
             } absolute inset-0 flex h-full w-full items-center justify-center transition-opacity`}
           >
-            <RiCheckLine className="h-3 w-3 text-primary-600" />
+            <Check className="h-3 w-3 text-primary-600" />
           </span>
           <span
             className={`${
               checked ? 'opacity-0' : 'opacity-100'
             } absolute inset-0 flex h-full w-full items-center justify-center transition-opacity`}
           >
-            <RiCloseLine className="h-3 w-3 text-gray-400" />
+            <X className="h-3 w-3 text-gray-400" />
           </span>
         </span>
       </button>
     </div>
   )
   
+  if (isLoading) {
+    return <ActionLoader isLoading={true} />;
+  }
+  
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
-      className="max-w-3xl mx-auto px-4 py-8"
-    >
-      <h1 className={`${typography.h1} mb-8 text-gray-900 dark:text-gray-100`}>Account Settings</h1>
+    <div className="space-y-6">
+      <h1 className="text-2xl font-bold">{t('common.settings')}</h1>
 
-      <AnimatePresence>
-        {(success || error) && (
+      <div className="grid lg:grid-cols-3 gap-6">
+        {/* Main Settings */}
+        <div className="lg:col-span-2 space-y-6">
+          {/* Language */}
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="mb-6"
+            className={`${
+              isDark 
+                ? 'bg-gray-900/50 backdrop-blur-sm border-gray-800' 
+                : 'bg-white border-gray-200'
+            } border rounded-xl p-6 shadow-lg`}
           >
-        {success && (
-              <div className="p-4 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-200 rounded-lg border border-green-200 dark:border-green-800">
-                <div className="flex">
-                  <RiCheckLine className="h-5 w-5 text-green-400 mt-0.5" />
-                  <div className="ml-3">
-                    <p className="text-sm font-medium">{success}</p>
+            <h2 className="text-lg font-semibold mb-4">{t('settings.language.title')}</h2>
+            <div className="space-y-4">
+              <button 
+                onClick={() => handleLanguageChange('ar')}
+                className={`w-full p-4 rounded-lg ${
+                  selectedLanguage === 'ar'
+                    ? 'bg-blue-100 dark:bg-blue-900/50'
+                    : isDark
+                      ? 'bg-gray-800/50 hover:bg-gray-700'
+                      : 'bg-gray-50 hover:bg-gray-100'
+                } transition-colors flex items-center justify-between group`}
+              >
+                <div className="flex items-center gap-3">
+                  <Globe className="w-5 h-5 text-blue-400" />
+                  <div className="text-left">
+                    <div className="font-medium">العربية</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                      {t('settings.language.arabic')}
+                    </div>
+                  </div>
+                </div>
+                {selectedLanguage === 'ar' && (
+                  <div className="w-2 h-2 rounded-full bg-blue-500" />
+                )}
+              </button>
+
+              <button 
+                onClick={() => handleLanguageChange('en')}
+                className={`w-full p-4 rounded-lg ${
+                  selectedLanguage === 'en'
+                    ? 'bg-blue-100 dark:bg-blue-900/50'
+                    : isDark
+                      ? 'bg-gray-800/50 hover:bg-gray-700'
+                      : 'bg-gray-50 hover:bg-gray-100'
+                } transition-colors flex items-center justify-between group`}
+              >
+                <div className="flex items-center gap-3">
+                  <Globe className="w-5 h-5 text-blue-400" />
+                  <div className="text-left">
+                    <div className="font-medium">English</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                      {t('settings.language.english')}
+                    </div>
+                  </div>
+                </div>
+                {selectedLanguage === 'en' && (
+                  <div className="w-2 h-2 rounded-full bg-blue-500" />
+                )}
+              </button>
+
+              <button 
+                onClick={() => handleLanguageChange('fr')}
+                className={`w-full p-4 rounded-lg ${
+                  selectedLanguage === 'fr'
+                    ? 'bg-blue-100 dark:bg-blue-900/50'
+                    : isDark
+                      ? 'bg-gray-800/50 hover:bg-gray-700'
+                      : 'bg-gray-50 hover:bg-gray-100'
+                } transition-colors flex items-center justify-between group`}
+              >
+                <div className="flex items-center gap-3">
+                  <Globe className="w-5 h-5 text-blue-400" />
+                  <div className="text-left">
+                    <div className="font-medium">Français</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                      {t('settings.language.french')}
+                    </div>
+                  </div>
+                </div>
+                {selectedLanguage === 'fr' && (
+                  <div className="w-2 h-2 rounded-full bg-blue-500" />
+                )}
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Notifications */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className={`${
+              isDark 
+                ? 'bg-gray-900/50 backdrop-blur-sm border-gray-800' 
+                : 'bg-white border-gray-200'
+            } border rounded-xl p-6 shadow-lg`}
+          >
+            <h2 className="text-lg font-semibold mb-4">{t('settings.notifications.title')}</h2>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Bell className="w-5 h-5 text-blue-400" />
+                  <div>
+                    <div className="font-medium">{t('settings.notifications.push')}</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                      {t('settings.notifications.description')}
+                    </div>
+                  </div>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    className="sr-only peer"
+                    checked={notifications.push}
+                    onChange={() => handleNotificationChange('push')}
+                  />
+                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                </label>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Mail className="w-5 h-5 text-blue-400" />
+                  <div>
+                    <div className="font-medium">{t('settings.notifications.email')}</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                      {t('settings.notifications.description')}
+                    </div>
+                  </div>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    className="sr-only peer"
+                    checked={notifications.email}
+                    onChange={() => handleNotificationChange('email')}
+                  />
+                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                </label>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Smartphone className="w-5 h-5 text-blue-400" />
+                  <div>
+                    <div className="font-medium">{t('settings.notifications.sms')}</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                      {t('settings.notifications.description')}
+                    </div>
+                  </div>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    className="sr-only peer"
+                    checked={notifications.sms}
+                    onChange={() => handleNotificationChange('sms')}
+                  />
+                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                </label>
+              </div>
+            </div>
+
+            <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+              <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">
+                {t('settings.notifications.title')}
+              </h3>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="text-sm">{t('settings.notifications.transactions')}</div>
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      checked={notifications.transactions}
+                      onChange={() => handleNotificationChange('transactions')}
+                    />
+                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="text-sm">{t('settings.notifications.marketing')}</div>
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      checked={notifications.marketing}
+                      onChange={() => handleNotificationChange('marketing')}
+                    />
+                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="text-sm">{t('settings.notifications.security')}</div>
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      checked={notifications.security}
+                      onChange={() => handleNotificationChange('security')}
+                    />
+                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Security */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className={`${
+              isDark 
+                ? 'bg-gray-900/50 backdrop-blur-sm border-gray-800' 
+                : 'bg-white border-gray-200'
+            } border rounded-xl p-6 shadow-lg`}
+          >
+            <h2 className="text-lg font-semibold mb-4">{t('settings.security.title')}</h2>
+            <div className="space-y-4">
+              <button 
+                onClick={() => setShowPasswordModal(true)}
+                className={`w-full p-4 rounded-lg ${
+                  isDark
+                    ? 'bg-gray-800/50 hover:bg-gray-700'
+                    : 'bg-gray-50 hover:bg-gray-100'
+                } transition-colors flex items-center justify-between group`}
+              >
+                <div className="flex items-center gap-3">
+                  <Lock className="w-5 h-5 text-blue-400" />
+                  <div className="text-left">
+                    <div className="font-medium">{t('settings.security.changePassword')}</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                      {t('settings.security.description')}
+                    </div>
+                  </div>
+                </div>
+                <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-gray-600 dark:text-gray-400 dark:group-hover:text-gray-300" />
+              </button>
+
+              <button className={`w-full p-4 rounded-lg ${
+                isDark
+                  ? 'bg-gray-800/50 hover:bg-gray-700'
+                  : 'bg-gray-50 hover:bg-gray-100'
+              } transition-colors flex items-center justify-between group`}>
+                <div className="flex items-center gap-3">
+                  <Shield className="w-5 h-5 text-blue-400" />
+                  <div className="text-left">
+                    <div className="font-medium">{t('settings.security.twoFactor')}</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                      {t('settings.security.description')}
+                    </div>
+                  </div>
+                </div>
+                <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-gray-600 dark:text-gray-400 dark:group-hover:text-gray-300" />
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Danger Zone */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className={`${
+              isDark 
+                ? 'bg-red-900/20 backdrop-blur-sm border-red-800' 
+                : 'bg-red-50 border-red-200'
+            } border rounded-xl p-6 shadow-lg`}
+          >
+            <h2 className="text-lg font-semibold mb-4 text-red-600 dark:text-red-400">{t('settings.dangerZone.title')}</h2>
+            <div className="space-y-4">
+              <button 
+                onClick={() => setShowDeleteModal(true)}
+                className="w-full p-4 rounded-lg bg-red-100 hover:bg-red-200 dark:bg-red-900/50 dark:hover:bg-red-900 transition-colors flex items-center justify-between group"
+              >
+                <div className="flex items-center gap-3">
+                  <AlertTriangle className="w-5 h-5 text-red-500" />
+                  <div className="text-left">
+                    <div className="font-medium text-red-600 dark:text-red-400">{t('settings.dangerZone.deleteAccount.title')}</div>
+                    <div className="text-sm text-red-500 dark:text-red-400">
+                      {t('settings.dangerZone.deleteAccount.description')}
+                    </div>
+                  </div>
+                </div>
+                <ChevronRight className="w-5 h-5 text-red-400 group-hover:text-red-500" />
+              </button>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Sidebar */}
+        <div className="lg:col-span-1 space-y-6">
+          {/* Account Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className={`${
+              isDark 
+                ? 'bg-gray-900/50 backdrop-blur-sm border-gray-800' 
+                : 'bg-white border-gray-200'
+            } border rounded-xl p-6 shadow-lg`}
+          >
+            <h2 className="text-lg font-semibold mb-4">{t('settings.accountInfo.title')}</h2>
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                {userProfile?.profilePicture ? (
+                  <img 
+                    src={userProfile.profilePicture} 
+                    alt={userProfile.displayName} 
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center">
+                    <span className="text-lg font-semibold text-blue-600 dark:text-blue-400">
+                      {userProfile?.displayName?.[0]?.toUpperCase() || 'U'}
+                    </span>
+                  </div>
+                )}
+                <div>
+                  <div className="font-medium">{userProfile?.displayName || userProfile?.email || 'User'}</div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400">
+                    {userProfile?.email || 'Loading...'}
                   </div>
                 </div>
               </div>
-            )}
-            
-            {error && (
-              <div className="p-4 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-200 rounded-lg border border-red-200 dark:border-red-800">
-                <div className="flex">
-                  <RiCloseLine className="h-5 w-5 text-red-400 mt-0.5" />
-                  <div className="ml-3">
-                    <p className="text-sm font-medium">{error}</p>
-                  </div>
+
+              <div className="pt-4 border-t border-gray-200 dark:border-gray-700 space-y-3">
+                <div className="flex items-center gap-2">
+                  <Smartphone className="w-4 h-4 text-gray-500" />
+                  <span className="text-sm text-gray-600 dark:text-gray-400">
+                    {userProfile?.phoneNumber || t('settings.accountInfo.noPhoneNumber')}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-gray-500" />
+                  <span className="text-sm text-gray-600 dark:text-gray-400">
+                    {t('settings.accountInfo.memberSince')} {userProfile?.createdAt ? format(new Date(userProfile.createdAt), 'MMMM yyyy') : 'N/A'}
+                  </span>
                 </div>
               </div>
-            )}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Delete Account Modal */}
+      <AnimatePresence>
+        {showDeleteModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className={`${
+                isDark 
+                  ? 'bg-gray-900 border-gray-800' 
+                  : 'bg-white border-gray-200'
+              } border rounded-xl p-6 shadow-lg max-w-md w-full`}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-red-600 dark:text-red-400">{t('settings.dangerZone.deleteAccount.confirmTitle')}</h3>
+                <button 
+                  onClick={() => setShowDeleteModal(false)}
+                  className="p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                >
+                  <X className="w-5 h-5 text-gray-500" />
+                </button>
+              </div>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">
+                {t('settings.dangerZone.deleteAccount.confirmMessage')}
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowDeleteModal(false)}
+                  className="flex-1 p-3 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
+                >
+                  {t('settings.dangerZone.deleteAccount.cancel')}
+                </button>
+                <button
+                  onClick={handleDeleteAccount}
+                  className="flex-1 p-3 rounded-lg bg-red-100 hover:bg-red-200 dark:bg-red-900/50 dark:hover:bg-red-900 transition-colors text-red-600 dark:text-red-400"
+                >
+                  {t('settings.dangerZone.deleteAccount.confirm')}
+                </button>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <SettingSection
-        icon={RiBellLine}
-        title="Notifications"
-        description="Manage how you receive notifications and alerts"
-      >
-            <div className="space-y-4">
-          <Toggle
-            label="Email Notifications"
-                        name="emailNotifications"
-                        checked={notifications.emailNotifications}
-                        onChange={handleNotificationChange}
-            disabled={updatingNotifications}
-          />
-          <Toggle
-            label="Transaction Alerts"
-                        name="transactionAlerts"
-                        checked={notifications.transactionAlerts}
-                        onChange={handleNotificationChange}
-            disabled={updatingNotifications}
-          />
-          <Toggle
-            label="Marketing Emails"
-                        name="marketingEmails"
-                        checked={notifications.marketingEmails}
-                        onChange={handleNotificationChange}
-            disabled={updatingNotifications}
-          />
-            <div className="mt-6">
-            <Button
-                onClick={saveNotificationSettings}
-                disabled={updatingNotifications}
-              className="w-full sm:w-auto"
-              >
-              {updatingNotifications ? 'Saving...' : 'Save Notification Settings'}
-            </Button>
-          </div>
-        </div>
-      </SettingSection>
-
-      <SettingSection
-        icon={RiLockLine}
-        title="Security"
-        description="Manage your account security and authentication settings"
-      >
-        <div className="space-y-4">
-          <Toggle
-            label="Two-Factor Authentication"
-            name="twoFactorEnabled"
-            checked={security.twoFactorEnabled}
-            onChange={handleSecurityChange}
-            disabled={updatingSecurity}
-          />
-          <div className="mt-6 flex flex-col sm:flex-row gap-3">
-            <Button
-              onClick={saveSecuritySettings}
-              disabled={updatingSecurity}
-              className="w-full sm:w-auto"
-            >
-              {updatingSecurity ? 'Saving...' : 'Save Security Settings'}
-            </Button>
-            <Button
-              variant="secondary"
-              onClick={() => setShowPasswordForm(true)}
-              className="w-full sm:w-auto"
-            >
-              Change Password
-            </Button>
-            <Button
-              variant="secondary"
-              onClick={handleSessionsClick}
-              className="w-full sm:w-auto"
-            >
-              Manage Active Sessions
-            </Button>
-              </div>
-            </div>
-      </SettingSection>
-
-      <SettingSection
-        icon={RiGlobalLine}
-        title="Privacy"
-        description="Review our privacy policy and manage your data"
-      >
-        <div className="space-y-4">
-          <Button
-            variant="secondary"
-            onClick={() => setShowPrivacyPolicy(true)}
-            className="w-full sm:w-auto"
-          >
-            View Privacy Policy
-          </Button>
-          </div>
-      </SettingSection>
-
-      <SettingSection
-        icon={RiDeleteBinLine}
-        title="Account Management"
-        description="Manage your account status and data"
-      >
-        <div className="space-y-4">
-          {userProfile?.deletion_requested_at ? (
-            <div className="space-y-4">
-              <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
-                <div className="flex items-start">
-                  <RiTimeLine className="h-5 w-5 text-red-400 mt-0.5" />
-                  <div className="ml-3">
-                    <h3 className="text-sm font-medium text-red-800 dark:text-red-200">
-                      Account Deletion Scheduled
-                    </h3>
-                    <p className="mt-2 text-sm text-red-700 dark:text-red-300">
-                      Your account is scheduled for deletion. The process will complete in 14 days from the request date.
-                      You can cancel the deletion process before it completes.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <Button
-                variant="primary"
-                      onClick={handleCancelDeletion}
-                className="w-full sm:w-auto"
-                    >
-                      Cancel Account Deletion
-              </Button>
-            </div>
-                  ) : (
-            <Button
-              variant="danger"
-              onClick={handleDeleteAccount}
-              className="w-full sm:w-auto"
-            >
-              Delete Account
-            </Button>
-          )}
-        </div>
-      </SettingSection>
-
+      {/* Password Update Modal */}
       <AnimatePresence>
-        {showPasswordForm && (
+        {showPasswordModal && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 dark:bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           >
             <motion.div
-              initial={{ scale: 0.95 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.95 }}
-              className="w-full max-w-lg"
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className={`${
+                isDark 
+                  ? 'bg-gray-900 border-gray-800' 
+                  : 'bg-white border-gray-200'
+              } border rounded-xl p-6 shadow-lg max-w-md w-full`}
             >
-              <Card className="dark:bg-gray-800">
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className={`${typography.h2} text-gray-900 dark:text-gray-100`}>Change Password</h2>
-                    <button 
-                      onClick={() => setShowPasswordForm(false)}
-                      className="text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400"
-                    >
-                      <RiCloseLine className="w-6 h-6" />
-                    </button>
-                  </div>
-                  <PasswordUpdateForm onClose={() => setShowPasswordForm(false)} />
-                </div>
-              </Card>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold">{t('settings.security.changePassword')}</h3>
+                <button 
+                  onClick={() => setShowPasswordModal(false)}
+                  className="p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                >
+                  <X className="w-5 h-5 text-gray-500" />
+                </button>
+              </div>
+              <PasswordUpdateForm onClose={() => setShowPasswordModal(false)} />
             </motion.div>
           </motion.div>
-      )}
-
-      {showPrivacyPolicy && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 dark:bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50"
-          >
-            <motion.div
-              initial={{ scale: 0.95 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.95 }}
-              className="w-full max-w-2xl"
-            >
-              <Card>
-                <div className="p-6">
-            <div className="flex justify-between items-center mb-4">
-                    <h2 className={`${typography.h2} text-gray-900 dark:text-gray-100`}>Privacy Policy</h2>
-              <button
-                onClick={() => setShowPrivacyPolicy(false)}
-                      className="text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400"
-              >
-                      <RiCloseLine className="w-6 h-6" />
-              </button>
-            </div>
-                  <div className="prose dark:prose-invert max-h-[60vh] overflow-y-auto">
-                    <pre className="whitespace-pre-wrap font-sans text-sm">
-                {privacyPolicyContent}
-              </pre>
-            </div>
-            <div className="mt-6 flex justify-end">
-                    <Button
-                      variant="secondary"
-                onClick={() => setShowPrivacyPolicy(false)}
-              >
-                Close
-                    </Button>
-            </div>
-          </div>
-              </Card>
-            </motion.div>
-          </motion.div>
-      )}
+        )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   )
 }
 

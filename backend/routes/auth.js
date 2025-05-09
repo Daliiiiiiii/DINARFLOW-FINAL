@@ -26,6 +26,8 @@ const passwordValidation = body('password')
 router.post('/register', [
   body('email').isEmail().normalizeEmail(),
   passwordValidation,
+  body('firstName').trim().notEmpty().isLength({ min: 2, max: 25 }),
+  body('lastName').trim().notEmpty().isLength({ min: 2, max: 25 }),
   body('displayName').trim().notEmpty(),
   body('phoneNumber').custom(value => {
     try {
@@ -150,5 +152,18 @@ router.post('/resend-verification', authController.resendVerification);
 router.post('/forgot-password', [
   body('email').isEmail().normalizeEmail()
 ], authController.forgotPassword);
+
+// Verify reset code
+router.post('/verify-reset-code', [
+  body('email').isEmail().normalizeEmail(),
+  body('code').isLength({ min: 6, max: 6 }).isNumeric()
+], authController.verifyResetCode);
+
+// Reset password
+router.post('/reset-password', [
+  body('email').isEmail().normalizeEmail(),
+  body('code').isLength({ min: 6, max: 6 }).isNumeric(),
+  passwordValidation
+], authController.resetPassword);
 
 export default router;

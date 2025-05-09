@@ -11,12 +11,17 @@ import {
 import { useTransactions } from '../../contexts/TransactionContext'
 import { useAuth } from '../../contexts/AuthContext'
 import { useNotification } from '../../contexts/NotificationContext'
+import { useTheme } from '../../contexts/ThemeContext'
+import { useTranslation } from 'react-i18next'
 import './CryptoExchange.css'
 
 const CryptoExchange = () => {
   const { buyCrypto, sellCrypto, cryptoRate } = useTransactions()
   const { userProfile } = useAuth()
   const { showError } = useNotification()
+  const { theme } = useTheme()
+  const { t } = useTranslation()
+  const isDark = theme === 'dark'
   
   const [exchangeMode, setExchangeMode] = useState('buy')
   const [amount, setAmount] = useState('')
@@ -87,19 +92,25 @@ const CryptoExchange = () => {
     const parsedAmount = parseFloat(amount)
     
     if (isNaN(parsedAmount) || parsedAmount <= 0) {
-      return 'Please enter a valid amount'
+      return t('crypto.exchange.errors.invalidAmount')
     }
     
     if (parsedAmount < limits.minAmount) {
-      return `Minimum amount is ${limits.minAmount} ${exchangeMode === 'buy' ? 'TND' : 'DFLOW'}`
+      return t('crypto.exchange.errors.minAmount', { 
+        amount: limits.minAmount, 
+        currency: exchangeMode === 'buy' ? 'TND' : 'DFLOW' 
+      })
     }
     
     if (parsedAmount > limits.maxAmount) {
-      return `Maximum amount is ${limits.maxAmount} ${exchangeMode === 'buy' ? 'TND' : 'DFLOW'}`
+      return t('crypto.exchange.errors.maxAmount', { 
+        amount: limits.maxAmount, 
+        currency: exchangeMode === 'buy' ? 'TND' : 'DFLOW' 
+      })
     }
     
     if (exchangeMode === 'buy' && parsedAmount > limits.dailyLimit) {
-      return `Daily limit is ${limits.dailyLimit} TND`
+      return t('crypto.exchange.errors.dailyLimit', { amount: limits.dailyLimit })
     }
     
     return null
@@ -122,12 +133,12 @@ const CryptoExchange = () => {
     
     // Check balance
     if (exchangeMode === 'buy' && parsedAmount > userProfile?.walletBalance) {
-      setError('Insufficient TND balance')
+      setError(t('crypto.exchange.errors.insufficientTnd'))
       return
     }
     
     if (exchangeMode === 'sell' && parsedAmount > userProfile?.cryptoBalance) {
-      setError('Insufficient DFLOW balance')
+      setError(t('crypto.exchange.errors.insufficientDflow'))
       return
     }
     
@@ -144,14 +155,14 @@ const CryptoExchange = () => {
       setAmount('')
       setCalculatedAmount('')
     } catch (error) {
-      setError(error.message || 'An error occurred during the exchange')
+      setError(error.message || t('crypto.exchange.errors.error'))
     } finally {
       setIsSubmitting(false)
     }
   }
   
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl p-6">
+    <div className={`${isDark ? 'bg-gray-900/50 backdrop-blur-sm border-gray-800' : 'bg-white border-gray-200'} border rounded-xl p-6`}>
       <div className="flex justify-between items-center mb-6">
         <div className="flex items-center">
           <div className={`w-10 h-10 rounded-full ${exchangeMode === 'buy' ? 'bg-green-100 dark:bg-green-900/20' : 'bg-red-100 dark:bg-red-900/20'} flex items-center justify-center mr-3`}>
@@ -160,9 +171,9 @@ const CryptoExchange = () => {
               size={24} 
             />
           </div>
-          <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
-          {exchangeMode === 'buy' ? 'Buy DFLOW' : 'Sell DFLOW'}
-        </h2>
+          <h2 className={`text-xl font-semibold ${isDark ? 'text-gray-100' : 'text-gray-900'}`}>
+            {exchangeMode === 'buy' ? t('crypto.exchange.buy') : t('crypto.exchange.sell')}
+          </h2>
         </div>
         
         <div className="flex items-center space-x-4">
@@ -172,17 +183,17 @@ const CryptoExchange = () => {
           >
             <RiInformationLine size={20} />
           </button>
-        <button
-          onClick={toggleExchangeMode}
+          <button
+            onClick={toggleExchangeMode}
             className={`flex items-center text-sm font-medium px-3 py-1.5 rounded-full transition-colors
               ${exchangeMode === 'buy' 
                 ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30' 
                 : 'bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/30'
               }`}
-        >
-          <RiArrowLeftRightLine className="mr-1" size={16} />
-          Switch to {exchangeMode === 'buy' ? 'Sell' : 'Buy'}
-        </button>
+          >
+            <RiArrowLeftRightLine className="mr-1" size={16} />
+            {t('crypto.exchange.switchTo')} {exchangeMode === 'buy' ? t('crypto.exchange.sell') : t('crypto.exchange.buy')}
+          </button>
         </div>
       </div>
       
@@ -192,7 +203,7 @@ const CryptoExchange = () => {
           animate={{ opacity: 1, y: 0 }}
           className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 rounded-lg"
         >
-          Your {exchangeMode === 'buy' ? 'purchase' : 'sale'} was successful!
+          {t('crypto.exchange.success', { type: exchangeMode === 'buy' ? t('crypto.exchange.buy').toLowerCase() : t('crypto.exchange.sell').toLowerCase() })}
         </motion.div>
       )}
       
@@ -206,17 +217,16 @@ const CryptoExchange = () => {
         </motion.div>
       )}
       
-      <div className="bg-gray-50 dark:bg-gray-900/50 p-4 rounded-lg mb-6">
-        <div className="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400">
-          <span>Current Rate</span>
-          <span className="font-medium text-gray-800 dark:text-gray-200">1 DFLOW = {cryptoRate.toFixed(2)} TND</span>
+      <div className={`${isDark ? 'bg-gray-900/50' : 'bg-white'} p-4 rounded-lg mb-6 border ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
+        <div className={`flex justify-between items-center text-sm ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>
+          <span>{t('crypto.exchange.currentRate')}</span>
+          <span className={`font-medium ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>1 DFLOW = {cryptoRate.toFixed(2)} TND</span>
         </div>
-        
-        <div className="flex justify-between items-center mt-2 text-sm text-gray-600 dark:text-gray-400">
-          <span>Your Balance</span>
+        <div className={`flex justify-between items-center mt-2 text-sm ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>
+          <span>{t('crypto.exchange.yourBalance')}</span>
           <div className="text-right">
-            <div className="font-medium text-gray-800 dark:text-gray-200">{userProfile?.walletBalance?.toFixed(2) || '0.00'} TND</div>
-            <div className="font-medium text-gray-800 dark:text-gray-200">{userProfile?.cryptoBalance?.toFixed(4) || '0.0000'} DFLOW</div>
+            <div className={`font-medium ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>{userProfile?.walletBalance?.toFixed(2) || '0.00'} TND</div>
+            <div className={`font-medium ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>{userProfile?.cryptoBalance?.toFixed(4) || '0.0000'} DFLOW</div>
           </div>
         </div>
       </div>
@@ -224,8 +234,8 @@ const CryptoExchange = () => {
       <form onSubmit={handleSubmit} className="relative">
         <div className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              {exchangeMode === 'buy' ? 'TND Amount' : 'DFLOW Amount'}
+            <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-800'}`}>
+              {exchangeMode === 'buy' ? t('crypto.exchange.tndAmount') : t('crypto.exchange.dflowAmount')}
             </label>
             <div className="relative">
               <input
@@ -233,7 +243,7 @@ const CryptoExchange = () => {
                 value={amount}
                 onChange={handleAmountChange}
                 placeholder="0.00"
-                className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:border-primary-500 dark:focus:border-primary-400 focus:ring focus:ring-primary-200 dark:focus:ring-primary-900 focus:ring-opacity-50 transition-all duration-200 shadow-sm hover:border-gray-300 dark:hover:border-gray-600 text-gray-800 dark:text-gray-200 text-lg font-medium tracking-wide no-spinners"
+                className={`w-full px-4 py-3 rounded-xl ${isDark ? 'bg-gray-900 border-gray-700 text-gray-200' : 'bg-white border-gray-200 text-gray-800'} focus:border-primary-500 dark:focus:border-primary-400 focus:ring focus:ring-primary-200 dark:focus:ring-primary-900 focus:ring-opacity-50 transition-all duration-200 shadow-sm hover:border-gray-300 dark:hover:border-gray-600 text-lg font-medium tracking-wide no-spinners`}
                 step={exchangeMode === 'buy' ? '0.01' : '0.0001'}
                 min="0"
                 required
@@ -257,7 +267,7 @@ const CryptoExchange = () => {
                     </button>
                   </div>
                   <span className="text-gray-500 ml-2 font-medium">
-                {exchangeMode === 'buy' ? 'TND' : 'DFLOW'}
+                    {exchangeMode === 'buy' ? 'TND' : 'DFLOW'}
                   </span>
                 </div>
               </div>
@@ -271,20 +281,20 @@ const CryptoExchange = () => {
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              {exchangeMode === 'buy' ? 'DFLOW Amount' : 'TND Amount'}
+            <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-800'}`}>
+              {exchangeMode === 'buy' ? t('crypto.exchange.dflowAmount') : t('crypto.exchange.tndAmount')}
             </label>
             <div className="relative">
               <input
                 type="text"
                 value={calculatedAmount}
-                className="w-full px-4 py-3 rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 text-lg font-medium tracking-wide cursor-not-allowed"
+                className={`w-full px-4 py-3 rounded-xl border ${isDark ? 'border-gray-700 bg-gray-900 text-gray-200' : 'border-gray-100 bg-white text-gray-800'} text-lg font-medium tracking-wide cursor-not-allowed`}
                 placeholder="0.00"
                 disabled
               />
               <div className="absolute inset-y-0 right-0 flex items-center px-4">
                 <span className="text-gray-500 dark:text-gray-400 font-medium">
-                {exchangeMode === 'buy' ? 'DFLOW' : 'TND'}
+                  {exchangeMode === 'buy' ? 'DFLOW' : 'TND'}
                 </span>
               </div>
             </div>
@@ -304,12 +314,12 @@ const CryptoExchange = () => {
             {isSubmitting ? (
               <>
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                Processing...
+                {t('crypto.exchange.processing')}
               </>
             ) : (
               <>
                 <RiExchangeDollarLine className="mr-2" size={20} />
-                {exchangeMode === 'buy' ? 'Buy DFLOW' : 'Sell DFLOW'}
+                {exchangeMode === 'buy' ? t('crypto.exchange.buy') : t('crypto.exchange.sell')}
               </>
             )}
           </button>
@@ -332,7 +342,7 @@ const CryptoExchange = () => {
               className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-md w-full p-6"
             >
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Transaction Limits</h2>
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">{t('crypto.exchange.limits.title')}</h2>
                 <button
                   onClick={() => setShowLimits(false)}
                   className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
@@ -342,18 +352,18 @@ const CryptoExchange = () => {
               </div>
               <div className="space-y-4 text-gray-600 dark:text-gray-400">
                 <div className="space-y-2">
-                  <h3 className="font-medium text-gray-900 dark:text-gray-100">Buy Limits</h3>
+                  <h3 className="font-medium text-gray-900 dark:text-gray-100">{t('crypto.exchange.limits.buyLimits')}</h3>
                   <ul className="space-y-1 text-sm">
-                    <li>• Minimum amount: {limits.minAmount} TND</li>
-                    <li>• Maximum amount: {limits.maxAmount} TND</li>
-                    <li>• Daily limit: {limits.dailyLimit} TND</li>
+                    <li>• {t('crypto.exchange.limits.minAmount')}: {limits.minAmount} TND</li>
+                    <li>• {t('crypto.exchange.limits.maxAmount')}: {limits.maxAmount} TND</li>
+                    <li>• {t('crypto.exchange.limits.dailyLimit')}: {limits.dailyLimit} TND</li>
                   </ul>
                 </div>
                 <div className="space-y-2">
-                  <h3 className="font-medium text-gray-900 dark:text-gray-100">Sell Limits</h3>
+                  <h3 className="font-medium text-gray-900 dark:text-gray-100">{t('crypto.exchange.limits.sellLimits')}</h3>
                   <ul className="space-y-1 text-sm">
-                    <li>• Minimum amount: {limits.minAmount} DFLOW</li>
-                    <li>• Maximum amount: {limits.maxAmount} DFLOW</li>
+                    <li>• {t('crypto.exchange.limits.minAmount')}: {limits.minAmount} DFLOW</li>
+                    <li>• {t('crypto.exchange.limits.maxAmount')}: {limits.maxAmount} DFLOW</li>
                   </ul>
                 </div>
               </div>

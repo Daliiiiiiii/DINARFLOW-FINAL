@@ -1,8 +1,11 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000',
-    withCredentials: true
+    baseURL: '',  // Remove the /api prefix since it's handled by the proxy
+    withCredentials: true,
+    timeout: 30000, // 30 seconds timeout
+    maxContentLength: 50 * 1024 * 1024, // 50MB
+    maxBodyLength: 50 * 1024 * 1024 // 50MB
 });
 
 // Request interceptor
@@ -11,6 +14,10 @@ api.interceptors.request.use(
         const token = localStorage.getItem('token');
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
+        }
+        // Don't set Content-Type for FormData, let the browser set it with the boundary
+        if (!(config.data instanceof FormData)) {
+            config.headers['Content-Type'] = 'application/json';
         }
         return config;
     },

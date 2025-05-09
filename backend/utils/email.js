@@ -34,7 +34,7 @@ const sendEmail = async ({ to, subject, html, text, context = {} }) => {
     try {
         // If HTML is a path to a template, read and use it
         if (html && typeof html === 'string' && html.endsWith('.html')) {
-            const templatePath = path.join(__dirname, '..', html)
+            const templatePath = path.join(process.cwd(), html)
             if (fs.existsSync(templatePath)) {
                 let template = fs.readFileSync(templatePath, 'utf8')
 
@@ -45,6 +45,9 @@ const sendEmail = async ({ to, subject, html, text, context = {} }) => {
                 })
 
                 html = template
+            } else {
+                console.error('Template not found:', templatePath)
+                throw new Error('Email template not found')
             }
         }
 

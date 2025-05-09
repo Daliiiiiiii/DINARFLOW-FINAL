@@ -140,7 +140,7 @@ const MobileApp = () => {
               />
             </motion.div>
 
-            {/* Floating Features */}
+            {/* Floating Features. */}
             {features.map((feature, index) => {
               const opacity = useTransform(
                 scrollYProgress,

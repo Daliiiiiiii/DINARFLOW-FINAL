@@ -1135,3 +1135,1137 @@
 	Metadata: {}
 2025-05-05T22:18:05.327Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
 	Metadata: {}
+2025-05-05T22:50:36.187Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-05T22:50:36.191Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-08T02:06:46.904Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-08T02:06:46.908Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-08T15:32:03.980Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-08T15:32:03.984Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-08T18:50:26.100Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-08T18:50:26.104Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-08T20:41:37.334Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-08T20:41:37.337Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-08T20:41:48.303Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-08T20:41:48.306Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-08T20:41:57.765Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-08T20:41:57.771Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T00:34:41.399Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T00:34:41.403Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T01:30:55.246Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T01:30:55.250Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T01:34:28.069Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T01:34:28.072Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T01:38:00.306Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T01:38:00.311Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T01:39:23.459Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T01:39:23.464Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T01:39:38.094Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T01:39:38.098Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T01:42:33.548Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T01:42:33.552Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T01:43:20.978Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T01:43:20.982Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T01:44:24.674Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T01:44:24.678Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T01:46:16.238Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T01:46:16.242Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T01:47:38.964Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T01:47:38.968Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T01:48:50.508Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T01:48:50.512Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T01:50:20.743Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T01:50:20.747Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T01:51:10.526Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T01:51:10.530Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T01:51:22.452Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T01:51:22.455Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T01:56:35.236Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T01:56:35.240Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T01:58:38.029Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T01:58:38.032Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:00:18.881Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:00:18.884Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:01:17.840Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:01:17.843Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:01:27.244Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:01:27.247Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:02:06.059Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:02:06.064Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:05:06.382Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:05:06.386Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:07:13.954Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:07:13.959Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:07:19.914Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:07:19.917Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:08:05.813Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:08:05.816Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:08:09.859Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:08:09.862Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:08:15.389Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:08:15.393Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:18:28.536Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:18:28.539Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:18:34.000Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:18:34.003Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:22:32.799Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:22:32.804Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:24:57.529Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:24:57.532Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:27:34.287Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:27:34.290Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:32:13.689Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:32:13.695Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:35:29.284Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:35:29.287Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:38:44.634Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:38:44.636Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:40:55.781Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:40:55.784Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:49:00.605Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:49:00.609Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:52:35.709Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:52:35.713Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:53:17.353Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:53:17.357Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T02:57:00.246Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T02:57:00.250Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T03:35:05.329Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T03:35:05.332Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T03:38:55.612Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T03:38:55.616Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T03:42:39.663Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T03:42:39.667Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T03:58:20.347Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T03:58:20.351Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T03:58:31.522Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T03:58:31.527Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T03:58:44.343Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T03:58:44.347Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:00:16.011Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T04:00:16.015Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:01:55.705Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T04:01:55.708Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:02:05.166Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T04:02:05.171Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:03:03.915Z [ERROR] RATE LIMIT: KYC submission failed
+	Metadata: {
+  "userId": "681d6d5dc464ae9b966dcb4c",
+  "error": "Invalid input"
+}
+2025-05-09T04:03:03.917Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:03:04.392Z [ERROR] RATE LIMIT: KYC submission failed
+	Metadata: {
+  "userId": "681d6d5dc464ae9b966dcb4c",
+  "error": "Invalid input"
+}
+2025-05-09T04:03:04.393Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:03:15.421Z [ERROR] RATE LIMIT: KYC submission failed
+	Metadata: {
+  "userId": "681d6d5dc464ae9b966dcb4c",
+  "error": "Invalid input"
+}
+2025-05-09T04:03:15.421Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:03:20.176Z [ERROR] RATE LIMIT: KYC submission failed
+	Metadata: {
+  "userId": "681d6d5dc464ae9b966dcb4c",
+  "error": "Invalid input"
+}
+2025-05-09T04:03:20.177Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:03:41.497Z [INFO] RATE LIMIT: GridFS bucket initialized
+	Metadata: {}
+2025-05-09T04:03:41.500Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:03:56.606Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:04:10.842Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:04:19.906Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:04:43.438Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:04:49.155Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:06:31.992Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:07:49.675Z [ERROR] RATE LIMIT: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:07:49.676Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:08:14.578Z [ERROR] RATE LIMIT: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:08:14.579Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:08:32.838Z [ERROR] RATE LIMIT: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:08:32.840Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:08:40.729Z [ERROR] RATE LIMIT: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:08:40.730Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:08:48.207Z [ERROR] RATE LIMIT: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:08:48.208Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:09:02.309Z [ERROR] RATE LIMIT: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:09:02.310Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:09:44.458Z [ERROR] RATE LIMIT: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:09:44.459Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:10:26.673Z [ERROR] RATE LIMIT: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:10:26.674Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:10:38.158Z [ERROR] RATE LIMIT: KYC submission error: Missing required file: frontId
+	Metadata: {
+  "stack": "Error: Missing required file: frontId\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:12:27)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:51:35\n    at Layer.handle [as handle_request] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at done (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:47:7)\n    at indicateDone (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:51:68)\n    at C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\lib\\make-middleware.js:157:11\n    at WriteStream.<anonymous> (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\multer\\storage\\disk.js:43:9)\n    at WriteStream.emit (node:events:530:35)\n    at finish (node:internal/streams/writable:955:10)"
+}
+2025-05-09T04:10:38.159Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:11:40.067Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:11:47.022Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:13:49.678Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:14:35.167Z [INFO] RATE LIMIT: KYC submission request:
+	Metadata: {
+  "files": [
+    "frontId",
+    "backId",
+    "selfieWithId"
+  ],
+  "body": {
+    "idType": "national_id",
+    "idNumber": "14039166",
+    "firstName": "Mohamed Ali",
+    "lastName": "Faouel",
+    "dateOfBirth": "2002-05-11",
+    "address": "Al ouardanine 23 hay enozha, monastir 5010",
+    "city": "Ouerdanine",
+    "province": "Monastir",
+    "zipCode": "5010",
+    "idDocument": "null",
+    "selfie": "null",
+    "proofOfAddress": "null"
+  }
+}
+2025-05-09T04:14:35.189Z [ERROR] RATE LIMIT: File storage error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:14:35.190Z [ERROR] RATE LIMIT: KYC submission error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:14:35.191Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": "Image resolution too low. Minimum size is 800x600",
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:14:56.412Z [INFO] RATE LIMIT: KYC submission request:
+	Metadata: {
+  "files": [
+    "frontId",
+    "backId",
+    "selfieWithId"
+  ],
+  "body": {
+    "idType": "national_id",
+    "idNumber": "14039166",
+    "firstName": "Mohamed Ali",
+    "lastName": "Faouel",
+    "dateOfBirth": "2002-05-11",
+    "address": "Al ouardanine 23 hay enozha, monastir 5010",
+    "city": "Ouerdanine",
+    "province": "Monastir",
+    "zipCode": "5010",
+    "idDocument": "null",
+    "selfie": "null",
+    "proofOfAddress": "null"
+  }
+}
+2025-05-09T04:14:56.421Z [ERROR] RATE LIMIT: File storage error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:14:56.422Z [ERROR] RATE LIMIT: KYC submission error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:14:56.423Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": "Image resolution too low. Minimum size is 800x600",
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:15:48.074Z [INFO] RATE LIMIT: KYC submission request:
+	Metadata: {
+  "files": [
+    "frontId",
+    "backId",
+    "selfieWithId"
+  ],
+  "body": {
+    "idType": "national_id",
+    "idNumber": "14039166",
+    "firstName": "Mohamed Ali",
+    "lastName": "Faouel",
+    "dateOfBirth": "2002-05-11",
+    "address": "Al ouardanine 23 hay enozha, monastir 5010",
+    "city": "Ouerdanine",
+    "province": "Monastir",
+    "zipCode": "5010",
+    "idDocument": "null",
+    "selfie": "null",
+    "proofOfAddress": "null"
+  }
+}
+2025-05-09T04:15:48.124Z [ERROR] RATE LIMIT: File storage error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:15:48.129Z [ERROR] RATE LIMIT: KYC submission error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:15:48.130Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": "Image resolution too low. Minimum size is 800x600",
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:15:57.485Z [INFO] RATE LIMIT: KYC submission request:
+	Metadata: {
+  "files": [
+    "frontId",
+    "backId",
+    "selfieWithId"
+  ],
+  "body": {
+    "idType": "national_id",
+    "idNumber": "14039166",
+    "firstName": "Mohamed Ali",
+    "lastName": "Faouel",
+    "dateOfBirth": "2002-05-11",
+    "address": "Al ouardanine 23 hay enozha, monastir 5010",
+    "city": "Ouerdanine",
+    "province": "Monastir",
+    "zipCode": "5010",
+    "idDocument": "null",
+    "selfie": "null",
+    "proofOfAddress": "null"
+  }
+}
+2025-05-09T04:15:57.489Z [ERROR] RATE LIMIT: File storage error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:15:57.490Z [ERROR] RATE LIMIT: KYC submission error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:15:57.491Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": "Image resolution too low. Minimum size is 800x600",
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:16:16.104Z [INFO] RATE LIMIT: KYC submission request:
+	Metadata: {
+  "files": [
+    "frontId",
+    "backId",
+    "selfieWithId"
+  ],
+  "body": {
+    "idType": "national_id",
+    "idNumber": "14039166",
+    "firstName": "Mohamed Ali",
+    "lastName": "Faouel",
+    "dateOfBirth": "2002-05-11",
+    "address": "Al ouardanine 23 hay enozha, monastir 5010",
+    "city": "Ouerdanine",
+    "province": "Monastir",
+    "zipCode": "5010",
+    "idDocument": "null",
+    "selfie": "null",
+    "proofOfAddress": "null"
+  }
+}
+2025-05-09T04:16:16.111Z [ERROR] RATE LIMIT: File storage error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:16:16.111Z [ERROR] RATE LIMIT: KYC submission error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:16:16.112Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": "Image resolution too low. Minimum size is 800x600",
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:44:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:16:41.880Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:17:43.084Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:17:50.299Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:18:53.126Z [INFO] RATE LIMIT: KYC submission request:
+	Metadata: {
+  "files": [
+    "frontId",
+    "backId",
+    "selfieWithId"
+  ],
+  "body": {
+    "idType": "passport",
+    "idNumber": "45854656",
+    "firstName": "Mohamed Ali",
+    "lastName": "Faouel",
+    "dateOfBirth": "2007-05-05",
+    "address": "Al ouardanine 23 hay enozha, monastir 5010",
+    "city": "Sousse",
+    "province": "Médenine",
+    "zipCode": "5010",
+    "idDocument": "null",
+    "selfie": "null",
+    "proofOfAddress": "null"
+  }
+}
+2025-05-09T04:18:53.130Z [ERROR] RATE LIMIT: Error storing file:
+	Metadata: {
+  "error": "Image resolution too low. Minimum size is 800x600",
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:51:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:18:53.132Z [ERROR] RATE LIMIT: KYC submission error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:51:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20"
+}
+2025-05-09T04:18:53.132Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": "Image resolution too low. Minimum size is 800x600",
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:51:27)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:20:32)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:50:20",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:19:27.109Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:19:36.389Z [INFO] RATE LIMIT: KYC submission request:
+	Metadata: {
+  "files": [
+    "frontId",
+    "backId",
+    "selfieWithId"
+  ],
+  "body": {
+    "idType": "passport",
+    "idNumber": "45854656",
+    "firstName": "Mohamed Ali",
+    "lastName": "Faouel",
+    "dateOfBirth": "2007-05-05",
+    "address": "Al ouardanine 23 hay enozha, monastir 5010",
+    "city": "Sousse",
+    "province": "Médenine",
+    "zipCode": "5010",
+    "idDocument": "null",
+    "selfie": "null",
+    "proofOfAddress": "null"
+  }
+}
+2025-05-09T04:19:36.474Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 61442,
+  "processedSize": 45468,
+  "dimensions": "786x871",
+  "format": "png"
+}
+2025-05-09T04:19:36.531Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 128442,
+  "processedSize": 45163,
+  "dimensions": "1647x917",
+  "format": "png"
+}
+2025-05-09T04:19:36.565Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 937262,
+  "processedSize": 114777,
+  "dimensions": "526x710",
+  "format": "png"
+}
+2025-05-09T04:19:39.914Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:20:03.131Z [INFO] RATE LIMIT: KYC submission request:
+	Metadata: {
+  "files": [
+    "frontId",
+    "backId",
+    "selfieWithId"
+  ],
+  "body": {
+    "idType": "driving_license",
+    "idNumber": "78979989",
+    "firstName": "Mohamed Ali",
+    "lastName": "Faouel",
+    "dateOfBirth": "2007-05-05",
+    "address": "Al ouardanine 23 hay enozha, monastir 5010",
+    "city": "Sousse",
+    "province": "Médenine",
+    "zipCode": "5010",
+    "idDocument": "null",
+    "selfie": "null",
+    "proofOfAddress": "null"
+  }
+}
+2025-05-09T04:20:03.159Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 88713,
+  "dimensions": "736x726",
+  "format": "jpeg"
+}
+2025-05-09T04:20:03.180Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 937262,
+  "processedSize": 114777,
+  "dimensions": "526x710",
+  "format": "png"
+}
+2025-05-09T04:20:03.213Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 1000019,
+  "processedSize": 135852,
+  "dimensions": "596x768",
+  "format": "png"
+}
+2025-05-09T04:20:06.075Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:20:49.305Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:20:56.826Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:21:05.226Z [INFO] RATE LIMIT: KYC submission request:
+	Metadata: {
+  "files": [
+    "frontId",
+    "backId",
+    "selfieWithId"
+  ],
+  "body": {
+    "idType": "driving_license",
+    "idNumber": "78979989",
+    "firstName": "Mohamed Ali",
+    "lastName": "Faouel",
+    "dateOfBirth": "2007-05-05",
+    "address": "Al ouardanine 23 hay enozha, monastir 5010",
+    "city": "Sousse",
+    "province": "Médenine",
+    "zipCode": "5010",
+    "idDocument": "null",
+    "selfie": "null",
+    "proofOfAddress": "null"
+  }
+}
+2025-05-09T04:21:05.253Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 88713,
+  "format": "image/jpeg"
+}
+2025-05-09T04:21:05.273Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 937262,
+  "processedSize": 114777,
+  "format": "image/png"
+}
+2025-05-09T04:21:05.305Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 1000019,
+  "processedSize": 135852,
+  "format": "image/png"
+}
+2025-05-09T04:21:08.063Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:21:33.521Z [INFO] RATE LIMIT: KYC submission request:
+	Metadata: {
+  "files": [
+    "frontId",
+    "backId",
+    "selfieWithId"
+  ],
+  "body": {
+    "idType": "passport",
+    "idNumber": "99999999",
+    "firstName": "Mohamed Ali",
+    "lastName": "Faouel",
+    "dateOfBirth": "2007-05-05",
+    "address": "Al ouardanine 23 hay enozha, monastir 5010",
+    "city": "Sousse",
+    "province": "Monastir",
+    "zipCode": "5010",
+    "idDocument": "null",
+    "selfie": "null",
+    "proofOfAddress": "null"
+  }
+}
+2025-05-09T04:21:33.552Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 1000019,
+  "processedSize": 135852,
+  "format": "image/png"
+}
+2025-05-09T04:21:33.581Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 34179,
+  "processedSize": 36945,
+  "format": "image/png"
+}
+2025-05-09T04:21:33.605Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 937262,
+  "processedSize": 114777,
+  "format": "image/png"
+}
+2025-05-09T04:21:36.606Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:22:03.810Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:22:16.353Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:22:19.179Z [INFO] RATE LIMIT: KYC submission request:
+	Metadata: {
+  "files": [
+    "frontId",
+    "backId",
+    "selfieWithId"
+  ],
+  "body": {
+    "idType": "passport",
+    "idNumber": "99999999",
+    "firstName": "Mohamed Ali",
+    "lastName": "Faouel",
+    "dateOfBirth": "2007-05-05",
+    "address": "Al ouardanine 23 hay enozha, monastir 5010",
+    "city": "Sousse",
+    "province": "Monastir",
+    "zipCode": "5010",
+    "idDocument": "null",
+    "selfie": "null",
+    "proofOfAddress": "null"
+  }
+}
+2025-05-09T04:22:19.214Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 1000019,
+  "processedSize": 135852,
+  "format": "image/png"
+}
+2025-05-09T04:22:19.244Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 34179,
+  "processedSize": 36945,
+  "format": "image/png"
+}
+2025-05-09T04:22:19.269Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 937262,
+  "processedSize": 114777,
+  "format": "image/png"
+}
+2025-05-09T04:22:22.378Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:22:56.719Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:23:35.127Z [INFO] RATE LIMIT: KYC submission request:
+	Metadata: {
+  "files": [
+    "frontId",
+    "backId",
+    "selfieWithId"
+  ],
+  "body": {
+    "idType": "national_id",
+    "idNumber": "99999999",
+    "firstName": "Mohamed Ali",
+    "lastName": "Faouel",
+    "dateOfBirth": "2007-05-05",
+    "address": "Al ouardanine 23 hay enozha, monastir 5010",
+    "city": "Sousse",
+    "province": "Médenine",
+    "zipCode": "5010",
+    "idDocument": "null",
+    "selfie": "null",
+    "proofOfAddress": "null"
+  }
+}
+2025-05-09T04:23:35.147Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 937262,
+  "processedSize": 114777,
+  "format": "image/png"
+}
+2025-05-09T04:23:35.171Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 78946,
+  "processedSize": 88713,
+  "format": "image/jpeg"
+}
+2025-05-09T04:23:35.203Z [INFO] RATE LIMIT: Image processed successfully
+	Metadata: {
+  "type": "general",
+  "originalSize": 34179,
+  "processedSize": 36945,
+  "format": "image/png"
+}
+2025-05-09T04:23:38.248Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:24:03.760Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:24:08.568Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:24:22.344Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:24:29.754Z [INFO] RATE LIMIT: KYC submission request:
+	Metadata: {
+  "files": [
+    "frontId",
+    "backId",
+    "selfieWithId"
+  ],
+  "body": {
+    "idType": "national_id",
+    "idNumber": "99999999",
+    "firstName": "Mohamed Ali",
+    "lastName": "Faouel",
+    "dateOfBirth": "2007-05-05",
+    "address": "Al ouardanine 23 hay enozha, monastir 5010",
+    "city": "Sousse",
+    "province": "Médenine",
+    "zipCode": "5010",
+    "idDocument": "null",
+    "selfie": "null",
+    "proofOfAddress": "null"
+  }
+}
+2025-05-09T04:24:32.967Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:26:02.530Z [INFO] RATE LIMIT: KYC submission request:
+	Metadata: {
+  "files": [
+    "frontId",
+    "backId",
+    "selfieWithId"
+  ],
+  "body": {
+    "idType": "national_id",
+    "idNumber": "99999999",
+    "firstName": "Mohamed Ali",
+    "lastName": "Faouel",
+    "dateOfBirth": "2007-05-05",
+    "address": "Al ouardanine 23 hay enozha, monastir 5010",
+    "city": "Sousse",
+    "province": "Médenine",
+    "zipCode": "5010",
+    "idDocument": "null",
+    "selfie": "null",
+    "proofOfAddress": "null"
+  }
+}
+2025-05-09T04:26:05.638Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:29:00.516Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:29:03.518Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-09T04:29:03.570Z [ERROR] RATE LIMIT: Error processing image: Invalid input
+	Metadata: {
+  "stack": "Error: Invalid input\n    at Sharp (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\sharp\\lib\\constructor.js:175:11)\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:35:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:03.571Z [ERROR] RATE LIMIT: Error storing file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to process image. Please try again with a different file.\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:40:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:03.571Z [ERROR] RATE LIMIT: Error storing frontId file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to process image. Please try again with a different file.\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:40:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:03.572Z [ERROR] RATE LIMIT: Error submitting KYC: Failed to store frontId file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to store frontId file: Failed to process image. Please try again with a different file.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:03.572Z [ERROR] RATE LIMIT: Error processing KYC submission:
+	Metadata: {
+  "error": "Failed to store frontId file: Failed to process image. Please try again with a different file.",
+  "stack": "Error: Failed to store frontId file: Failed to process image. Please try again with a different file.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:29:03.577Z [ERROR] RATE LIMIT: Error during file cleanup: The "cb" argument must be of type function. Received undefined
+	Metadata: {
+  "code": "ERR_INVALID_ARG_TYPE",
+  "stack": "TypeError [ERR_INVALID_ARG_TYPE]: The \"cb\" argument must be of type function. Received undefined\n    at makeCallback (node:fs:186:3)\n    at Object.unlink (node:fs:1941:14)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:78:20\n    at Array.map (<anonymous>)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:77:47\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+}
+2025-05-09T04:29:16.784Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-09T04:29:16.906Z [ERROR] RATE LIMIT: Error processing image: Invalid input
+	Metadata: {
+  "stack": "Error: Invalid input\n    at Sharp (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\sharp\\lib\\constructor.js:175:11)\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:35:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:16.906Z [ERROR] RATE LIMIT: Error storing file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to process image. Please try again with a different file.\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:40:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:16.907Z [ERROR] RATE LIMIT: Error storing frontId file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to process image. Please try again with a different file.\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:40:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:16.907Z [ERROR] RATE LIMIT: Error submitting KYC: Failed to store frontId file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to store frontId file: Failed to process image. Please try again with a different file.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:16.907Z [ERROR] RATE LIMIT: Error processing KYC submission:
+	Metadata: {
+  "error": "Failed to store frontId file: Failed to process image. Please try again with a different file.",
+  "stack": "Error: Failed to store frontId file: Failed to process image. Please try again with a different file.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:29:16.908Z [ERROR] RATE LIMIT: Error during file cleanup: The "cb" argument must be of type function. Received undefined
+	Metadata: {
+  "code": "ERR_INVALID_ARG_TYPE",
+  "stack": "TypeError [ERR_INVALID_ARG_TYPE]: The \"cb\" argument must be of type function. Received undefined\n    at makeCallback (node:fs:186:3)\n    at Object.unlink (node:fs:1941:14)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:78:20\n    at Array.map (<anonymous>)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:77:47\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+}
+2025-05-09T04:29:27.773Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-09T04:29:27.892Z [ERROR] RATE LIMIT: Error processing image: Invalid input
+	Metadata: {
+  "stack": "Error: Invalid input\n    at Sharp (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\sharp\\lib\\constructor.js:175:11)\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:35:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:27.892Z [ERROR] RATE LIMIT: Error storing file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to process image. Please try again with a different file.\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:40:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:27.893Z [ERROR] RATE LIMIT: Error storing frontId file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to process image. Please try again with a different file.\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:40:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:27.893Z [ERROR] RATE LIMIT: Error submitting KYC: Failed to store frontId file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to store frontId file: Failed to process image. Please try again with a different file.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:27.893Z [ERROR] RATE LIMIT: Error processing KYC submission:
+	Metadata: {
+  "error": "Failed to store frontId file: Failed to process image. Please try again with a different file.",
+  "stack": "Error: Failed to store frontId file: Failed to process image. Please try again with a different file.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:29:27.893Z [ERROR] RATE LIMIT: Error during file cleanup: The "cb" argument must be of type function. Received undefined
+	Metadata: {
+  "code": "ERR_INVALID_ARG_TYPE",
+  "stack": "TypeError [ERR_INVALID_ARG_TYPE]: The \"cb\" argument must be of type function. Received undefined\n    at makeCallback (node:fs:186:3)\n    at Object.unlink (node:fs:1941:14)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:78:20\n    at Array.map (<anonymous>)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:77:47\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+}
+2025-05-09T04:29:41.362Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-09T04:29:41.472Z [ERROR] RATE LIMIT: Error processing image: Invalid input
+	Metadata: {
+  "stack": "Error: Invalid input\n    at Sharp (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\sharp\\lib\\constructor.js:175:11)\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:35:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:41.473Z [ERROR] RATE LIMIT: Error storing file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to process image. Please try again with a different file.\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:40:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:41.473Z [ERROR] RATE LIMIT: Error storing frontId file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to process image. Please try again with a different file.\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:40:23)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:56)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:41.473Z [ERROR] RATE LIMIT: Error submitting KYC: Failed to store frontId file: Failed to process image. Please try again with a different file.
+	Metadata: {
+  "stack": "Error: Failed to store frontId file: Failed to process image. Please try again with a different file.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24"
+}
+2025-05-09T04:29:41.474Z [ERROR] RATE LIMIT: Error processing KYC submission:
+	Metadata: {
+  "error": "Failed to store frontId file: Failed to process image. Please try again with a different file.",
+  "stack": "Error: Failed to store frontId file: Failed to process image. Please try again with a different file.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:64:24",
+  "userId": "681d6d5dc464ae9b966dcb4c"
+}
+2025-05-09T04:29:41.474Z [ERROR] RATE LIMIT: Error during file cleanup: The "cb" argument must be of type function. Received undefined
+	Metadata: {
+  "code": "ERR_INVALID_ARG_TYPE",
+  "stack": "TypeError [ERR_INVALID_ARG_TYPE]: The \"cb\" argument must be of type function. Received undefined\n    at makeCallback (node:fs:186:3)\n    at Object.unlink (node:fs:1941:14)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:78:20\n    at Array.map (<anonymous>)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:77:47\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+}
+2025-05-09T04:30:31.164Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:31:02.629Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:31:03.740Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-09T04:33:11.206Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:33:26.506Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:35:44.948Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-09T04:35:48.063Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:38:27.459Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-09T04:38:30.027Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T04:39:48.629Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T13:18:00.197Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T13:34:44.968Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-09T13:34:48.252Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T13:39:37.835Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T13:39:38.481Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-09T13:39:41.274Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T13:39:41.335Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-09T13:39:44.322Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T13:42:32.782Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T13:44:25.567Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T13:44:30.448Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T13:45:10.006Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-09T13:45:29.270Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T13:46:43.323Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T13:47:18.761Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T13:49:48.587Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T14:04:05.202Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-09T14:04:07.935Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T14:04:32.904Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T14:20:19.624Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-09T14:20:22.214Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T14:21:15.666Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T14:22:40.513Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-09T14:22:40.524Z [ERROR] RATE LIMIT: Multer error during KYC upload:
+	Metadata: {
+  "error": {
+    "name": "MulterError",
+    "message": "Unexpected field",
+    "code": "LIMIT_UNEXPECTED_FILE",
+    "field": "frontId",
+    "storageErrors": []
+  }
+}
+2025-05-09T14:23:58.676Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T14:25:30.515Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T14:27:18.086Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-09T14:27:20.905Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}

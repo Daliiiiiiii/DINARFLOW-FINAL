@@ -1,7 +1,7 @@
 import express from 'express';
 import { body } from 'express-validator';
 import { auth, validatePhoneNumber } from '../middleware/auth.js';
-import { uploadSingle } from '../middleware/fileUpload.js';
+import { uploadSingle } from '../middleware/upload.js';
 import User from '../models/User.js';
 import path from 'path';
 import fs from 'fs/promises';
@@ -82,7 +82,7 @@ router.post('/privacy-policy', auth, async (req, res) => {
 });
 
 // Upload profile picture
-router.post('/profile-picture', auth, uploadSingle('profilePicture'), async (req, res) => {
+router.post('/profile-picture', auth, uploadSingle, async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: 'No file uploaded' });
@@ -91,7 +91,7 @@ router.post('/profile-picture', auth, uploadSingle('profilePicture'), async (req
     // Delete old profile picture if it exists
     const user = await User.findById(req.user._id);
     if (user.profilePicture) {
-      const oldPicturePath = path.join(process.cwd(), 'server/uploads', path.basename(user.profilePicture));
+      const oldPicturePath = path.join(process.cwd(), 'uploads', path.basename(user.profilePicture));
       try {
         await fs.unlink(oldPicturePath);
       } catch (error) {
@@ -125,7 +125,7 @@ router.delete('/profile-picture', auth, async (req, res) => {
     }
 
     // Delete the file
-    const picturePath = path.join(process.cwd(), 'server/uploads', path.basename(user.profilePicture));
+    const picturePath = path.join(process.cwd(), 'uploads', path.basename(user.profilePicture));
     try {
       await fs.unlink(picturePath);
     } catch (error) {

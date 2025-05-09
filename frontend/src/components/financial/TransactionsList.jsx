@@ -11,11 +11,15 @@ import {
   RiLoader4Line,
   RiInformationLine
 } from 'react-icons/ri'
+import { useTranslation } from 'react-i18next'
 
 const TransactionsList = ({ transactions = [], isLoading = false, showSearch = false }) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [showFilters, setShowFilters] = useState(false)
   const [selectedType, setSelectedType] = useState('all')
+  const [page, setPage] = useState(1)
+  const { t } = useTranslation()
+  const pageSize = 5
   
   if (isLoading) {
     return (
@@ -58,6 +62,10 @@ const TransactionsList = ({ transactions = [], isLoading = false, showSearch = f
     
     return searchMatch && typeMatch
   })
+  
+  // Pagination logic
+  const totalPages = Math.ceil(filteredTransactions.length / pageSize)
+  const paginatedTransactions = filteredTransactions.slice((page - 1) * pageSize, page * pageSize)
   
   // Get transaction icon based on type and subtype
   const getTransactionIcon = (transaction) => {
@@ -166,7 +174,7 @@ const TransactionsList = ({ transactions = [], isLoading = false, showSearch = f
                         : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                   }`}
                 >
-                  All
+                  {t('history.all')}
                 </button>
                 <button
                   onClick={() => setSelectedType('send')}
@@ -176,7 +184,7 @@ const TransactionsList = ({ transactions = [], isLoading = false, showSearch = f
                         : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                   }`}
                 >
-                  Sent
+                  {t('history.sent')}
                 </button>
                 <button
                   onClick={() => setSelectedType('receive')}
@@ -186,7 +194,7 @@ const TransactionsList = ({ transactions = [], isLoading = false, showSearch = f
                         : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                   }`}
                 >
-                  Received
+                  {t('history.received')}
                 </button>
                 <button
                   onClick={() => setSelectedType('crypto')}
@@ -196,7 +204,7 @@ const TransactionsList = ({ transactions = [], isLoading = false, showSearch = f
                         : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                   }`}
                 >
-                  Crypto
+                  {t('history.crypto')}
                 </button>
               </div>
             </motion.div>
@@ -206,8 +214,8 @@ const TransactionsList = ({ transactions = [], isLoading = false, showSearch = f
       )}
       
       <div className="divide-y divide-gray-100 dark:divide-gray-700 max-h-[460px] overflow-y-auto">
-        {filteredTransactions.length > 0 ? (
-          filteredTransactions.map((transaction) => (
+        {paginatedTransactions.length > 0 ? (
+          paginatedTransactions.map((transaction) => (
             <motion.div 
               key={transaction?.id || Math.random()} 
               initial={{ opacity: 0, y: 20 }}
@@ -222,7 +230,7 @@ const TransactionsList = ({ transactions = [], isLoading = false, showSearch = f
                 
                 <div className="flex-1 min-w-0">
                   <p className="font-medium text-gray-900 dark:text-gray-100 truncate">
-                    {transaction?.description || transaction?.type || 'Unknown Transaction'}
+                    {t(`history.${transaction?.type}`)}{transaction?.subtype ? ` (${t('history.' + transaction.subtype)})` : ''}
                   </p>
                   <div className="flex flex-col sm:flex-row sm:items-center text-xs text-gray-500 dark:text-gray-400 mt-1">
                     <span className="truncate">
@@ -246,10 +254,33 @@ const TransactionsList = ({ transactions = [], isLoading = false, showSearch = f
           ))
         ) : (
           <div className="py-12 text-center">
-            <p className="text-gray-500 dark:text-gray-400">No matching transactions found</p>
+            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">{t('history.noTransactions')}</h3>
+            <p className="text-gray-500 dark:text-gray-400">{t('history.tryAdjustingFilters')}</p>
           </div>
         )}
       </div>
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="flex justify-between items-center p-4 border-t border-gray-100 dark:border-gray-700">
+          <button
+            className="px-4 py-2 text-sm font-medium rounded-lg bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+            onClick={() => setPage(page - 1)}
+            disabled={page === 1}
+          >
+            Previous
+          </button>
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            Page {page} of {totalPages}
+          </span>
+          <button
+            className="px-4 py-2 text-sm font-medium rounded-lg bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+            onClick={() => setPage(page + 1)}
+            disabled={page === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   )
 }

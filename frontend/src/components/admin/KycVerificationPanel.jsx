@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { RiCheckLine, RiCloseLine, RiHistoryLine, RiDeleteBinLine } from 'react-icons/ri';
 import { getImageUrl } from '../../utils/urlUtils';
+import api from '../../lib/axios';
 
 const KycVerificationPanel = () => {
   const { userProfile } = useAuth();
@@ -19,16 +20,10 @@ const KycVerificationPanel = () => {
 
   const fetchPendingKycUsers = async () => {
     try {
-      const response = await fetch('/api/kyc/admin/pending', {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error);
-      setUsers(data.users);
+      const response = await api.get('/api/kyc/admin/pending');
+      setUsers(response.data.users);
     } catch (error) {
-      setError(error.message);
+      setError(error.response?.data?.error || error.message);
     } finally {
       setLoading(false);
     }
@@ -36,38 +31,23 @@ const KycVerificationPanel = () => {
 
   const fetchAuditTrail = async (userId) => {
     try {
-      const response = await fetch(`/api/kyc/admin/audit/${userId}`, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error);
-      setAuditTrail(data.audit);
+      const response = await api.get(`/api/kyc/admin/audit/${userId}`);
+      setAuditTrail(response.data.audit);
       setShowAudit(true);
     } catch (error) {
-      setError(error.message);
+      setError(error.response?.data?.error || error.message);
     }
   };
 
   const handleVerification = async (userId, status, reason = '') => {
     try {
-      const response = await fetch(`/api/kyc/admin/verify/${userId}`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ status, reason })
-      });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error);
+      const response = await api.post(`/api/kyc/admin/verify/${userId}`, { status, reason });
       
       // Update local state
       setUsers(users.filter(user => user._id !== userId));
       setSelectedUser(null);
     } catch (error) {
-      setError(error.message);
+      setError(error.response?.data?.error || error.message);
     }
   };
 
@@ -75,20 +55,13 @@ const KycVerificationPanel = () => {
     if (!window.confirm('Are you sure you want to delete this KYC data?')) return;
     
     try {
-      const response = await fetch(`/api/kyc/admin/${userId}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error);
+      await api.delete(`/api/kyc/admin/${userId}`);
       
       // Update local state
       setUsers(users.filter(user => user._id !== userId));
       setSelectedUser(null);
     } catch (error) {
-      setError(error.message);
+      setError(error.response?.data?.error || error.message);
     }
   };
 

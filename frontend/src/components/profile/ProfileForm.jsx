@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { useAuth } from '../../contexts/AuthContext'
-import KycVerificationForm from '../forms/KycVerificationForm'
 import { FaCamera } from 'react-icons/fa'
 import api from '../../lib/axios'
 import { RiShieldLine, RiShieldCheckLine } from 'react-icons/ri'
+import KYCForm from '../ui/KYCForm'
+import { toast } from 'react-toastify'
 
 const ProfileForm = () => {
-  const { userProfile, updateUserProfile } = useAuth()
+  const { userProfile, updateUserProfile, startKycVerification } = useAuth()
   const fileInputRef = useRef(null)
   
   const [formData, setFormData] = useState({
@@ -116,6 +117,20 @@ const ProfileForm = () => {
     }
   }
 
+  const handleKycSubmit = async (formData) => {
+    try {
+      await startKycVerification(formData, {
+        frontId: formData.frontId,
+        backId: formData.backId,
+        selfieWithId: formData.selfieWithId
+      });
+      setShowKycForm(false);
+      toast.success('KYC submitted successfully!');
+    } catch (error) {
+      toast.error(error.message || 'Failed to submit KYC');
+    }
+  };
+
   if (!userProfile) {
     return (
       <div className="flex justify-center items-center h-48">
@@ -126,10 +141,10 @@ const ProfileForm = () => {
 
   const getKycStatusBadge = () => {
     const statusConfig = {
-      in_progress: {
+      pending: {
         icon: <RiShieldLine className="w-5 h-5" />,
-        text: 'In Progress',
-        className: 'bg-blue-100 dark:bg-blue-900/20 text-blue-800 dark:text-blue-200'
+        text: 'Pending',
+        className: 'bg-yellow-100 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200'
       },
       verified: {
         icon: <RiShieldCheckLine className="w-5 h-5" />,
@@ -140,16 +155,21 @@ const ProfileForm = () => {
         icon: <RiShieldLine className="w-5 h-5" />,
         text: 'Rejected',
         className: 'bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200'
+      },
+      unverified: {
+        icon: <RiShieldLine className="w-5 h-5" />,
+        text: 'Not Verified',
+        className: 'bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-200'
       }
     }
 
-    const config = statusConfig[userProfile.kyc_status] || {
+    const config = statusConfig[userProfile.kyc?.status] || {
       icon: <RiShieldLine className="w-5 h-5" />,
-      text: 'Pending',
-      className: 'bg-yellow-100 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200'
+      text: 'Not Verified',
+      className: 'bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-200'
     }
 
-        return (
+    return (
       <div className={`flex items-center px-2 py-1 rounded-full text-xs font-medium ${config.className}`}>
         {config.icon}
         <span className="ml-1">{config.text}</span>
@@ -289,26 +309,26 @@ const ProfileForm = () => {
           {getKycStatusBadge()}
         </div>
 
-        {userProfile.kyc_status !== 'in_progress' && (
+        {userProfile.kyc?.status !== 'in_progress' && (
           <button
             onClick={() => setShowKycForm(true)}
             className={`w-full btn ${
-              userProfile.kyc_status === 'rejected'
+              userProfile.kyc?.status === 'rejected'
                 ? 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500'
-                : userProfile.kyc_status === 'verified'
+                : userProfile.kyc?.status === 'verified'
                 ? 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500'
                 : 'bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500'
             }`}
           >
-            {userProfile.kyc_status === 'rejected'
+            {userProfile.kyc?.status === 'rejected'
               ? 'Resubmit KYC Documents'
-              : userProfile.kyc_status === 'verified'
+              : userProfile.kyc?.status === 'verified'
               ? 'View KYC Details'
               : 'Start KYC Verification'}
           </button>
         )}
 
-        {userProfile.kyc_status === 'in_progress' && (
+        {userProfile.kyc?.status === 'in_progress' && (
           <div className="p-4 bg-primary-50 rounded-lg">
             <div className="flex items-center">
               <div className="mr-3">
@@ -325,7 +345,7 @@ const ProfileForm = () => {
       {showKycForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="w-full max-w-2xl">
-            <KycVerificationForm onClose={() => setShowKycForm(false)} />
+            <KYCForm onClose={() => setShowKycForm(false)} onSubmit={handleKycSubmit} />
           </div>
         </div>
       )}

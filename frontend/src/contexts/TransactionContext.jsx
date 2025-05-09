@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { useAuth } from './AuthContext'
 import { toast } from 'react-toastify'
+import api from '../lib/axios'
 
 const TransactionContext = createContext()
 
@@ -14,6 +15,18 @@ export function TransactionProvider({ children }) {
   const [loading, setLoading] = useState(true)
   const [cryptoRate] = useState(0.25) // 1 DFLOW = 0.25 TND
 
+  const fetchTransactions = async () => {
+    try {
+      const { data } = await api.get('/api/transactions')
+      setTransactions(data.transactions)
+    } catch (error) {
+      console.error('Error fetching transactions:', error)
+      toast.error('Failed to load transactions')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
     if (!currentUser) {
       setTransactions([])
@@ -21,136 +34,76 @@ export function TransactionProvider({ children }) {
       return
     }
 
-    const fetchTransactions = async () => {
-      try {
-        const response = await fetch('/api/transactions', {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        })
-
-        if (!response.ok) throw new Error('Failed to fetch transactions')
-
-        const data = await response.json()
-        setTransactions(data.transactions)
-      } catch (error) {
-        console.error('Error fetching transactions:', error)
-        toast.error('Failed to load transactions')
-      } finally {
-        setLoading(false)
-      }
-    }
-
     fetchTransactions()
   }, [currentUser])
 
   async function transferTND(recipientEmail, amount, description) {
     try {
-      const response = await fetch('/api/transactions/transfer', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify({
-          recipientEmail,
-          amount,
-          description,
-          currency: 'TND'
-        })
+      const { data } = await api.post('/api/transactions/transfer', {
+        recipientEmail,
+        amount,
+        description,
+        currency: 'TND'
       })
-
-      const data = await response.json()
-      if (!response.ok) throw new Error(data.error)
 
       setTransactions(prev => [data.transaction, ...prev])
       toast.success(`${amount} TND transferred successfully!`)
       return true
     } catch (error) {
       console.error('Transfer error:', error)
-      toast.error(error.message)
+      toast.error(error.response?.data?.error || error.message)
       throw error
     }
   }
 
   async function buyCrypto(amount) {
     try {
-      const response = await fetch('/api/transactions/crypto/buy', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify({
-          amount,
-          tndAmount: amount * cryptoRate
-        })
+      const { data } = await api.post('/api/transactions/crypto/buy', {
+        amount,
+        tndAmount: amount * cryptoRate
       })
-
-      const data = await response.json()
-      if (!response.ok) throw new Error(data.error)
 
       setTransactions(prev => [data.transaction, ...prev])
       toast.success(`Successfully bought ${amount} DFLOW`)
       return true
     } catch (error) {
       console.error('Buy crypto error:', error)
-      toast.error(error.message)
+      toast.error(error.response?.data?.error || error.message)
       throw error
     }
   }
 
   async function sellCrypto(amount) {
     try {
-      const response = await fetch('/api/transactions/crypto/sell', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify({
-          amount,
-          tndAmount: amount * cryptoRate
-        })
+      const { data } = await api.post('/api/transactions/crypto/sell', {
+        amount,
+        tndAmount: amount * cryptoRate
       })
-
-      const data = await response.json()
-      if (!response.ok) throw new Error(data.error)
 
       setTransactions(prev => [data.transaction, ...prev])
       toast.success(`Successfully sold ${amount} DFLOW`)
       return true
     } catch (error) {
       console.error('Sell crypto error:', error)
-      toast.error(error.message)
+      toast.error(error.response?.data?.error || error.message)
       throw error
     }
   }
 
   async function transferCrypto(recipientEmail, amount, description) {
     try {
-      const response = await fetch('/api/transactions/crypto/transfer', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify({
-          recipientEmail,
-          amount,
-          description
-        })
+      const { data } = await api.post('/api/transactions/crypto/transfer', {
+        recipientEmail,
+        amount,
+        description
       })
-
-      const data = await response.json()
-      if (!response.ok) throw new Error(data.error)
 
       setTransactions(prev => [data.transaction, ...prev])
       toast.success(`${amount} DFLOW transferred successfully!`)
       return true
     } catch (error) {
       console.error('Transfer crypto error:', error)
-      toast.error(error.message)
+      toast.error(error.response?.data?.error || error.message)
       throw error
     }
   }
@@ -193,6 +146,7 @@ export function TransactionProvider({ children }) {
   const value = {
     transactions,
     loading,
+    fetchTransactions,
     transferTND,
     buyCrypto,
     sellCrypto,

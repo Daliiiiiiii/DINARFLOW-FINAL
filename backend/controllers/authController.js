@@ -18,11 +18,13 @@ const register = async (req, res) => {
     try {
         console.log('Registration attempt with data:', {
             email: req.body.email,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             displayName: req.body.displayName,
             phoneNumber: req.body.phoneNumber
         });
 
-        const { email, password, displayName, phoneNumber } = req.body;
+        const { email, password, firstName, lastName, displayName, phoneNumber } = req.body;
 
         // Check if user exists
         const existingUser = await User.findOne({ email });
@@ -79,6 +81,8 @@ const register = async (req, res) => {
         const user = new User({
             email,
             password,
+            firstName,
+            lastName,
             displayName,
             phoneNumber,
             verificationCode,
@@ -122,6 +126,9 @@ const register = async (req, res) => {
         });
     } catch (error) {
         console.error('Registration error:', error);
+        if (error.code === 11000 && error.keyPattern && error.keyPattern.phoneNumber) {
+            return res.status(400).json({ error: 'This phone number is already registered. Please use a different number.' });
+        }
         res.status(500).json({ error: 'Failed to register user' });
     }
 };
@@ -170,6 +177,8 @@ const verifyEmail = async (req, res) => {
                 id: user._id,
                 email: user.email,
                 displayName: user.displayName,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 phoneNumber: user.phoneNumber,
                 walletBalance: user.walletBalance,
                 cryptoBalance: user.cryptoBalance,
@@ -221,6 +230,8 @@ const login = async (req, res) => {
                 id: user._id,
                 email: user.email,
                 displayName: user.displayName,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 phoneNumber: user.phoneNumber,
                 walletBalance: user.walletBalance,
                 cryptoBalance: user.cryptoBalance,
@@ -341,13 +352,15 @@ const forgotPassword = async (req, res) => {
             });
         }
 
-        // Generate reset token
+        // Generate reset token and code
         const resetToken = crypto.randomBytes(32).toString('hex');
-        const resetTokenExpires = new Date(Date.now() + 1 * 60 * 60 * 1000); // 1 hour
+        const resetTokenExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+        const resetCode = Math.floor(100000 + Math.random() * 900000).toString();
 
-        // Save reset token to user
+        // Save reset token and code to user
         user.resetToken = resetToken;
         user.resetTokenExpires = resetTokenExpires;
+        user.verificationCode = resetCode;
         await user.save();
 
         // Send reset email
@@ -359,6 +372,7 @@ const forgotPassword = async (req, res) => {
             context: {
                 displayName: user.displayName,
                 resetLink,
+                resetCode,
                 email,
                 currentYear: new Date().getFullYear()
             }
@@ -373,13 +387,94 @@ const forgotPassword = async (req, res) => {
     }
 };
 
+const verifyResetCode = async (req, res) => {
+    try {
+        const { email, code } = req.body;
+
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({
+                message: 'No account found with this email address'
+            });
+        }
+
+        if (user.verificationCode !== code) {
+            return res.status(400).json({
+                message: 'Invalid verification code'
+            });
+        }
+
+        // Check if code is expired (10 minutes)
+        const codeAge = Date.now() - user.updatedAt;
+        if (codeAge > 10 * 60 * 1000) {
+            return res.status(400).json({
+                message: 'Verification code has expired'
+            });
+        }
+
+        res.status(200).json({
+            message: 'Code verified successfully'
+        });
+    } catch (error) {
+        console.error('Reset code verification error:', error);
+        res.status(500).json({
+            message: 'An error occurred during code verification'
+        });
+    }
+};
+
+const resetPassword = async (req, res) => {
+    try {
+        const { email, code, newPassword } = req.body;
+
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({
+                message: 'No account found with this email address'
+            });
+        }
+
+        if (user.verificationCode !== code) {
+            return res.status(400).json({
+                message: 'Invalid verification code'
+            });
+        }
+
+        // Check if code is expired (10 minutes)
+        const codeAge = Date.now() - user.updatedAt;
+        if (codeAge > 10 * 60 * 1000) {
+            return res.status(400).json({
+                message: 'Verification code has expired'
+            });
+        }
+
+        // Update password
+        user.password = newPassword;
+        user.verificationCode = null;
+        user.resetToken = null;
+        user.resetTokenExpires = null;
+        await user.save();
+
+        res.status(200).json({
+            message: 'Password has been reset successfully'
+        });
+    } catch (error) {
+        console.error('Reset password error:', error);
+        res.status(500).json({
+            message: 'An error occurred while resetting password'
+        });
+    }
+};
+
 const authController = {
     register,
     login,
     updatePassword,
     verifyEmail,
     resendVerification,
-    forgotPassword
+    forgotPassword,
+    verifyResetCode,
+    resetPassword
 };
 
 export default authController; 
