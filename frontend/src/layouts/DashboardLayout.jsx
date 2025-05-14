@@ -1,7 +1,8 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState, Suspense, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation, Link, Outlet, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import io from 'socket.io-client';
 import {
   Wallet,
   Settings,
@@ -14,29 +15,78 @@ import {
   LayoutDashboard,
   ArrowLeftRight,
   Building2,
-  Bitcoin,
   Clock,
   UserCircle,
-  MessagesSquare
+  MessagesSquare,
+  Users,
+  FileText,
+  Shield,
+  BarChart2,
+  FileCheck
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 import LoadingSpinner from '../assets/animations/LoadingSpinner';
-import KYCOverlay from '../layouts/KYCOverlay';
+import NotificationList from '../components/notifications/NotificationList';
 
 const DashboardLayout = () => {
-  const { loading, userProfile, logout } = useAuth();
+  const { loading, userProfile, logout, visualRole, toggleVisualRole } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const isDark = theme === 'dark';
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(false);
-  const kycStatus = userProfile?.kycStatus || 'unverified';
-  const rejectionReason = userProfile?.kycRejectionReason || '';
-  const showKycOverlay = kycStatus !== 'verified' && !['/profile', '/settings', '/support'].includes(location.pathname);
-  const isKycOverlayPage = !['/profile', '/settings', '/support'].includes(location.pathname);
+  const [socket, setSocket] = useState(null);
+  const isVisualAdmin = visualRole === 'admin';
+
+  // Add effect to handle route changes based on visual role
+  useEffect(() => {
+    if (location.pathname === '/dashboard' && isVisualAdmin) {
+      navigate('/admin');
+    } else if (location.pathname.startsWith('/admin') && !isVisualAdmin) {
+      navigate('/dashboard');
+    }
+  }, [location.pathname, isVisualAdmin, navigate]);
+
+  // Initialize WebSocket connection
+  useEffect(() => {
+    if (userProfile) {
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      const newSocket = io(import.meta.env.VITE_API_URL || 'http://localhost:3000', {
+        auth: { token },
+        reconnection: true,
+        reconnectionAttempts: 5,
+        reconnectionDelay: 1000,
+        timeout: 10000
+      });
+
+      newSocket.on('connect', () => {
+        console.log('WebSocket connected for user:', userProfile.email);
+      });
+
+      newSocket.on('connect_error', (error) => {
+        console.error('WebSocket connection error:', error);
+      });
+
+      newSocket.on('disconnect', (reason) => {
+        console.log('WebSocket disconnected:', reason);
+      });
+
+      // Store socket instance globally
+      window.socket = newSocket;
+      setSocket(newSocket);
+
+      return () => {
+        if (newSocket) {
+          console.log('Cleaning up WebSocket connection');
+          newSocket.disconnect();
+          window.socket = null;
+        }
+      };
+    }
+  }, [userProfile]);
 
   // Handle route changes
   React.useEffect(() => {
@@ -57,16 +107,15 @@ const DashboardLayout = () => {
     };
   }, []);
 
-  const navItems = [
+  const navItems = isVisualAdmin ? [] : [
     { path: '/dashboard', icon: LayoutDashboard, label: t('navigation.dashboard') },
     { path: '/wallet', icon: Wallet, label: t('navigation.wallet') },
     { path: '/transfer', icon: ArrowLeftRight, label: t('navigation.transfer') },
     { path: '/bank-transfer', icon: Building2, label: t('navigation.bankTransfer') },
-    { path: '/crypto', icon: Bitcoin, label: t('navigation.crypto') },
     { path: '/history', icon: Clock, label: t('navigation.history') },
     { path: '/profile', icon: UserCircle, label: t('navigation.profile') },
     { path: '/settings', icon: Settings, label: t('navigation.settings') },
-    { path: '/support', icon: MessagesSquare, label: 'Support' }
+    ...(['admin', 'superadmin'].includes(userProfile?.role) ? [] : [{ path: '/support', icon: MessagesSquare, label: t('navigation.support') }])
   ];
 
   const handleLogout = async () => {
@@ -76,6 +125,16 @@ const DashboardLayout = () => {
     } catch (error) {
       console.error('Logout error:', error);
     }
+  };
+
+  const handleSwitchToUserView = () => {
+    toggleVisualRole();
+    navigate('/dashboard');
+  };
+
+  const handleSwitchToAdminView = () => {
+    toggleVisualRole();
+    navigate('/admin');
   };
 
   if (loading) return <LoadingSpinner />;
@@ -106,7 +165,7 @@ const DashboardLayout = () => {
           isDark 
             ? 'bg-gray-900/50 backdrop-blur-xl border-gray-800' 
             : 'bg-white border-gray-200'
-        } border-r p-6 flex flex-col fixed h-screen`}
+        } border-r p-6 flex flex-col fixed h-screen overflow-y-auto`}
       >
         <Link to="/" className="flex items-center gap-2 mb-10">
           <Wallet className="w-8 h-8 text-blue-500" />
@@ -115,7 +174,125 @@ const DashboardLayout = () => {
           </span>
         </Link>
 
+        {/* Admin Navigation - Moved to top */}
+        {['admin', 'superadmin'].includes(userProfile?.role) && (
+          <div className="mb-8">
+            <h3 className={`px-4 text-xs font-semibold ${isDark ? 'text-gray-400' : 'text-gray-500'} uppercase tracking-wider`}>
+              Admin
+            </h3>
+            <nav className="mt-2 space-y-2">
+              {isVisualAdmin ? (
+                <>
+                  <Link
+                    to="/admin"
+                    className={`w-full px-4 py-3 rounded-lg flex items-center gap-3 transition-colors ${
+                      location.pathname === '/admin'
+                        ? 'bg-blue-600/20 text-blue-600'
+                        : isDark 
+                          ? 'hover:bg-gray-800 text-gray-300' 
+                          : 'hover:bg-gray-100 text-gray-600'
+                    }`}
+                  >
+                    <LayoutDashboard className="w-5 h-5" />
+                    Dashboard
+                  </Link>
+                  <Link
+                    to="/admin/users"
+                    className={`w-full px-4 py-3 rounded-lg flex items-center gap-3 transition-colors ${
+                      location.pathname === '/admin/users'
+                        ? 'bg-blue-600/20 text-blue-600'
+                        : isDark 
+                          ? 'hover:bg-gray-800 text-gray-300' 
+                          : 'hover:bg-gray-100 text-gray-600'
+                    }`}
+                  >
+                    <Users className="w-5 h-5" />
+                    Users
+                  </Link>
+                  <Link
+                    to="/admin/kyc"
+                    className={`w-full px-4 py-3 rounded-lg flex items-center gap-3 transition-colors ${
+                      location.pathname === '/admin/kyc'
+                        ? 'bg-blue-600/20 text-blue-600'
+                        : isDark 
+                          ? 'hover:bg-gray-800 text-gray-300' 
+                          : 'hover:bg-gray-100 text-gray-600'
+                    }`}
+                  >
+                    <FileCheck className="w-5 h-5" />
+                    KYC
+                  </Link>
+                  <Link
+                    to="/admin/support"
+                    className={`w-full px-4 py-3 rounded-lg flex items-center gap-3 transition-colors ${
+                      location.pathname === '/admin/support'
+                        ? 'bg-blue-600/20 text-blue-600'
+                        : isDark 
+                          ? 'hover:bg-gray-800 text-gray-300' 
+                          : 'hover:bg-gray-100 text-gray-600'
+                    }`}
+                  >
+                    <MessagesSquare className="w-5 h-5" />
+                    Support
+                  </Link>
+                  {userProfile?.role === 'superadmin' && (
+                    <Link
+                      to="/admin/settings"
+                      className={`w-full px-4 py-3 rounded-lg flex items-center gap-3 transition-colors ${
+                        location.pathname === '/admin/settings'
+                          ? 'bg-blue-600/20 text-blue-600'
+                          : isDark 
+                            ? 'hover:bg-gray-800 text-gray-300' 
+                            : 'hover:bg-gray-100 text-gray-600'
+                      }`}
+                    >
+                      <Settings className="w-5 h-5" />
+                      Settings
+                    </Link>
+                  )}
+                </>
+              ) : (
+                <button
+                  onClick={handleSwitchToAdminView}
+                  className={`w-full px-4 py-3 rounded-lg flex items-center gap-3 transition-all duration-200 ${
+                    isDark 
+                      ? 'bg-gradient-to-r from-purple-600/20 to-blue-600/20 hover:from-purple-600/30 hover:to-blue-600/30 text-purple-400 border border-purple-500/20' 
+                      : 'bg-gradient-to-r from-purple-50 to-blue-50 hover:from-purple-100 hover:to-purple-100 text-purple-600 border border-purple-200'
+                  }`}
+                >
+                  <Shield className="w-5 h-5" />
+                  <span className="font-medium">Switch to Admin View</span>
+                </button>
+              )}
+            </nav>
+          </div>
+        )}
+
         <nav className="flex-1">
+          {isVisualAdmin ? (
+            <div className="mb-4">
+              <h3 className={`px-4 text-xs font-semibold ${isDark ? 'text-gray-400' : 'text-gray-500'} uppercase tracking-wider`}>
+                User View
+              </h3>
+              <button
+                onClick={handleSwitchToUserView}
+                className={`w-full mt-2 px-4 py-3 rounded-lg flex items-center gap-3 transition-all duration-200 ${
+                  isDark 
+                    ? 'bg-gradient-to-r from-blue-600/20 to-purple-600/20 hover:from-blue-600/30 hover:to-purple-600/30 text-blue-400 border border-blue-500/20' 
+                    : 'bg-gradient-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 text-blue-600 border border-blue-200'
+                }`}
+              >
+                <UserCircle className="w-5 h-5" />
+                <span className="font-medium">Switch to User View</span>
+              </button>
+            </div>
+          ) : (
+            <div className="mb-4">
+              <h3 className={`px-4 text-xs font-semibold ${isDark ? 'text-gray-400' : 'text-gray-500'} uppercase tracking-wider`}>
+                User View
+              </h3>
+            </div>
+          )}
           <ul className="space-y-2">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -196,10 +373,7 @@ const DashboardLayout = () => {
             </div>
             
             <div className="flex items-center gap-4">
-              <button className="relative p-2 text-gray-400 hover:text-white transition-colors">
-                <Bell className="w-6 h-6" />
-                <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
-              </button>
+              <NotificationList />
               
               {/* Profile Button */}
               <div className="relative">
@@ -242,6 +416,7 @@ const DashboardLayout = () => {
                           ? 'bg-gray-900 border-gray-800' 
                           : 'bg-white border-gray-200'
                       } border py-1`}
+                      dir={i18n.language === 'ar' ? 'rtl' : undefined}
                     >
                       <Link
                         to="/profile"
@@ -249,12 +424,14 @@ const DashboardLayout = () => {
                       >
                         {t('common.viewProfile')}
                       </Link>
-                      <Link
-                        to="/settings"
-                        className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800"
-                      >
-                        {t('common.settings')}
-                      </Link>
+                      {!['admin', 'superadmin'].includes(userProfile?.role) && (
+                        <Link
+                          to="/settings"
+                          className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800"
+                        >
+                          {t('common.settings')}
+                        </Link>
+                      )}
                       <button
                         onClick={handleLogout}
                         className="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -268,11 +445,6 @@ const DashboardLayout = () => {
             </div>
           </div>
         </motion.div>
-
-        {/* KYC Overlay (now below header, above content) */}
-        {showKycOverlay && (
-          <KYCOverlay status={kycStatus} rejectionReason={rejectionReason} />
-        )}
 
         <div className="p-8">
           <Outlet />

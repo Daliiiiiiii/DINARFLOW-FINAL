@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Alert</title>
+</head>
+<body style="margin:0; padding:0; background:#181c2f; color:#e5e7eb; font-family: Arial, sans-serif;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#181c2f; padding:0; margin:0;">
+        <tr>
+            <td align="center">
+                <table width="420" cellpadding="0" cellspacing="0" border="0" style="background:#232946; border-radius:18px; margin:40px auto; padding:0; box-shadow:0 8px 32px 0 rgba(31,41,55,0.18);">
+                    <tr>
+                        <td align="center" style="padding:24px 24px 0 24px;">
+                            <img src="file:///C:/Users/Dali/Downloads/project/frontend/public/logo.svg" alt="DinarFlow Logo" width="44" height="44" style="display:block; margin:0 auto 4px auto;">
+                            <div style="font-size:22px; font-weight:bold; color:#3b82f6; letter-spacing:1px; margin-bottom:8px;">DinarFlow</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="padding:0 24px;">
+                            <div style="width:56px; height:56px; background:#f87171; border-radius:50%; display:block; margin:0 auto 18px auto;">
+                                <table width="56" height="56" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" valign="middle">
+                                    <img src="https://img.icons8.com/ios-filled/50/fa314a/error--v1.png" width="32" height="32" alt="Alert" style="display:block; margin:auto;">
+                                </td></tr></table>
+                            </div>
+                            <h1 style="font-size:22px; font-weight:bold; margin:0 0 8px 0; color:#fff;">Security Alert</h1>
+                            <p style="margin:0 0 8px 0; color:#d1d5db;">Dear {{displayName}},</p>
+                            <p style="margin:0 0 18px 0; color:#d1d5db;">We detected a login attempt to your DinarFlow account from a new device:</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:0 24px;">
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#20243a; border-radius:10px; padding:0; margin:22px 0 18px 0;">
+                                <tr>
+                                    <td style="padding:14px 18px 6px 18px;">
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td style="color:#a1a7bb; font-size:15px; font-weight:400;">Device</td>
+                                                <td align="right" style="font-weight:500; color:#fff; font-size:15px;">{{device}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#a1a7bb; font-size:15px; font-weight:400;">Location</td>
+                                                <td align="right" style="font-weight:500; color:#fff; font-size:15px;">{{location}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#a1a7bb; font-size:15px; font-weight:400;">Time</td>
+                                                <td align="right" style="font-weight:500; color:#fff; font-size:15px;">{{timestamp}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#a1a7bb; font-size:15px; font-weight:400;">IP Address</td>
+                                                <td align="right" style="font-weight:500; color:#fff; font-size:15px;">{{ip}}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:0 24px;">
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:rgba(239,68,68,0.13); border:1px solid #ef4444; border-radius:10px;">
+                                <tr>
+                                    <td style="padding:16px 18px; color:#f87171;">
+                                        <p style="color:#f87171; margin:0 0 10px 0; font-weight:600;">If this wasn't you, please secure your account immediately by:</p>
+                                        <ul style="margin:0; padding-left:20px; color:#f87171;">
+                                            <li style="margin-bottom:6px;">Changing your password</li>
+                                            <li style="margin-bottom:6px;">Enabling two-factor authentication</li>
+                                            <li>Reviewing recent account activity</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left" style="padding:18px 24px 0 24px;">
+                            <a href="{{secureAccountUrl}}" style="display:inline-block; background:#ef4444; color:white; text-decoration:none; padding:12px 28px; border-radius:8px; font-weight:600; margin:8px 8px 0 0; font-size:15px;">Secure My Account</a>
+                            <a href="{{learnMoreUrl}}" style="display:inline-block; background:#374151; color:#e5e7eb; text-decoration:none; padding:12px 28px; border-radius:8px; font-weight:500; margin:8px 0 0 0; font-size:15px;">Learn More</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height:32px;"></td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="padding:32px 24px 0 24px; border-top:1px solid #374151; color:#9ca3af; font-size:14px;">
+                            <p style="margin:8px 0;">This is an automated message, please do not reply.</p>
+                            <p style="margin:8px 0;">&copy; {{currentYear}} DinarFlow. All rights reserved.</p>
+                            <p style="margin:8px 0;">
+                                <a href="{{supportUrl}}" style="color:#3b82f6; text-decoration:none;">Support</a> |
+                                <a href="{{privacyUrl}}" style="color:#3b82f6; text-decoration:none;">Privacy Policy</a> |
+                                <a href="{{termsUrl}}" style="color:#3b82f6; text-decoration:none;">Terms of Service</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html> 

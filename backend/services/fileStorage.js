@@ -25,32 +25,44 @@ class FileStorageService {
             const filepath = path.join(this.uploadDir, filename);
 
             // Check file type
-            const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/webp'];
             if (!allowedTypes.includes(file.mimetype)) {
-                throw new Error('Only JPG and PNG images are allowed. GIF and other formats are not supported.');
+                throw new Error('Only JPG, PNG, GIF, and WebP images are allowed.');
             }
 
             // Process image
             try {
-                if (file.buffer) {
-                    // Handle buffer-based file
-                    await sharp(file.buffer)
-                        .resize(800, 600, { fit: 'inside', withoutEnlargement: true })
-                        .toFile(filepath);
-                } else if (file.path) {
-                    // Handle disk-stored file
-                    await sharp(file.path)
-                        .resize(800, 600, { fit: 'inside', withoutEnlargement: true })
-                        .toFile(filepath);
-
-                    // Delete the original file after processing
-                    try {
-                        await fs.promises.unlink(file.path);
-                    } catch (error) {
-                        logger.error('Error deleting original file:', error);
+                if (file.mimetype === 'image/gif') {
+                    // For GIFs, just move the file without processing
+                    if (file.buffer) {
+                        await fs.promises.writeFile(filepath, file.buffer);
+                    } else if (file.path) {
+                        await fs.promises.copyFile(file.path, filepath);
+                        // Delete the original file after copying
+                        try {
+                            await fs.promises.unlink(file.path);
+                        } catch (error) {
+                            logger.error('Error deleting original file:', error);
+                        }
                     }
                 } else {
-                    throw new Error('Invalid file format');
+                    // Process other image types with Sharp
+                    if (file.buffer) {
+                        await sharp(file.buffer)
+                            .resize(800, 600, { fit: 'inside', withoutEnlargement: true })
+                            .toFile(filepath);
+                    } else if (file.path) {
+                        await sharp(file.path)
+                            .resize(800, 600, { fit: 'inside', withoutEnlargement: true })
+                            .toFile(filepath);
+
+                        // Delete the original file after processing
+                        try {
+                            await fs.promises.unlink(file.path);
+                        } catch (error) {
+                            logger.error('Error deleting original file:', error);
+                        }
+                    }
                 }
             } catch (error) {
                 logger.error('Error processing image:', error);

@@ -35,44 +35,29 @@ const userSchema = new mongoose.Schema({
     index: { unique: true },
     validate: {
       validator: function (v) {
-        return /^\+216\d{8}$/.test(v);
+        // Allow both +216XXXXXXXX and 216XXXXXXXX formats
+        return /^(\+?216)?\d{8}$/.test(v);
       },
       message: props => `${props.value} is not a valid Tunisian phone number!`
     }
+  },
+  role: {
+    type: String,
+    required: true,
+    default: 'user',
+    enum: ['user', 'admin', 'superadmin'],
+    index: true
   },
   walletBalance: {
     type: Number,
     default: 0,
     min: 0
   },
-  cryptoBalance: {
-    type: Number,
-    default: 0,
-    min: 0
+  bankAccount: {
+    bankName: { type: String },
+    accountNumber: { type: String }
   },
   address: String,
-  kycVerified: {
-    type: Boolean,
-    default: false
-  },
-  kycStatus: {
-    type: String,
-    enum: ['unverified', 'pending', 'verified', 'rejected'],
-    default: 'unverified'
-  },
-  kycData: {
-    idType: String,
-    idNumber: String,
-    dateOfBirth: Date,
-    idFrontUrl: String,
-    idBackUrl: String,
-    selfieUrl: String
-  },
-  privacyAccepted: {
-    type: Boolean,
-    default: false
-  },
-  privacyAcceptedAt: Date,
   notificationsEnabled: {
     type: Boolean,
     default: true
@@ -87,7 +72,7 @@ const userSchema = new mongoose.Schema({
   },
   accountStatus: {
     type: String,
-    enum: ['active', 'pending_deletion'],
+    enum: ['active', 'pending_deletion', 'suspended'],
     default: 'active'
   },
   deletionRequestedAt: Date,
@@ -120,38 +105,67 @@ const userSchema = new mongoose.Schema({
     type: Map,
     of: mongoose.Schema.Types.Mixed
   },
+  isOnline: {
+    type: Boolean,
+    default: false,
+    index: true
+  },
+  lastSeen: {
+    type: Date,
+    default: Date.now,
+    index: true
+  },
   kyc: {
     status: {
       type: String,
-      enum: ['unverified', 'pending', 'verified', 'rejected'],
+      enum: ['verified', 'unverified', 'rejected', 'pending'],
       default: 'unverified'
     },
-    submittedAt: Date,
-    verifiedAt: Date,
-    verificationNotes: String,
-    documents: {
-      frontId: String,
-      backId: String,
-      selfieWithId: String
-    },
-    data: {
-      type: Map,
-      of: mongoose.Schema.Types.Mixed
-    },
-    auditTrail: [{
-      action: {
-        type: String,
-        required: true
+    submissions: [{
+      submittedAt: Date,
+      verifiedAt: Date,
+      verificationNotes: String,
+      personalInfo: {
+        idType: String,
+        idNumber: String,
+        dateOfBirth: Date,
+        firstName: String,
+        lastName: String,
+        address: String,
+        city: String,
+        province: String,
+        zipCode: String
       },
-      details: {
-        type: Map,
-        of: mongoose.Schema.Types.Mixed
+      documents: {
+        frontId: String,
+        backId: String,
+        selfieWithId: String,
+        signature: String
       },
-      timestamp: {
-        type: Date,
-        default: Date.now
-      }
-    }]
+      auditTrail: [{
+        action: {
+          type: String,
+          required: true
+        },
+        details: {
+          type: Map,
+          of: mongoose.Schema.Types.Mixed
+        },
+        timestamp: {
+          type: Date,
+          default: Date.now
+        }
+      }]
+    }],
+    currentSubmission: {
+      type: Number,
+      default: -1
+    }
+  },
+  associatedBankAccount: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'BankAccount',
+    default: null
   },
   createdAt: {
     type: Date,
@@ -170,6 +184,28 @@ const userSchema = new mongoose.Schema({
         const baseUrl = process.env.API_URL || 'http://localhost:3000';
         ret.profilePicture = `${baseUrl}${ret.profilePicture}`;
       }
+      // Add KYC document URL transformation for allAttempts
+      if (ret.kyc && Array.isArray(ret.kyc.submissions)) {
+        const baseUrl = process.env.API_URL || 'http://localhost:3000';
+        ret.kyc.submissions.forEach(sub => {
+          if (sub.documents) {
+            Object.keys(sub.documents).forEach(key => {
+              if (sub.documents[key] && !sub.documents[key].startsWith('http')) {
+                sub.documents[key] = `${baseUrl}/uploads/${sub.documents[key]}`;
+              }
+            });
+          }
+        });
+      }
+      // Add KYC document URL transformation for top-level documents
+      if (ret.documents) {
+        const baseUrl = process.env.API_URL || 'http://localhost:3000';
+        Object.keys(ret.documents).forEach(key => {
+          if (ret.documents[key] && !ret.documents[key].startsWith('http')) {
+            ret.documents[key] = `${baseUrl}/uploads/${ret.documents[key]}`;
+          }
+        });
+      }
       delete ret.password;
       delete ret.__v;
       return ret;
@@ -183,6 +219,9 @@ userSchema.index({ passwordResetToken: 1 });
 userSchema.index({ 'socialAuth.google': 1 });
 userSchema.index({ 'socialAuth.facebook': 1 });
 userSchema.index({ 'socialAuth.twitter': 1 });
+
+// Add compound index for role and lastSeen
+userSchema.index({ role: 1, lastSeen: -1 });
 
 // Hash password before saving
 userSchema.pre('save', async function (next) {

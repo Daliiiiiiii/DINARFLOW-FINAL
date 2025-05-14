@@ -9,22 +9,22 @@ const transactionSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
-    enum: ['transfer', 'crypto', 'crypto_transfer']
+    enum: ['transfer', 'bank']
   },
   subtype: {
     type: String,
     required: true,
-    enum: ['send', 'receive', 'buy', 'sell']
+    enum: ['send', 'receive', 'deposit', 'withdrawal']
   },
   amount: {
     type: Number,
     required: true,
-    min: 0
   },
   currency: {
     type: String,
     required: true,
-    enum: ['TND', 'CRYPTO']
+    enum: ['TND'],
+    default: 'TND'
   },
   recipientId: {
     type: mongoose.Schema.Types.ObjectId,

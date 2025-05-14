@@ -27,12 +27,15 @@ import {
   Download,
   AlertCircle,
   BarChart3,
-  Users
+  Users,
+  TrendingUp,
+  TrendingDown
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 import ActionLoader from '../assets/animations/ActionLoader';
 import KYCOverlay from '../layouts/KYCOverlay';
 
@@ -48,11 +51,14 @@ const Dashboard = () => {
   const [timeRange, setTimeRange] = useState('30');
   const [stats, setStats] = useState({
     totalBalance: 0,
-    dflowBalance: 0,
-    totalIncome: 0,
-    totalOutcome: 0,
-    avgTransaction: 0,
-    transactionCount: 0
+    monthlyIncome: 0,
+    monthlyExpenses: 0,
+    volume24h: 0,
+    transactions: {
+      total: 0,
+      sent: 0,
+      received: 0
+    }
   });
 
   const [chartData, setChartData] = useState([]);
@@ -61,125 +67,101 @@ const Dashboard = () => {
   const [hasData, setHasData] = useState(false);
 
   // Show KYCOverlay if user is not verified
-  const showKycOverlay = userProfile && userProfile.kycStatus !== 'verified';
+  const showKycOverlay = currentUser && currentUser.kyc?.status !== 'verified';
+  const kycStatus = currentUser?.kyc?.status || 'unverified';
+  const rejectionReason = currentUser?.kyc?.verificationNotes || '';
 
-  // Dummy data for unverified users
-  const dummyStats = {
-    totalBalance: 24500.00,
-    dflowBalance: 1250,
+  // Mock data for development
+  const mockStats = {
+    totalBalance: 5000,
+    monthlyIncome: 2500,
+    monthlyExpenses: 1500,
     volume24h: 156000,
-    activeUsers: 2450
+    transactions: {
+      total: 25,
+      sent: 10,
+      received: 15
+    }
   };
-  const dummyChartData = [
-    { name: 'Jan', value: 4000, income: 3000, outcome: 1000 },
-    { name: 'Feb', value: 3000, income: 2000, outcome: 1000 },
-    { name: 'Mar', value: 5000, income: 3500, outcome: 1500 },
-    { name: 'Apr', value: 2780, income: 2000, outcome: 780 },
-    { name: 'May', value: 6890, income: 5000, outcome: 1890 },
-    { name: 'Jun', value: 2390, income: 1500, outcome: 890 },
-    { name: 'Jul', value: 3490, income: 2500, outcome: 990 },
-  ];
-  const dummyPieData = [
-    { name: 'received TND', value: 6 },
-    { name: 'sent TND', value: 4 },
-    { name: 'received DFLOW', value: 1 },
-    { name: 'sent DFLOW', value: 1 }
-  ];
-  const dummyCurrencyBreakdown = [
-    { currency: 'TND', income: 3000, outcome: 1500 },
-    { currency: 'DFLOW', income: 500, outcome: 200 }
-  ];
-  const dummyTransactions = [
+
+  const mockTransactions = [
     {
-      type: 'Sent TND',
-      amount: '-250 TND',
-      status: 'Completed',
-      date: '2024-03-15 14:30'
+      id: 1,
+      type: 'transfer',
+      subtype: 'send',
+      amount: -100,
+      currency: 'TND',
+      recipient: 'John Doe',
+      date: '2024-03-15 14:30:22',
+      status: 'completed'
     },
     {
-      type: 'Received TND',
-      amount: '+1,500 TND',
-      status: 'Completed',
-      date: '2024-03-15 12:45'
+      id: 2,
+      type: 'transfer',
+      subtype: 'receive',
+      amount: 200,
+      currency: 'TND',
+      sender: 'Jane Smith',
+      date: '2024-03-14 09:15:45',
+      status: 'completed'
     },
     {
-      type: 'Sent TND',
-      amount: '-100 TND',
-      status: 'Pending',
-      date: '2024-03-15 10:20'
+      id: 3,
+      type: 'bank',
+      subtype: 'withdrawal',
+      amount: -500,
+      currency: 'TND',
+      recipient: 'Bank of Tunisia',
+      date: '2024-03-15 16:45:30',
+      status: 'pending'
     }
   ];
 
-  // If user is unverified, use dummy data for dashboard content
-  const isUnverified = userProfile?.kycStatus !== 'verified';
-  const statsToUse = isUnverified ? dummyStats : stats;
-  const chartDataToUse = isUnverified ? dummyChartData : chartData;
-  const pieDataToUse = isUnverified ? dummyPieData : pieData;
-  const currencyBreakdownToUse = isUnverified ? dummyCurrencyBreakdown : currencyBreakdown;
-  const transfersToUse = isUnverified ? dummyTransactions : transactions;
+  // Generate localized month names
+  const getMonthName = (monthIndex) => {
+    const name = new Date(2024, monthIndex).toLocaleString(i18n.language, { month: 'short' });
+    return name.charAt(0).toUpperCase() + name.slice(1);
+  };
 
-  // Stats cards config
-  const statsCards = isUnverified
-    ? [
-        {
-          title: 'Wallet Balance',
-          value: '24,500.00 TND',
-          change: '+2.5%',
-          isPositive: true,
-          icon: Wallet
-        },
-        {
-          title: 'Bank Account Balance',
-          value: '1,250 TND',
-          change: '-1.2%',
-          isPositive: false,
-          icon: Coins
-        },
-        {
-          title: '24h Volume',
-          value: 'TND 156,000',
-          change: '+5.3%',
-          isPositive: true,
-          icon: BarChart3
-        },
-        {
-          title: 'Active Users',
-          value: '2,450',
-          change: '+12.5%',
-          isPositive: true,
-          icon: Users
-        }
-      ]
-    : [
-        {
-          title: t('dashboard.walletBalance') || 'Wallet Balance',
-          value: `TND ${statsToUse.totalBalance.toFixed(2)}`,
-          change: '+2.5%',
-          isPositive: true,
-          icon: Wallet
-        },
-        {
-          title: t('dashboard.bankAccountBalance') || 'Bank Account Balance',
-          value: `${statsToUse.dflowBalance.toFixed(2)} DFLOW`,
-          change: '-1.2%',
-          isPositive: false,
-          icon: Coins
-        },
-        {
-          title: t('dashboard.totalIncome'),
-          value: `TND ${statsToUse.totalIncome.toFixed(2)}`,
-          change: '+5.3%',
-          isPositive: true,
-          icon: BarChart3
-        },
-        {
-          title: t('dashboard.transactionCount'),
-          value: `${statsToUse.transactionCount}`,
-          change: '+12.5%',
-          isPositive: true,
-          icon: Users
-        }
-      ];
+  const mockChartData = [
+    { name: getMonthName(0), income: 3000, outcome: 1500 },
+    { name: getMonthName(1), income: 2000, outcome: 1000 },
+    { name: getMonthName(2), income: 3500, outcome: 1500 },
+    { name: getMonthName(3), income: 2000, outcome: 780 },
+    { name: getMonthName(4), income: 5000, outcome: 1890 },
+    { name: getMonthName(5), income: 1500, outcome: 890 }
+  ];
+
+  const statsCards = [
+    {
+      title: t('dashboard.totalBalance'),
+      value: mockStats.totalBalance.toFixed(2),
+      icon: Wallet,
+      trend: '+5.2%',
+      trendType: 'up'
+    },
+    {
+      title: t('dashboard.monthlyIncome'),
+      value: mockStats.monthlyIncome.toFixed(2),
+      icon: TrendingUp,
+      trend: '+2.1%',
+      trendType: 'up'
+    },
+    {
+      title: t('dashboard.monthlyExpenses'),
+      value: mockStats.monthlyExpenses.toFixed(2),
+      icon: TrendingDown,
+      trend: '-1.5%',
+      trendType: 'down'
+    },
+    {
+      title: t('dashboard.volume24h'),
+      value: mockStats.volume24h.toLocaleString(),
+      icon: BarChart3,
+      trend: '+8.3%',
+      trendType: 'up'
+    }
+  ];
 
   useEffect(() => {
     if (!transactions.length) {
@@ -198,32 +180,24 @@ const Dashboard = () => {
     // Calculate basic stats
     const income = filteredTransactions
       .filter(t => t.type === 'received')
-      .reduce((acc, t) => acc + t.amount, 0);
+      .reduce((acc, t) => acc + (t.amount || 0), 0);
 
     const outcome = filteredTransactions
       .filter(t => t.type === 'sent')
-      .reduce((acc, t) => acc + t.amount, 0);
-
-    const dflowBalance = filteredTransactions
-      .filter(t => t.currency === 'DFLOW')
-      .reduce((acc, t) => {
-        if (t.type === 'received') return acc + t.amount;
-        if (t.type === 'sent') return acc - t.amount;
-        return acc;
-      }, 0);
+      .reduce((acc, t) => acc + (t.amount || 0), 0);
 
     const totalTransactions = filteredTransactions.length;
-    const avgTransaction = totalTransactions > 0 
-      ? (income + outcome) / totalTransactions 
-      : 0;
 
     setStats({
       totalBalance: currentUser?.balance || 0,
-      dflowBalance,
-      totalIncome: income,
-      totalOutcome: outcome,
-      avgTransaction,
-      transactionCount: totalTransactions
+      monthlyIncome: income,
+      monthlyExpenses: outcome,
+      volume24h: 0,
+      transactions: {
+        total: totalTransactions,
+        sent: filteredTransactions.filter(t => t.type === 'sent').length,
+        received: filteredTransactions.filter(t => t.type === 'received').length
+      }
     });
 
     // Prepare daily chart data
@@ -234,9 +208,9 @@ const Dashboard = () => {
         dailyData[date] = { income: 0, outcome: 0 };
       }
       if (t.type === 'received') {
-        dailyData[date].income += t.amount;
+        dailyData[date].income += (t.amount || 0);
       } else {
-        dailyData[date].outcome += t.amount;
+        dailyData[date].outcome += (t.amount || 0);
       }
     });
 
@@ -250,41 +224,19 @@ const Dashboard = () => {
 
     // Prepare pie chart data
     const typeCounts = filteredTransactions.reduce((acc, t) => {
-      const key = `${t.type}-${t.currency}`;
+      const key = t.type;
       acc[key] = (acc[key] || 0) + 1;
       return acc;
     }, {});
 
-    const pieDataArray = Object.entries(typeCounts).map(([key, value]) => {
-      const [type, currency] = key.split('-');
-      return {
-        name: `${type} ${currency}`,
-        value
-      };
-    });
+    const pieDataArray = Object.entries(typeCounts).map(([type, value]) => ({
+      name: type,
+      value
+    }));
 
     setPieData(pieDataArray);
 
-    // Prepare currency breakdown
-    const currencyData = filteredTransactions.reduce((acc, t) => {
-      if (!acc[t.currency]) {
-        acc[t.currency] = { income: 0, outcome: 0 };
-      }
-      if (t.type === 'received') {
-        acc[t.currency].income += t.amount;
-      } else {
-        acc[t.currency].outcome += t.amount;
-      }
-      return acc;
-    }, {});
-
-    const currencyBreakdownArray = Object.entries(currencyData).map(([currency, data]) => ({
-      currency,
-      ...data
-    }));
-
-    setCurrencyBreakdown(currencyBreakdownArray);
-  }, [transactions, currentUser, timeRange]);
+  }, [transactions, currentUser, timeRange, t]);
 
   const handleRefresh = () => {
     fetchTransactions();
@@ -363,12 +315,11 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="relative">
       {showKycOverlay && (
-        <KYCOverlay
-          status={userProfile?.kycStatus}
-          rejectionReason={userProfile?.kycRejectionReason}
-          centered
+        <KYCOverlay 
+          status={kycStatus}
+          rejectionReason={rejectionReason}
         />
       )}
       {/* Controls */}
@@ -382,7 +333,7 @@ const Dashboard = () => {
                 ? 'bg-gray-800/50 border-gray-700 text-white'
                 : 'bg-white border-gray-300'
             } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-            disabled={isUnverified}
+            disabled={!!showKycOverlay}
           >
             <option value="7">{t('dashboard.last7Days')}</option>
             <option value="30">{t('dashboard.last30Days')}</option>
@@ -410,10 +361,10 @@ const Dashboard = () => {
                 <stat.icon className="w-6 h-6 text-blue-400" />
               </div>
               <span className={`flex items-center text-sm ${
-                stat.isPositive ? 'text-green-400' : 'text-red-400'
+                stat.trendType === 'up' ? 'text-green-400' : 'text-red-400'
               }`}>
-                {stat.change}
-                {stat.isPositive ? (
+                {stat.trend}
+                {stat.trendType === 'up' ? (
                   <ArrowUpRight className="w-4 h-4 ml-1" />
                 ) : (
                   <ArrowDownRight className="w-4 h-4 ml-1" />
@@ -440,10 +391,10 @@ const Dashboard = () => {
               : 'bg-white border-gray-200'
           } border rounded-xl p-6`}
         >
-          <h3 className="text-xl font-semibold mb-6">Balance History</h3>
+          <h3 className="text-xl font-semibold mb-6">{t('dashboard.balanceHistory')}</h3>
           <div className="h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={isUnverified ? dummyChartData : chartData}>
+              <AreaChart data={showKycOverlay ? mockChartData : chartData}>
                 <defs>
                   <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.3}/>
@@ -455,7 +406,7 @@ const Dashboard = () => {
                   stroke={isDark ? '#1F2937' : '#E5E7EB'} 
                 />
                 <XAxis 
-                  dataKey={isUnverified ? 'name' : 'date'}
+                  dataKey="name"
                   stroke={isDark ? '#6B7280' : '#4B5563'} 
                 />
                 <YAxis 
@@ -471,11 +422,11 @@ const Dashboard = () => {
                 />
                 <Area
                   type="monotone"
-                  dataKey={isUnverified ? 'value' : 'income'}
+                  dataKey="income"
                   stroke="#3B82F6"
                   fillOpacity={1}
                   fill="url(#colorValue)"
-                  name="Balance"
+                  name={t('dashboard.totalBalance')}
                 />
               </AreaChart>
             </ResponsiveContainer>
@@ -492,10 +443,10 @@ const Dashboard = () => {
               : 'bg-white border-gray-200'
           } border rounded-xl p-6`}
         >
-          <h3 className="text-xl font-semibold mb-6">Income vs Outcome</h3>
+          <h3 className="text-xl font-semibold mb-6">{t('dashboard.incomeVsOutcome')}</h3>
           <div className="h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={isUnverified ? dummyChartData : chartData}>
+              <AreaChart data={showKycOverlay ? mockChartData : chartData}>
                 <defs>
                   <linearGradient id="colorIncome" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#10B981" stopOpacity={0.3}/>
@@ -511,7 +462,7 @@ const Dashboard = () => {
                   stroke={isDark ? '#1F2937' : '#E5E7EB'} 
                 />
                 <XAxis 
-                  dataKey={isUnverified ? 'name' : 'date'}
+                  dataKey="name"
                   stroke={isDark ? '#6B7280' : '#4B5563'} 
                 />
                 <YAxis 
@@ -531,7 +482,7 @@ const Dashboard = () => {
                   stroke="#10B981"
                   fillOpacity={1}
                   fill="url(#colorIncome)"
-                  name="Income"
+                  name={t('dashboard.monthlyIncome')}
                 />
                 <Area
                   type="monotone"
@@ -539,7 +490,7 @@ const Dashboard = () => {
                   stroke="#EF4444"
                   fillOpacity={1}
                   fill="url(#colorOutcome)"
-                  name="Outcome"
+                  name={t('dashboard.monthlyExpenses')}
                 />
               </AreaChart>
             </ResponsiveContainer>
@@ -558,42 +509,54 @@ const Dashboard = () => {
             : 'bg-white border-gray-200'
         } border rounded-xl p-6`}
       >
-        <h3 className="text-xl font-semibold mb-6">Recent Transactions</h3>
+        <h3 className="text-xl font-semibold mb-6">{t('dashboard.recentTransactions')}</h3>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-sm border-b ${
                 isDark ? 'border-gray-800' : 'border-gray-200'
               }`}>
-                <th className="text-left pb-4">Type</th>
-                <th className="text-left pb-4">Amount</th>
-                <th className="text-left pb-4">Status</th>
-                <th className="text-left pb-4">Date</th>
+                <th className={`${i18n.language === 'ar' ? 'text-right' : 'text-left'} pb-4`}>{t('history.type')}</th>
+                <th className={`${i18n.language === 'ar' ? 'text-right' : 'text-left'} pb-4`}>{t('history.amount')}</th>
+                <th className={`${i18n.language === 'ar' ? 'text-right' : 'text-left'} pb-4`}>{t('history.status')}</th>
+                <th className={`${i18n.language === 'ar' ? 'text-right' : 'text-left'} pb-4`}>{t('history.date')}</th>
               </tr>
             </thead>
             <tbody>
-              {(isUnverified ? dummyTransactions : transactions.slice(0, 5)).map((tx, index) => (
-                <tr key={index} className={`border-b ${
-                  isDark ? 'border-gray-800/50' : 'border-gray-200/50'
-                }`}>
-                  <td className="py-4">{tx.type || tx.type}</td>
-                  <td className={`py-4 ${
-                    (tx.amount || '').toString().startsWith('+') ? 'text-green-400' : 'text-red-400'
-                  }`}>{tx.amount || (tx.type === 'received' ? '+' : '-') + tx.amount + ' ' + tx.currency}</td>
-                  <td className="py-4">
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      (tx.status === 'Completed' || tx.status === 'completed')
-                        ? 'bg-green-500/20 text-green-400'
-                        : 'bg-yellow-500/20 text-yellow-400'
-                    }`}>
-                      {tx.status || tx.status}
-                    </span>
-                  </td>
-                  <td className={`py-4 ${
-                    isDark ? 'text-gray-400' : 'text-gray-600'
-                  }`}>{tx.date || new Date(tx.createdAt).toLocaleString()}</td>
-                </tr>
-              ))}
+              {(showKycOverlay ? mockTransactions : transactions.slice(0, 5)).map((tx, index) => {
+                // Format transaction type
+                const formattedType = `${t(`history.${tx.type}`)}${tx.subtype ? ' - ' + t(`wallet.${tx.subtype}`) : ''}`;
+
+                // Format amount with proper sign
+                const amount = tx.amount || 0;
+                const formattedAmount = `${amount > 0 ? '+' : ''}${amount} ${tx.currency || 'TND'}`;
+
+                // Format status
+                const status = tx.status?.toLowerCase() || 'pending';
+                const formattedStatus = t(`status.${status}`);
+
+                // Format date
+                const formattedDate = tx.date || new Date(tx.createdAt).toLocaleString();
+
+                return (
+                  <tr key={index} className={`border-b ${
+                    isDark ? 'border-gray-800/50' : 'border-gray-200/50'
+                  }`}>
+                    <td className={`py-4 ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>{formattedType}</td>
+                    <td className={`py-4 ${amount > 0 ? 'text-green-400' : 'text-red-400'} ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>{formattedAmount}</td>
+                    <td className={`py-4 ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        status === 'completed'
+                          ? 'bg-green-500/20 text-green-400'
+                          : 'bg-yellow-500/20 text-yellow-400'
+                      }`}>
+                        {formattedStatus}
+                      </span>
+                    </td>
+                    <td className={`py-4 ${isDark ? 'text-gray-400' : 'text-gray-600'} ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>{formattedDate}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

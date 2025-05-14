@@ -1,27 +1,47 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: '',  // Remove the /api prefix since it's handled by the proxy
-    withCredentials: true,
-    timeout: 30000, // 30 seconds timeout
+    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000',
+    timeout: 60000, // Increase timeout to 60 seconds for large file uploads
     maxContentLength: 50 * 1024 * 1024, // 50MB
-    maxBodyLength: 50 * 1024 * 1024 // 50MB
+    maxBodyLength: 50 * 1024 * 1024, // 50MB
+    withCredentials: true // Enable credentials
 });
 
 // Request interceptor
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem('token');
+        // Check both localStorage and sessionStorage for token
+        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
+            console.log('Adding token to request:', {
+                url: config.url,
+                method: config.method,
+                hasToken: !!token
+            });
+        } else {
+            console.log('No token found for request:', {
+                url: config.url,
+                method: config.method
+            });
         }
         // Don't set Content-Type for FormData, let the browser set it with the boundary
         if (!(config.data instanceof FormData)) {
             config.headers['Content-Type'] = 'application/json';
         }
+
+        // Add retry logic for network errors
+        config.retry = 3;
+        config.retryDelay = 1000;
+
         return config;
     },
     (error) => {
+        console.error('Request interceptor error:', {
+            error: error.message,
+            config: error.config
+        });
         return Promise.reject(error);
     }
 );
@@ -29,10 +49,51 @@ api.interceptors.request.use(
 // Response interceptor
 api.interceptors.response.use(
     (response) => response,
-    (error) => {
+    async (error) => {
+        const config = error.config;
+
+        // If there's no config or we've already retried, reject
+        if (!config || !config.retry) {
+            return Promise.reject(error);
+        }
+
+        // Set retry count
+        config.retryCount = config.retryCount || 0;
+
+        // Check if we should retry
+        if (config.retryCount < config.retry) {
+            config.retryCount += 1;
+
+            // Create new promise with exponential backoff
+            const backoff = new Promise(resolve => {
+                setTimeout(() => {
+                    resolve();
+                }, config.retryDelay * config.retryCount);
+            });
+
+            // Wait for backoff and retry
+            await backoff;
+            return api(config);
+        }
+
+        // Log error details
+        console.error('API Error:', {
+            url: error.config?.url,
+            method: error.config?.method,
+            status: error.response?.status,
+            data: error.response?.data,
+            message: error.message,
+            headers: error.config?.headers
+        });
+
         if (error.response?.status === 401) {
-            localStorage.removeItem('token');
-            window.location.href = '/login';
+            // Only clear token and redirect if it's not a login attempt
+            if (!error.config.url.includes('/api/auth/login')) {
+                console.log('Clearing tokens due to 401 error');
+                localStorage.removeItem('token');
+                sessionStorage.removeItem('token');
+                window.location.href = '/login';
+            }
         }
         return Promise.reject(error);
     }

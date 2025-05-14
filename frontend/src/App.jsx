@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation, Outlet } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { useAuth } from './contexts/AuthContext'
 import { useTranslation } from 'react-i18next'
@@ -10,7 +10,8 @@ import ErrorBoundary from './components/ErrorBoundary'
 import { AuthProvider } from './contexts/AuthContext'
 import { NotificationProvider } from './contexts/NotificationContext'
 import { ThemeProvider } from './contexts/ThemeContext'
-import PrivateRoute from './components/auth/PrivateRoute'
+import { TransactionProvider } from './contexts/TransactionContext'
+import PrivateRoute, { AdminRoute } from './components/auth/PrivateRoute'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import EmailVerification from './components/auth/EmailVerification'
@@ -22,6 +23,12 @@ import NotFound from './pages/NotFound'
 import Landing from './pages/Landing'
 import LoadingSpinner from './assets/animations/LoadingSpinner'
 import Support from './pages/Support'
+import Admin from './admin/Admin'
+import AdminUsers from './admin/Users'
+import AdminSupport from './admin/Support'
+import AdminSettings from './admin/Settings'
+import AdminKYC from './admin/KYC'
+import UserProfile from './admin/UserProfile'
 
 // Layouts
 import AuthLayout from './layouts/AuthLayout'
@@ -30,9 +37,7 @@ import DashboardLayout from './layouts/DashboardLayout'
 // Pages
 import Wallet from './pages/Wallet'
 import Transfer from './pages/Transfer'
-import Crypto from './pages/Crypto'
 import History from './pages/History'
-import AdminDashboard from './pages/AdminDashboard'
 import BankTransfer from './pages/BankTransfer'
 
 const AppContent = () => {
@@ -101,7 +106,7 @@ const AppContent = () => {
   // Auth route component (redirects to dashboard if already logged in)
   const AuthRoute = ({ children }) => {
     if (currentUser) {
-      return <Navigate to="/dashboard" replace />
+      return <Navigate to={currentUser.role === 'admin' ? '/admin' : '/dashboard'} replace />
     }
     return children
   }
@@ -136,11 +141,12 @@ const AppContent = () => {
                 </AuthRoute>
               } 
             />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="forgot-password" element={<ForgotPassword />} />
           </Route>
 
           {/* Standalone verify-email route (no AuthLayout) */}
           <Route path="verify-email" element={<EmailVerification />} />
+          <Route path="reset-password" element={<ForgotPassword />} />
 
           {/* Dashboard Routes */}
           <Route 
@@ -153,13 +159,27 @@ const AppContent = () => {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="wallet" element={<Wallet />} />
             <Route path="transfer" element={<Transfer />} />
-            <Route path="crypto" element={<Crypto />} />
             <Route path="history" element={<History />} />
             <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<Settings />} />
-            <Route path="admin" element={<AdminDashboard />} />
-            <Route path="bank-transfer" element={<BankTransfer />} />
             <Route path="support" element={<Support />} />
+            <Route path="bank-transfer" element={<BankTransfer />} />
+          </Route>
+
+          {/* Admin Routes - Separated from Dashboard Routes */}
+          <Route 
+            element={
+              <AdminRoute>
+                <DashboardLayout />
+              </AdminRoute>
+            }
+          >
+            <Route path="admin" element={<Admin />} />
+            <Route path="admin/users" element={<AdminUsers />} />
+            <Route path="admin/users/:id" element={<UserProfile />} />
+            <Route path="admin/support" element={<AdminSupport />} />
+            <Route path="admin/settings" element={<AdminSettings />} />
+            <Route path="admin/kyc" element={<AdminKYC />} />
           </Route>
 
           {/* Not Found */}
@@ -187,7 +207,9 @@ function App() {
     <ThemeProvider>
       <AuthProvider>
         <NotificationProvider>
-          <AppContent />
+          <TransactionProvider>
+            <AppContent />
+          </TransactionProvider>
         </NotificationProvider>
       </AuthProvider>
     </ThemeProvider>

@@ -68,11 +68,25 @@ const Login = () => {
     try {
       setLoading(true)
       setError('')
-      await login(email, password, rememberMe)
+      const user = await login(email, password, rememberMe)
 
-      // If login was triggered from a protected route, redirect back there
-      const from = location.state?.from?.pathname || '/dashboard'
-      navigate(from, { replace: true })
+      // Check if email is verified
+      if (!user.emailVerified) {
+        // Store email for verification and redirect
+        localStorage.setItem('pendingVerificationEmail', email)
+        localStorage.setItem('verificationFromLogin', 'true')
+        navigate('/verify-email')
+        return
+      }
+
+      // Redirect based on user role
+      if (user.role === 'admin') {
+        navigate('/admin', { replace: true })
+      } else {
+        // If login was triggered from a protected route, redirect back there
+        const from = location.state?.from?.pathname || '/dashboard'
+        navigate(from, { replace: true })
+      }
     } catch (error) {
       setError('Failed to sign in. Please check your credentials.')
     } finally {

@@ -14,6 +14,7 @@ const EmailVerification = () => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
     const [email, setEmail] = useState('');
+    const [isFromLogin, setIsFromLogin] = useState(false);
     const navigate = useNavigate();
 
     const { verifyEmail, resendVerificationCode } = useAuth();
@@ -23,12 +24,14 @@ const EmailVerification = () => {
     useEffect(() => {
         // Get email from localStorage
         const pendingEmail = localStorage.getItem('pendingVerificationEmail');
+        const fromLogin = localStorage.getItem('verificationFromLogin');
         if (!pendingEmail) {
             toast.error('No pending verification found');
             navigate('/register');
             return;
         }
         setEmail(pendingEmail);
+        setIsFromLogin(fromLogin === 'true');
     }, [navigate]);
 
     useEffect(() => {
@@ -220,13 +223,19 @@ const EmailVerification = () => {
                         <button
                             type="button"
                             onClick={() => {
-                                localStorage.setItem('restoreRegisterForm', '1');
-                                navigate('/register');
+                                localStorage.removeItem('pendingVerificationEmail');
+                                localStorage.removeItem('verificationFromLogin');
+                                if (isFromLogin) {
+                                    navigate('/login');
+                                } else {
+                                    localStorage.setItem('restoreRegisterForm', '1');
+                                    navigate('/register');
+                                }
                             }}
                             className="text-sm text-gray-400 hover:text-gray-300 flex items-center gap-1"
                         >
                             <RiArrowLeftLine className="w-4 h-4 mr-1" />
-                            Back to Register
+                            {isFromLogin ? 'Back to Login' : 'Back to Register'}
                         </button>
                     </div>
                 </div>

@@ -1,13 +1,16 @@
-import React, { useState, useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useCallback, useEffect } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Mail, ArrowRight, CheckCircle, AlertTriangle, RefreshCw, Eye, EyeOff, KeyRound, Sparkles } from 'lucide-react';
 import Logo from '../../components/ui/Logo';
 import api from '../../lib/axios';
+import NotFound from '../NotFound';
 
-const RequestResetPassword = () => {
+const ForgotPassword = () => {
   const navigate = useNavigate();
-  const [step, setStep] = useState('email'); // email, code, newPassword, success
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get('token');
+  const [step, setStep] = useState(token ? 'newPassword' : 'email'); // jump to newPassword if token
   const [email, setEmail] = useState('');
   const [code, setCode] = useState(['', '', '', '', '', '']);
   const [newPassword, setNewPassword] = useState('');
@@ -17,9 +20,32 @@ const RequestResetPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState(0);
+  const [tokenValid, setTokenValid] = useState(null); // null = not checked yet, true = valid, false = invalid
 
   // For demo purposes
   const DEMO_CODE = '123456';
+
+  // If token is present, validate it
+  useEffect(() => {
+    if (token) {
+      // Validate token with backend
+      (async () => {
+        try {
+          setIsLoading(true);
+          const { data } = await api.post('/api/auth/validate-reset-token', { token });
+          setTokenValid(!!data.valid);
+          if (data.valid && data.email) {
+            setEmail(data.email);
+          }
+        } catch (err) {
+          setTokenValid(false);
+        } finally {
+          setIsLoading(false);
+        }
+      })();
+      setStep('newPassword');
+    }
+  }, [token]);
 
   const calculatePasswordStrength = useCallback((password) => {
     let strength = 0;
@@ -153,13 +179,14 @@ const RequestResetPassword = () => {
     setError('');
 
     try {
-      const { data } = await api.post('/api/auth/reset-password', { 
-        email,
-        code: code.join(''),
-        newPassword
-      });
+      let payload;
+      if (token) {
+        payload = { token, newPassword };
+      } else {
+        payload = { email, code: code.join(''), newPassword };
+      }
+      const { data } = await api.post('/api/auth/reset-password', payload);
       setStep('success');
-      // Redirect to login after showing success
       setTimeout(() => {
         navigate('/login');
       }, 2000);
@@ -221,6 +248,18 @@ const RequestResetPassword = () => {
         return '';
     }
   };
+
+  if (token && tokenValid === false) {
+    return <NotFound />;
+  }
+  if (token && tokenValid === null) {
+    // Still loading/validating
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white text-xl">
+        Validating reset link...
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 to-gray-900 flex items-center justify-center p-4">
@@ -505,4 +544,4 @@ const RequestResetPassword = () => {
   );
 };
 
-export default RequestResetPassword;
+export default ForgotPassword;

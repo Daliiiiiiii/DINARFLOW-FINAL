@@ -19,9 +19,12 @@ import Button from '../components/ui/Button'
 import { typography } from '../styles/typography'
 import { useTranslation } from 'react-i18next'
 import ActionLoader from '../assets/animations/ActionLoader'
+import KYCOverlay from '../layouts/KYCOverlay'
+import { useAuth } from '../contexts/AuthContext'
 
 const History = () => {
   const { transactions = [], loading, getFilteredTransactions } = useTransactions()
+  const { userProfile } = useAuth()
   const [filters, setFilters] = useState({
     type: '',
     subtype: '',
@@ -33,6 +36,11 @@ const History = () => {
   const [showFilters, setShowFilters] = useState(false)
   const [sortOrder, setSortOrder] = useState('desc')
   const { t, i18n } = useTranslation()
+  
+  // Show KYCOverlay if user is not verified
+  const showKycOverlay = userProfile && userProfile.kyc?.status !== 'verified';
+  const kycStatus = userProfile?.kyc?.status || 'unverified';
+  const rejectionReason = userProfile?.kyc?.verificationNotes || '';
   
   // Apply filters to get filtered transactions
   const filteredTransactions = loading ? [] : getFilteredTransactions(filters)
@@ -66,12 +74,18 @@ const History = () => {
   return (
     <>
       <ActionLoader isLoading={loading} />
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
-      className="space-y-6"
-    >
+      {showKycOverlay && (
+        <KYCOverlay 
+          status={kycStatus}
+          rejectionReason={rejectionReason}
+        />
+      )}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        className="space-y-6"
+      >
       {/* Header Section */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center">
@@ -200,7 +214,7 @@ const History = () => {
                     >
                       <option value="">{t('history.allTypes')}</option>
                       <option value="transfer">{t('history.transfer')}</option>
-                      <option value="crypto">{t('history.crypto')}</option>
+                      <option value="bank">{t('history.bank')}</option>
                     </select>
                   </div>
 

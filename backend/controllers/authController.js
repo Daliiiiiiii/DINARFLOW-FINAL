@@ -6,9 +6,15 @@ import sendEmail from '../utils/email.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import crypto from 'crypto';
+import { NotificationService } from '../services/notificationService.js';
+import { UAParser } from 'ua-parser-js';
+import axios from 'axios';
+import { format } from 'date-fns';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const notificationService = new NotificationService();
 
 const generateVerificationCode = () => {
     return Math.floor(100000 + Math.random() * 900000).toString();
@@ -40,7 +46,7 @@ const register = async (req, res) => {
                 existingUser.verificationTokenExpires = verificationTokenExpires;
                 await existingUser.save();
                 try {
-                    const verificationLink = `http://localhost:5173/verify-email?token=${verificationToken}`;
+                    const verificationLink = `http://localhost:5174/verify-email?token=${verificationToken}`;
                     await sendEmail({
                         to: email,
                         subject: 'Verify Your Email Address',
@@ -96,7 +102,7 @@ const register = async (req, res) => {
         // Send verification email
         try {
             console.log('Attempting to send verification email to:', email);
-            const verificationLink = `http://localhost:5173/verify-email?token=${verificationToken}`;
+            const verificationLink = `http://localhost:5174/verify-email?token=${verificationToken}`;
 
             await sendEmail({
                 to: email,
@@ -176,16 +182,13 @@ const verifyEmail = async (req, res) => {
             user: {
                 id: user._id,
                 email: user.email,
-                displayName: user.displayName,
                 firstName: user.firstName,
                 lastName: user.lastName,
-                phoneNumber: user.phoneNumber,
+                displayName: user.displayName,
+                profilePicture: user.profilePicture,
                 walletBalance: user.walletBalance,
-                cryptoBalance: user.cryptoBalance,
-                kycVerified: user.kycVerified,
-                kycStatus: user.kycStatus,
-                emailVerified: user.emailVerified,
-                profilePicture: user.profilePicture
+                isVerified: user.kycStatus === 'verified',
+                emailVerified: user.emailVerified
             }
         });
     } catch (error) {
@@ -211,9 +214,102 @@ const login = async (req, res) => {
         // Check password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
+            // Increment login attempts
+            user.loginAttempts += 1;
+            if (user.loginAttempts >= 5) {
+                user.lockUntil = new Date(Date.now() + 15 * 60 * 1000); // Lock for 15 minutes
+                await user.save();
+
+                // Send security alert for account lockout
+                await notificationService.notifySecurityAlert(
+                    user._id,
+                    'account_locked',
+                    {
+                        attempts: user.loginAttempts,
+                        lockUntil: user.lockUntil,
+                        ip: req.ip,
+                        userAgent: req.headers['user-agent']
+                    }
+                );
+
+                return res.status(401).json({
+                    message: 'Account locked due to multiple failed attempts. Please try again in 15 minutes.'
+                });
+            }
+            await user.save();
             return res.status(401).json({
                 message: 'Invalid credentials'
             });
+        }
+
+        // Reset login attempts on successful login
+        user.loginAttempts = 0;
+        user.lockUntil = undefined;
+        user.lastLogin = new Date();
+        await user.save();
+
+        // --- DYNAMIC SECURITY DATA ---
+        const userAgent = req.headers['user-agent'] || 'Unknown Device';
+        const parser = new UAParser(userAgent);
+        const browser = parser.getBrowser();
+        const os = parser.getOS();
+        const device = `${browser.name || 'Unknown Browser'} ${browser.version || ''} on ${os.name || 'Unknown OS'} ${os.version || ''}`.trim();
+        let ip = req.headers['x-forwarded-for']?.split(',')[0] || req.ip || '127.0.0.1';
+        if (ip.startsWith('::ffff:')) ip = ip.replace('::ffff:', '');
+        if (ip === '::1') ip = '127.0.0.1';
+        let location = 'Unknown';
+        try {
+            const geo = await axios.get(`http://ip-api.com/json/${ip}`);
+            if (geo.data && geo.data.status === 'success') {
+                location = `${geo.data.city || ''}, ${geo.data.country || ''}`.replace(/^, /, '');
+            }
+        } catch (e) { }
+        const timestamp = format(new Date(), 'PPpp');
+        // --- END DYNAMIC SECURITY DATA ---
+
+        // Send security alert for successful login
+        await notificationService.notifySecurityAlert(
+            user._id,
+            'login_success',
+            {
+                device,
+                ip,
+                location,
+                timestamp,
+                userAgent,
+                secureAccountUrl: 'https://dinarflow.com/security',
+                learnMoreUrl: 'https://dinarflow.com/security/learn-more',
+                supportUrl: 'https://dinarflow.com/support',
+                privacyUrl: 'https://dinarflow.com/privacy',
+                termsUrl: 'https://dinarflow.com/terms',
+                currentYear: new Date().getFullYear()
+            }
+        );
+
+        // If email is not verified, resend verification code
+        if (!user.emailVerified) {
+            const verificationCode = generateVerificationCode();
+            user.verificationCode = verificationCode;
+            user.verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+            await user.save();
+
+            try {
+                const verificationLink = `http://localhost:5174/verify-email?token=${user.verificationToken}`;
+                await sendEmail({
+                    to: user.email,
+                    subject: 'Verify Your Email Address',
+                    html: path.join('templates', 'verification-email.html'),
+                    context: {
+                        displayName: user.displayName,
+                        verificationCode,
+                        verificationLink,
+                        email: user.email,
+                        currentYear: new Date().getFullYear()
+                    }
+                });
+            } catch (emailError) {
+                console.error('Error sending verification email:', emailError);
+            }
         }
 
         // Generate token with appropriate expiration
@@ -227,74 +323,141 @@ const login = async (req, res) => {
         res.json({
             token,
             user: {
-                id: user._id,
+                _id: user._id,
                 email: user.email,
                 displayName: user.displayName,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                phoneNumber: user.phoneNumber,
-                walletBalance: user.walletBalance,
-                cryptoBalance: user.cryptoBalance,
-                kycVerified: user.kycVerified,
-                kycStatus: user.kycStatus,
-                profilePicture: user.profilePicture
+                role: user.role,
+                emailVerified: user.emailVerified,
+                twoFactorEnabled: user.twoFactorEnabled
             }
         });
     } catch (error) {
         console.error('Login error:', error);
-        res.status(500).json({ message: 'Server error during login' });
+        res.status(500).json({ message: 'Internal server error' });
     }
 };
 
 const updatePassword = async (req, res) => {
     try {
         const { currentPassword, newPassword } = req.body;
-        const userId = req.user.id;
+        const user = await User.findById(req.user._id).select('+password');
 
-        // Validate request
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({
-                message: errors.array()[0].msg
-            });
-        }
-
-        // Get user from database
-        const user = await User.findById(userId).select('+password');
-        if (!user) {
-            return res.status(400).json({
-                message: 'Unable to find your account. Please try again.'
-            });
-        }
-
-        // Check if current password matches
+        // Verify current password
         const isMatch = await bcrypt.compare(currentPassword, user.password);
         if (!isMatch) {
-            return res.status(400).json({
-                message: 'Current password is incorrect'
-            });
+            return res.status(401).json({ message: 'Current password is incorrect' });
         }
 
-        // Check if new password is same as current password
+        // Check if new password is same as current
         const isSamePassword = await bcrypt.compare(newPassword, user.password);
         if (isSamePassword) {
-            return res.status(400).json({
-                message: 'New password must be different from your current password'
-            });
+            return res.status(400).json({ message: 'New password must be different from current password' });
         }
 
+        // Hash new password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword, salt);
+
         // Update password
-        user.password = newPassword; // The model middleware will hash it
+        user.password = hashedPassword;
+        user.lastPasswordChange = new Date();
         await user.save();
 
-        res.status(200).json({
-            message: 'Your password has been successfully updated!'
+        // --- DYNAMIC SECURITY DATA ---
+        const userAgent = req.headers['user-agent'] || 'Unknown Device';
+        const parser = new UAParser(userAgent);
+        const browser = parser.getBrowser();
+        const os = parser.getOS();
+        const device = `${browser.name || 'Unknown Browser'} ${browser.version || ''} on ${os.name || 'Unknown OS'} ${os.version || ''}`.trim();
+        let ip = req.headers['x-forwarded-for']?.split(',')[0] || req.ip || '127.0.0.1';
+        if (ip.startsWith('::ffff:')) ip = ip.replace('::ffff:', '');
+        if (ip === '::1') ip = '127.0.0.1';
+        let location = 'Unknown';
+        try {
+            const geo = await axios.get(`http://ip-api.com/json/${ip}`);
+            if (geo.data && geo.data.status === 'success') {
+                location = `${geo.data.city || ''}, ${geo.data.country || ''}`.replace(/^, /, '');
+            }
+        } catch (e) { }
+        const timestamp = format(new Date(), 'PPpp');
+        // --- END DYNAMIC SECURITY DATA ---
+        // Send security alert for password change
+        await notificationService.notifySecurityAlert(
+            user._id,
+            'password_changed',
+            {
+                device,
+                ip,
+                location,
+                timestamp,
+                userAgent,
+                secureAccountUrl: 'https://dinarflow.com/security',
+                learnMoreUrl: 'https://dinarflow.com/security/learn-more',
+                supportUrl: 'https://dinarflow.com/support',
+                privacyUrl: 'https://dinarflow.com/privacy',
+                termsUrl: 'https://dinarflow.com/terms',
+                currentYear: new Date().getFullYear()
+            }
+        );
+        res.json({ message: 'Password updated successfully' });
+    } catch (error) {
+        console.error('Update password error:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+const toggleTwoFactor = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        const newStatus = !user.twoFactorEnabled;
+
+        user.twoFactorEnabled = newStatus;
+        await user.save();
+
+        // --- DYNAMIC SECURITY DATA ---
+        const userAgent = req.headers['user-agent'] || 'Unknown Device';
+        const parser = new UAParser(userAgent);
+        const browser = parser.getBrowser();
+        const os = parser.getOS();
+        const device = `${browser.name || 'Unknown Browser'} ${browser.version || ''} on ${os.name || 'Unknown OS'} ${os.version || ''}`.trim();
+        let ip = req.headers['x-forwarded-for']?.split(',')[0] || req.ip || '127.0.0.1';
+        if (ip.startsWith('::ffff:')) ip = ip.replace('::ffff:', '');
+        if (ip === '::1') ip = '127.0.0.1';
+        let location = 'Unknown';
+        try {
+            const geo = await axios.get(`http://ip-api.com/json/${ip}`);
+            if (geo.data && geo.data.status === 'success') {
+                location = `${geo.data.city || ''}, ${geo.data.country || ''}`.replace(/^, /, '');
+            }
+        } catch (e) { }
+        const timestamp = format(new Date(), 'PPpp');
+        // --- END DYNAMIC SECURITY DATA ---
+        // Send security alert for 2FA change
+        await notificationService.notifySecurityAlert(
+            user._id,
+            '2fa_changed',
+            {
+                enabled: newStatus,
+                device,
+                ip,
+                location,
+                timestamp,
+                userAgent,
+                secureAccountUrl: 'https://dinarflow.com/security',
+                learnMoreUrl: 'https://dinarflow.com/security/learn-more',
+                supportUrl: 'https://dinarflow.com/support',
+                privacyUrl: 'https://dinarflow.com/privacy',
+                termsUrl: 'https://dinarflow.com/terms',
+                currentYear: new Date().getFullYear()
+            }
+        );
+        res.json({
+            message: `Two-factor authentication ${newStatus ? 'enabled' : 'disabled'} successfully`,
+            twoFactorEnabled: newStatus
         });
     } catch (error) {
-        console.error('Error updating password:', error);
-        res.status(500).json({
-            message: 'An error occurred while updating your password. Please try again.'
-        });
+        console.error('Toggle 2FA error:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 };
 
@@ -317,7 +480,7 @@ const resendVerification = async (req, res) => {
         user.verificationTokenExpires = verificationTokenExpires;
         await user.save();
         try {
-            const verificationLink = `http://localhost:5173/verify-email?token=${verificationToken}`;
+            const verificationLink = `http://localhost:5174/verify-email?token=${verificationToken}`;
             await sendEmail({
                 to: email,
                 subject: 'Verify Your Email Address',
@@ -364,7 +527,7 @@ const forgotPassword = async (req, res) => {
         await user.save();
 
         // Send reset email
-        const resetLink = `http://localhost:5173/reset-password?token=${resetToken}`;
+        const resetLink = `${process.env.FRONTEND_URL || 'http://localhost:5174'}/reset-password?token=${resetToken}`;
         await sendEmail({
             to: email,
             subject: 'Password Reset Instructions',
@@ -466,6 +629,35 @@ const resetPassword = async (req, res) => {
     }
 };
 
+const validateResetToken = async (req, res) => {
+    try {
+        const { token } = req.body;
+
+        const user = await User.findOne({
+            resetToken: token,
+            resetTokenExpires: { $gt: Date.now() }
+        });
+
+        if (!user) {
+            return res.status(400).json({
+                valid: false,
+                message: 'Invalid or expired reset token'
+            });
+        }
+
+        res.json({
+            valid: true,
+            email: user.email
+        });
+    } catch (error) {
+        console.error('Token validation error:', error);
+        res.status(500).json({
+            valid: false,
+            message: 'Error validating reset token'
+        });
+    }
+};
+
 const authController = {
     register,
     login,
@@ -474,7 +666,9 @@ const authController = {
     resendVerification,
     forgotPassword,
     verifyResetCode,
-    resetPassword
+    resetPassword,
+    toggleTwoFactor,
+    validateResetToken
 };
 
 export default authController; 

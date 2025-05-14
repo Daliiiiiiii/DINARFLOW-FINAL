@@ -9,10 +9,12 @@ class WebSocketService {
             cors: {
                 origin: process.env.NODE_ENV === 'production'
                     ? process.env.FRONTEND_URL
-                    : 'http://localhost:5173',
+                    : ['http://localhost:5174', 'http://localhost:5173'],
                 methods: ['GET', 'POST'],
                 credentials: true
-            }
+            },
+            pingTimeout: 60000,
+            pingInterval: 25000
         });
 
         this.initialize();
@@ -23,6 +25,7 @@ class WebSocketService {
             try {
                 const token = socket.handshake.auth.token;
                 if (!token) {
+                    console.log('No token provided for WebSocket connection');
                     return next(new Error('Authentication error'));
                 }
 
@@ -30,36 +33,78 @@ class WebSocketService {
                 const user = await User.findById(decoded.userId);
 
                 if (!user) {
+                    console.log('User not found for WebSocket connection:', decoded.userId);
                     return next(new Error('User not found'));
                 }
 
                 socket.user = user;
+                console.log('WebSocket authentication successful for user:', user.email);
                 next();
             } catch (error) {
+                console.error('WebSocket authentication error:', error.message);
                 next(new Error('Authentication error'));
             }
         });
 
-        this.io.on('connection', (socket) => {
-            console.log(`User connected: ${socket.user.email}`);
+        this.io.on('connection', async (socket) => {
+            try {
+                console.log(`User connected: ${socket.user.email}`);
 
-            // Join user's room
-            socket.join(`user:${socket.user._id}`);
+                // Update user's online status
+                await User.findByIdAndUpdate(socket.user._id, {
+                    isOnline: true,
+                    lastSeen: new Date()
+                }, { new: true }).exec();
 
-            // Handle transaction updates
-            socket.on('transaction:update', (data) => {
-                this.emitToUser(socket.user._id, 'transaction:updated', data);
-            });
+                // Join user's room
+                socket.join(`user:${socket.user._id}`);
 
-            // Handle balance updates
-            socket.on('balance:update', (data) => {
-                this.emitToUser(socket.user._id, 'balance:updated', data);
-            });
+                // If user is admin, join admin room
+                if (['admin', 'superadmin'].includes(socket.user.role)) {
+                    socket.join('admin');
+                }
 
-            // Handle disconnect
-            socket.on('disconnect', () => {
-                console.log(`User disconnected: ${socket.user.email}`);
-            });
+                // Notify admins about user's online status
+                this.io.to('admin').emit('user:status', {
+                    userId: socket.user._id,
+                    isOnline: true,
+                    lastSeen: new Date()
+                });
+
+                // Handle transaction updates
+                socket.on('transaction:update', (data) => {
+                    this.emitToUser(socket.user._id, 'transaction:updated', data);
+                });
+
+                // Handle balance updates
+                socket.on('balance:update', (data) => {
+                    this.emitToUser(socket.user._id, 'balance:updated', data);
+                });
+
+                // Handle disconnect
+                socket.on('disconnect', async (reason) => {
+                    console.log(`User disconnected: ${socket.user.email}, reason: ${reason}`);
+
+                    try {
+                        // Update user's online status
+                        await User.findByIdAndUpdate(socket.user._id, {
+                            isOnline: false,
+                            lastSeen: new Date()
+                        }, { new: true }).exec();
+
+                        // Notify admins about user's offline status
+                        this.io.to('admin').emit('user:status', {
+                            userId: socket.user._id,
+                            isOnline: false,
+                            lastSeen: new Date()
+                        });
+                    } catch (error) {
+                        console.error('Error updating user status on disconnect:', error);
+                    }
+                });
+            } catch (error) {
+                console.error('Error in WebSocket connection handler:', error);
+            }
         });
     }
 

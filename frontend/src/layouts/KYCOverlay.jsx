@@ -18,15 +18,9 @@ const KYCOverlay = ({ className = '', status = 'unverified', rejectionReason = '
 
   const handleKycSubmit = async (formData) => {
     try {
-      await startKycVerification(formData, {
-        frontId: formData.frontId,
-        backId: formData.backId,
-        selfieWithId: formData.selfieWithId
-      });
-      setShowKycForm(false);
-      toast.success('KYC submitted successfully!');
+      await startKycVerification(formData);
     } catch (error) {
-      toast.error(error.message || 'Failed to submit KYC');
+      // Remove duplicate toast since it's handled in KYCForm
     }
   };
 

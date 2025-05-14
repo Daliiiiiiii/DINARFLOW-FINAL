@@ -21,6 +21,8 @@ import kycRoutes from './routes/kyc.js';
 import notificationRoutes from './routes/notifications.js';
 import fileRoutes from './routes/files.js';
 import bankAccountRoutes from './routes/bankAccounts.js';
+import adminRoutes from './routes/admin.js';
+import testRoutes from './routes/test.js';
 
 dotenv.config();
 
@@ -46,6 +48,9 @@ const server = createServer(app);
 
 // Initialize WebSocket
 const wsService = new WebSocketService(server);
+
+// Make WebSocket service available in routes
+app.set('wsService', wsService);
 
 // Security middleware
 app.use(helmet({
@@ -73,6 +78,7 @@ app.use(compression());
 // CORS configuration
 const allowedOrigins = [
   'http://localhost:5174',
+  'http://localhost:5173',
   process.env.FRONTEND_URL
 ].filter(Boolean);
 
@@ -87,7 +93,8 @@ app.use(cors({
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  exposedHeaders: ['Authorization'],
   maxAge: 86400 // 24 hours
 }));
 
@@ -115,6 +122,8 @@ app.use('/api/kyc', kycRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/files', fileRoutes);
 app.use('/api/bank-accounts', bankAccountRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/test', testRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
@@ -203,13 +212,16 @@ app.use((err, req, res, next) => {
   }
 
   // Default error response
-  return res.status(500).json({
-    error: process.env.NODE_ENV === 'development' ? err.message : 'Internal server error',
-    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
+  res.status(500).json({
+    error: 'Internal Server Error',
+    message: err.message
   });
 });
 
+// Start server
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
+  console.log(`Health check: http://localhost:${PORT}/health`);
+  console.log(`MongoDB test: http://localhost:${PORT}/test-mongodb`);
 });

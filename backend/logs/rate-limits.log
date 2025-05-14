@@ -2269,3 +2269,1697 @@
 	Metadata: {}
 2025-05-09T14:27:20.905Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
 	Metadata: {}
+2025-05-09T15:40:07.244Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T15:45:49.876Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T16:13:01.432Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T16:21:14.910Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T16:21:20.874Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T16:21:40.276Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T16:21:45.659Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T16:21:50.609Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T16:22:17.182Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T16:22:27.040Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T16:22:56.609Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T16:23:02.892Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T16:23:13.042Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T16:23:51.650Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T16:26:54.819Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T16:27:32.917Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T16:27:40.780Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T16:29:09.148Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T19:30:36.933Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T21:01:50.459Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T21:41:39.503Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-09T21:41:39.508Z [ERROR] RATE LIMIT: Multer error during KYC upload:
+	Metadata: {
+  "error": {
+    "name": "MulterError",
+    "message": "Unexpected field",
+    "code": "LIMIT_UNEXPECTED_FILE",
+    "field": "signature",
+    "storageErrors": []
+  }
+}
+2025-05-09T21:42:27.123Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T21:49:04.453Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T21:49:32.195Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T21:50:06.733Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T21:50:13.384Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T21:50:28.323Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T21:50:35.240Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T21:50:49.738Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T21:51:01.022Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T21:52:07.944Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T21:52:28.229Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T21:52:45.697Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-09T21:53:31.254Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T16:18:26.611Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T16:22:50.003Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T16:22:59.641Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T16:23:32.071Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T16:23:39.342Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T16:23:46.728Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T16:24:22.869Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T16:31:12.748Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T16:39:57.038Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T16:42:29.434Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T17:57:03.858Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T17:57:53.873Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T18:14:42.957Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T18:14:54.708Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T18:15:02.425Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T18:15:07.902Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T18:16:51.588Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T18:20:13.285Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T18:20:50.770Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T18:20:53.952Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T18:21:03.707Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T18:21:33.175Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T19:39:00.042Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T19:42:28.435Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:03:51.822Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:04:01.045Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:05:19.975Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-10T21:05:19.977Z [ERROR] RATE LIMIT: Multer error during KYC upload:
+	Metadata: {
+  "error": {
+    "name": "MulterError",
+    "message": "Unexpected field",
+    "code": "LIMIT_UNEXPECTED_FILE",
+    "field": "signature",
+    "storageErrors": []
+  }
+}
+2025-05-10T21:10:11.462Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:10:15.585Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:12:24.752Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-10T21:12:28.250Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:13:11.614Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:13:47.161Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-10T21:13:50.813Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:16:33.493Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:19:08.114Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:19:57.001Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:20:03.166Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:20:39.803Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:20:46.325Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:22:33.968Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-10T21:22:37.214Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:22:50.217Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:25:25.515Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-10T21:25:28.587Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:26:00.938Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:27:42.576Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-10T21:27:45.899Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:28:46.062Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:28:58.057Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:29:07.245Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:29:16.152Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:31:54.301Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:32:38.426Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-10T21:32:41.977Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:33:18.226Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:33:56.575Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:35:18.123Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:36:37.948Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:36:55.020Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-10T21:36:58.213Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:37:47.866Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:38:44.860Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-10T21:38:45.037Z [ERROR] RATE LIMIT: Image resolution too low
+	Metadata: {
+  "width": 451,
+  "height": 595,
+  "metadata": {
+    "userId": "681fc3c5d17e5a194f582a87",
+    "documentType": "backId",
+    "uploadDate": "2025-05-10T21:38:45.035Z"
+  }
+}
+2025-05-10T21:38:45.039Z [ERROR] RATE LIMIT: File storage error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:26:23)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:38)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:76:24"
+}
+2025-05-10T21:38:45.039Z [ERROR] RATE LIMIT: Error storing backId file: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:26:23)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:38)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:76:24"
+}
+2025-05-10T21:38:45.040Z [ERROR] RATE LIMIT: Error submitting KYC: Failed to store backId file: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Failed to store backId file: Image resolution too low. Minimum size is 800x600\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:76:24"
+}
+2025-05-10T21:38:45.040Z [ERROR] RATE LIMIT: Error processing KYC submission:
+	Metadata: {
+  "error": "Failed to store backId file: Image resolution too low. Minimum size is 800x600",
+  "stack": "Error: Failed to store backId file: Image resolution too low. Minimum size is 800x600\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:76:24",
+  "userId": "681fc3c5d17e5a194f582a87"
+}
+2025-05-10T21:38:45.042Z [ERROR] RATE LIMIT: Error during file cleanup: The "cb" argument must be of type function. Received undefined
+	Metadata: {
+  "code": "ERR_INVALID_ARG_TYPE",
+  "stack": "TypeError [ERR_INVALID_ARG_TYPE]: The \"cb\" argument must be of type function. Received undefined\n    at makeCallback (node:fs:186:3)\n    at Object.unlink (node:fs:1941:14)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:89:20\n    at Array.map (<anonymous>)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:88:47"
+}
+2025-05-10T21:38:48.253Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:39:42.057Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:41:19.745Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-10T21:41:23.295Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:42:42.745Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:42:52.919Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:43:05.625Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:44:16.609Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-10T21:44:19.934Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:44:30.700Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:45:14.121Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:49:50.990Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:49:51.404Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-10T21:49:54.522Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:51:31.085Z [INFO] RATE LIMIT: KYC submission request received
+	Metadata: {}
+2025-05-10T21:51:34.421Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:52:10.189Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:56:39.565Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T21:56:44.626Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:02:04.572Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:02:43.707Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:03:09.227Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:03:45.938Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:04:11.809Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:08:38.145Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:18:36.594Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:19:06.448Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:24:35.066Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:28:30.057Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:28:35.875Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:29:23.601Z [ERROR] RATE LIMIT: Error submitting KYC: Cannot read properties of undefined (reading 'frontId')
+	Metadata: {
+  "stack": "TypeError: Cannot read properties of undefined (reading 'frontId')\n    at file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:15:73\n    at Array.filter (<anonymous>)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:15:48)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:20:20"
+}
+2025-05-10T22:29:23.602Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681fcd8cbef2a6603d658c27"
+}
+2025-05-10T22:35:13.934Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:35:24.985Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:38:28.289Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:51:19.061Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "681fcd8cbef2a6603d658c27"
+}
+2025-05-10T22:51:21.619Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:51:48.676Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:52:00.858Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:53:35.407Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:54:03.507Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T22:54:32.605Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "681fcd8cbef2a6603d658c27",
+  "formDataKeys": [
+    "idType",
+    "idNumber",
+    "firstName",
+    "lastName",
+    "dateOfBirth",
+    "address",
+    "city",
+    "province",
+    "zipCode"
+  ],
+  "fileKeys": [
+    "frontId",
+    "backId",
+    "selfieWithId",
+    "signature"
+  ]
+}
+2025-05-10T22:54:32.648Z [INFO] RATE LIMIT: Storing file:
+	Metadata: {
+  "fileId": "50fd0736-b4ab-48e3-b856-286f6429c5e0",
+  "originalName": "Screenshot 2025-04-06 174605.png",
+  "mimetype": "image/png",
+  "size": 1000019,
+  "uploadDir": "C:\\Users\\Dali\\Downloads\\project\\backend\\uploads"
+}
+2025-05-10T22:54:32.693Z [INFO] RATE LIMIT: Storing file:
+	Metadata: {
+  "fileId": "41dec924-9348-4d09-8cb8-cfecbcbb3477",
+  "originalName": "Screenshot 2025-04-27 172659.png",
+  "mimetype": "image/png",
+  "size": 16831,
+  "uploadDir": "C:\\Users\\Dali\\Downloads\\project\\backend\\uploads"
+}
+2025-05-10T22:54:32.700Z [INFO] RATE LIMIT: Storing file:
+	Metadata: {
+  "fileId": "82bd11ff-a143-4133-86b6-b6b7ce0b49cf",
+  "originalName": "image (1).png",
+  "mimetype": "image/png",
+  "size": 34179,
+  "uploadDir": "C:\\Users\\Dali\\Downloads\\project\\backend\\uploads"
+}
+2025-05-10T22:54:32.715Z [INFO] RATE LIMIT: Storing file:
+	Metadata: {
+  "fileId": "c39885f7-a4ab-4335-a1cc-af67c5ad7d3f",
+  "originalName": "unknown.png",
+  "mimetype": "image/png",
+  "size": 937262,
+  "uploadDir": "C:\\Users\\Dali\\Downloads\\project\\backend\\uploads"
+}
+2025-05-10T22:54:32.884Z [ERROR] RATE LIMIT: Error creating audit trail: User validation failed: kyc.auditTrail.0.details: Cast to Map failed for value "KYC documents submitted for verification" (type string) at path "details" because of "TypeError"
+	Metadata: {
+  "errors": {
+    "kyc.auditTrail.0.details": {
+      "stringValue": "\"KYC documents submitted for verification\"",
+      "valueType": "string",
+      "kind": "Map",
+      "value": "KYC documents submitted for verification",
+      "path": "details",
+      "reason": {},
+      "name": "CastError",
+      "message": "Cast to Map failed for value \"KYC documents submitted for verification\" (type string) at path \"details\" because of \"TypeError\""
+    }
+  },
+  "_message": "User validation failed",
+  "stack": "ValidationError: User validation failed: kyc.auditTrail.0.details: Cast to Map failed for value \"KYC documents submitted for verification\" (type string) at path \"details\" because of \"TypeError\"\n    at Document.invalidate (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:3351:32)\n    at Subdocument.invalidate (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:229:12)\n    at EmbeddedDocument.$set (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:1486:12)\n    at EmbeddedDocument.$set (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:1132:16)\n    at EmbeddedDocument.Document (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:178:12)\n    at EmbeddedDocument.Subdocument (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:34:12)\n    at EmbeddedDocument.ArraySubdocument [as constructor] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\arraySubdocument.js:44:15)\n    at new EmbeddedDocument (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\schema\\documentArray.js:131:17)\n    at Proxy._cast (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\documentArray\\methods\\index.js:103:17)\n    at Proxy._mapCast (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\array\\methods\\index.js:263:17)"
+}
+2025-05-10T22:54:32.886Z [ERROR] RATE LIMIT: Error submitting KYC: User validation failed: kyc.auditTrail.0.details: Cast to Map failed for value "KYC documents submitted for verification" (type string) at path "details" because of "TypeError"
+	Metadata: {
+  "errors": {
+    "kyc.auditTrail.0.details": {
+      "stringValue": "\"KYC documents submitted for verification\"",
+      "valueType": "string",
+      "kind": "Map",
+      "value": "KYC documents submitted for verification",
+      "path": "details",
+      "reason": {},
+      "name": "CastError",
+      "message": "Cast to Map failed for value \"KYC documents submitted for verification\" (type string) at path \"details\" because of \"TypeError\""
+    }
+  },
+  "_message": "User validation failed",
+  "stack": "ValidationError: User validation failed: kyc.auditTrail.0.details: Cast to Map failed for value \"KYC documents submitted for verification\" (type string) at path \"details\" because of \"TypeError\"\n    at Document.invalidate (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:3351:32)\n    at Subdocument.invalidate (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:229:12)\n    at EmbeddedDocument.$set (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:1486:12)\n    at EmbeddedDocument.$set (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:1132:16)\n    at EmbeddedDocument.Document (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:178:12)\n    at EmbeddedDocument.Subdocument (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:34:12)\n    at EmbeddedDocument.ArraySubdocument [as constructor] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\arraySubdocument.js:44:15)\n    at new EmbeddedDocument (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\schema\\documentArray.js:131:17)\n    at Proxy._cast (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\documentArray\\methods\\index.js:103:17)\n    at Proxy._mapCast (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\array\\methods\\index.js:263:17)"
+}
+2025-05-10T22:54:32.887Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": "User validation failed: kyc.auditTrail.0.details: Cast to Map failed for value \"KYC documents submitted for verification\" (type string) at path \"details\" because of \"TypeError\"",
+  "stack": "ValidationError: User validation failed: kyc.auditTrail.0.details: Cast to Map failed for value \"KYC documents submitted for verification\" (type string) at path \"details\" because of \"TypeError\"\n    at Document.invalidate (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:3351:32)\n    at Subdocument.invalidate (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:229:12)\n    at EmbeddedDocument.$set (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:1486:12)\n    at EmbeddedDocument.$set (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:1132:16)\n    at EmbeddedDocument.Document (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:178:12)\n    at EmbeddedDocument.Subdocument (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:34:12)\n    at EmbeddedDocument.ArraySubdocument [as constructor] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\arraySubdocument.js:44:15)\n    at new EmbeddedDocument (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\schema\\documentArray.js:131:17)\n    at Proxy._cast (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\documentArray\\methods\\index.js:103:17)\n    at Proxy._mapCast (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\array\\methods\\index.js:263:17)",
+  "userId": "681fcd8cbef2a6603d658c27",
+  "formData": {
+    "idType": "national_id",
+    "idNumber": "45645654",
+    "firstName": "Mohamed Ali",
+    "lastName": "Faouel",
+    "dateOfBirth": "2007-05-05",
+    "address": "Al ouardanine 23 hay enozha, monastir 5010",
+    "city": "Sousse",
+    "province": "Monastir",
+    "zipCode": "5010"
+  },
+  "files": [
+    "frontId",
+    "backId",
+    "selfieWithId",
+    "signature"
+  ]
+}
+2025-05-10T22:54:35.300Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T23:01:08.222Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T23:01:59.335Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T23:08:54.424Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T23:10:49.528Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T23:10:52.845Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T23:41:41.197Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T23:41:45.189Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T23:41:54.174Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T23:41:58.838Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T23:42:04.164Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T23:42:11.646Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T23:44:32.825Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T23:44:38.229Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-10T23:49:17.417Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:13:21.097Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:13:29.931Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:14:23.805Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:14:33.545Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:14:44.970Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:17:18.067Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:17:22.979Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:18:31.434Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:19:00.326Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:20:20.617Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:20:35.852Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:20:53.366Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:21:00.925Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:21:20.888Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:22:13.015Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:22:20.667Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:22:43.262Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:23:18.242Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:23:25.238Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:23:49.166Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:26:13.725Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:27:36.986Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:27:49.105Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:27:59.893Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:31:59.440Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:32:13.954Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:32:22.986Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:34:16.814Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:34:57.758Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:37:17.677Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:40:48.003Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:45:09.045Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:48:00.394Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:52:08.176Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:52:57.678Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:54:10.874Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:56:06.107Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:56:34.025Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T00:57:53.965Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T01:01:16.596Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T01:06:14.525Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T01:06:34.067Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T01:06:44.176Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T01:07:36.603Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T01:08:23.949Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T01:09:14.174Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T01:26:24.915Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T01:48:47.551Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T01:51:26.552Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T01:52:34.581Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T01:58:25.916Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T01:59:38.873Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:01:59.765Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:06:23.540Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:09:08.107Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:18:26.823Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:19:32.503Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:20:06.815Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:23:48.777Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:24:33.441Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:24:57.449Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:26:28.172Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:29:46.014Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:30:32.084Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:30:48.767Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:31:03.945Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:35:44.410Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:49:22.958Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:51:23.363Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T02:52:15.055Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T03:44:10.085Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T03:45:09.091Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T03:49:04.508Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T03:51:28.874Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T03:53:11.829Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T03:54:29.130Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T03:54:51.313Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T03:56:28.331Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T03:56:45.238Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T04:02:52.499Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T04:03:23.757Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T04:04:37.313Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T04:04:57.769Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T04:05:26.180Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T04:06:42.354Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T04:09:11.264Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T04:09:45.315Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T04:11:11.183Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T04:11:45.941Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T04:37:29.557Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T04:37:40.185Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T04:37:48.322Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T04:38:11.235Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T04:38:15.987Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T04:41:50.879Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T04:42:45.601Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:01:59.771Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:06:21.896Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:06:40.807Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:06:51.253Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:10:19.344Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:13:40.563Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:17:43.697Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:18:04.246Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:21:17.375Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:21:26.242Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:21:31.775Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:24:34.888Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:24:37.653Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "userId": {
+        "stringValue": "\"{\n  userId: new ObjectId('681fcd8cbef2a6603d658c27'),\n  type: 'login_success',\n  title: 'New Login Detected',\n  message: 'A successful login was detected on your account.',\n  metadata: {\n    ip: '::1',\n    userAgent: 'Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.26100.3912',\n    location: '::1'\n  }\n}\"",
+        "valueType": "Object",
+        "kind": "ObjectId",
+        "value": {
+          "userId": "681fcd8cbef2a6603d658c27",
+          "type": "login_success",
+          "title": "New Login Detected",
+          "message": "A successful login was detected on your account.",
+          "metadata": {
+            "ip": "::1",
+            "userAgent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.26100.3912",
+            "location": "::1"
+          }
+        },
+        "path": "userId",
+        "reason": {},
+        "name": "CastError",
+        "message": "Cast to ObjectId failed for value \"{\n  userId: new ObjectId('681fcd8cbef2a6603d658c27'),\n  type: 'login_success',\n  title: 'New Login Detected',\n  message: 'A successful login was detected on your account.',\n  metadata: {\n    ip: '::1',\n    userAgent: 'Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.26100.3912',\n    location: '::1'\n  }\n}\" (type Object) at path \"userId\" because of \"BSONError\""
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: userId: Cast to ObjectId failed for value \"{\n  userId: new ObjectId('681fcd8cbef2a6603d658c27'),\n  type: 'login_success',\n  title: 'New Login Detected',\n  message: 'A successful login was detected on your account.',\n  metadata: {\n    ip: '::1',\n    userAgent: 'Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.26100.3912',\n    location: '::1'\n  }\n}\" (type Object) at path \"userId\" because of \"BSONError\""
+  },
+  "userId": {
+    "userId": "681fcd8cbef2a6603d658c27",
+    "type": "login_success",
+    "title": "New Login Detected",
+    "message": "A successful login was detected on your account.",
+    "metadata": {
+      "ip": "::1",
+      "userAgent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.26100.3912",
+      "location": "::1"
+    }
+  },
+  "type": "alert"
+}
+2025-05-11T05:24:51.890Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:24:53.958Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T05:25:04.783Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "transaction",
+  "title": "Money Sent Successfully"
+}
+2025-05-11T05:26:08.015Z [INFO] RATE LIMIT: Deleted notification: 682034a59e2e51edea250054
+	Metadata: {
+  "userId": "681fcd8cbef2a6603d658c27"
+}
+2025-05-11T05:26:08.894Z [INFO] RATE LIMIT: Deleted notification: 682034b09e2e51edea25006c
+	Metadata: {
+  "userId": "681fcd8cbef2a6603d658c27"
+}
+2025-05-11T05:26:50.978Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:27:35.577Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "transaction",
+  "title": "Money Sent Successfully"
+}
+2025-05-11T05:32:01.246Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:37:47.307Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:38:56.392Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:42:59.369Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T05:50:56.483Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T05:51:02.075Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T16:41:38.702Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T16:42:09.378Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T16:42:20.934Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T16:42:38.883Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T16:42:55.203Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T16:43:06.023Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T16:44:56.523Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T16:45:28.321Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T16:48:03.914Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T16:49:41.031Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T16:49:43.338Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T16:52:00.747Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T16:52:02.780Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T16:55:10.763Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T16:55:12.865Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T16:56:03.028Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T16:58:17.504Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T16:58:19.499Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T17:01:30.572Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T17:01:32.640Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T17:06:26.375Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T17:09:44.137Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T17:09:52.575Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T17:09:54.828Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T17:22:53.168Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T17:22:55.507Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T17:27:16.710Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T17:27:18.843Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T17:28:17.851Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T17:28:22.808Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T17:36:14.363Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-11T17:37:05.740Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-11T17:37:07.930Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-12T19:28:35.926Z [ERROR] RATE LIMIT: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+	Metadata: {}
+2025-05-12T19:29:04.612Z [ERROR] RATE LIMIT: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+	Metadata: {}
+2025-05-12T19:30:41.633Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T19:31:16.098Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T19:31:23.953Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T19:32:05.385Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T19:32:36.765Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T19:32:44.578Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T19:32:48.255Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T19:33:05.729Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T19:33:42.001Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T19:37:14.722Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-12T19:42:27.382Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-12T19:42:44.149Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-12T19:46:10.061Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-12T19:47:00.250Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T19:49:14.360Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-12T19:54:07.077Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T19:54:36.039Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T19:54:54.780Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T20:55:59.630Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-12T20:56:34.963Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T21:10:05.923Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T21:28:01.627Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T21:41:59.046Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T21:47:32.970Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T21:47:50.825Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T22:11:19.975Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T22:14:15.677Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T22:14:19.398Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T22:15:35.016Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T22:16:23.531Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-12T22:16:35.395Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-12T22:17:19.176Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-12T22:18:17.112Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-12T22:18:26.965Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:25:29.069Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:26:16.399Z [INFO] RATE LIMIT: Created notification for user 681fcd8cbef2a6603d658c27
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T21:27:20.065Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:27:58.444Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:28:56.120Z [INFO] RATE LIMIT: Created notification for user 6823b97fe4f55fed03b2ac6f
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T21:29:42.838Z [INFO] RATE LIMIT: Created notification for user 6823b97fe4f55fed03b2ac6f
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T21:30:00.072Z [INFO] RATE LIMIT: Created notification for user 6823b97fe4f55fed03b2ac6f
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T21:30:33.701Z [INFO] RATE LIMIT: Created notification for user 6823b97fe4f55fed03b2ac6f
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T21:30:43.818Z [INFO] RATE LIMIT: Created notification for user 6823b97fe4f55fed03b2ac6f
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T21:32:07.845Z [INFO] RATE LIMIT: Created notification for user 6823ba2ae4f55fed03b2ad81
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T21:32:45.162Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:32:54.585Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:33:29.678Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:34:10.735Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:34:18.776Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:35:04.762Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:36:11.988Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:37:09.694Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:38:50.417Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:40:24.121Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:41:14.837Z [INFO] RATE LIMIT: Created notification for user 6823b97fe4f55fed03b2ac6f
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T21:41:24.928Z [INFO] RATE LIMIT: Created notification for user 6823ba2ae4f55fed03b2ad81
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T21:44:15.998Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:44:23.190Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:44:36.375Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:44:42.197Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:44:57.121Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:45:09.064Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:46:44.530Z [INFO] RATE LIMIT: Created notification for user 6823ba2ae4f55fed03b2ad81
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T21:47:03.574Z [INFO] RATE LIMIT: Created notification for user 6823ba2ae4f55fed03b2ad81
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T21:47:55.972Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:54:48.330Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:55:41.287Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:55:54.842Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:59:41.840Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T21:59:52.873Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:00:11.025Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:00:22.645Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:01:19.093Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-13T22:01:22.983Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:03:36.027Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:03:41.700Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:03:55.951Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:04:40.078Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:05:04.809Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-13T22:05:08.766Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:07:41.798Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-13T22:07:45.779Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:08:18.640Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:11:08.991Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-13T22:11:13.051Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:13:57.221Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:25:32.403Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:26:14.290Z [INFO] RATE LIMIT: Created notification for user 6823b97fe4f55fed03b2ac6f
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T22:27:12.531Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:29:29.605Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:30:46.122Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:35:38.664Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:36:32.463Z [INFO] RATE LIMIT: Created notification for user 6823b97fe4f55fed03b2ac6f
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T22:50:21.965Z [INFO] RATE LIMIT: Created notification for user 6823ba2ae4f55fed03b2ad81
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T22:51:27.761Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823ba2ae4f55fed03b2ad81"
+}
+2025-05-13T22:51:31.614Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:53:04.899Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:53:09.346Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:53:34.486Z [INFO] RATE LIMIT: Created notification for user 6823ba2ae4f55fed03b2ad81
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T22:53:59.370Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823ba2ae4f55fed03b2ad81"
+}
+2025-05-13T22:54:03.574Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:54:55.404Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:55:05.727Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:55:28.448Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:56:30.164Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-13T22:56:34.235Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:56:42.124Z [INFO] RATE LIMIT: Created notification for user 6823ba2ae4f55fed03b2ad81
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T22:57:01.767Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823ba2ae4f55fed03b2ad81"
+}
+2025-05-13T22:57:05.478Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:58:14.971Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:58:20.013Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:58:25.531Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:59:06.468Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:59:37.601Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T22:59:48.124Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:00:14.261Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-13T23:00:14.304Z [ERROR] RATE LIMIT: Error submitting KYC: You already have a pending KYC submission. Please wait for it to be reviewed.
+	Metadata: {
+  "stack": "Error: You already have a pending KYC submission. Please wait for it to be reviewed.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:60:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:117:20"
+}
+2025-05-13T23:00:14.305Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-13T23:00:15.359Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-13T23:00:15.399Z [ERROR] RATE LIMIT: Error submitting KYC: You already have a pending KYC submission. Please wait for it to be reviewed.
+	Metadata: {
+  "stack": "Error: You already have a pending KYC submission. Please wait for it to be reviewed.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:60:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:117:20"
+}
+2025-05-13T23:00:15.399Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-13T23:00:17.455Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-13T23:00:17.494Z [ERROR] RATE LIMIT: Error submitting KYC: You already have a pending KYC submission. Please wait for it to be reviewed.
+	Metadata: {
+  "stack": "Error: You already have a pending KYC submission. Please wait for it to be reviewed.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:60:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:117:20"
+}
+2025-05-13T23:00:17.495Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-13T23:01:44.013Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:02:24.056Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-13T23:02:27.901Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:03:19.697Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:03:25.632Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:03:30.670Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:03:38.069Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:03:43.571Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:04:40.770Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:04:48.488Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:05:11.400Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:06:23.328Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:08:39.170Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:08:47.731Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:11:08.343Z [INFO] RATE LIMIT: Created notification for user 6823b97fe4f55fed03b2ac6f
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T23:11:12.392Z [INFO] RATE LIMIT: Created notification for user 6823b97fe4f55fed03b2ac6f
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T23:11:58.616Z [INFO] RATE LIMIT: Created notification for user 6823b97fe4f55fed03b2ac6f
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T23:24:09.230Z [INFO] RATE LIMIT: Created notification for user 6823b97fe4f55fed03b2ac6f
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T23:24:15.226Z [INFO] RATE LIMIT: Created notification for user 6823b97fe4f55fed03b2ac6f
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T23:24:18.986Z [INFO] RATE LIMIT: Created notification for user 6823b97fe4f55fed03b2ac6f
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-13T23:35:13.954Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:35:33.964Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:54:20.442Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:58:05.529Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-13T23:59:00.151Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:00:12.668Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:00:35.844Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:00:52.871Z [INFO] RATE LIMIT: Created notification for user 6823b97fe4f55fed03b2ac6f
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-14T00:02:57.882Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:03:52.933Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:04:55.060Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:05:52.007Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:06:58.600Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:21:29.062Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:21:41.973Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-14T00:21:45.335Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:21:45.612Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-14T00:21:45.655Z [ERROR] RATE LIMIT: Error submitting KYC: You already have a pending KYC submission. Please wait for it to be reviewed.
+	Metadata: {
+  "stack": "Error: You already have a pending KYC submission. Please wait for it to be reviewed.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:60:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:117:20"
+}
+2025-05-14T00:21:45.655Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-14T00:21:47.707Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-14T00:21:47.747Z [ERROR] RATE LIMIT: Error submitting KYC: You already have a pending KYC submission. Please wait for it to be reviewed.
+	Metadata: {
+  "stack": "Error: You already have a pending KYC submission. Please wait for it to be reviewed.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:60:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:117:20"
+}
+2025-05-14T00:21:47.748Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-14T00:21:50.800Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-14T00:21:50.839Z [ERROR] RATE LIMIT: Error submitting KYC: You already have a pending KYC submission. Please wait for it to be reviewed.
+	Metadata: {
+  "stack": "Error: You already have a pending KYC submission. Please wait for it to be reviewed.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:60:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:117:20"
+}
+2025-05-14T00:21:50.840Z [ERROR] RATE LIMIT: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-14T00:23:18.940Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:24:06.926Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:24:19.468Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:24:30.036Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:25:02.289Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-14T00:25:05.871Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:25:25.602Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:26:02.615Z [INFO] RATE LIMIT: Created notification for user 6823e30789ab8d5bf96ae20e
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-14T00:26:18.247Z [INFO] RATE LIMIT: Created notification for user 6823e30789ab8d5bf96ae20e
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-14T00:27:43.424Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823e30789ab8d5bf96ae20e"
+}
+2025-05-14T00:27:47.320Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:30:21.323Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:30:27.293Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:31:26.166Z [INFO] RATE LIMIT: Created notification for user 6823e449a22477250aae4983
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-14T00:32:11.235Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823e449a22477250aae4983"
+}
+2025-05-14T00:32:14.944Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:33:41.772Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:34:40.279Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:34:45.034Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:36:43.231Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:37:33.170Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:39:57.890Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:40:09.927Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:40:41.234Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:40:51.078Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:42:05.534Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-14T00:42:58.584Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823e6cad294b1e0b640077b"
+}
+2025-05-14T00:43:02.353Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:43:45.378Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:44:12.076Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823e6cad294b1e0b640077b"
+}
+2025-05-14T00:44:15.854Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:46:06.614Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:46:21.878Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:48:44.690Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823e6cad294b1e0b640077b"
+}
+2025-05-14T00:48:48.482Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:51:12.818Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823e6cad294b1e0b640077b"
+}
+2025-05-14T00:51:16.748Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:54:04.843Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823e6cad294b1e0b640077b"
+}
+2025-05-14T00:54:08.909Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T00:56:25.387Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823e6cad294b1e0b640077b"
+}
+2025-05-14T00:56:29.108Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:00:16.512Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823e6cad294b1e0b640077b"
+}
+2025-05-14T01:00:19.965Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:03:37.755Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:05:43.088Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:06:11.361Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:07:31.972Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:08:55.826Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:12:22.472Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:13:14.125Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:13:49.387Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:14:47.023Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:15:05.356Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:16:27.548Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:16:46.337Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:24:18.371Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:26:18.240Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:26:31.983Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:26:45.331Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:27:00.579Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:30:27.730Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:32:57.750Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:33:55.966Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823e6cad294b1e0b640077b"
+}
+2025-05-14T01:33:59.474Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:43:08.021Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:44:08.336Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823e6cad294b1e0b640077b"
+}
+2025-05-14T01:44:11.843Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:45:10.604Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823e6cad294b1e0b640077b"
+}
+2025-05-14T01:45:14.039Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:49:59.069Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:51:06.237Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "6823e6cad294b1e0b640077b"
+}
+2025-05-14T01:51:09.887Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:53:00.667Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T01:54:49.434Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T17:13:56.678Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T18:07:55.111Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T18:14:29.985Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T18:53:20.545Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T18:55:55.242Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T18:56:22.561Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T19:01:28.405Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T19:02:04.322Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T19:03:16.305Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T19:03:56.124Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T21:24:27.162Z [ERROR] RATE LIMIT: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+	Metadata: {}
+2025-05-14T21:25:28.750Z [ERROR] RATE LIMIT: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+	Metadata: {}
+2025-05-14T21:26:51.286Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T21:26:52.801Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-14T21:46:09.702Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T21:52:22.392Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T21:53:29.274Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T21:54:24.727Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T21:55:08.103Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T21:56:10.544Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T21:59:00.375Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T22:05:02.512Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T22:06:39.868Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T22:06:45.938Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T22:08:24.685Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T22:12:47.293Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T22:14:34.724Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T22:14:40.605Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T22:15:30.653Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T22:17:14.746Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T22:20:59.213Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T22:21:04.006Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T22:21:57.762Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T22:26:06.285Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T22:28:09.668Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T22:49:19.591Z [INFO] RATE LIMIT: Created notification for user 68250d005b61cc6366eb59ea
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-14T22:50:04.079Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68250d005b61cc6366eb59ea"
+}
+2025-05-14T22:50:08.016Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T22:54:17.431Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T22:57:23.623Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T23:04:29.212Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T23:08:41.276Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T23:17:20.152Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T23:17:31.877Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-14T23:18:28.804Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}

@@ -39,17 +39,23 @@ async function migrateUsers() {
 
         // Transform and insert users into MongoDB
         for (const user of users) {
-            const mongoUser = {
+            const newUser = {
                 email: user.email,
-                password: user.encrypted_password, // Note: You might need to handle password hashing differently
-                displayName: user.display_name,
-                phoneNumber: user.phone_number,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 walletBalance: user.wallet_balance || 0,
-                cryptoBalance: user.crypto_balance || 0,
-                address: user.address,
-                kycVerified: user.kyc_verified || false,
-                kycStatus: user.kyc_status || 'pending',
-                kycData: user.kyc_data || {},
+                phoneNumber: user.phone_number,
+                displayName: user.display_name,
+                kyc: {
+                    status: user.kyc_status || 'unverified',
+                    personalInfo: user.kyc_data || {},
+                    documents: {},
+                    data: {},
+                    auditTrail: [{
+                        action: 'migrated',
+                        timestamp: new Date()
+                    }]
+                },
                 privacyAccepted: user.privacy_accepted || false,
                 privacyAcceptedAt: user.privacy_accepted_at ? new Date(user.privacy_accepted_at) : null,
                 notificationsEnabled: user.notifications_enabled ?? true,
@@ -61,7 +67,7 @@ async function migrateUsers() {
                 metadata: user.metadata || {}
             };
 
-            await User.create(mongoUser);
+            await User.create(newUser);
             console.log(`Migrated user: ${user.email}`);
         }
 

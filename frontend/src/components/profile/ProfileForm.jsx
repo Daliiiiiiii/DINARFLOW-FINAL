@@ -3,12 +3,14 @@ import { motion } from 'framer-motion'
 import { useAuth } from '../../contexts/AuthContext'
 import { FaCamera } from 'react-icons/fa'
 import api from '../../lib/axios'
-import { RiShieldLine, RiShieldCheckLine } from 'react-icons/ri'
+import { RiShieldLine, RiShieldCheckLine, RiUser3Line } from 'react-icons/ri'
 import KYCForm from '../ui/KYCForm'
 import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 
 const ProfileForm = () => {
   const { userProfile, updateUserProfile, startKycVerification } = useAuth()
+  const { t } = useTranslation()
   const fileInputRef = useRef(null)
   
   const [formData, setFormData] = useState({
@@ -119,15 +121,9 @@ const ProfileForm = () => {
 
   const handleKycSubmit = async (formData) => {
     try {
-      await startKycVerification(formData, {
-        frontId: formData.frontId,
-        backId: formData.backId,
-        selfieWithId: formData.selfieWithId
-      });
-      setShowKycForm(false);
-      toast.success('KYC submitted successfully!');
+      await startKycVerification(formData);
     } catch (error) {
-      toast.error(error.message || 'Failed to submit KYC');
+      // Remove duplicate toast since it's handled in KYCForm
     }
   };
 
@@ -143,36 +139,29 @@ const ProfileForm = () => {
     const statusConfig = {
       pending: {
         icon: <RiShieldLine className="w-5 h-5" />,
-        text: 'Pending',
         className: 'bg-yellow-100 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200'
       },
       verified: {
         icon: <RiShieldCheckLine className="w-5 h-5" />,
-        text: 'Verified',
         className: 'bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-200'
       },
       rejected: {
         icon: <RiShieldLine className="w-5 h-5" />,
-        text: 'Rejected',
         className: 'bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200'
       },
       unverified: {
         icon: <RiShieldLine className="w-5 h-5" />,
-        text: 'Not Verified',
         className: 'bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-200'
       }
     }
 
-    const config = statusConfig[userProfile.kyc?.status] || {
-      icon: <RiShieldLine className="w-5 h-5" />,
-      text: 'Not Verified',
-      className: 'bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-200'
-    }
+    const status = userProfile.kycStatus || 'unverified';
+    const config = statusConfig[status] || statusConfig['unverified'];
 
     return (
       <div className={`flex items-center px-2 py-1 rounded-full text-xs font-medium ${config.className}`}>
         {config.icon}
-        <span className="ml-1">{config.text}</span>
+        <span className="ml-1">{t(`kycStatus.${status}`)}</span>
       </div>
     )
   }
@@ -219,8 +208,10 @@ const ProfileForm = () => {
                 </div>
               </>
             ) : (
-              <div className="text-gray-400">
-                <FaCamera className="text-3xl" />
+              <div className="w-full h-full flex items-center justify-center bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400">
+                <span className="text-2xl font-semibold">
+                  {userProfile.displayName?.[0]?.toUpperCase() || 'U'}
+                </span>
               </div>
             )}
           </div>
@@ -300,35 +291,33 @@ const ProfileForm = () => {
       
       <div className="mt-8 pt-6 border-t border-gray-200">
         <div className="flex items-center justify-between mb-4">
-          <div>
-            <h3 className="text-lg font-medium text-gray-900">KYC Verification</h3>
-            <p className="mt-1 text-sm text-gray-500">
-              Verify your identity to access all features
-            </p>
+          <div className="flex items-center gap-2">
+            <RiUser3Line className="text-gray-400 dark:text-gray-500" size={20} />
+            <h3 className="text-lg font-medium text-gray-900">{t('profile.displayName')}</h3>
           </div>
           {getKycStatusBadge()}
         </div>
 
-        {userProfile.kyc?.status !== 'in_progress' && (
+        {userProfile.kycStatus !== 'in_progress' && (
           <button
             onClick={() => setShowKycForm(true)}
             className={`w-full btn ${
-              userProfile.kyc?.status === 'rejected'
+              userProfile.kycStatus === 'rejected'
                 ? 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500'
-                : userProfile.kyc?.status === 'verified'
+                : userProfile.kycStatus === 'verified'
                 ? 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500'
                 : 'bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500'
             }`}
           >
-            {userProfile.kyc?.status === 'rejected'
+            {userProfile.kycStatus === 'rejected'
               ? 'Resubmit KYC Documents'
-              : userProfile.kyc?.status === 'verified'
+              : userProfile.kycStatus === 'verified'
               ? 'View KYC Details'
               : 'Start KYC Verification'}
           </button>
         )}
 
-        {userProfile.kyc?.status === 'in_progress' && (
+        {userProfile.kycStatus === 'in_progress' && (
           <div className="p-4 bg-primary-50 rounded-lg">
             <div className="flex items-center">
               <div className="mr-3">

@@ -15,10 +15,13 @@ import { useTranslation } from 'react-i18next'
 import ActionLoader from '../assets/animations/ActionLoader'
 import KYCOverlay from '../layouts/KYCOverlay'
 import KYCForm from '../components/ui/KYCForm'
+import ReactDOM from 'react-dom'
+import axios from 'axios'
 
 const Profile = () => {
   const { currentUser, updateUserProfile, startKycVerification } = useAuth() // Get user and update function from context
   const { t } = useTranslation()
+  
   const [profileImage, setProfileImage] = useState(currentUser?.profilePicture || null)
   const [phoneNumber, setPhoneNumber] = useState(currentUser?.phoneNumber || '')
   const [isEditingPhone, setIsEditingPhone] = useState(false)
@@ -26,6 +29,8 @@ const Profile = () => {
   const [isHovered, setIsHovered] = useState(false)
   const [showKycOverlay, setShowKycOverlay] = useState(false)
   const [showKycForm, setShowKycForm] = useState(false)
+  const [bankAccount, setBankAccount] = useState(null)
+  const [bankAccountLoading, setBankAccountLoading] = useState(false)
 
   // Create a ref for the hidden file input
   const fileInputRef = useRef(null)
@@ -100,15 +105,9 @@ const Profile = () => {
 
   const handleKycSubmit = async (formData) => {
     try {
-      await startKycVerification(formData, {
-        frontId: formData.frontId,
-        backId: formData.backId,
-        selfieWithId: formData.selfieWithId
-      });
-      setShowKycForm(false);
-      toast.success('KYC submitted successfully!');
+      await startKycVerification(formData);
     } catch (error) {
-      toast.error(error.message || 'Failed to submit KYC');
+      // Remove duplicate toast since it's handled in KYCForm
     }
   };
 
@@ -119,6 +118,26 @@ const Profile = () => {
       setPhoneNumber(currentUser.phoneNumber || '')
     }
   }, [currentUser])
+
+  useEffect(() => {
+    const fetchBankAccount = async () => {
+      if (currentUser?.associatedBankAccount) {
+        setBankAccountLoading(true);
+        try {
+          const token = localStorage.getItem('token');
+          const { data } = await axios.get(`/api/bank-accounts/${currentUser.associatedBankAccount}`, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          setBankAccount(data.bankAccount);
+        } catch (e) {
+          setBankAccount(null);
+        } finally {
+          setBankAccountLoading(false);
+        }
+      }
+    };
+    fetchBankAccount();
+  }, [currentUser]);
 
   if (isLoading) {
     return <ActionLoader isLoading={true} />;
@@ -177,8 +196,9 @@ const Profile = () => {
                     </>
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400">
-                      <RiUser3Line size={48} className="mb-2" />
-                      <span className="text-sm font-medium text-primary-600 dark:text-primary-400">{t('profile.addPhoto')}</span>
+                      <span className="text-2xl font-semibold">
+                        {currentUser.displayName?.[0]?.toUpperCase() || 'U'}
+                      </span>
                     </div>
                   )}
                   {isLoading && (
@@ -252,7 +272,7 @@ const Profile = () => {
               <div className="flex items-center">
                 <span className="text-gray-900 dark:text-gray-100 font-medium flex items-center">
                   {currentUser.displayName}
-                  {currentUser.kycStatus === 'verified' && (
+                  {currentUser.kyc?.status === 'verified' && (
                     <motion.span
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
@@ -343,6 +363,22 @@ const Profile = () => {
               )}
             </div>
           </div>
+
+          {/* Associated Bank Account */}
+          <div className="mt-8">
+            <h2 className="text-xl font-semibold mb-2">{t('wallet.bankAccount')}</h2>
+            {bankAccountLoading ? (
+              <div className="text-gray-500">Loading bank account...</div>
+            ) : bankAccount ? (
+              <div className="p-4 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+                <div className="mb-1 font-medium">{bankAccount.bankName}</div>
+                <div className="mb-1 text-sm text-gray-500">{bankAccount.accountNumber}</div>
+                <div className="text-lg font-bold text-blue-600 dark:text-blue-400">{bankAccount.balance?.toFixed(2) ?? '0.00'} TND</div>
+              </div>
+            ) : (
+              <div className="text-gray-500 dark:text-gray-400">{t('profile.noBankAccount') || 'No bank account assigned yet. Your bank account will be assigned after KYC review.'}</div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -354,7 +390,7 @@ const Profile = () => {
               <RiShieldUserLine className="text-gray-400 dark:text-gray-500 mr-2" size={20} />
               <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('profile.kycVerification')}</h2>
             </div>
-            {currentUser.kycStatus === 'verified' ? (
+            {currentUser.kyc?.status === 'verified' ? (
               <motion.span
                 initial={{ scale: 0 }}
                 animate={{ scale: 1.1, transition: { yoyo: Infinity, duration: 0.8 } }}
@@ -365,14 +401,25 @@ const Profile = () => {
                 </svg>
                 {t('kycStatus.verified')}
               </motion.span>
+            ) : currentUser.kyc?.status === 'pending' ? (
+              <span className="px-3 py-1 text-sm font-medium text-yellow-700 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 rounded-full flex items-center gap-1">
+                <svg className="w-4 h-4 mr-1 text-yellow-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {t('kycStatus.pending')}
+              </span>
             ) : (
-              <span className="px-3 py-1 text-sm font-medium text-yellow-700 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 rounded-full">
-                {currentUser.kycStatus ? t('kycStatus.' + currentUser.kycStatus) : t('kycStatus.pending')}
+              <span className={`px-3 py-1 text-sm font-medium rounded-full ${
+                currentUser.kyc?.status === 'rejected' 
+                  ? 'text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/20'
+                  : 'text-gray-700 dark:text-gray-400 bg-gray-50 dark:bg-gray-900/20'
+              }`}>
+                {t('kycStatus.' + (currentUser.kyc?.status || 'unverified'))}
               </span>
             )}
           </div>
         </div>
-        {currentUser.kycStatus !== 'verified' && (
+        {(currentUser.kyc?.status === 'unverified' || currentUser.kyc?.status === 'rejected') && (
           <div className="p-6">
             <p className="text-gray-600 dark:text-gray-300 mb-4">
               {t('profile.verifyIdentity')}
@@ -382,16 +429,29 @@ const Profile = () => {
               onClick={() => setShowKycForm(true)}
             >
               <RiShieldUserLine className="mr-2" size={20} />
-              {t('profile.startKyc')}
+              {currentUser.kyc?.status === 'rejected' ? t('profile.resubmitKyc') : t('profile.startKyc')}
             </button>
+          </div>
+        )}
+        {currentUser.kyc?.status === 'pending' && (
+          <div className="p-6">
+            <div className="flex items-center justify-center space-x-3 text-yellow-600 dark:text-yellow-400">
+              <svg className="w-6 h-6 animate-spin" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p className="text-center">
+                {t('profile.kycPending')}
+              </p>
+            </div>
           </div>
         )}
       </div>
 
-      {showKycForm && (
+      {showKycForm && ReactDOM.createPortal(
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
           <KYCForm onClose={() => setShowKycForm(false)} onSubmit={handleKycSubmit} />
-        </div>
+        </div>,
+        document.body
       )}
     </motion.div>
   )

@@ -24,64 +24,38 @@ const Support = () => {
   const [expandedFaq, setExpandedFaq] = useState(null);
   const [messages, setMessages] = useState([]);
 
-  const faqs = [
+  const faqItems = [
     {
-      id: 1,
-      category: 'Account',
-      questions: [
+      category: 'General',
+      items: [
         {
-          id: 'acc-1',
-          question: 'How do I reset my password?',
-          answer: 'You can reset your password by clicking on the "Forgot Password" link on the login page. Follow the instructions sent to your email to create a new password.'
+          question: 'What payment methods do you support?',
+          answer: 'We support bank transfers and credit/debit cards for all transactions on our platform.'
         },
         {
-          id: 'acc-2',
-          question: 'How do I enable two-factor authentication?',
-          answer: 'Go to Settings > Security and click on "Enable Two-Factor Authentication". Follow the setup process to enhance your account security.'
+          question: 'Are there any fees for transfers?',
+          answer: 'Transfers between DinarFlow users are free. Bank transfers may incur small fees.'
         }
       ]
     },
     {
-      id: 2,
-      category: 'Payments',
-      questions: [
+      category: 'Security',
+      items: [
         {
-          id: 'pay-1',
-          question: 'What payment methods are supported?',
-          answer: 'We support bank transfers, credit/debit cards, and DFLOW tokens for all transactions on our platform.'
-        },
-        {
-          id: 'pay-2',
-          question: 'Are there any transaction fees?',
-          answer: 'Transfers between DinarFlow users are free. Bank transfers and crypto conversions may incur small fees.'
-        }
-      ]
-    },
-    {
-      id: 3,
-      category: 'DFLOW Token',
-      questions: [
-        {
-          id: 'dflow-1',
-          question: 'What is DFLOW token?',
-          answer: 'DFLOW is our native digital token that enables fast, secure transactions within the DinarFlow ecosystem.'
-        },
-        {
-          id: 'dflow-2',
-          question: 'How do I buy DFLOW tokens?',
-          answer: 'You can buy DFLOW tokens directly from your wallet using TND. Go to Wallet > Buy DFLOW to get started.'
+          question: 'How secure is my money?',
+          answer: 'Your money is protected by bank-grade security measures and encryption.'
         }
       ]
     }
   ];
 
-  const filteredFaqs = faqs.map(category => ({
+  const filteredFaqs = faqItems.map(category => ({
     ...category,
-    questions: category.questions.filter(q => 
+    items: category.items.filter(q => 
       q.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
       q.answer.toLowerCase().includes(searchTerm.toLowerCase())
     )
-  })).filter(category => category.questions.length > 0);
+  })).filter(category => category.items.length > 0);
 
   const handleStartChat = () => {
     setShowChat(true);
@@ -185,7 +159,7 @@ const Support = () => {
               <div className="grid md:grid-cols-2 gap-6">
                 {filteredFaqs.map((category) => (
                   <div
-                    key={category.id}
+                    key={category.category}
                     className={`${
                       isDark 
                         ? 'bg-gray-900/50 backdrop-blur-sm border-gray-800' 
@@ -194,21 +168,21 @@ const Support = () => {
                   >
                     <h2 className="text-xl font-semibold mb-4">{category.category}</h2>
                     <div className="space-y-3">
-                      {category.questions.map((faq) => (
-                        <div key={faq.id} className="border-b border-gray-700 last:border-0 pb-3 last:pb-0">
+                      {category.items.map((faq) => (
+                        <div key={faq.question} className="border-b border-gray-700 last:border-0 pb-3 last:pb-0">
                           <button
-                            onClick={() => setExpandedFaq(expandedFaq === faq.id ? null : faq.id)}
+                            onClick={() => setExpandedFaq(expandedFaq === faq.question ? null : faq.question)}
                             className="w-full text-left"
                           >
                             <div className="flex items-center justify-between">
                               <span className="font-medium">{faq.question}</span>
                               <ChevronDown className={`w-5 h-5 transition-transform ${
-                                expandedFaq === faq.id ? 'rotate-180' : ''
+                                expandedFaq === faq.question ? 'rotate-180' : ''
                               }`} />
                             </div>
                           </button>
                           <AnimatePresence>
-                            {expandedFaq === faq.id && (
+                            {expandedFaq === faq.question && (
                               <motion.div
                                 initial={{ height: 0, opacity: 0 }}
                                 animate={{ height: 'auto', opacity: 1 }}

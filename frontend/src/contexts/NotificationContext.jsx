@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, useRef } from 'react'
+import { createContext, useContext, useCallback, useRef } from 'react'
 import { toast } from 'react-toastify'
 import PropTypes from 'prop-types'
 
@@ -13,110 +13,76 @@ export const useNotification = () => {
 }
 
 export const NotificationProvider = ({ children }) => {
-  const [queue, setQueue] = useState([])
-  const isProcessing = useRef(false)
-  const processingTimeout = useRef(null)
+  const lastNotification = useRef(null)
+  const timeoutRef = useRef(null)
 
-  const processQueue = useCallback(() => {
-    if (queue.length === 0 || isProcessing.current) return
-
-    isProcessing.current = true
-    const currentNotification = queue[0]
-
-    try {
-      toast(currentNotification.message, {
-        type: currentNotification.type,
-        position: 'top-right',
-        autoClose: currentNotification.autoClose || 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        ...currentNotification.options
-      })
-
-      setQueue(prevQueue => prevQueue.slice(1))
-    } catch (error) {
-      console.error('Error processing notification:', error)
-      // Remove the failed notification from the queue
-      setQueue(prevQueue => prevQueue.slice(1))
-    } finally {
-      isProcessing.current = false
-      // Process next notification after a short delay
-      processingTimeout.current = setTimeout(() => {
-        processQueue()
-      }, 300)
+  const showNotification = useCallback((type, message, options = {}) => {
+    // Clear any existing timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
     }
-  }, [queue])
 
-  const addNotification = useCallback((notification) => {
-    setQueue(prevQueue => [...prevQueue, notification])
-    // Start processing if not already processing
-    if (!isProcessing.current) {
-      processQueue()
+    // Check if this is the same notification as the last one
+    const notificationKey = `${type}-${message}`
+    if (lastNotification.current === notificationKey) {
+      return
     }
-  }, [processQueue])
 
-  const clearQueue = useCallback(() => {
-    setQueue([])
-    if (processingTimeout.current) {
-      clearTimeout(processingTimeout.current)
-    }
-    isProcessing.current = false
+    // Show the notification
+    toast(message, {
+      type,
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      ...options
+    })
+
+    // Update last notification
+    lastNotification.current = notificationKey
+
+    // Clear the last notification reference after a delay
+    timeoutRef.current = setTimeout(() => {
+      lastNotification.current = null
+    }, 1000)
   }, [])
 
   const showSuccess = useCallback((message, options = {}) => {
-    addNotification({
-      message,
-      type: 'success',
-      options: {
-        ...options,
-        className: 'bg-green-500 text-white'
-      }
+    showNotification('success', message, {
+      ...options,
+      className: 'bg-green-500 text-white'
     })
-  }, [addNotification])
+  }, [showNotification])
 
   const showError = useCallback((message, options = {}) => {
-    addNotification({
-      message,
-      type: 'error',
-      options: {
-        ...options,
-        className: 'bg-red-500 text-white'
-      }
+    showNotification('error', message, {
+      ...options,
+      className: 'bg-red-500 text-white'
     })
-  }, [addNotification])
+  }, [showNotification])
 
   const showInfo = useCallback((message, options = {}) => {
-    addNotification({
-      message,
-      type: 'info',
-      options: {
-        ...options,
-        className: 'bg-blue-500 text-white'
-      }
+    showNotification('info', message, {
+      ...options,
+      className: 'bg-blue-500 text-white'
     })
-  }, [addNotification])
+  }, [showNotification])
 
   const showWarning = useCallback((message, options = {}) => {
-    addNotification({
-      message,
-      type: 'warning',
-      options: {
-        ...options,
-        className: 'bg-yellow-500 text-white'
-      }
+    showNotification('warning', message, {
+      ...options,
+      className: 'bg-yellow-500 text-white'
     })
-  }, [addNotification])
+  }, [showNotification])
 
   const value = {
     showSuccess,
     showError,
     showInfo,
-    showWarning,
-    clearQueue,
-    queue
+    showWarning
   }
 
   return (

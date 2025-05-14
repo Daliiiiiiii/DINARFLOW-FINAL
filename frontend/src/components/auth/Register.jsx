@@ -275,10 +275,6 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (!validateForm()) return
-        if (!acceptedTerms) {
-            toast.error('Please accept the terms and conditions')
-            return
-        }
 
         setIsLoading(true)
         try {

@@ -1,20 +1,28 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   RiSendPlaneLine, 
   RiUserLine, 
   RiSearchLine,
   RiWalletLine,
-  RiInformationLine
+  RiInformationLine,
+  RiBankLine,
+  RiArrowRightLine,
+  RiLoader4Line
 } from 'react-icons/ri'
 import { useTransactions } from '../../contexts/TransactionContext'
 import { useAuth } from '../../contexts/AuthContext'
 import axios from 'axios'
-import '../financial/CryptoExchange.css'
+import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
+import Button from '../ui/Button'
+import Input from '../ui/Input'
+import Select from '../ui/Select'
 
 const TransferForm = () => {
   const { transferTND } = useTransactions()
   const { userProfile } = useAuth()
+  const { t } = useTranslation()
   
   const [recipient, setRecipient] = useState('')
   const [amount, setAmount] = useState('')

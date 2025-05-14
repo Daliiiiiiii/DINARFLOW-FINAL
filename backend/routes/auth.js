@@ -6,6 +6,8 @@ import { validatePhoneNumber, auth } from '../middleware/auth.js';
 import process from 'process';
 import { authLimiter } from '../middleware/rateLimiter.js';
 import authController from '../controllers/authController.js';
+import bcrypt from 'bcryptjs';
+import sendEmail from '../utils/email.js';
 
 const router = express.Router();
 
@@ -95,11 +97,11 @@ router.get('/validate', auth, async (req, res) => {
         displayName: user.displayName,
         phoneNumber: user.phoneNumber,
         walletBalance: user.walletBalance,
-        cryptoBalance: user.cryptoBalance,
-        kycVerified: user.kycVerified,
-        kycStatus: user.kycStatus,
+        isVerified: user.kyc?.status === 'verified',
+        kyc: user.kyc || { status: 'unverified' },
         emailVerified: user.emailVerified,
-        profilePicture: user.profilePicture
+        profilePicture: user.profilePicture,
+        role: user.role
       }
     });
   } catch (error) {
@@ -165,5 +167,8 @@ router.post('/reset-password', [
   body('code').isLength({ min: 6, max: 6 }).isNumeric(),
   passwordValidation
 ], authController.resetPassword);
+
+// Validate reset token
+router.post('/validate-reset-token', authController.validateResetToken);
 
 export default router;

@@ -1,158 +1,114 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react'
 import { useAuth } from './AuthContext'
-import { toast } from 'react-toastify'
 import api from '../lib/axios'
+import { useTranslation } from 'react-i18next'
 
 const TransactionContext = createContext()
 
-export function useTransactions() {
-  return useContext(TransactionContext)
+export const useTransactions = () => {
+  const context = useContext(TransactionContext)
+  if (!context) {
+    throw new Error('useTransactions must be used within a TransactionProvider')
+  }
+  return context
 }
 
-export function TransactionProvider({ children }) {
-  const { currentUser } = useAuth()
+export const TransactionProvider = ({ children }) => {
+  const { user } = useAuth()
+  const { t } = useTranslation()
   const [transactions, setTransactions] = useState([])
   const [loading, setLoading] = useState(true)
-  const [cryptoRate] = useState(0.25) // 1 DFLOW = 0.25 TND
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    if (user) {
+      console.log('User authenticated, fetching transactions...')
+      fetchTransactions()
+    } else {
+      console.log('No user found, skipping transaction fetch')
+      setLoading(false)
+    }
+  }, [user])
 
   const fetchTransactions = async () => {
     try {
+      setLoading(true)
+      console.log('Making API request to /api/transactions')
       const { data } = await api.get('/api/transactions')
-      setTransactions(data.transactions)
+      console.log('Received transactions:', data)
+      setTransactions(data.transactions || [])
+      setError(null)
     } catch (error) {
-      console.error('Error fetching transactions:', error)
-      toast.error('Failed to load transactions')
+      console.error('Error fetching transactions:', error.response?.data || error.message)
+      setError(error.response?.data?.message || t('transactions.errors.fetchFailed'))
+      setTransactions([])
     } finally {
       setLoading(false)
     }
   }
 
-  useEffect(() => {
-    if (!currentUser) {
-      setTransactions([])
-      setLoading(false)
-      return
-    }
-
-    fetchTransactions()
-  }, [currentUser])
-
-  async function transferTND(recipientEmail, amount, description) {
-    try {
-      const { data } = await api.post('/api/transactions/transfer', {
-        recipientEmail,
-        amount,
-        description,
-        currency: 'TND'
-      })
-
-      setTransactions(prev => [data.transaction, ...prev])
-      toast.success(`${amount} TND transferred successfully!`)
-      return true
-    } catch (error) {
-      console.error('Transfer error:', error)
-      toast.error(error.response?.data?.error || error.message)
-      throw error
-    }
-  }
-
-  async function buyCrypto(amount) {
-    try {
-      const { data } = await api.post('/api/transactions/crypto/buy', {
-        amount,
-        tndAmount: amount * cryptoRate
-      })
-
-      setTransactions(prev => [data.transaction, ...prev])
-      toast.success(`Successfully bought ${amount} DFLOW`)
-      return true
-    } catch (error) {
-      console.error('Buy crypto error:', error)
-      toast.error(error.response?.data?.error || error.message)
-      throw error
-    }
-  }
-
-  async function sellCrypto(amount) {
-    try {
-      const { data } = await api.post('/api/transactions/crypto/sell', {
-        amount,
-        tndAmount: amount * cryptoRate
-      })
-
-      setTransactions(prev => [data.transaction, ...prev])
-      toast.success(`Successfully sold ${amount} DFLOW`)
-      return true
-    } catch (error) {
-      console.error('Sell crypto error:', error)
-      toast.error(error.response?.data?.error || error.message)
-      throw error
-    }
-  }
-
-  async function transferCrypto(recipientEmail, amount, description) {
-    try {
-      const { data } = await api.post('/api/transactions/crypto/transfer', {
-        recipientEmail,
-        amount,
-        description
-      })
-
-      setTransactions(prev => [data.transaction, ...prev])
-      toast.success(`${amount} DFLOW transferred successfully!`)
-      return true
-    } catch (error) {
-      console.error('Transfer crypto error:', error)
-      toast.error(error.response?.data?.error || error.message)
-      throw error
-    }
-  }
-
-  function getFilteredTransactions(filters = {}) {
-    const { type, currency, startDate, endDate } = filters
-
-    if (!transactions?.length) return []
-
+  const getFilteredTransactions = (filters) => {
     return transactions.filter(transaction => {
-      if (!transaction) return false
-      let matches = true
-
-      if (type && transaction.type !== type) {
-        matches = false
+      // Filter by type
+      if (filters.type && transaction.type !== filters.type) {
+        return false
       }
 
-      if (currency && transaction.currency !== currency) {
-        matches = false
+      // Filter by subtype
+      if (filters.subtype && transaction.subtype !== filters.subtype) {
+        return false
       }
 
-      if (startDate && transaction.createdAt) {
-        const transactionDate = new Date(transaction.createdAt)
-        if (transactionDate < new Date(startDate)) {
-          matches = false
-        }
+      // Filter by date range
+      if (filters.startDate && new Date(transaction.createdAt) < new Date(filters.startDate)) {
+        return false
+      }
+      if (filters.endDate && new Date(transaction.createdAt) > new Date(filters.endDate)) {
+        return false
       }
 
-      if (endDate && transaction.createdAt) {
-        const transactionDate = new Date(transaction.createdAt)
-        if (transactionDate > new Date(endDate)) {
-          matches = false
-        }
+      // Filter by amount range
+      if (filters.minAmount && Math.abs(transaction.amount) < parseFloat(filters.minAmount)) {
+        return false
+      }
+      if (filters.maxAmount && Math.abs(transaction.amount) > parseFloat(filters.maxAmount)) {
+        return false
       }
 
-      return matches
+      return true
     })
+  }
+
+  const createTransfer = async (transferData) => {
+    try {
+      const { data } = await api.post('/api/transactions/transfer', transferData)
+      setTransactions(prev => [data.transaction, ...prev])
+      return data
+    } catch (error) {
+      console.error('Transfer error:', error.response?.data || error.message)
+      throw error
+    }
+  }
+
+  const createBankTransfer = async (transferData) => {
+    try {
+      const { data } = await api.post('/api/transactions/bank-transfer', transferData)
+      setTransactions(prev => [data.transaction, ...prev])
+      return data
+    } catch (error) {
+      console.error('Bank transfer error:', error.response?.data || error.message)
+      throw error
+    }
   }
 
   const value = {
     transactions,
     loading,
+    error,
     fetchTransactions,
-    transferTND,
-    buyCrypto,
-    sellCrypto,
-    transferCrypto,
-    getFilteredTransactions,
-    cryptoRate
+    createTransfer,
+    createBankTransfer,
+    getFilteredTransactions
   }
 
   return (
@@ -161,3 +117,5 @@ export function TransactionProvider({ children }) {
     </TransactionContext.Provider>
   )
 }
+
+export default TransactionContext

@@ -145,4 +145,60 @@ router.delete('/profile-picture', auth, async (req, res) => {
   }
 });
 
+// Search users by any identifier (phone, email, or name)
+router.get('/search', auth, async (req, res) => {
+  try {
+    const { q } = req.query;
+    if (!q) {
+      return res.status(400).json({ error: 'Search query is required' });
+    }
+
+    // Clean and format the search query
+    const cleanQuery = q.trim();
+
+    // Build search conditions
+    const searchConditions = [];
+
+    // Email search
+    if (cleanQuery.includes('@')) {
+      searchConditions.push({ email: cleanQuery.toLowerCase() });
+    }
+
+    // Phone number search
+    const cleanNumber = cleanQuery.replace(/\D/g, '');
+    if (cleanNumber.length >= 8) {
+      const possibleFormats = [
+        cleanNumber,                    // Raw number
+        `216${cleanNumber}`,           // With 216 prefix
+        `+216${cleanNumber}`,          // With +216 prefix
+        cleanNumber.slice(-8)          // Last 8 digits
+      ];
+      searchConditions.push({ phoneNumber: { $in: possibleFormats } });
+    }
+
+    // Name search (if query is not an email or phone)
+    if (!cleanQuery.includes('@') && !/^\d+$/.test(cleanQuery)) {
+      searchConditions.push({ displayName: { $regex: cleanQuery, $options: 'i' } });
+    }
+
+    // If no valid search conditions, return empty result
+    if (searchConditions.length === 0) {
+      return res.json([]);
+    }
+
+    // Search for users
+    const users = await User.find({
+      $or: searchConditions,
+      accountStatus: 'active'
+    })
+      .select('displayName profilePicture email phoneNumber')
+      .limit(5);
+
+    res.json(users);
+  } catch (error) {
+    console.error('Search error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 export default router;

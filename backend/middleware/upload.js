@@ -26,13 +26,13 @@ const storage = multer.diskStorage({
     }
 });
 
-// File filter for KYC documents
+// File filter for profile pictures
 const fileFilter = (req, file, cb) => {
-    // Only allow JPG and PNG
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    // Allow JPG, PNG, GIF, and WebP
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
 
     if (!allowedTypes.includes(file.mimetype)) {
-        return cb(new Error('Only JPG and PNG images are allowed. GIF and other formats are not supported.'));
+        return cb(new Error('Only JPG, PNG, GIF, and WebP images are allowed.'));
     }
 
     cb(null, true);
@@ -51,7 +51,8 @@ const upload = multer({
 export const uploadKyc = upload.fields([
     { name: 'frontId', maxCount: 1 },
     { name: 'backId', maxCount: 1 },
-    { name: 'selfieWithId', maxCount: 1 }
+    { name: 'selfieWithId', maxCount: 1 },
+    { name: 'signature', maxCount: 1 }
 ]);
 
 export const uploadSingle = upload.single('profilePicture'); 

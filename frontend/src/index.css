@@ -67,7 +67,7 @@
   }
 
   /* Fix sidebar positioning */
-  .fixed:not(.loading-spinner-overlay) {
+  .fixed:not(.loading-spinner-overlay):not(.action-loader-overlay) {
     left: 0 !important;
     right: auto !important;
   }
@@ -330,4 +330,13 @@ body:not(.landing-page) {
 }
 .dark .custom-scrollbar::-webkit-scrollbar-track {
   background: linear-gradient(135deg, #111827 60%, #1e293b 100%);
+}
+
+/* Add ActionLoader overlay class for RTL fix */
+.action-loader-overlay {
+  /* No RTL override, should cover full page */
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
 }

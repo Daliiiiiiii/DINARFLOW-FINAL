@@ -359,3 +359,222 @@
     "storageErrors": []
   }
 }
+2025-05-09T21:41:39.508Z [ERROR]: Multer error during KYC upload:
+	Metadata: {
+  "error": {
+    "name": "MulterError",
+    "message": "Unexpected field",
+    "code": "LIMIT_UNEXPECTED_FILE",
+    "field": "signature",
+    "storageErrors": []
+  }
+}
+2025-05-10T21:05:19.977Z [ERROR]: Multer error during KYC upload:
+	Metadata: {
+  "error": {
+    "name": "MulterError",
+    "message": "Unexpected field",
+    "code": "LIMIT_UNEXPECTED_FILE",
+    "field": "signature",
+    "storageErrors": []
+  }
+}
+2025-05-10T21:38:45.037Z [ERROR]: Image resolution too low
+	Metadata: {
+  "width": 451,
+  "height": 595,
+  "metadata": {
+    "userId": "681fc3c5d17e5a194f582a87",
+    "documentType": "backId",
+    "uploadDate": "2025-05-10T21:38:45.035Z"
+  }
+}
+2025-05-10T21:38:45.039Z [ERROR]: File storage error: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:26:23)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:38)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:76:24"
+}
+2025-05-10T21:38:45.039Z [ERROR]: Error storing backId file: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Image resolution too low. Minimum size is 800x600\n    at FileStorageService.storeFile (file:///C:/Users/Dali/Downloads/project/backend/services/fileStorage.js:26:23)\n    at async KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:25:38)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:76:24"
+}
+2025-05-10T21:38:45.040Z [ERROR]: Error submitting KYC: Failed to store backId file: Image resolution too low. Minimum size is 800x600
+	Metadata: {
+  "stack": "Error: Failed to store backId file: Image resolution too low. Minimum size is 800x600\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:76:24"
+}
+2025-05-10T21:38:45.040Z [ERROR]: Error processing KYC submission:
+	Metadata: {
+  "error": "Failed to store backId file: Image resolution too low. Minimum size is 800x600",
+  "stack": "Error: Failed to store backId file: Image resolution too low. Minimum size is 800x600\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:33:27)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:76:24",
+  "userId": "681fc3c5d17e5a194f582a87"
+}
+2025-05-10T21:38:45.042Z [ERROR]: Error during file cleanup: The "cb" argument must be of type function. Received undefined
+	Metadata: {
+  "code": "ERR_INVALID_ARG_TYPE",
+  "stack": "TypeError [ERR_INVALID_ARG_TYPE]: The \"cb\" argument must be of type function. Received undefined\n    at makeCallback (node:fs:186:3)\n    at Object.unlink (node:fs:1941:14)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:89:20\n    at Array.map (<anonymous>)\n    at file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:88:47"
+}
+2025-05-10T22:29:23.601Z [ERROR]: Error submitting KYC: Cannot read properties of undefined (reading 'frontId')
+	Metadata: {
+  "stack": "TypeError: Cannot read properties of undefined (reading 'frontId')\n    at file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:15:73\n    at Array.filter (<anonymous>)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:15:48)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:20:20"
+}
+2025-05-10T22:29:23.602Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "681fcd8cbef2a6603d658c27"
+}
+2025-05-10T22:54:32.884Z [ERROR]: Error creating audit trail: User validation failed: kyc.auditTrail.0.details: Cast to Map failed for value "KYC documents submitted for verification" (type string) at path "details" because of "TypeError"
+	Metadata: {
+  "errors": {
+    "kyc.auditTrail.0.details": {
+      "stringValue": "\"KYC documents submitted for verification\"",
+      "valueType": "string",
+      "kind": "Map",
+      "value": "KYC documents submitted for verification",
+      "path": "details",
+      "reason": {},
+      "name": "CastError",
+      "message": "Cast to Map failed for value \"KYC documents submitted for verification\" (type string) at path \"details\" because of \"TypeError\""
+    }
+  },
+  "_message": "User validation failed",
+  "stack": "ValidationError: User validation failed: kyc.auditTrail.0.details: Cast to Map failed for value \"KYC documents submitted for verification\" (type string) at path \"details\" because of \"TypeError\"\n    at Document.invalidate (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:3351:32)\n    at Subdocument.invalidate (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:229:12)\n    at EmbeddedDocument.$set (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:1486:12)\n    at EmbeddedDocument.$set (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:1132:16)\n    at EmbeddedDocument.Document (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:178:12)\n    at EmbeddedDocument.Subdocument (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:34:12)\n    at EmbeddedDocument.ArraySubdocument [as constructor] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\arraySubdocument.js:44:15)\n    at new EmbeddedDocument (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\schema\\documentArray.js:131:17)\n    at Proxy._cast (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\documentArray\\methods\\index.js:103:17)\n    at Proxy._mapCast (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\array\\methods\\index.js:263:17)"
+}
+2025-05-10T22:54:32.886Z [ERROR]: Error submitting KYC: User validation failed: kyc.auditTrail.0.details: Cast to Map failed for value "KYC documents submitted for verification" (type string) at path "details" because of "TypeError"
+	Metadata: {
+  "errors": {
+    "kyc.auditTrail.0.details": {
+      "stringValue": "\"KYC documents submitted for verification\"",
+      "valueType": "string",
+      "kind": "Map",
+      "value": "KYC documents submitted for verification",
+      "path": "details",
+      "reason": {},
+      "name": "CastError",
+      "message": "Cast to Map failed for value \"KYC documents submitted for verification\" (type string) at path \"details\" because of \"TypeError\""
+    }
+  },
+  "_message": "User validation failed",
+  "stack": "ValidationError: User validation failed: kyc.auditTrail.0.details: Cast to Map failed for value \"KYC documents submitted for verification\" (type string) at path \"details\" because of \"TypeError\"\n    at Document.invalidate (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:3351:32)\n    at Subdocument.invalidate (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:229:12)\n    at EmbeddedDocument.$set (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:1486:12)\n    at EmbeddedDocument.$set (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:1132:16)\n    at EmbeddedDocument.Document (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:178:12)\n    at EmbeddedDocument.Subdocument (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:34:12)\n    at EmbeddedDocument.ArraySubdocument [as constructor] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\arraySubdocument.js:44:15)\n    at new EmbeddedDocument (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\schema\\documentArray.js:131:17)\n    at Proxy._cast (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\documentArray\\methods\\index.js:103:17)\n    at Proxy._mapCast (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\array\\methods\\index.js:263:17)"
+}
+2025-05-10T22:54:32.887Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": "User validation failed: kyc.auditTrail.0.details: Cast to Map failed for value \"KYC documents submitted for verification\" (type string) at path \"details\" because of \"TypeError\"",
+  "stack": "ValidationError: User validation failed: kyc.auditTrail.0.details: Cast to Map failed for value \"KYC documents submitted for verification\" (type string) at path \"details\" because of \"TypeError\"\n    at Document.invalidate (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:3351:32)\n    at Subdocument.invalidate (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:229:12)\n    at EmbeddedDocument.$set (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:1486:12)\n    at EmbeddedDocument.$set (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:1132:16)\n    at EmbeddedDocument.Document (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\document.js:178:12)\n    at EmbeddedDocument.Subdocument (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:34:12)\n    at EmbeddedDocument.ArraySubdocument [as constructor] (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\arraySubdocument.js:44:15)\n    at new EmbeddedDocument (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\schema\\documentArray.js:131:17)\n    at Proxy._cast (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\documentArray\\methods\\index.js:103:17)\n    at Proxy._mapCast (C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\mongoose\\lib\\types\\array\\methods\\index.js:263:17)",
+  "userId": "681fcd8cbef2a6603d658c27",
+  "formData": {
+    "idType": "national_id",
+    "idNumber": "45645654",
+    "firstName": "Mohamed Ali",
+    "lastName": "Faouel",
+    "dateOfBirth": "2007-05-05",
+    "address": "Al ouardanine 23 hay enozha, monastir 5010",
+    "city": "Sousse",
+    "province": "Monastir",
+    "zipCode": "5010"
+  },
+  "files": [
+    "frontId",
+    "backId",
+    "selfieWithId",
+    "signature"
+  ]
+}
+2025-05-11T05:24:37.653Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "userId": {
+        "stringValue": "\"{\n  userId: new ObjectId('681fcd8cbef2a6603d658c27'),\n  type: 'login_success',\n  title: 'New Login Detected',\n  message: 'A successful login was detected on your account.',\n  metadata: {\n    ip: '::1',\n    userAgent: 'Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.26100.3912',\n    location: '::1'\n  }\n}\"",
+        "valueType": "Object",
+        "kind": "ObjectId",
+        "value": {
+          "userId": "681fcd8cbef2a6603d658c27",
+          "type": "login_success",
+          "title": "New Login Detected",
+          "message": "A successful login was detected on your account.",
+          "metadata": {
+            "ip": "::1",
+            "userAgent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.26100.3912",
+            "location": "::1"
+          }
+        },
+        "path": "userId",
+        "reason": {},
+        "name": "CastError",
+        "message": "Cast to ObjectId failed for value \"{\n  userId: new ObjectId('681fcd8cbef2a6603d658c27'),\n  type: 'login_success',\n  title: 'New Login Detected',\n  message: 'A successful login was detected on your account.',\n  metadata: {\n    ip: '::1',\n    userAgent: 'Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.26100.3912',\n    location: '::1'\n  }\n}\" (type Object) at path \"userId\" because of \"BSONError\""
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: userId: Cast to ObjectId failed for value \"{\n  userId: new ObjectId('681fcd8cbef2a6603d658c27'),\n  type: 'login_success',\n  title: 'New Login Detected',\n  message: 'A successful login was detected on your account.',\n  metadata: {\n    ip: '::1',\n    userAgent: 'Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.26100.3912',\n    location: '::1'\n  }\n}\" (type Object) at path \"userId\" because of \"BSONError\""
+  },
+  "userId": {
+    "userId": "681fcd8cbef2a6603d658c27",
+    "type": "login_success",
+    "title": "New Login Detected",
+    "message": "A successful login was detected on your account.",
+    "metadata": {
+      "ip": "::1",
+      "userAgent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.26100.3912",
+      "location": "::1"
+    }
+  },
+  "type": "alert"
+}
+2025-05-12T19:28:35.926Z [ERROR]: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-05-12T19:29:04.612Z [ERROR]: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-05-13T23:00:14.304Z [ERROR]: Error submitting KYC: You already have a pending KYC submission. Please wait for it to be reviewed.
+	Metadata: {
+  "stack": "Error: You already have a pending KYC submission. Please wait for it to be reviewed.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:60:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:117:20"
+}
+2025-05-13T23:00:14.305Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-13T23:00:15.399Z [ERROR]: Error submitting KYC: You already have a pending KYC submission. Please wait for it to be reviewed.
+	Metadata: {
+  "stack": "Error: You already have a pending KYC submission. Please wait for it to be reviewed.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:60:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:117:20"
+}
+2025-05-13T23:00:15.399Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-13T23:00:17.494Z [ERROR]: Error submitting KYC: You already have a pending KYC submission. Please wait for it to be reviewed.
+	Metadata: {
+  "stack": "Error: You already have a pending KYC submission. Please wait for it to be reviewed.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:60:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:117:20"
+}
+2025-05-13T23:00:17.495Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-14T00:21:45.655Z [ERROR]: Error submitting KYC: You already have a pending KYC submission. Please wait for it to be reviewed.
+	Metadata: {
+  "stack": "Error: You already have a pending KYC submission. Please wait for it to be reviewed.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:60:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:117:20"
+}
+2025-05-14T00:21:45.655Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-14T00:21:47.747Z [ERROR]: Error submitting KYC: You already have a pending KYC submission. Please wait for it to be reviewed.
+	Metadata: {
+  "stack": "Error: You already have a pending KYC submission. Please wait for it to be reviewed.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:60:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:117:20"
+}
+2025-05-14T00:21:47.748Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-14T00:21:50.839Z [ERROR]: Error submitting KYC: You already have a pending KYC submission. Please wait for it to be reviewed.
+	Metadata: {
+  "stack": "Error: You already have a pending KYC submission. Please wait for it to be reviewed.\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:60:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:117:20"
+}
+2025-05-14T00:21:50.840Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "6823b97fe4f55fed03b2ac6f"
+}
+2025-05-14T21:24:27.162Z [ERROR]: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-05-14T21:25:28.750Z [ERROR]: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
