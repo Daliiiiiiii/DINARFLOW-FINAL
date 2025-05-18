@@ -1,4 +1,4 @@
-import SupportTicket from '../models/support.js';
+import SupportTicket from '../models/Support.js';
 
 // Create a new support ticket
 export const createTicket = async (req, res) => {
