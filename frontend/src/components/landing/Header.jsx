@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Logo from '../ui/Logo';
 import MobileMenu from './MobileMenu';
 import { Menu } from 'lucide-react';
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -34,15 +35,15 @@ const Header = () => {
             <a href="#about" className="text-gray-300 hover:text-white transition-colors">
               About
             </a>
-            <a href="/login" className="text-gray-300 hover:text-white transition-colors">
+            <Link to="/login" className="text-gray-300 hover:text-white transition-colors">
               Login
-            </a>
-            <a
-              href="/register"
+            </Link>
+            <Link
+              to="/register"
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors"
             >
               Get Started
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
