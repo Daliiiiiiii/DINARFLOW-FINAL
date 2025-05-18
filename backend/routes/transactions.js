@@ -206,11 +206,19 @@ router.post('/transfer', [
     });
 
     // Emit WebSocket events for real-time balance updates
+    console.log('[DEBUG] Emitting balance update to sender:', {
+      userId: sender._id,
+      walletBalance: updatedSender.walletBalance
+    });
     req.app.get('wsService').emitToUser(sender._id, 'balance:updated', {
       userId: sender._id,
       walletBalance: updatedSender.walletBalance
     });
 
+    console.log('[DEBUG] Emitting balance update to recipient:', {
+      userId: recipientUser._id,
+      walletBalance: updatedRecipient.walletBalance
+    });
     req.app.get('wsService').emitToUser(recipientUser._id, 'balance:updated', {
       userId: recipientUser._id,
       walletBalance: updatedRecipient.walletBalance

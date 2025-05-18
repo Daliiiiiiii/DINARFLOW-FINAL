@@ -81,6 +81,16 @@ class WebSocketService {
                     this.emitToUser(socket.user._id, 'balance:updated', data);
                 });
 
+                // Handle support ticket message updates
+                socket.on('support:message', (data) => {
+                    // Emit to the ticket owner
+                    this.emitToUser(data.ticket.userId, 'support:message:received', data);
+                    // Emit to admin room if message is from user
+                    if (data.message.type === 'user') {
+                        this.emitToRoom('admin', 'support:message:received', data);
+                    }
+                });
+
                 // Handle disconnect
                 socket.on('disconnect', async (reason) => {
                     console.log(`User disconnected: ${socket.user.email}, reason: ${reason}`);

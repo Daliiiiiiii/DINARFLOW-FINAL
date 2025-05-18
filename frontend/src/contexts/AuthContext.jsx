@@ -16,13 +16,13 @@ export const useAuth = () => {
 // Helper function to format user data consistently
 const formatUserData = (user) => {
   if (!user) return null;
-  
+
   // Get the first part of the email (before @) if no display name is set
   const emailUsername = user.email?.split('@')[0] || '';
-  
+
   // Ensure kyc object exists with proper structure
   const kyc = user.kyc || {};
-  
+
   return {
     ...user,
     displayName: user.displayName || user.name || emailUsername || 'User',
@@ -104,7 +104,7 @@ export function AuthProvider({ children }) {
 
   const validatePhoneNumber = (phone) => {
     const cleanPhone = phone.replace(/[\s-]/g, '');
-    
+
     // Handle different formats
     if (cleanPhone.startsWith('+216')) {
       const remainingDigits = cleanPhone.slice(4);
@@ -121,7 +121,7 @@ export function AuthProvider({ children }) {
     } else if (/^\d{8}$/.test(cleanPhone)) {
       return `+216${cleanPhone}`;
     }
-    
+
     throw new Error('Invalid phone number format. Must be either +216XXXXXXXX, 216XXXXXXXX, or XXXXXXXX');
   }
 
@@ -145,10 +145,10 @@ export function AuthProvider({ children }) {
       }
 
       localStorage.setItem('token', data.token)
-      
+
       // Format user data consistently using the helper function
       const formattedUser = formatUserData(data.user);
-      
+
       // Update state with formatted user data
       setCurrentUser(formattedUser);
       setUserProfile(formattedUser);
@@ -191,36 +191,36 @@ export function AuthProvider({ children }) {
 
   async function login(email, password, rememberMe = false) {
     try {
-      const { data } = await api.post('/api/auth/login', { 
-        email, 
+      const { data } = await api.post('/api/auth/login', {
+        email,
         password,
-        rememberMe 
+        rememberMe
       });
-      
+
       // If email is not verified, don't complete login
       if (!data.user.emailVerified) {
         return data.user;
       }
-      
+
       // Store token with appropriate expiration
       if (rememberMe) {
         localStorage.setItem('token', data.token);
       } else {
         sessionStorage.setItem('token', data.token);
       }
-      
+
       // Set the token in axios headers
       api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
-      
+
       // Check for stored profile picture
       const storedProfilePicture = localStorage.getItem('profilePicture');
-      
+
       // Format user data consistently
       const formattedUser = formatUserData({
         ...data.user,
         profilePicture: storedProfilePicture || data.user.profilePicture
       });
-      
+
       // Update state with formatted user data
       setCurrentUser(formattedUser);
       setUserProfile(formattedUser);
@@ -247,7 +247,7 @@ export function AuthProvider({ children }) {
     try {
       // Store profile picture before clearing data
       const profilePicture = currentUser?.profilePicture;
-      
+
       // Disconnect WebSocket if it exists
       const socket = window.socket;
       if (socket) {
@@ -255,27 +255,27 @@ export function AuthProvider({ children }) {
         socket.disconnect();
         window.socket = null;
       }
-      
+
       await api.post('/api/auth/logout');
-      
+
       // Clear all auth-related data
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('user');
-      
+
       // Clear axios headers
       delete api.defaults.headers.common['Authorization'];
-      
+
       // Reset state
       setCurrentUser(null);
       setUserProfile(null);
-      
+
       // Restore profile picture if it exists
       if (profilePicture) {
         localStorage.setItem('profilePicture', profilePicture);
       }
-      
+
       toast.success('Logged out successfully!');
     } catch (error) {
       console.error('Logout error:', error);
@@ -330,14 +330,24 @@ export function AuthProvider({ children }) {
   };
 
   const updateWalletBalance = (newBalance) => {
-    setCurrentUser(prev => prev ? { ...prev, walletBalance: newBalance } : null);
-    setUserProfile(prev => prev ? { ...prev, walletBalance: newBalance } : null);
+    setCurrentUser(prev => {
+      if (!prev) return null;
+      const updated = { ...prev, walletBalance: newBalance };
+      console.log('[DEBUG] Updating currentUser balance:', updated);
+      return updated;
+    });
+    setUserProfile(prev => {
+      if (!prev) return null;
+      const updated = { ...prev, walletBalance: newBalance };
+      console.log('[DEBUG] Updating userProfile balance:', updated);
+      return updated;
+    });
   };
 
   async function startKycVerification(formData, files) {
     try {
       const formDataObj = new FormData();
-      
+
       // Validate document types
       const validTypes = ['image/jpeg', 'image/png'];
       const maxSize = 5 * 1024 * 1024; // 5MB
@@ -348,11 +358,11 @@ export function AuthProvider({ children }) {
           formDataObj.append(key, formData[key]);
         }
       });
-      
+
       // Validate files before upload
       const requiredFiles = ['frontId', 'backId', 'selfieWithId', 'signature'];
       const missingFiles = requiredFiles.filter(fileName => !formData.get(fileName));
-      
+
       if (missingFiles.length > 0) {
         throw new Error(`Missing required files: ${missingFiles.join(', ')}`);
       }
@@ -408,7 +418,7 @@ export function AuthProvider({ children }) {
           }
         }
       };
-      
+
       setCurrentUser(updatedUser);
       setUserProfile(updatedUser);
 

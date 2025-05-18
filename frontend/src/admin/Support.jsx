@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Search,
@@ -13,6 +13,8 @@ import {
   Download
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import api from '../lib/axios';
+import { io } from 'socket.io-client';
 
 const Support = () => {
   const { theme } = useTheme();
@@ -21,87 +23,150 @@ const Support = () => {
   const [statusFilter, setStatusFilter] = useState('all');
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [replyMessage, setReplyMessage] = useState('');
+  const [tickets, setTickets] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [socket, setSocket] = useState(null);
+  const messagesEndRef = useRef(null);
 
-  const tickets = [
-    {
-      id: 1,
-      user: {
-        name: 'John Doe',
-        email: 'john@example.com'
-      },
-      subject: 'Unable to complete bank transfer',
-      message: 'I tried to transfer money to my bank account but the transaction failed. Can you help me?',
-      status: 'open',
-      priority: 'high',
-      createdAt: '2024-03-15 14:30',
-      messages: [
-        {
-          id: 1,
-          type: 'user',
-          content: 'I tried to transfer money to my bank account but the transaction failed. Can you help me?',
-          timestamp: '2024-03-15 14:30'
-        },
-        {
-          id: 2,
-          type: 'admin',
-          content: 'Hello John, I understand you\'re having issues with bank transfers. Could you please provide the transaction ID?',
-          timestamp: '2024-03-15 14:35'
-        }
-      ]
-    },
-    {
-      id: 2,
-      user: {
-        name: 'Sarah Smith',
-        email: 'sarah@example.com'
-      },
-      subject: 'KYC verification pending',
-      message: 'My KYC verification has been pending for 3 days. When will it be approved?',
-      status: 'in_progress',
-      priority: 'medium',
-      createdAt: '2024-03-15 12:45',
-      messages: [
-        {
-          id: 1,
-          type: 'user',
-          content: 'My KYC verification has been pending for 3 days. When will it be approved?',
-          timestamp: '2024-03-15 12:45'
-        }
-      ]
-    },
-    {
-      id: 3,
-      user: {
-        name: 'Ahmed Ben Ali',
-        email: 'ahmed@example.com'
-      },
-      subject: 'Account locked',
-      message: 'My account was locked due to suspicious activity but I can assure you it was me.',
-      status: 'closed',
-      priority: 'high',
-      createdAt: '2024-03-15 10:20',
-      messages: [
-        {
-          id: 1,
-          type: 'user',
-          content: 'My account was locked due to suspicious activity but I can assure you it was me.',
-          timestamp: '2024-03-15 10:20'
-        },
-        {
-          id: 2,
-          type: 'admin',
-          content: 'We\'ve reviewed your account and unlocked it. Please enable 2FA for additional security.',
-          timestamp: '2024-03-15 10:30'
-        },
-        {
-          id: 3,
-          type: 'user',
-          content: 'Thank you! I\'ve enabled 2FA now.',
-          timestamp: '2024-03-15 10:35'
-        }
-      ]
+  useEffect(() => {
+    fetchTickets();
+  }, []);
+
+  // Initialize WebSocket connection
+  useEffect(() => {
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    const newSocket = io(import.meta.env.VITE_API_URL || 'http://localhost:3000', {
+      auth: { token }
+    });
+
+    newSocket.on('connect', () => {
+      console.log('WebSocket connected for admin support');
+    });
+
+    newSocket.on('support:message:received', (data) => {
+      console.log('Received support message:', data);
+      if (selectedTicket && data.ticket._id === selectedTicket._id) {
+        setSelectedTicket(prev => {
+          // Check if message already exists
+          const messageExists = prev.messages.some(msg => 
+            msg._id === data.message._id || 
+            (msg.timestamp === data.message.timestamp && msg.content === data.message.content)
+          );
+          if (messageExists) return prev;
+          return {
+            ...prev,
+            messages: [...prev.messages, data.message]
+          };
+        });
+      }
+      // Refresh tickets list to update latest message
+      fetchTickets();
+    });
+
+    setSocket(newSocket);
+
+    return () => {
+      newSocket.disconnect();
+    };
+  }, [selectedTicket?._id]);
+
+  const fetchTickets = async () => {
+    try {
+      setIsLoading(true);
+      const response = await api.get('/api/support/admin/tickets');
+      // Fetch user details for each ticket
+      const ticketsWithUsers = await Promise.all(
+        response.data.map(async (ticket) => {
+          try {
+            const userResponse = await api.get(`/api/admin/users/${ticket.userId}`);
+            return {
+              ...ticket,
+              user: userResponse.data,
+              priority: ticket.priority || 'medium'
+            };
+          } catch (error) {
+            console.error('Error fetching user details:', error);
+            return {
+              ...ticket,
+              user: {
+                name: 'Unknown User',
+                email: 'N/A'
+              },
+              priority: ticket.priority || 'medium'
+            };
+          }
+        })
+      );
+      setTickets(ticketsWithUsers);
+    } catch (error) {
+      console.error('Error fetching tickets:', error);
+    } finally {
+      setIsLoading(false);
     }
-  ];
+  };
+
+  const handleSendReply = async () => {
+    if (!replyMessage.trim() || !selectedTicket) return;
+
+    // Create optimistic message
+    const optimisticMessage = {
+      _id: Date.now().toString(), // Temporary ID
+      content: replyMessage.trim(),
+      type: 'agent',
+      timestamp: new Date().toISOString()
+    };
+
+    // Update UI optimistically
+    setSelectedTicket(prev => ({
+      ...prev,
+      messages: [...prev.messages, optimisticMessage]
+    }));
+    setReplyMessage('');
+
+    try {
+      setIsLoading(true);
+      const response = await api.post(`/api/support/admin/tickets/${selectedTicket._id}/messages`, {
+        content: replyMessage.trim(),
+        type: 'agent'
+      });
+      
+      // Update with real data from server
+      setSelectedTicket(response.data);
+      // Update the ticket in the tickets list
+      setTickets(prevTickets => 
+        prevTickets.map(ticket => 
+          ticket._id === selectedTicket._id ? response.data : ticket
+        )
+      );
+    } catch (error) {
+      console.error('Error sending reply:', error);
+      // Revert optimistic update on error
+      setSelectedTicket(prev => ({
+        ...prev,
+        messages: prev.messages.filter(msg => msg._id !== optimisticMessage._id)
+      }));
+      setReplyMessage(replyMessage); // Restore the message
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleCloseTicket = async () => {
+    if (!selectedTicket) return;
+
+    try {
+      setIsLoading(true);
+      await api.patch(`/api/support/admin/tickets/${selectedTicket._id}/status`, {
+        status: 'closed'
+      });
+      await fetchTickets();
+      setSelectedTicket(null);
+    } catch (error) {
+      console.error('Error closing ticket:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const getStatusBadge = (status) => {
     const config = {
@@ -129,7 +194,7 @@ const Support = () => {
     );
   };
 
-  const getPriorityBadge = (priority) => {
+  const getPriorityBadge = (priority = 'medium') => {
     const config = {
       low: 'bg-gray-100 dark:bg-gray-900/20 text-gray-800 dark:text-gray-200',
       medium: 'bg-yellow-100 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200',
@@ -143,24 +208,23 @@ const Support = () => {
     );
   };
 
-  const handleSendReply = () => {
-    if (!replyMessage.trim()) return;
+  const filteredTickets = tickets.filter(ticket => {
+    const matchesSearch = ticket.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         ticket.messages[0]?.content.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = statusFilter === 'all' || ticket.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
 
-    // Add reply to messages
-    const newMessage = {
-      id: selectedTicket.messages.length + 1,
-      type: 'admin',
-      content: replyMessage,
-      timestamp: new Date().toISOString()
-    };
-
-    setSelectedTicket(prev => ({
-      ...prev,
-      messages: [...prev.messages, newMessage]
-    }));
-
-    setReplyMessage('');
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
+  // Scroll to bottom when messages change
+  useEffect(() => {
+    if (selectedTicket) {
+      scrollToBottom();
+    }
+  }, [selectedTicket?.messages]);
 
   return (
       <div className="space-y-6">
@@ -264,9 +328,9 @@ const Support = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                {tickets.map((ticket) => (
+                {filteredTickets.map((ticket) => (
                   <motion.tr 
-                    key={ticket.id}
+                    key={ticket._id}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
@@ -282,15 +346,15 @@ const Support = () => {
                           <User className="w-5 h-5 text-gray-400" />
                         </div>
                         <div>
-                          <div className="font-medium">{ticket.user.name}</div>
-                          <div className="text-sm text-gray-500 dark:text-gray-400">{ticket.user.email}</div>
+                          <div className="font-medium">{ticket.user?.name || 'Unknown User'}</div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">{ticket.user?.email || 'N/A'}</div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
                       <div className="font-medium">{ticket.subject}</div>
                       <div className="text-sm text-gray-500 dark:text-gray-400 truncate max-w-xs">
-                        {ticket.message}
+                        {ticket.messages[0]?.content}
                       </div>
                     </td>
                     <td className="px-6 py-4">
@@ -315,7 +379,10 @@ const Support = () => {
                           Reply
                         </button>
                         {ticket.status !== 'closed' && (
-                          <button className="px-3 py-1 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm">
+                          <button
+                            onClick={handleCloseTicket}
+                            className="px-3 py-1 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm"
+                          >
                             Close
                           </button>
                         )}
@@ -330,7 +397,7 @@ const Support = () => {
           <div className="p-6 border-t border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div className="text-sm text-gray-500 dark:text-gray-400">
-                Showing 1 to 3 of 3 entries
+                Showing 1 to {filteredTickets.length} of {tickets.length} entries
               </div>
               <div className="flex items-center gap-2">
                 <button className={`px-4 py-2 text-sm font-medium rounded-lg ${
@@ -376,12 +443,11 @@ const Support = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm text-gray-500 dark:text-gray-400">User</label>
-                      <div className="font-medium">{selectedTicket.user.name}</div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">{selectedTicket.user.email}</div>
+                      <div className="font-medium">{selectedTicket.userId}</div>
                     </div>
                     <div>
                       <label className="block text-sm text-gray-500 dark:text-gray-400">Created</label>
-                      <div className="font-medium">{selectedTicket.createdAt}</div>
+                      <div className="font-medium">{new Date(selectedTicket.createdAt).toLocaleString()}</div>
                     </div>
                     <div>
                       <label className="block text-sm text-gray-500 dark:text-gray-400">Status</label>
@@ -389,7 +455,7 @@ const Support = () => {
                     </div>
                     <div>
                       <label className="block text-sm text-gray-500 dark:text-gray-400">Priority</label>
-                      <div>{getPriorityBadge(selectedTicket.priority)}</div>
+                      <div>{getPriorityBadge(selectedTicket.priority || 'medium')}</div>
                     </div>
                   </div>
 
@@ -402,49 +468,47 @@ const Support = () => {
                   <div className="space-y-4">
                     {selectedTicket.messages.map((message) => (
                       <div
-                        key={message.id}
-                        className={`flex ${message.type === 'admin' ? 'justify-end' : 'justify-start'}`}
+                        key={message._id}
+                        className={`flex ${message.type === 'agent' ? 'justify-end' : 'justify-start'}`}
                       >
-                        <div className={`max-w-[70%] ${message.type === 'admin' ? 'bg-blue-600/20' : isDark ? 'bg-gray-800' : 'bg-gray-100'} rounded-lg p-4`}>
+                        <div className={`max-w-[70%] ${message.type === 'agent' ? 'bg-blue-600/20' : isDark ? 'bg-gray-800' : 'bg-gray-100'} rounded-lg p-4`}>
                           <div className="text-sm">{message.content}</div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400 mt-2">{message.timestamp}</div>
+                          <div className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                            {new Date(message.timestamp).toLocaleString()}
+                          </div>
                         </div>
                       </div>
                     ))}
+                    <div ref={messagesEndRef} />
                   </div>
 
-                  {/* Reply Form */}
+                  {/* Reply Box */}
                   {selectedTicket.status !== 'closed' && (
-                    <div className="pt-4">
-                      <textarea
-                        value={replyMessage}
-                        onChange={(e) => setReplyMessage(e.target.value)}
-                        placeholder="Type your reply..."
-                        className={`w-full px-4 py-3 rounded-lg border ${
-                          isDark
-                            ? 'bg-gray-800/50 border-gray-700 text-white focus:border-blue-500'
-                            : 'border-gray-300 focus:border-blue-500'
-                        } focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 resize-none`}
-                        rows={4}
-                      />
-                      <div className="flex items-center justify-end gap-3 mt-4">
-                        <button
-                          onClick={() => setSelectedTicket(null)}
-                          className={`px-4 py-2 rounded-lg ${
+                    <div className="mt-6">
+                      <div className="flex gap-4">
+                        <input
+                          type="text"
+                          value={replyMessage}
+                          onChange={(e) => setReplyMessage(e.target.value)}
+                          placeholder="Type your reply..."
+                          className={`flex-1 px-4 py-2 rounded-lg border ${
                             isDark
-                              ? 'bg-gray-800 hover:bg-gray-700'
-                              : 'bg-gray-100 hover:bg-gray-200'
-                          } transition-colors`}
-                        >
-                          Cancel
-                        </button>
+                              ? 'bg-gray-800 border-gray-700 text-white focus:border-blue-500'
+                              : 'border-gray-300 focus:border-blue-500'
+                          } focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}
+                        />
                         <button
                           onClick={handleSendReply}
-                          disabled={!replyMessage.trim()}
-                          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2"
+                          disabled={!replyMessage.trim() || isLoading}
+                          className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+                            replyMessage.trim() && !isLoading
+                              ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                              : isDark
+                                ? 'bg-gray-800 text-gray-400'
+                                : 'bg-gray-100 text-gray-400'
+                          }`}
                         >
-                          <Send className="w-4 h-4" />
-                          Send Reply
+                          <Send className="w-5 h-5" />
                         </button>
                       </div>
                     </div>

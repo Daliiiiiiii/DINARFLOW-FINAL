@@ -57,34 +57,6 @@ const Transfer = () => {
   const kycStatus = userProfile?.kyc?.status || 'unverified';
   const rejectionReason = userProfile?.kyc?.verificationNotes || '';
 
-  // Listen for WebSocket balance updates
-  useEffect(() => {
-    const socket = window.socket;
-    if (!socket) return;
-
-    const handleBalanceUpdate = (data) => {
-      if (data.walletBalance !== undefined) {
-        // Update sender's balance
-        if (data.userId === userProfile._id) {
-          updateWalletBalance(data.walletBalance);
-        }
-        // Update recipient's balance if they are selected
-        if (recipientUser && data.userId === recipientUser._id) {
-          setRecipientUser(prev => ({
-            ...prev,
-            walletBalance: data.walletBalance
-          }));
-        }
-      }
-    };
-
-    socket.on('balance:updated', handleBalanceUpdate);
-
-    return () => {
-      socket.off('balance:updated', handleBalanceUpdate);
-    };
-  }, [updateWalletBalance, userProfile._id, recipientUser]);
-
   // Clear transfer status after 5 seconds
   useEffect(() => {
     if (transferStatus) {

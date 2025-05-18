@@ -30,7 +30,7 @@ import LoadingSpinner from '../assets/animations/LoadingSpinner';
 import NotificationList from '../components/notifications/NotificationList';
 
 const DashboardLayout = () => {
-  const { loading, userProfile, logout, visualRole, toggleVisualRole } = useAuth();
+  const { loading, userProfile, logout, visualRole, toggleVisualRole, updateWalletBalance } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
@@ -52,26 +52,52 @@ const DashboardLayout = () => {
 
   // Initialize WebSocket connection
   useEffect(() => {
-    if (userProfile) {
+    if (userProfile && userProfile._id) {  // Check for both userProfile and _id
       const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      console.log('[DEBUG] Initializing WebSocket connection for user:', userProfile._id);
+      
       const newSocket = io(import.meta.env.VITE_API_URL || 'http://localhost:3000', {
         auth: { token },
         reconnection: true,
-        reconnectionAttempts: 5,
+        reconnectionAttempts: Infinity,
         reconnectionDelay: 1000,
-        timeout: 10000
+        reconnectionDelayMax: 5000,
+        timeout: 20000,
+        transports: ['websocket', 'polling']
       });
 
       newSocket.on('connect', () => {
-        console.log('WebSocket connected for user:', userProfile.email);
+        console.log('[DEBUG] WebSocket connected for user:', userProfile.email);
+        // Join user's room
+        const userRoom = `user:${userProfile._id}`;
+        console.log('[DEBUG] Joining user room:', userRoom);
+        newSocket.emit('join:room', userRoom);
       });
 
       newSocket.on('connect_error', (error) => {
-        console.error('WebSocket connection error:', error);
+        console.error('[DEBUG] WebSocket connection error:', error);
       });
 
       newSocket.on('disconnect', (reason) => {
-        console.log('WebSocket disconnected:', reason);
+        console.log('[DEBUG] WebSocket disconnected:', reason);
+        if (reason === 'io server disconnect') {
+          // Server initiated disconnect, try to reconnect
+          newSocket.connect();
+        }
+      });
+
+      // Add global balance update listener
+      newSocket.on('balance:updated', (data) => {
+        console.log('[DEBUG] Received global balance update:', data);
+        if (data.userId === userProfile._id && data.walletBalance !== undefined) {
+          console.log('[DEBUG] Updating global wallet balance:', data.walletBalance);
+          // Force a re-render by updating the state
+          updateWalletBalance(data.walletBalance);
+          // Dispatch a custom event to notify other components
+          window.dispatchEvent(new CustomEvent('walletBalanceUpdated', { 
+            detail: { balance: data.walletBalance }
+          }));
+        }
       });
 
       // Store socket instance globally
@@ -80,13 +106,15 @@ const DashboardLayout = () => {
 
       return () => {
         if (newSocket) {
-          console.log('Cleaning up WebSocket connection');
+          console.log('[DEBUG] Cleaning up WebSocket connection');
           newSocket.disconnect();
           window.socket = null;
         }
       };
+    } else {
+      console.log('[DEBUG] Cannot initialize WebSocket: userProfile or userProfile._id is missing');
     }
-  }, [userProfile]);
+  }, [userProfile, updateWalletBalance]);
 
   // Handle route changes
   React.useEffect(() => {

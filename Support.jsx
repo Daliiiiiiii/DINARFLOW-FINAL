@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
+import {
   Search,
-  Send, 
-  Clock, 
+  Send,
+  Clock,
   CheckCircle,
   XCircle,
-  User, 
+  User,
   Bot,
   Plus,
   FileText,
@@ -24,10 +24,9 @@ import {
   ThumbsDown,
   Mail
 } from 'lucide-react';
-import { useTheme } from '../contexts/ThemeContext';
-import ActionLoader from '../assets/animations/ActionLoader';
-import api from '../lib/axios';
-import { io } from 'socket.io-client';
+import DashboardLayout from '../../components/dashboard/DashboardLayout';
+import { useTheme } from '../../contexts/ThemeContext';
+import ActionLoader from '../../components/ui/ActionLoader';
 
 const Support = () => {
   const { theme } = useTheme();
@@ -39,167 +38,34 @@ const Support = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [expandedFaq, setExpandedFaq] = useState(null);
   const [showArticle, setShowArticle] = useState(null);
-  const [tickets, setTickets] = useState([]);
-  const [ticketMessages, setTicketMessages] = useState([]);
-  const [newTicketTitle, setNewTicketTitle] = useState('');
-  const [showNewTicketModal, setShowNewTicketModal] = useState(false);
-  const [socket, setSocket] = useState(null);
-  const messagesEndRef = useRef(null);
 
-  // Fetch tickets on mount
-  useEffect(() => {
-    fetchTickets();
-  }, []);
-
-  // Initialize WebSocket connection
-  useEffect(() => {
-    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-    const newSocket = io(import.meta.env.VITE_API_URL || 'http://localhost:3000', {
-      auth: { token }
-    });
-
-    newSocket.on('connect', () => {
-      console.log('WebSocket connected for support');
-    });
-
-    newSocket.on('support:message:received', (data) => {
-      console.log('Received support message:', data);
-      if (selectedTicket && data.ticket._id === selectedTicket._id) {
-        setTicketMessages(prev => {
-          // Check if message already exists
-          const messageExists = prev.some(msg => 
-            msg._id === data.message._id || 
-            (msg.timestamp === data.message.timestamp && msg.content === data.message.content)
-          );
-          if (messageExists) return prev;
-          return [...prev, data.message];
-        });
-      }
-      // Refresh tickets list to update latest message
-      fetchTickets();
-    });
-
-    setSocket(newSocket);
-
-    return () => {
-      newSocket.disconnect();
-    };
-  }, [selectedTicket?._id]);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  // Scroll to bottom when messages change
-  useEffect(() => {
-    scrollToBottom();
-  }, [ticketMessages]);
-
-  const fetchTickets = async () => {
-    try {
-      setIsLoading(true);
-      const res = await api.get('/api/support/tickets');
-      setTickets(res.data);
-    } catch (err) {
-      // Optionally show error
-    } finally {
-      setIsLoading(false);
+  const tickets = [
+    {
+      id: 1,
+      subject: "Failed Bank Transfer",
+      priority: "high",
+      status: "open",
+      lastUpdate: "2 min ago",
+      category: "Payment",
+      messages: [
+        {
+          id: 1,
+          type: 'user',
+          content: 'Hi, my bank transfer failed but the money was deducted from my account.',
+          timestamp: '2024-03-15 14:30'
+        }
+      ]
+    },
+    {
+      id: 2,
+      subject: "Account Verification Issue",
+      priority: "medium",
+      status: "pending",
+      lastUpdate: "1 hour ago",
+      category: "KYC",
+      messages: []
     }
-  };
-
-  const handleNewTicket = async () => {
-    setShowNewTicketModal(true);
-  };
-
-  const handleCreateTicket = async () => {
-    if (!newTicketTitle.trim()) return;
-    try {
-      setIsLoading(true);
-      const res = await api.post('/api/support/tickets', { subject: newTicketTitle });
-      setShowNewTicketModal(false);
-      setNewTicketTitle('');
-      await fetchTickets();
-      setSelectedTicket(res.data);
-      setActiveTab('tickets');
-      fetchTicketMessages(res.data._id);
-    } catch (err) {
-      // Optionally show error
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleCloseTicket = async () => {
-    if (!selectedTicket) return;
-    try {
-      setIsLoading(true);
-      await api.patch(`/api/support/tickets/${selectedTicket._id}/status`, { status: 'closed' });
-      await fetchTickets();
-      setSelectedTicket(null);
-      setTicketMessages([]);
-    } catch (err) {
-      // Optionally show error
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const fetchTicketMessages = async (ticketId) => {
-    try {
-      setIsLoading(true);
-      const res = await api.get(`/api/support/tickets/${ticketId}`);
-      setTicketMessages(res.data.messages || []);
-    } catch (err) {
-      // Optionally show error
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleSelectTicket = (ticket) => {
-    setSelectedTicket(ticket);
-    setActiveTab('tickets');
-    fetchTicketMessages(ticket._id);
-  };
-
-  const handleSendMessage = async () => {
-    if (!message.trim() || !selectedTicket) return;
-    
-    // Create optimistic message
-    const optimisticMessage = {
-      _id: Date.now().toString(), // Temporary ID
-      content: message.trim(),
-      type: 'user',
-      timestamp: new Date().toISOString()
-    };
-
-    // Update UI optimistically
-    setTicketMessages(prev => [...prev, optimisticMessage]);
-    setMessage('');
-
-    try {
-      setIsLoading(true);
-      const response = await api.post(`/api/support/tickets/${selectedTicket._id}/messages`, { 
-        content: message.trim() 
-      });
-      
-      if (response.data) {
-        // Update with real data from server
-        setTicketMessages(response.data.messages || []);
-        // Refresh the tickets list to update the latest message
-        await fetchTickets();
-      }
-    } catch (err) {
-      console.error('Error sending message:', err);
-      // Revert optimistic update on error
-      setTicketMessages(prev => prev.filter(msg => msg._id !== optimisticMessage._id));
-      setMessage(message); // Restore the message
-      // Show error message to user
-      alert(err.response?.data?.message || 'Failed to send message. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  ];
 
   const faqs = [
     {
@@ -287,25 +153,24 @@ const Support = () => {
   };
 
   return (
-    <>
+    <DashboardLayout>
       <div className="min-h-[calc(100vh-8rem)]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`${
-            isDark 
-              ? 'bg-gray-900/50 backdrop-blur-sm border-gray-800' 
+          className={`${isDark
+              ? 'bg-gray-900/50 backdrop-blur-sm border-gray-800'
               : 'bg-white border-gray-200'
-          } border rounded-xl overflow-hidden h-[calc(100vh-12rem)]`}
+            } border rounded-xl overflow-hidden h-[calc(100vh-12rem)]`}
         >
           {/* Support Hub Navigation */}
           <div className="border-b border-gray-800 p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold">Support Center</h1>
-            <button
-                onClick={handleNewTicket}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2"
-            >
+            <div className="flex items-center justify-between mb-6">
+              <h1 className="text-2xl font-bold">Support Center</h1>
+              <button
+                onClick={() => setActiveTab('tickets')}
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2"
+              >
                 <Plus className="w-4 h-4" />
                 New Ticket
               </button>
@@ -313,82 +178,77 @@ const Support = () => {
             <div className="flex gap-4">
               <button
                 onClick={() => setActiveTab('home')}
-                className={`px-4 py-2 rounded-lg transition-colors flex items-center gap-2 ${
-                  activeTab === 'home'
+                className={`px-4 py-2 rounded-lg transition-colors flex items-center gap-2 ${activeTab === 'home'
                     ? 'bg-blue-600 text-white'
                     : isDark
                       ? 'text-gray-400 hover:bg-gray-800'
                       : 'text-gray-600 hover:bg-gray-100'
-                }`}
+                  }`}
               >
                 <LifeBuoy className="w-4 h-4" />
                 Home
               </button>
               <button
                 onClick={() => setActiveTab('tickets')}
-                className={`px-4 py-2 rounded-lg transition-colors flex items-center gap-2 ${
-                  activeTab === 'tickets'
+                className={`px-4 py-2 rounded-lg transition-colors flex items-center gap-2 ${activeTab === 'tickets'
                     ? 'bg-blue-600 text-white'
                     : isDark
                       ? 'text-gray-400 hover:bg-gray-800'
                       : 'text-gray-600 hover:bg-gray-100'
-                }`}
+                  }`}
               >
                 <MessageSquare className="w-4 h-4" />
                 My Tickets
               </button>
               <button
                 onClick={() => setActiveTab('knowledge')}
-                className={`px-4 py-2 rounded-lg transition-colors flex items-center gap-2 ${
-                  activeTab === 'knowledge'
+                className={`px-4 py-2 rounded-lg transition-colors flex items-center gap-2 ${activeTab === 'knowledge'
                     ? 'bg-blue-600 text-white'
                     : isDark
                       ? 'text-gray-400 hover:bg-gray-800'
                       : 'text-gray-600 hover:bg-gray-100'
-                }`}
+                  }`}
               >
                 <Book className="w-4 h-4" />
                 Knowledge Base
-            </button>
+              </button>
             </div>
-        </div>
+          </div>
 
-          <div className="h-[calc(100%-145px)] overflow-y-auto">
-        <AnimatePresence mode="wait">
+          <div className="h-[calc(100%-145px)] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+            <AnimatePresence mode="wait">
               {activeTab === 'home' && (
-            <motion.div
+                <motion.div
                   key="home"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   className="p-6"
-            >
-              {/* Search */}
+                >
+                  {/* Search */}
                   <div className="max-w-2xl mx-auto mb-8">
                     <div className="relative">
                       <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <input
-                    type="text"
+                      <input
+                        type="text"
                         placeholder="Search for help..."
-                        className={`w-full pl-12 pr-4 py-3 ${
-                      isDark
+                        className={`w-full pl-12 pr-4 py-3 ${isDark
                             ? 'bg-gray-800/50 border-gray-700 text-white'
                             : 'bg-gray-50 border-gray-200 text-gray-900'
-                        } border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                  />
-                </div>
-              </div>
+                          } border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                      />
+                    </div>
+                  </div>
 
                   {/* Quick Actions */}
                   <div className="grid md:grid-cols-3 gap-6 mb-12">
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       onClick={() => setActiveTab('tickets')}
-                      className={`p-6 rounded-xl border ${
-                        isDark
+                      className={`p-6 rounded-xl border ${isDark
                           ? 'bg-gray-800/50 border-gray-700 hover:bg-gray-800'
                           : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
-                      } transition-colors text-left group`}
+                        } transition-colors text-left group`}
                     >
                       <div className="flex items-center justify-between mb-4">
                         <div className="w-12 h-12 rounded-lg bg-blue-600/20 flex items-center justify-center">
@@ -403,11 +263,10 @@ const Support = () => {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       onClick={() => setActiveTab('knowledge')}
-                      className={`p-6 rounded-xl border ${
-                        isDark
+                      className={`p-6 rounded-xl border ${isDark
                           ? 'bg-gray-800/50 border-gray-700 hover:bg-gray-800'
                           : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
-                      } transition-colors text-left group`}
+                        } transition-colors text-left group`}
                     >
                       <div className="flex items-center justify-between mb-4">
                         <div className="w-12 h-12 rounded-lg bg-purple-600/20 flex items-center justify-center">
@@ -422,11 +281,10 @@ const Support = () => {
                     <motion.a
                       href="mailto:support@dinarflow.com"
                       whileHover={{ scale: 1.02 }}
-                      className={`p-6 rounded-xl border ${
-                        isDark
+                      className={`p-6 rounded-xl border ${isDark
                           ? 'bg-gray-800/50 border-gray-700 hover:bg-gray-800'
                           : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
-                      } transition-colors text-left group`}
+                        } transition-colors text-left group`}
                     >
                       <div className="flex items-center justify-between mb-4">
                         <div className="w-12 h-12 rounded-lg bg-green-600/20 flex items-center justify-center">
@@ -451,11 +309,10 @@ const Support = () => {
                             setShowArticle(article);
                             setActiveTab('knowledge');
                           }}
-                          className={`p-4 rounded-xl border ${
-                      isDark 
+                          className={`p-4 rounded-xl border ${isDark
                               ? 'bg-gray-800/50 border-gray-700 hover:bg-gray-800'
                               : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
-                          } transition-colors text-left group`}
+                            } transition-colors text-left group`}
                         >
                           <div className="flex items-center justify-between mb-2">
                             <span className="text-sm text-gray-400">{article.category}</span>
@@ -480,36 +337,34 @@ const Support = () => {
                           <h3 className="text-lg font-medium mb-4">{category.category}</h3>
                           <div className="space-y-2">
                             {category.questions.map((faq) => (
-                          <button
+                              <button
                                 key={faq.id}
                                 onClick={() => setExpandedFaq(expandedFaq === faq.id ? null : faq.id)}
-                                className={`w-full p-4 rounded-xl border ${
-                                  isDark
+                                className={`w-full p-4 rounded-xl border ${isDark
                                     ? 'bg-gray-800/50 border-gray-700'
                                     : 'bg-gray-50 border-gray-200'
-                                } transition-colors text-left`}
-                          >
-                            <div className="flex items-center justify-between">
-                              <span className="font-medium">{faq.question}</span>
-                                  <ChevronDown
-                                    className={`w-5 h-5 text-gray-400 transition-transform ${
-                                      expandedFaq === faq.id ? 'rotate-180' : ''
-                                    }`}
-                                  />
-                            </div>
-                          <AnimatePresence>
-                                  {expandedFaq === faq.id && (
-                              <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: 'auto', opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.2 }}
-                                      className="mt-4 text-gray-400"
+                                  } transition-colors text-left`}
                               >
+                                <div className="flex items-center justify-between">
+                                  <span className="font-medium">{faq.question}</span>
+                                  <ChevronDown
+                                    className={`w-5 h-5 text-gray-400 transition-transform ${expandedFaq === faq.id ? 'rotate-180' : ''
+                                      }`}
+                                  />
+                                </div>
+                                <AnimatePresence>
+                                  {expandedFaq === faq.id && (
+                                    <motion.div
+                                      initial={{ height: 0, opacity: 0 }}
+                                      animate={{ height: 'auto', opacity: 1 }}
+                                      exit={{ height: 0, opacity: 0 }}
+                                      transition={{ duration: 0.2 }}
+                                      className="mt-4 text-gray-400"
+                                    >
                                       {faq.answer}
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
+                                    </motion.div>
+                                  )}
+                                </AnimatePresence>
                               </button>
                             ))}
                           </div>
@@ -529,8 +384,8 @@ const Support = () => {
                   className="grid grid-cols-12 h-full"
                 >
                   {/* Ticket List */}
-                  <div className={`col-span-4 border-r ${isDark ? 'border-gray-800' : 'border-gray-200'} h-full`}> 
-                    <div className="p-6 h-full flex flex-col">
+                  <div className={`col-span-4 border-r ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
+                    <div className="p-6">
                       <div className="flex items-center gap-4 mb-6">
                         <div className="relative flex-1">
                           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -539,42 +394,39 @@ const Support = () => {
                             placeholder="Search tickets..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className={`w-full pl-9 pr-4 py-2 ${
-                              isDark
+                            className={`w-full pl-9 pr-4 py-2 ${isDark
                                 ? 'bg-gray-800/50 border-gray-700 text-white'
                                 : 'bg-gray-50 border-gray-200 text-gray-900'
-                            } border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                              } border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
                           />
                         </div>
                         <button
-                          className={`p-2 rounded-lg ${
-                            isDark
+                          className={`p-2 rounded-lg ${isDark
                               ? 'bg-gray-800 hover:bg-gray-700'
                               : 'bg-gray-100 hover:bg-gray-200'
-                          } transition-colors`}
+                            } transition-colors`}
                         >
                           <Filter className="w-5 h-5 text-gray-400" />
                         </button>
                       </div>
-                      <div className="space-y-4 flex-1 overflow-y-auto">
+
+                      <div className="space-y-4">
                         {tickets.map((ticket) => (
                           <button
-                            key={ticket._id}
-                            onClick={() => handleSelectTicket(ticket)}
-                            className={`w-full p-4 rounded-xl ${
-                              isDark
+                            key={ticket.id}
+                            onClick={() => setSelectedTicket(ticket)}
+                            className={`w-full p-4 rounded-xl ${isDark
                                 ? 'hover:bg-gray-800/50'
                                 : 'hover:bg-gray-50'
-                            } transition-colors border ${
-                              selectedTicket?._id === ticket._id
+                              } transition-colors border ${selectedTicket?.id === ticket.id
                                 ? 'border-blue-500'
                                 : isDark
                                   ? 'border-gray-800'
                                   : 'border-gray-200'
-                            }`}
+                              }`}
                           >
                             <div className="flex items-start justify-between mb-2">
-                              <h3 className="font-medium text-left">{ticket.subject || 'No Title'}</h3>
+                              <h3 className="font-medium text-left">{ticket.subject}</h3>
                               <span className="text-xs text-gray-400">{ticket.lastUpdate}</span>
                             </div>
                             <div className="flex items-center gap-2 mb-2">
@@ -595,12 +447,12 @@ const Support = () => {
                   </div>
 
                   {/* Ticket Details */}
-                  <div className="col-span-8">
+                  <div className="col-span-8 h-full flex flex-col">
                     {selectedTicket ? (
                       <div className="h-full flex flex-col">
-                        <div className="p-6 border-b border-gray-800">
+                        <div className="p-6 border-b border-gray-800 flex-shrink-0">
                           <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-xl font-semibold">{selectedTicket.subject || 'No Title'}</h2>
+                            <h2 className="text-xl font-semibold">{selectedTicket.subject}</h2>
                             <div className="flex items-center gap-2">
                               <span className={`px-2 py-0.5 rounded-full text-xs ${getPriorityColor(selectedTicket.priority)}`}>
                                 {selectedTicket.priority}
@@ -611,32 +463,23 @@ const Support = () => {
                             </div>
                           </div>
                           <div className="flex items-center gap-4 text-sm text-gray-400">
-                            <span>Ticket #{selectedTicket._id}</span>
-                          </div>
-                          <div className="mt-4">
-                            {selectedTicket.status !== 'closed' && (
-                              <button
-                                onClick={handleCloseTicket}
-                                className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-sm"
-                              >
-                                Close Ticket
-                              </button>
-                            )}
+                            <span>Ticket #{selectedTicket.id}</span>
+                            <span>Created {selectedTicket.lastUpdate}</span>
+                            <span>{selectedTicket.category}</span>
                           </div>
                         </div>
 
-                        <div className="flex-1 overflow-y-auto p-6">
-                          {ticketMessages.map((message) => (
+                        <div className="flex-1 overflow-y-auto p-6 min-h-0">
+                          {selectedTicket.messages.map((message) => (
                             <div
-                              key={message._id}
+                              key={message.id}
                               className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'} mb-6`}
                             >
                               <div className={`max-w-[70%] flex gap-4 ${message.type === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
-                                <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
-                                  message.type === 'user'
+                                <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${message.type === 'user'
                                     ? 'bg-blue-600/20'
                                     : 'bg-purple-600/20'
-                                }`}>
+                                  }`}>
                                   {message.type === 'user' ? (
                                     <User className="w-5 h-5 text-blue-400" />
                                   ) : (
@@ -644,18 +487,16 @@ const Support = () => {
                                   )}
                                 </div>
                                 <div>
-                                  <div className={`rounded-xl px-6 py-3 ${
-                                    message.type === 'user'
+                                  <div className={`rounded-xl px-6 py-3 ${message.type === 'user'
                                       ? 'bg-blue-600 text-white'
                                       : isDark
                                         ? 'bg-gray-800 text-gray-100'
                                         : 'bg-gray-100 text-gray-900'
-                                  }`}>
+                                    }`}>
                                     {message.content}
                                   </div>
-                                  <div className={`flex items-center gap-2 mt-1 text-xs ${
-                                    isDark ? 'text-gray-400' : 'text-gray-500'
-                                  }`}>
+                                  <div className={`flex items-center gap-2 mt-1 text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'
+                                    }`}>
                                     {new Date(message.timestamp).toLocaleTimeString()}
                                     {message.type === 'user' && (
                                       <CheckCheck className="w-4 h-4 text-blue-400" />
@@ -665,7 +506,6 @@ const Support = () => {
                               </div>
                             </div>
                           ))}
-                          <div ref={messagesEndRef} />
                         </div>
 
                         <div className="p-6 border-t border-gray-800">
@@ -675,34 +515,27 @@ const Support = () => {
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
                                 placeholder="Type your message..."
-                                className={`w-full pr-12 py-3 pl-4 ${
-                                  isDark
+                                className={`w-full pr-12 py-3 pl-4 ${isDark
                                     ? 'bg-gray-800/50 border-gray-700 text-white'
                                     : 'bg-gray-50 border-gray-200 text-gray-900'
-                                } border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none`}
+                                  } border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none`}
                                 rows={1}
                                 style={{ minHeight: '44px', maxHeight: '120px' }}
                               />
                               <button
                                 className="absolute right-3 top-1/2 -translate-y-1/2"
-                                type="button"
-                                tabIndex={-1}
-                                disabled
+                                onClick={() => { }}
                               >
                                 <Paperclip className="w-5 h-5 text-gray-400" />
                               </button>
                             </div>
                             <button
-                              className={`px-6 py-3 rounded-xl transition-colors flex items-center gap-2 ${
-                                message.trim()
+                              className={`px-6 py-3 rounded-xl transition-colors flex items-center gap-2 ${message.trim()
                                   ? 'bg-blue-600 hover:bg-blue-700 text-white'
                                   : isDark
                                     ? 'bg-gray-800 text-gray-400'
                                     : 'bg-gray-100 text-gray-400'
-                              }`}
-                              onClick={handleSendMessage}
-                              disabled={!message.trim()}
-                              type="button"
+                                }`}
                             >
                               <Send className="w-5 h-5" />
                             </button>
@@ -742,11 +575,10 @@ const Support = () => {
                         Back to Articles
                       </button>
 
-                      <div className={`p-8 rounded-xl border ${
-                        isDark
+                      <div className={`p-8 rounded-xl border ${isDark
                           ? 'bg-gray-800/50 border-gray-700'
                           : 'bg-gray-50 border-gray-200'
-                      }`}>
+                        }`}>
                         <div className="max-w-3xl mx-auto">
                           <div className="flex items-center gap-4 mb-2">
                             <span className="text-sm text-gray-400">{showArticle.category}</span>
@@ -760,18 +592,16 @@ const Support = () => {
                           <div className="mt-8 pt-8 border-t border-gray-700">
                             <p className="text-gray-400 mb-4">Was this article helpful?</p>
                             <div className="flex items-center gap-4">
-                              <button className={`p-2 rounded-lg ${
-                                isDark
+                              <button className={`p-2 rounded-lg ${isDark
                                   ? 'hover:bg-gray-700'
                                   : 'hover:bg-gray-200'
-                              } transition-colors`}>
+                                } transition-colors`}>
                                 <ThumbsUp className="w-5 h-5 text-gray-400" />
                               </button>
-                              <button className={`p-2 rounded-lg ${
-                                isDark
+                              <button className={`p-2 rounded-lg ${isDark
                                   ? 'hover:bg-gray-700'
                                   : 'hover:bg-gray-200'
-                              } transition-colors`}>
+                                } transition-colors`}>
                                 <ThumbsDown className="w-5 h-5 text-gray-400" />
                               </button>
                             </div>
@@ -787,11 +617,10 @@ const Support = () => {
                           <input
                             type="text"
                             placeholder="Search articles..."
-                            className={`w-full pl-12 pr-4 py-3 ${
-                              isDark
+                            className={`w-full pl-12 pr-4 py-3 ${isDark
                                 ? 'bg-gray-800/50 border-gray-700 text-white'
                                 : 'bg-gray-50 border-gray-200 text-gray-900'
-                            } border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                              } border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500`}
                           />
                         </div>
                       </div>
@@ -802,11 +631,10 @@ const Support = () => {
                             key={article.id}
                             whileHover={{ scale: 1.02 }}
                             onClick={() => setShowArticle(article)}
-                            className={`p-6 rounded-xl border ${
-                              isDark
+                            className={`p-6 rounded-xl border ${isDark
                                 ? 'bg-gray-800/50 border-gray-700 hover:bg-gray-800'
                                 : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
-                            } transition-colors text-left group`}
+                              } transition-colors text-left group`}
                           >
                             <div className="flex items-center justify-between mb-2">
                               <span className="text-sm text-gray-400">{article.category}</span>
@@ -822,45 +650,15 @@ const Support = () => {
                       </div>
                     </>
                   )}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </motion.div>
       </div>
 
-      {/* New Ticket Modal */}
-      {showNewTicketModal && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-          <div className={`bg-white dark:bg-gray-900 p-8 rounded-xl shadow-xl w-full max-w-md`}>
-            <h2 className="text-xl font-semibold mb-4">Create New Ticket</h2>
-            <input
-              type="text"
-              value={newTicketTitle}
-              onChange={e => setNewTicketTitle(e.target.value)}
-              placeholder="Enter ticket title..."
-              className="w-full mb-4 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <div className="flex justify-end gap-2">
-              <button
-                onClick={() => setShowNewTicketModal(false)}
-                className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleCreateTicket}
-                className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
-              >
-                Create
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       <ActionLoader isLoading={isLoading} />
-      </>
+    </DashboardLayout>
   );
 };
 

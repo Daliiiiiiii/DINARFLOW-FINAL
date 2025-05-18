@@ -23,6 +23,7 @@ import fileRoutes from './routes/files.js';
 import bankAccountRoutes from './routes/bankAccounts.js';
 import adminRoutes from './routes/admin.js';
 import testRoutes from './routes/test.js';
+import supportRoutes from './routes/support.js';
 
 dotenv.config();
 
@@ -92,7 +93,7 @@ app.use(cors({
     return callback(null, true);
   },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
   exposedHeaders: ['Authorization'],
   maxAge: 86400 // 24 hours
@@ -124,6 +125,7 @@ app.use('/api/files', fileRoutes);
 app.use('/api/bank-accounts', bankAccountRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/test', testRoutes);
+app.use('/api/support', supportRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
