@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
+// https://vitejs.dev/config
 export default defineConfig({
   plugins: [react()],
   server: {
@@ -9,7 +9,8 @@ export default defineConfig({
     strictPort: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        /*target: 'http://localhost:3000',*/
+        target: 'https://dinarflow.onrender.com/',
         changeOrigin: true,
         secure: false,
         ws: true,
@@ -27,7 +28,8 @@ export default defineConfig({
         }
       },
       '/uploads': {
-        target: 'http://localhost:3000',
+        /*target: 'http://localhost:3000',*/
+        target: 'https://dinarflow.onrender.com/',
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path
