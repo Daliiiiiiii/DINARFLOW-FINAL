@@ -1,4 +1,4 @@
-const PUBLIC_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const PUBLIC_URL = import.meta.env.VITE_API_URL || 'https://dinarflow.onrender.com';
 
 export const getFileUrl = (path) => {
     if (!path) return ''
