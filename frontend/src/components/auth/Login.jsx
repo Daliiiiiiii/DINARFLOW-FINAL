@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { useAuth } from '../../contexts/AuthContext'
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react'
 import Logo from '../ui/Logo'
+import api from '../../lib/axios'
 
 const Login = () => {
   const { login } = useAuth()
@@ -31,32 +32,23 @@ const Login = () => {
       setError('')
       setLoading(true)
 
-      // Check if account is pending deletion
-      const response = await fetch('/api/auth/check-status', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email })
-      })
+      // Check if account is pending deletion using configured axios instance
+      try {
+        const { data } = await api.post('/api/auth/check-status', { email })
 
-      const data = await response.json()
+        if (data.accountStatus === 'pending_deletion') {
+          setShowDeletionWarning(true)
+          setPendingLoginData({ email, password })
+          return
+        }
 
-      if (response.status === 404) {
-        throw new Error('No account found with this email')
+        await proceedWithLogin(email, password, rememberMe)
+      } catch (error) {
+        if (error.response?.status === 404) {
+          throw new Error('No account found with this email')
+        }
+        throw new Error(error.response?.data?.error || 'Failed to check account status')
       }
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to check account status')
-      }
-
-      if (data.accountStatus === 'pending_deletion') {
-        setShowDeletionWarning(true)
-        setPendingLoginData({ email, password })
-        return
-      }
-
-      await proceedWithLogin(email, password, rememberMe)
     } catch (error) {
       setError(error.message || 'Failed to sign in. Please check your credentials.')
     } finally {
