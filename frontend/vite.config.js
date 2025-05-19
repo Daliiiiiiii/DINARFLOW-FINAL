@@ -28,7 +28,8 @@ export default defineConfig({
         }
       },
       '/uploads': {
-        target: 'http://localhost:3000',
+        /*target: 'http://localhost:3000',*/
+        target: 'https://dinarflow.onrender.com/',
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path
