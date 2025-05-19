@@ -9,7 +9,8 @@ export default defineConfig({
     strictPort: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        /*target: 'http://localhost:3000',*/
+        target: 'https://dinarflow.onrender.com/',
         changeOrigin: true,
         secure: false,
         ws: true,
