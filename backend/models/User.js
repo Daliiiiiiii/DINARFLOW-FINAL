@@ -180,13 +180,18 @@ const userSchema = new mongoose.Schema({
   toJSON: {
     virtuals: true,
     transform: function (doc, ret) {
+      // Use the API_URL from environment, fallback to localhost only in development
+      const baseUrl = process.env.NODE_ENV === 'production'
+        ? process.env.API_URL
+        : (process.env.API_URL || 'http://localhost:3000');
+
+      // Transform profile picture URL
       if (ret.profilePicture && !ret.profilePicture.startsWith('http')) {
-        const baseUrl = process.env.API_URL || 'http://localhost:3000';
         ret.profilePicture = `${baseUrl}${ret.profilePicture}`;
       }
-      // Add KYC document URL transformation for allAttempts
+
+      // Transform KYC document URLs for all submissions
       if (ret.kyc && Array.isArray(ret.kyc.submissions)) {
-        const baseUrl = process.env.API_URL || 'http://localhost:3000';
         ret.kyc.submissions.forEach(sub => {
           if (sub.documents) {
             Object.keys(sub.documents).forEach(key => {
@@ -197,15 +202,16 @@ const userSchema = new mongoose.Schema({
           }
         });
       }
-      // Add KYC document URL transformation for top-level documents
+
+      // Transform top-level document URLs
       if (ret.documents) {
-        const baseUrl = process.env.API_URL || 'http://localhost:3000';
         Object.keys(ret.documents).forEach(key => {
           if (ret.documents[key] && !ret.documents[key].startsWith('http')) {
             ret.documents[key] = `${baseUrl}/uploads/${ret.documents[key]}`;
           }
         });
       }
+
       delete ret.password;
       delete ret.__v;
       return ret;

@@ -76,7 +76,7 @@ const ProfileForm = () => {
   const getImageUrl = (path) => {
     if (!path) return null;
     if (path.startsWith('http')) return path;
-    return `${import.meta.env.VITE_API_URL || 'http://localhost:3000'}${path}`;
+    return `${api.defaults.baseURL}${path}`;
   };
 
   const handlePhotoChange = async (e) => {
