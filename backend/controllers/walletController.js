@@ -7,7 +7,6 @@ import mongoose from 'mongoose';
 export const createWallet = async (req, res) => {
     try {
         const { userId } = req.body; // Get userId from request body instead of req.user
-
         if (!userId) {
             return res.status(400).json({ error: 'User ID is required' });
         }
@@ -37,7 +36,8 @@ export const createWallet = async (req, res) => {
 
 export const getWallet = async (req, res) => {
     try {
-        const { userId } = req.user;
+        const { userId } = req.query;
+        console.log('userId 5ra ', userId);
         const wallet = await Wallet.findOne({ userId });
 
         if (!wallet) {

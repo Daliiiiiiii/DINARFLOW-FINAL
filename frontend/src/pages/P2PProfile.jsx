@@ -30,7 +30,8 @@ const P2PProfile = () => {
   const { theme } = useTheme();
   const { currentUser } = useAuth();
   const isDark = theme === 'dark';
-  const { userId: urlUserId } = useParams();
+  let { userId } = useParams();
+  console.log('userIdss', userId);
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('profile');
   const [isEditing, setIsEditing] = useState(false);
@@ -40,7 +41,7 @@ const P2PProfile = () => {
   const [loading, setLoading] = useState(true);
   
   // Calculate if this is the user's own profile
-  const isOwnProfile = !urlUserId || urlUserId === 'undefined' || urlUserId === 'profile' || urlUserId === currentUser?._id;
+  const isOwnProfile = !userId || userId === 'undefined' || userId === 'profile' || userId === currentUser?._id;
   
   // Handle navigation and profile fetching in a single effect
   useEffect(() => {
@@ -60,20 +61,20 @@ const P2PProfile = () => {
           navigate('/login', { replace: true });
           return;
         }
+        console.log('userId', userId);
 
         // Handle redirect first if needed
-        if (!urlUserId || urlUserId === 'undefined' || urlUserId === 'profile') {
+        if (!userId || userId === 'undefined' || userId === 'profile') {
           console.log('Redirecting to own profile');
-          navigate(`/p2p/profile/${currentUser._id}`, { replace: true });
+          navigate(`/p2p/${currentUser._id}`, { replace: true });
           return; // Let the effect re-run with the new URL
         }
-
         // Use the userId from URL
-        const targetUserId = urlUserId;
+        const targetUserId = userId;
         
         console.log('Fetching profile for user:', targetUserId);
         console.log('Current user ID:', currentUser._id);
-        console.log('URL user ID:', urlUserId);
+        console.log('URL user ID:', userId);
         console.log('Is own profile:', isOwnProfile);
 
         try {
@@ -207,7 +208,7 @@ const P2PProfile = () => {
       isMounted = false;
       controller.abort();
     };
-  }, [urlUserId, currentUser, navigate, isOwnProfile]);
+  }, [userId, currentUser, navigate, isOwnProfile]);
 
   // If no current user, don't render anything
   if (!currentUser) {

@@ -128,7 +128,7 @@ const CryptoWallet = () => {
   const fetchWalletData = async () => {
     try {
       setIsLoading(true);
-      const response = await api.get('/api/wallet');
+      const response = await api.get('/api/wallet', { params: { userId: userProfile._id } });
       setWalletData(response.data);
     } catch (error) {
       console.error('Error fetching wallet data:', error);
@@ -187,8 +187,9 @@ const CryptoWallet = () => {
         <p className="text-gray-500">No wallet found</p>
         <button
           onClick={async () => {
+            console.log('userProfile',  { userId: userProfile._id });
             try {
-              await api.post('/api/wallet/create');
+              await api.post('/api/wallet/create', { userId: userProfile._id });
               fetchWalletData();
             } catch (error) {
               toast.error('Failed to create wallet');

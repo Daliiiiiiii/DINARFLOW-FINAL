@@ -4949,3 +4949,24 @@
   "type": "transaction",
   "title": "Withdrawn 500.00 TND"
 }
+2025-05-22T21:44:57.197Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-22T21:51:05.191Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T22:21:10.217Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-22T22:21:48.286Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-22T22:27:45.673Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-22T22:28:47.520Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-22T22:34:31.434Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-22T22:34:36.796Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-05-22T22:35:32.587Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
