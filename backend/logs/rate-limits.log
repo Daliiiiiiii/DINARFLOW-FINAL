@@ -4934,3 +4934,18 @@
 	Metadata: {}
 2025-05-22T21:34:21.960Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
 	Metadata: {}
+2025-05-22T21:36:16.090Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Withdrawn 2000.00 TND"
+}
+2025-05-22T21:36:25.821Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Deposited 2100.00 TND"
+}
+2025-05-22T21:36:34.527Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Withdrawn 500.00 TND"
+}
