@@ -1,4 +1,4 @@
-const PUBLIC_URL = import.meta.env.VITE_API_URL || 'https://dinarflow.onrender.com';
+const PUBLIC_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 export const getFileUrl = (path) => {
     if (!path) return ''
@@ -6,21 +6,29 @@ export const getFileUrl = (path) => {
 }
 
 export const getImageUrl = (path, options = {}) => {
-    if (!path) return ''
+    if (!path) return '';
 
-    const { width, height, quality = 80 } = options
-    let url = path.startsWith('http') ? path : `${PUBLIC_URL}${path}`
+    // If it's already a full URL, return it as is
+    if (path.startsWith('http')) return path;
 
+    // Remove any leading slashes to prevent double slashes
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+
+    // Get the base URL from environment variables
+    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+    let url = `${baseUrl}/${cleanPath}`;
+
+    const { width, height, quality = 80 } = options;
     if (width || height) {
-        const params = new URLSearchParams()
-        if (width) params.append('w', width)
-        if (height) params.append('h', height)
-        params.append('q', quality)
+        const params = new URLSearchParams();
+        if (width) params.append('w', width);
+        if (height) params.append('h', height);
+        params.append('q', quality);
 
-        url = `${url}?${params.toString()}`
+        url = `${url}?${params.toString()}`;
     }
 
-    return url
+    return url;
 }
 
 export const getAssetUrl = (path) => {

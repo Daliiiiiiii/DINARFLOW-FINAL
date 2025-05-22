@@ -29,6 +29,10 @@ import AdminSupport from './admin/Support'
 import AdminSettings from './admin/Settings'
 import AdminKYC from './admin/KYC'
 import UserProfile from './admin/UserProfile'
+import P2P from './pages/P2P'
+import Notifications from './pages/Notifications'
+import CryptoWallet from './pages/CryptoWallet'
+import P2PProfile from './pages/P2PProfile'
 
 // Layouts
 import AuthLayout from './layouts/AuthLayout'
@@ -164,6 +168,10 @@ const AppContent = () => {
             <Route path="settings" element={<Settings />} />
             <Route path="support" element={<Support />} />
             <Route path="bank-transfer" element={<BankTransfer />} />
+            <Route path="p2p" element={<P2P />} />
+            <Route path="p2p/:userId" element={<P2PProfile />} />
+            <Route path="notifications" element={<Notifications />} />
+            <Route path="crypto-wallet" element={<CryptoWallet />} />
           </Route>
 
           {/* Admin Routes - Separated from Dashboard Routes */}

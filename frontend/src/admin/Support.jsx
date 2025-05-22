@@ -15,6 +15,7 @@ import {
 import { useTheme } from '../contexts/ThemeContext';
 import api from '../lib/axios';
 import { io } from 'socket.io-client';
+import { useTranslation } from 'react-i18next';
 
 const Support = () => {
   const { theme } = useTheme();
@@ -27,6 +28,7 @@ const Support = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [socket, setSocket] = useState(null);
   const messagesEndRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchTickets();
@@ -229,22 +231,22 @@ const Support = () => {
   return (
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold">Support Tickets</h1>
+          <h1 className="text-2xl font-bold">{t('admin.supportTickets')}</h1>
           <div className="flex items-center gap-3">
             <span className={`px-3 py-1 rounded-lg ${
               isDark ? 'bg-gray-800' : 'bg-gray-100'
             }`}>
-              <span className="text-yellow-400 font-medium">8</span> Open
+              <span className="text-yellow-400 font-medium">8</span> {t('admin.open')}
             </span>
             <span className={`px-3 py-1 rounded-lg ${
               isDark ? 'bg-gray-800' : 'bg-gray-100'
             }`}>
-              <span className="text-blue-400 font-medium">5</span> In Progress
+              <span className="text-blue-400 font-medium">5</span> {t('admin.inProgress')}
             </span>
             <span className={`px-3 py-1 rounded-lg ${
               isDark ? 'bg-gray-800' : 'bg-gray-100'
             }`}>
-              <span className="text-green-400 font-medium">12</span> Closed
+              <span className="text-green-400 font-medium">12</span> {t('admin.closed')}
             </span>
           </div>
         </div>

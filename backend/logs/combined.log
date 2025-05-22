@@ -3110,3 +3110,671 @@
 2025-05-19T00:28:37.950Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
 2025-05-19T00:36:05.079Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
 2025-05-19T00:39:47.375Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-19T00:39:59.798Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-19T04:34:49.582Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-19T04:42:25.612Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-19T04:46:26.557Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-19T04:46:34.185Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-19T04:47:54.184Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-19T04:50:07.136Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-19T04:51:03.163Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-19T06:28:11.269Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-19T06:34:47.570Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-19T06:52:11.904Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-20T13:58:46.732Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-20T14:03:55.222Z [INFO]: Created notification for user 68250d005b61cc6366eb59ea
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-20T21:51:03.073Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-20T22:03:50.046Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-20T22:35:45.972Z [INFO]: Created notification for user 68250d005b61cc6366eb59ea
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-20T23:07:55.635Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T00:01:35.003Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T00:14:06.280Z [INFO]: Created notification for user 68250d005b61cc6366eb59ea
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T00:21:11.806Z [INFO]: Created notification for user 68250d005b61cc6366eb59ea
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T00:21:56.771Z [INFO]: Created notification for user 68250d005b61cc6366eb59ea
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T00:29:51.630Z [INFO]: Created notification for user 682d0357fc584bbbfc261eab
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T00:29:56.518Z [INFO]: Created notification for user 682d0357fc584bbbfc261eab
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T00:30:02.470Z [INFO]: Created notification for user 682d0357fc584bbbfc261eab
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T00:30:10.341Z [INFO]: Created notification for user 682d0357fc584bbbfc261eab
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T00:32:17.400Z [INFO]: Created notification for user 682d0357fc584bbbfc261eab
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T00:32:22.051Z [INFO]: Created notification for user 682d0357fc584bbbfc261eab
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T00:32:27.692Z [INFO]: Created notification for user 682d0357fc584bbbfc261eab
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T00:32:34.450Z [INFO]: Created notification for user 682d0357fc584bbbfc261eab
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T00:33:34.763Z [INFO]: Created notification for user 682d1f55fc584bbbfc265690
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T00:35:29.751Z [INFO]: Created notification for user 682d1f55fc584bbbfc265690
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T04:28:54.185Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T04:31:18.693Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T08:54:15.186Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T08:54:22.240Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T09:10:06.115Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T09:11:32.114Z [INFO]: Created notification for user 68250d005b61cc6366eb59ea
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T09:53:43.024Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T09:54:01.959Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T09:54:09.871Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T09:54:24.732Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T09:54:31.122Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T09:54:46.661Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T09:56:10.765Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-21T09:57:27.281Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T09:57:38.908Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T09:59:54.291Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T10:00:19.087Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T10:00:25.496Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-21T12:25:19.977Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T12:25:56.041Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T12:26:04.855Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T12:26:21.229Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-21T12:26:29.963Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-21T12:27:11.529Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-21T12:32:12.977Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-21T12:38:11.916Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-21T12:38:28.151Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T12:38:50.963Z [INFO]: Created notification for user 68250d005b61cc6366eb59ea
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T12:39:34.257Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T12:39:48.519Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T12:40:11.456Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-21T12:40:19.548Z [INFO]: Created notification for user 68250d005b61cc6366eb59ea
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T12:41:00.046Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T12:41:48.577Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T12:42:09.317Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-21T12:42:17.673Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T12:42:31.627Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T12:42:38.507Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T12:43:11.841Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T13:04:26.602Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T13:09:36.416Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T13:10:12.170Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-21T13:10:31.842Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T13:12:16.236Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-21T13:12:48.272Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-21T13:12:57.802Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T13:13:07.850Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T13:13:44.841Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T13:14:13.491Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T13:16:43.535Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T13:20:38.962Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T13:20:52.298Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T13:23:45.433Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T13:56:11.497Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-21T13:56:48.908Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T13:59:17.456Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T14:02:01.773Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T14:04:53.756Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T14:06:58.545Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T14:07:08.656Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-21T14:22:35.290Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-21T14:24:23.850Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T14:26:25.082Z [INFO]: Created notification for user 68250d005b61cc6366eb59ea
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T14:28:24.160Z [INFO]: Created notification for user 68250d005b61cc6366eb59ea
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T20:11:08.385Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-21T21:32:54.988Z [INFO]: Created notification for user 68250d005b61cc6366eb59ea
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-21T22:40:11.517Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-21T23:01:28.726Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-21T23:04:38.621Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-21T23:57:52.007Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T00:12:46.206Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T10:48:34.454Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T10:48:43.063Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T10:54:55.931Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T10:55:08.896Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T10:57:15.689Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T11:06:14.064Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:06:21.276Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:07:19.194Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T11:07:49.412Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T11:08:52.329Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:08:56.773Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:09:06.619Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:09:12.715Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:09:24.299Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:10:50.066Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:10:59.934Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:11:12.770Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:11:15.022Z [INFO]: Processing KYC submission
+	Metadata: {
+  "userId": "682e6bde755cf136feedc20b"
+}
+2025-05-22T11:11:15.061Z [ERROR]: Error submitting KYC: Cannot convert undefined or null to object
+	Metadata: {
+  "stack": "TypeError: Cannot convert undefined or null to object\n    at Function.entries (<anonymous>)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:103:55)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:117:20"
+}
+2025-05-22T11:11:15.062Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b"
+}
+2025-05-22T11:11:23.435Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:12:26.996Z [INFO]: Processing KYC submission
+	Metadata: {
+  "userId": "682e6bde755cf136feedc20b"
+}
+2025-05-22T11:12:31.446Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T11:13:13.304Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:13:18.572Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:13:26.936Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:15:17.227Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T11:15:23.477Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T11:15:40.549Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T11:15:56.485Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:16:19.788Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T11:17:44.452Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:18:09.069Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T11:22:44.940Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T11:23:16.848Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:23:31.885Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T11:25:24.075Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T11:32:33.792Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T11:32:36.203Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:33:59.881Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T11:39:42.823Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T11:39:56.864Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T11:40:15.326Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T11:43:20.185Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T11:43:47.142Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T11:44:18.697Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T11:45:20.436Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T11:45:43.767Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T11:45:50.166Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T11:46:33.416Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T12:05:40.477Z [INFO]: Processing KYC submission
+	Metadata: {
+  "userId": "682e6bde755cf136feedc20b"
+}
+2025-05-22T12:05:44.817Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T12:07:11.487Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T12:08:05.495Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T12:09:13.391Z [INFO]: Processing KYC submission
+	Metadata: {
+  "userId": "682e6bde755cf136feedc20b"
+}
+2025-05-22T12:09:17.888Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T12:15:32.503Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T12:17:57.387Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T12:18:29.963Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T12:19:16.752Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T12:30:19.899Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T12:31:16.096Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T12:32:17.334Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T12:32:35.996Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T12:37:06.541Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T12:38:11.025Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T12:40:02.614Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T12:40:28.453Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T12:50:37.693Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T12:53:42.451Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T13:13:11.484Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T13:15:50.681Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T14:12:00.675Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T14:16:55.922Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T14:17:02.180Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T14:17:23.965Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Deposited 10.00 TND"
+}
+2025-05-22T14:19:13.760Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Withdrawn 10.00 TND"
+}
+2025-05-22T14:39:54.019Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Withdrawn 200.00 TND"
+}
+2025-05-22T14:40:01.099Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Deposited 600.00 TND"
+}
+2025-05-22T14:41:12.722Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Withdrawn 600.00 TND"
+}
+2025-05-22T14:41:25.840Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Deposited 600.00 TND"
+}
+2025-05-22T14:42:02.321Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Withdrawn 600.00 TND"
+}
+2025-05-22T14:42:57.195Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Deposited 600.00 TND"
+}
+2025-05-22T15:40:12.283Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Withdrawn 600.00 TND"
+}
+2025-05-22T18:04:13.255Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Deposited 600.00 TND"
+}
+2025-05-22T18:29:54.026Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T18:38:46.286Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-22T18:39:44.629Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Sent 100.00 TND"
+}
+2025-05-22T18:39:44.630Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Received 100.00 TND"
+}
+2025-05-22T18:40:32.510Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Withdrawn 100.00 TND"
+}
+2025-05-22T18:47:07.095Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T18:50:06.747Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T18:54:48.653Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T18:55:55.620Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T18:57:45.631Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T18:59:21.247Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T18:59:54.970Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`feature` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`feature` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert"
+          ],
+          "path": "type",
+          "value": "feature"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "feature"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `feature` is not a valid enum value for path `type`."
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "feature"
+}
+2025-05-22T18:59:56.303Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`feature` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`feature` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert"
+          ],
+          "path": "type",
+          "value": "feature"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "feature"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `feature` is not a valid enum value for path `type`."
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "feature"
+}
+2025-05-22T18:59:58.361Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`feature` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`feature` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert"
+          ],
+          "path": "type",
+          "value": "feature"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "feature"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `feature` is not a valid enum value for path `type`."
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "feature"
+}
+2025-05-22T19:00:01.425Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`feature` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`feature` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert"
+          ],
+          "path": "type",
+          "value": "feature"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "feature"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `feature` is not a valid enum value for path `type`."
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "feature"
+}
+2025-05-22T19:00:32.557Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T19:00:35.241Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "feature",
+  "title": "Feature Notification Subscription"
+}
+2025-05-22T19:00:46.195Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "feature",
+  "title": "Feature Notification Subscription"
+}
+2025-05-22T19:10:13.783Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T19:23:28.934Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T19:23:54.297Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T19:30:57.930Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T19:34:03.492Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "feature",
+  "title": "Feature Notification Subscription"
+}
+2025-05-22T19:34:31.274Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "feature",
+  "title": "Feature Notification Subscription"
+}
+2025-05-22T19:35:53.628Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T19:36:01.382Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T19:46:07.202Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T19:49:44.788Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T19:50:13.265Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T19:50:20.685Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T19:53:29.068Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T19:53:36.839Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T19:53:48.854Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T19:59:28.775Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T20:03:02.788Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T20:04:55.301Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T20:05:02.981Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T20:09:12.877Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T20:15:15.840Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T20:19:58.699Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T20:27:23.990Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T20:35:48.619Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Received 100.00 TND"
+}
+2025-05-22T20:35:48.882Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Sent 100.00 TND"
+}
+2025-05-22T21:16:59.455Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T21:24:03.191Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T21:34:21.960Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net

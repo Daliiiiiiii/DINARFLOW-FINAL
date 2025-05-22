@@ -4,6 +4,8 @@ import { body } from 'express-validator';
 import { NotificationService } from '../services/notificationService.js';
 import User from '../models/User.js';
 import mongoose from 'mongoose';
+import { generateTestRIB } from '../utils/bankUtils.js';
+import BankAccount from '../models/BankAccount.js';
 
 const router = express.Router();
 const notificationService = new NotificationService();
@@ -228,27 +230,57 @@ router.post('/kyc/:userId/approve', [auth, adminAuth], async (req, res) => {
             return res.status(400).json({ error: 'Invalid KYC submission' });
         }
 
-        currentSubmission.status = 'verified';
-        currentSubmission.verifiedAt = new Date();
-        currentSubmission.reviewedBy = req.user._id;
+        // Start a session for transaction
+        const session = await mongoose.startSession();
+        session.startTransaction();
 
-        // Add to audit trail
-        currentSubmission.auditTrail.push({
-            action: 'verified',
-            details: {
-                previousStatus: currentSubmission.status,
-                reviewedBy: req.user._id,
+        try {
+            // Update KYC status
+            currentSubmission.status = 'verified';
+            currentSubmission.verifiedAt = new Date();
+            currentSubmission.reviewedBy = req.user._id;
+
+            // Add to audit trail
+            currentSubmission.auditTrail.push({
+                action: 'verified',
+                details: {
+                    previousStatus: currentSubmission.status,
+                    reviewedBy: req.user._id,
+                    timestamp: new Date()
+                },
                 timestamp: new Date()
-            },
-            timestamp: new Date()
-        });
+            });
 
-        await user.save();
+            // Generate a test RIB for the user
+            const rib = generateTestRIB(user._id);
 
-        res.json({
-            message: 'KYC request verified successfully',
-            reviewedBy: req.user._id
-        });
+            // Create a new bank account for the user
+            const bankAccount = await BankAccount.create([{
+                userId: user._id,
+                name: `${currentSubmission.personalInfo.firstName} ${currentSubmission.personalInfo.lastName}`,
+                accountNumber: rib,
+                bankName: 'Test Bank'
+            }], { session });
+
+            // Update user's KYC status and associate the bank account
+            user.kyc.status = 'verified';
+            user.associatedBankAccount = bankAccount[0]._id;
+
+            await user.save({ session });
+
+            await session.commitTransaction();
+
+            res.json({
+                message: 'KYC request verified successfully',
+                reviewedBy: req.user._id,
+                bankAccount: bankAccount[0]
+            });
+        } catch (error) {
+            await session.abortTransaction();
+            throw error;
+        } finally {
+            session.endSession();
+        }
     } catch (error) {
         console.error('Error verifying KYC request:', error);
         res.status(500).json({ error: 'Error verifying KYC request' });
@@ -647,6 +679,184 @@ router.post('/notifications/security-alert', [
     } catch (error) {
         console.error('Send security alert error:', error);
         res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+// Generate RIB for verified users without bank accounts
+router.post('/users/:userId/generate-rib', [auth, adminAuth], async (req, res) => {
+    try {
+        const user = await User.findById(req.params.userId);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        console.log('Current user state:', {
+            userId: user._id,
+            hasAssociatedBankAccount: !!user.associatedBankAccount,
+            associatedBankAccountId: user.associatedBankAccount
+        });
+
+        // Check if user has an associated bank account AND verify it exists
+        if (user.associatedBankAccount) {
+            const existingBankAccount = await BankAccount.findById(user.associatedBankAccount);
+            if (existingBankAccount) {
+                return res.status(400).json({ error: 'User already has a bank account' });
+            }
+            // If bank account doesn't exist, clear the stale reference
+            user.associatedBankAccount = null;
+            user.bankAccount = null;
+            await user.save();
+        }
+
+        // Start a session for transaction
+        const session = await mongoose.startSession();
+        session.startTransaction();
+
+        try {
+            // Get user's name from KYC submission or use display name
+            const currentSubmission = user.kyc?.submissions?.[user.kyc?.currentSubmission];
+            const userName = currentSubmission?.personalInfo
+                ? `${currentSubmission.personalInfo.firstName} ${currentSubmission.personalInfo.lastName}`
+                : user.displayName;
+
+            // Generate a test RIB for the user
+            const rib = generateTestRIB(user._id);
+
+            // Create a new bank account for the user
+            const bankAccount = await BankAccount.create([{
+                userId: user._id,
+                name: userName,
+                accountNumber: rib,
+                bankName: 'Test Bank'
+            }], { session });
+
+            console.log('Created bank account:', {
+                bankAccountId: bankAccount[0]._id,
+                userId: user._id
+            });
+
+            // Associate the bank account with the user (both fields)
+            user.associatedBankAccount = bankAccount[0]._id;
+            user.bankAccount = {
+                bankName: bankAccount[0].bankName,
+                accountNumber: bankAccount[0].accountNumber
+            };
+            await user.save({ session });
+
+            console.log('Updated user with bank account:', {
+                userId: user._id,
+                associatedBankAccountId: user.associatedBankAccount,
+                bankAccount: user.bankAccount
+            });
+
+            await session.commitTransaction();
+
+            // Fetch the updated user to ensure we have the latest data
+            const updatedUser = await User.findById(user._id).populate('associatedBankAccount');
+
+            console.log('Final user state:', {
+                userId: updatedUser._id,
+                hasAssociatedBankAccount: !!updatedUser.associatedBankAccount,
+                associatedBankAccountId: updatedUser.associatedBankAccount,
+                bankAccount: updatedUser.bankAccount
+            });
+
+            res.json({
+                message: 'RIB generated successfully',
+                bankAccount: bankAccount[0],
+                user: updatedUser
+            });
+        } catch (error) {
+            console.error('Transaction error:', error);
+            await session.abortTransaction();
+            throw error;
+        } finally {
+            session.endSession();
+        }
+    } catch (error) {
+        console.error('Error generating RIB:', error);
+        res.status(500).json({ error: 'Error generating RIB' });
+    }
+});
+
+// Batch generate RIBs for all verified users without bank accounts
+router.post('/users/generate-ribs', [auth, adminAuth], async (req, res) => {
+    try {
+        // Find all verified users without bank accounts
+        const users = await User.find({
+            'kyc.status': 'verified',
+            associatedBankAccount: null
+        });
+
+        if (users.length === 0) {
+            return res.json({
+                message: 'No verified users found without bank accounts',
+                generated: 0
+            });
+        }
+
+        const results = {
+            success: 0,
+            failed: 0,
+            errors: []
+        };
+
+        // Process users in batches to avoid overwhelming the database
+        const batchSize = 10;
+        for (let i = 0; i < users.length; i += batchSize) {
+            const batch = users.slice(i, i + batchSize);
+
+            await Promise.all(batch.map(async (user) => {
+                const session = await mongoose.startSession();
+                session.startTransaction();
+
+                try {
+                    // Get user's name from KYC submission
+                    const currentSubmission = user.kyc.submissions[user.kyc.currentSubmission];
+                    const userName = currentSubmission?.personalInfo
+                        ? `${currentSubmission.personalInfo.firstName} ${currentSubmission.personalInfo.lastName}`
+                        : user.displayName;
+
+                    // Generate a test RIB for the user
+                    const rib = generateTestRIB(user._id);
+
+                    // Create a new bank account for the user
+                    const bankAccount = await BankAccount.create([{
+                        userId: user._id,
+                        name: userName,
+                        accountNumber: rib,
+                        bankName: 'Test Bank'
+                    }], { session });
+
+                    // Associate the bank account with the user
+                    user.associatedBankAccount = bankAccount[0]._id;
+                    await user.save({ session });
+
+                    await session.commitTransaction();
+                    results.success++;
+                } catch (error) {
+                    await session.abortTransaction();
+                    results.failed++;
+                    results.errors.push({
+                        userId: user._id,
+                        error: error.message
+                    });
+                } finally {
+                    session.endSession();
+                }
+            }));
+        }
+
+        res.json({
+            message: 'RIB generation completed',
+            total: users.length,
+            success: results.success,
+            failed: results.failed,
+            errors: results.errors
+        });
+    } catch (error) {
+        console.error('Error batch generating RIBs:', error);
+        res.status(500).json({ error: 'Error batch generating RIBs' });
     }
 });
 

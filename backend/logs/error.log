@@ -578,3 +578,132 @@
 }
 2025-05-14T21:24:27.162Z [ERROR]: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
 2025-05-14T21:25:28.750Z [ERROR]: Error connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-05-22T11:11:15.061Z [ERROR]: Error submitting KYC: Cannot convert undefined or null to object
+	Metadata: {
+  "stack": "TypeError: Cannot convert undefined or null to object\n    at Function.entries (<anonymous>)\n    at KycService.submitKyc (file:///C:/Users/Dali/Downloads/project/backend/services/kycService.js:103:55)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/Dali/Downloads/project/backend/routes/kyc.js:117:20"
+}
+2025-05-22T11:11:15.062Z [ERROR]: Error submitting KYC:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b"
+}
+2025-05-22T18:59:54.970Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`feature` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`feature` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert"
+          ],
+          "path": "type",
+          "value": "feature"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "feature"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `feature` is not a valid enum value for path `type`."
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "feature"
+}
+2025-05-22T18:59:56.303Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`feature` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`feature` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert"
+          ],
+          "path": "type",
+          "value": "feature"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "feature"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `feature` is not a valid enum value for path `type`."
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "feature"
+}
+2025-05-22T18:59:58.361Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`feature` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`feature` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert"
+          ],
+          "path": "type",
+          "value": "feature"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "feature"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `feature` is not a valid enum value for path `type`."
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "feature"
+}
+2025-05-22T19:00:01.425Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`feature` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`feature` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert"
+          ],
+          "path": "type",
+          "value": "feature"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "feature"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `feature` is not a valid enum value for path `type`."
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "feature"
+}

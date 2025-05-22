@@ -180,7 +180,7 @@ const verifyEmail = async (req, res) => {
             message: 'Email verified successfully',
             token,
             user: {
-                id: user._id,
+                _id: user._id,
                 email: user.email,
                 firstName: user.firstName,
                 lastName: user.lastName,
@@ -248,92 +248,54 @@ const login = async (req, res) => {
         user.lastLogin = new Date();
         await user.save();
 
-        // --- DYNAMIC SECURITY DATA ---
-        const userAgent = req.headers['user-agent'] || 'Unknown Device';
-        const parser = new UAParser(userAgent);
-        const browser = parser.getBrowser();
-        const os = parser.getOS();
-        const device = `${browser.name || 'Unknown Browser'} ${browser.version || ''} on ${os.name || 'Unknown OS'} ${os.version || ''}`.trim();
-        let ip = req.headers['x-forwarded-for']?.split(',')[0] || req.ip || '127.0.0.1';
-        if (ip.startsWith('::ffff:')) ip = ip.replace('::ffff:', '');
-        if (ip === '::1') ip = '127.0.0.1';
-        let location = 'Unknown';
-        try {
-            const geo = await axios.get(`http://ip-api.com/json/${ip}`);
-            if (geo.data && geo.data.status === 'success') {
-                location = `${geo.data.city || ''}, ${geo.data.country || ''}`.replace(/^, /, '');
-            }
-        } catch (e) { }
-        const timestamp = format(new Date(), 'PPpp');
-        // --- END DYNAMIC SECURITY DATA ---
-
-        // Send security alert for successful login
-        await notificationService.notifySecurityAlert(
-            user._id,
-            'login_success',
-            {
-                device,
-                ip,
-                location,
-                timestamp,
-                userAgent,
-                secureAccountUrl: 'https://dinarflow.com/security',
-                learnMoreUrl: 'https://dinarflow.com/security/learn-more',
-                supportUrl: 'https://dinarflow.com/support',
-                privacyUrl: 'https://dinarflow.com/privacy',
-                termsUrl: 'https://dinarflow.com/terms',
-                currentYear: new Date().getFullYear()
-            }
-        );
-
-        // If email is not verified, resend verification code
-        if (!user.emailVerified) {
-            const verificationCode = generateVerificationCode();
-            user.verificationCode = verificationCode;
-            user.verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
-            await user.save();
-
-            try {
-                const verificationLink = `http://localhost:5174/verify-email?token=${user.verificationToken}`;
-                await sendEmail({
-                    to: user.email,
-                    subject: 'Verify Your Email Address',
-                    html: path.join('templates', 'verification-email.html'),
-                    context: {
-                        displayName: user.displayName,
-                        verificationCode,
-                        verificationLink,
-                        email: user.email,
-                        currentYear: new Date().getFullYear()
-                    }
-                });
-            } catch (emailError) {
-                console.error('Error sending verification email:', emailError);
-            }
-        }
-
-        // Generate token with appropriate expiration
-        const tokenExpiration = rememberMe ? '30d' : '1d'; // 30 days for remember me, 1 day for normal session
+        // Generate token
         const token = jwt.sign(
             { userId: user._id },
             process.env.JWT_SECRET,
-            { expiresIn: tokenExpiration }
+            { expiresIn: rememberMe ? '30d' : '7d' }
         );
 
-        res.json({
+        // Get user agent info
+        const ua = new UAParser(req.headers['user-agent']);
+        const browserInfo = ua.getBrowser();
+        const osInfo = ua.getOS();
+        const deviceInfo = ua.getDevice();
+
+        // Send security alert for new login
+        await notificationService.notifySecurityAlert(
+            user._id,
+            'new_login',
+            {
+                browser: `${browserInfo.name} ${browserInfo.version}`,
+                os: `${osInfo.name} ${osInfo.version}`,
+                device: deviceInfo.type || 'desktop',
+                ip: req.ip,
+                location: 'Unknown', // You could add IP geolocation here
+                timestamp: new Date()
+            }
+        );
+
+        res.status(200).json({
+            message: 'Login successful',
             token,
             user: {
                 _id: user._id,
                 email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 displayName: user.displayName,
-                role: user.role,
+                profilePicture: user.profilePicture,
+                walletBalance: user.walletBalance,
+                isVerified: user.kycStatus === 'verified',
                 emailVerified: user.emailVerified,
-                twoFactorEnabled: user.twoFactorEnabled
+                role: user.role
             }
         });
     } catch (error) {
         console.error('Login error:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({
+            message: 'An error occurred during login'
+        });
     }
 };
 

@@ -11,11 +11,13 @@ import { useTranslation } from 'react-i18next';
 import KYCOverlay from '../layouts/KYCOverlay';
 import CreditCardInput from '../components/CreditCardInput';
 import ActionAnimation from '../components/ActionAnimation';
+import api from '../lib/axios';
+import ComingSoonOverlay from '../components/ui/ComingSoonOverlay';
 
 const Wallet = () => {
   const { theme } = useTheme();
   const { transactions, fetchTransactions, loading } = useTransactions();
-  const { userProfile } = useAuth();
+  const { userProfile, updateWalletBalance } = useAuth();
   const { t, i18n } = useTranslation();
   const isDark = theme === 'dark';
   const [bankAccount, setBankAccount] = useState(null);
@@ -23,6 +25,7 @@ const Wallet = () => {
   const [isCreditCardOpen, setIsCreditCardOpen] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
   const [animationType, setAnimationType] = useState('processing');
+  const [isQrScanOpen, setIsQrScanOpen] = useState(false);
 
   // Show KYCOverlay if user is not verified
   const showKycOverlay = userProfile && userProfile.kyc?.status !== 'verified';
@@ -83,9 +86,21 @@ const Wallet = () => {
     setAnimationType('processing');
     
     try {
-      // Here you would typically make an API call to process the payment
-      // For now, we'll simulate a successful payment
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Make API call to process the payment and top up wallet
+      const response = await api.post('/api/wallet/top-up', {
+        amount: cardData.amount,
+        cardDetails: {
+          number: cardData.number,
+          name: cardData.name,
+          expiry: cardData.expiry,
+          cvv: cardData.cvv
+        }
+      });
+      
+      // Update local state with new balance
+      if (response.data && response.data.newBalance) {
+        updateWalletBalance(response.data.newBalance);
+      }
       
       setAnimationType('success');
       setTimeout(() => {
@@ -93,6 +108,7 @@ const Wallet = () => {
         setIsCreditCardOpen(false);
       }, 2000);
     } catch (error) {
+      console.error('Top-up failed:', error);
       setAnimationType('error');
       setTimeout(() => {
         setShowAnimation(false);
@@ -143,7 +159,7 @@ const Wallet = () => {
                 {wallet.name}
               </h3>
               <p className="text-3xl font-semibold mb-6">
-                {wallet.currency} {wallet.balance}
+                {wallet.currency} {wallet.balance?.toFixed(2) || '0.00'}
               </p>
               <div className="flex gap-3">
                 <button className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white transition-colors">
@@ -208,9 +224,12 @@ const Wallet = () => {
               <CreditCard className="w-5 h-5 text-blue-400" />
               {t('wallet.addMoney')}
             </button>
-            <button className={`p-4 rounded-lg ${
-              isDark ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-100 hover:bg-gray-200'
-            } transition-colors flex items-center gap-3`}>
+            <button 
+              onClick={() => setIsQrScanOpen(true)}
+              className={`p-4 rounded-lg ${
+                isDark ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-100 hover:bg-gray-200'
+              } transition-colors flex items-center gap-3`}
+            >
               <QrCode className="w-5 h-5 text-blue-400" />
               {t('wallet.scanQr')}
             </button>
@@ -230,64 +249,60 @@ const Wallet = () => {
         >
           <h3 className="text-xl font-semibold mb-6">{t('wallet.recentActivity')}</h3>
           <div className="space-y-4">
-            {transactions.map((activity, index) => (
-              <div
-                key={index}
-                className={`flex items-center justify-between p-4 rounded-lg ${
-                  isDark ? 'bg-gray-800' : 'bg-gray-100'
-                }`}
-              >
-                <div className="flex items-center gap-4">
-                  <div className={`p-2 rounded-lg ${
-                    activity.isPositive ? 'bg-green-500/20' : 'bg-red-500/20'
-                  }`}>
-                    {activity.isPositive ? (
-                      <ArrowDownRight className={`w-5 h-5 ${
-                        activity.isPositive ? 'text-green-400' : 'text-red-400'
-                      }`} />
-                    ) : (
-                      <ArrowUpRight className={`w-5 h-5 ${
-                        activity.isPositive ? 'text-green-400' : 'text-red-400'
-                      }`} />
-                    )}
+            {loading ? (
+              <div className="flex items-center justify-center h-32">
+                <div className="animate-spin rounded-full h-8 w-8 border-4 border-blue-500 border-t-transparent"></div>
+              </div>
+            ) : transactions.length === 0 ? (
+              <p className={`text-center ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                {t('wallet.noTransactions')}
+              </p>
+            ) : (
+              transactions.map((activity, index) => (
+                <div
+                  key={index}
+                  className={`flex items-center justify-between p-4 rounded-lg ${
+                    isDark ? 'bg-gray-800/50' : 'bg-gray-50'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`p-2 rounded-lg ${
+                      activity.isPositive 
+                        ? 'bg-green-500/20 text-green-400' 
+                        : 'bg-red-500/20 text-red-400'
+                    }`}>
+                      {activity.isPositive ? (
+                        <ArrowUpRight className="w-5 h-5" />
+                      ) : (
+                        <ArrowDownRight className="w-5 h-5" />
+                      )}
+                    </div>
+                    <div>
+                      <p className={`font-medium ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
+                        {activity.description}
+                      </p>
+                      <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                        {activity.date}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-medium">{activity.type}</p>
+                  <div className="text-right">
+                    <p className={`font-medium ${
+                      activity.isPositive ? 'text-green-400' : 'text-red-400'
+                    }`}>
+                      {activity.amount}
+                    </p>
                     <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                      {activity.from}
+                      {activity.date}
                     </p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className={`font-medium ${
-                    activity.isPositive ? 'text-green-400' : 'text-red-400'
-                  }`}>
-                    {activity.amount}
-                  </p>
-                  <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                    {activity.date}
-                  </p>
-                </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </motion.div>
 
-        {/* Associated Bank Account */}
-        <div className="mt-8">
-          <h2 className="text-xl font-semibold mb-2">{t('wallet.bankAccount')}</h2>
-          {bankAccountLoading ? (
-            <div className="text-gray-500">Loading bank account...</div>
-          ) : bankAccount ? (
-            <div className="p-4 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-              <div className="mb-1 font-medium">{bankAccount.bankName}</div>
-              <div className="mb-1 text-sm text-gray-500">{bankAccount.accountNumber}</div>
-              <div className="text-lg font-bold text-blue-600 dark:text-blue-400">{bankAccount.balance?.toFixed(2) ?? '0.00'} TND</div>
-            </div>
-          ) : (
-            <div className="text-gray-500 dark:text-gray-400">{t('profile.noBankAccount') || 'No bank account assigned yet. Your bank account will be assigned after KYC review.'}</div>
-          )}
-        </div>
+
       </div>
 
       {/* Credit Card Input Modal */}
@@ -296,6 +311,15 @@ const Wallet = () => {
         onClose={() => setIsCreditCardOpen(false)}
         onSubmit={handleCreditCardSubmit}
       />
+
+      {/* QR Scan Coming Soon Overlay */}
+      {isQrScanOpen && (
+        <ComingSoonOverlay
+          title="QR Code Scanner"
+          description="Scan QR codes to quickly send money to friends and family"
+          onClose={() => setIsQrScanOpen(false)}
+        />
+      )}
 
       {/* Action Animation */}
       <ActionAnimation

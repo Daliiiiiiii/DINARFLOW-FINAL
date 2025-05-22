@@ -22,6 +22,7 @@ import { useNotification } from '../contexts/NotificationContext';
 import api from '../lib/axios';
 import ActionLoader from '../assets/animations/ActionLoader';
 import ReactDOM from 'react-dom';
+import { useTranslation } from 'react-i18next';
 
 const KYC = () => {
   const { theme } = useTheme();
@@ -56,6 +57,7 @@ const KYC = () => {
     sortBy: 'newest'
   });
   const [selectedAttemptIndex, setSelectedAttemptIndex] = useState(null);
+  const { t } = useTranslation();
 
   // Debounce filter changes
   useEffect(() => {
@@ -210,7 +212,7 @@ const KYC = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">KYC Verification</h1>
+        <h1 className="text-2xl font-bold">{t('admin.kycVerification')}</h1>
         <div className="flex items-center gap-3">
           <motion.button
             whileHover={{ scale: 1.02 }}
@@ -222,7 +224,7 @@ const KYC = () => {
           >
             <span className="text-yellow-400 font-medium">
               {statusCounts.pending}
-            </span> Pending
+            </span> {t('admin.pending')}
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.02 }}

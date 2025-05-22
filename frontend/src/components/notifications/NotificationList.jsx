@@ -5,17 +5,22 @@ import { useNotification } from '../../contexts/NotificationContext';
 import api from '../../lib/axios';
 
 const NotificationList = () => {
-  const [notifications, setNotifications] = useState([]);
-  const [unreadCount, setUnreadCount] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { showError } = useNotification();
+  const { 
+    notifications, 
+    setNotifications, 
+    unreadCount, 
+    setUnreadCount,
+    showError 
+  } = useNotification();
 
   const fetchNotifications = async () => {
     try {
       setIsLoading(true);
       const response = await api.get('/api/notifications');
-      setNotifications(response.data);
+      setNotifications(response.data.notifications);
+      setUnreadCount(response.data.notifications.filter(n => !n.read).length);
     } catch (error) {
       showError('Failed to fetch notifications');
     } finally {
@@ -23,18 +28,8 @@ const NotificationList = () => {
     }
   };
 
-  const fetchUnreadCount = async () => {
-    try {
-      const response = await api.get('/api/notifications/unread/count');
-      setUnreadCount(response.data.count);
-    } catch (error) {
-      console.error('Failed to fetch unread count:', error);
-    }
-  };
-
   useEffect(() => {
     fetchNotifications();
-    fetchUnreadCount();
   }, []);
 
   const markAsRead = async (notificationId) => {
@@ -45,7 +40,7 @@ const NotificationList = () => {
           ? { ...notification, read: true }
           : notification
       ));
-      fetchUnreadCount();
+      setUnreadCount(prev => Math.max(0, prev - 1));
     } catch (error) {
       showError('Failed to mark notification as read');
     }
@@ -55,7 +50,7 @@ const NotificationList = () => {
     try {
       await api.delete(`/api/notifications/${notificationId}`);
       setNotifications(notifications.filter(n => n._id !== notificationId));
-      fetchUnreadCount();
+      setUnreadCount(prev => Math.max(0, prev - 1));
     } catch (error) {
       showError('Failed to delete notification');
     }
@@ -147,7 +142,7 @@ const NotificationList = () => {
                       !notification.read ? 'bg-blue-50 dark:bg-blue-900/20' : ''
                     }`}
                   >
-                    <div className="flex items-start justify-between">
+                    <div className="flex items-start">
                       <div className="flex-1">
                         <h4 className="font-medium text-gray-900 dark:text-white">
                           {notification.title}

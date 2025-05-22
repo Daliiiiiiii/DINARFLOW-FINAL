@@ -1,6 +1,7 @@
-import { createContext, useContext, useCallback, useRef } from 'react'
+import { createContext, useContext, useCallback, useRef, useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import PropTypes from 'prop-types'
+import { useAuth } from './AuthContext'
 
 const NotificationContext = createContext()
 
@@ -15,6 +16,32 @@ export const useNotification = () => {
 export const NotificationProvider = ({ children }) => {
   const lastNotification = useRef(null)
   const timeoutRef = useRef(null)
+  const [notifications, setNotifications] = useState([])
+  const [unreadCount, setUnreadCount] = useState(0)
+  const { userProfile } = useAuth()
+
+  useEffect(() => {
+    if (!userProfile) return
+
+    // Listen for real-time notifications
+    const handleNewNotification = (data) => {
+      const { notification } = data
+      setNotifications(prev => [notification, ...prev])
+      setUnreadCount(prev => prev + 1)
+      
+      // Show toast for new notification
+      showNotification('info', notification.title, {
+        description: notification.message
+      })
+    }
+
+    // Subscribe to notification events
+    window.socket?.on('notification:received', handleNewNotification)
+
+    return () => {
+      window.socket?.off('notification:received', handleNewNotification)
+    }
+  }, [userProfile])
 
   const showNotification = useCallback((type, message, options = {}) => {
     // Clear any existing timeout
@@ -82,7 +109,11 @@ export const NotificationProvider = ({ children }) => {
     showSuccess,
     showError,
     showInfo,
-    showWarning
+    showWarning,
+    notifications,
+    setNotifications,
+    unreadCount,
+    setUnreadCount
   }
 
   return (

@@ -86,4 +86,31 @@ router.delete('/', authenticateToken, async (req, res) => {
     }
 });
 
+// Subscribe to feature notification
+router.post('/feature-subscribe', authenticateToken, async (req, res) => {
+    try {
+        const { featureName, featureDescription } = req.body;
+
+        // Create a notification for the feature subscription
+        await notificationService.createNotification(
+            req.user._id,
+            'feature',
+            'Feature Notification Subscription',
+            `You will be notified when ${featureName} is available.`,
+            {
+                featureName,
+                featureDescription,
+                subscribedAt: new Date()
+            }
+        );
+
+        res.json({
+            message: 'Successfully subscribed to feature notification',
+            featureName
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Error subscribing to feature notification' });
+    }
+});
+
 export default router; 

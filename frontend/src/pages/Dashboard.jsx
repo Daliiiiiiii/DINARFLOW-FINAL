@@ -29,7 +29,8 @@ import {
   BarChart3,
   Users,
   TrendingUp,
-  TrendingDown
+  TrendingDown,
+  ChevronDown
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
@@ -71,7 +72,7 @@ const Dashboard = () => {
   const kycStatus = currentUser?.kyc?.status || 'unverified';
   const rejectionReason = currentUser?.kyc?.verificationNotes || '';
 
-  // Mock data for development
+  // Mock data for development and non-verified users
   const mockStats = {
     totalBalance: 5000,
     monthlyIncome: 2500,
@@ -123,40 +124,103 @@ const Dashboard = () => {
     return name.charAt(0).toUpperCase() + name.slice(1);
   };
 
-  const mockChartData = [
-    { name: getMonthName(0), income: 3000, outcome: 1500 },
-    { name: getMonthName(1), income: 2000, outcome: 1000 },
-    { name: getMonthName(2), income: 3500, outcome: 1500 },
-    { name: getMonthName(3), income: 2000, outcome: 780 },
-    { name: getMonthName(4), income: 5000, outcome: 1890 },
-    { name: getMonthName(5), income: 1500, outcome: 890 }
-  ];
+  // Generate mock balance history data
+  const generateMockBalanceHistory = () => {
+    const data = [];
+    const now = new Date();
+    const startDate = new Date(now);
+    startDate.setDate(now.getDate() - 30); // Last 30 days
+
+    let balance = 5000; // Start with a reasonable balance
+    let totalIncome = 0;
+    let totalOutcome = 0;
+    let day = new Date(startDate);
+
+    // Generate more realistic transaction patterns
+    const generateDailyTransactions = () => {
+      const transactions = [];
+      const numTransactions = Math.floor(Math.random() * 3); // 0-2 transactions per day
+      
+      for (let i = 0; i < numTransactions; i++) {
+        const isIncome = Math.random() > 0.6; // 40% chance of income
+        const amount = isIncome 
+          ? Math.floor(Math.random() * 2000) + 500 // Income: 500-2500
+          : Math.floor(Math.random() * 1500) + 200; // Expenses: 200-1700
+        
+        transactions.push({
+          type: isIncome ? 'income' : 'expense',
+          amount: amount // Always positive, we'll track type separately
+        });
+      }
+      
+      return transactions;
+    };
+
+    while (day <= now) {
+      const dailyTransactions = generateDailyTransactions();
+      let dayIncome = 0;
+      let dayExpenses = 0;
+
+      dailyTransactions.forEach(tx => {
+        if (tx.type === 'income') {
+          dayIncome += tx.amount;
+          balance += tx.amount;
+          totalIncome += tx.amount;
+        } else {
+          dayExpenses += tx.amount;
+          balance -= tx.amount;
+          totalOutcome += tx.amount;
+        }
+      });
+
+      // Ensure balance doesn't go below 0
+      if (balance < 0) {
+        const adjustment = Math.abs(balance);
+        dayExpenses -= adjustment;
+        totalOutcome -= adjustment;
+        balance = 0;
+      }
+
+      data.push({
+        name: day.toLocaleDateString(i18n.language, { month: 'short', day: 'numeric' }),
+        income: totalIncome, // Cumulative income
+        outcome: totalOutcome, // Cumulative outcome
+        balance: balance
+      });
+
+      day.setDate(day.getDate() + 1);
+    }
+
+    return data;
+  };
+
+  const mockChartData = generateMockBalanceHistory();
 
   const statsCards = [
     {
       title: t('dashboard.totalBalance'),
-      value: mockStats.totalBalance.toFixed(2),
+      value: showKycOverlay ? mockStats.totalBalance.toFixed(2) : (currentUser?.walletBalance || 0).toFixed(2),
       icon: Wallet,
       trend: '+5.2%',
       trendType: 'up'
     },
     {
       title: t('dashboard.monthlyIncome'),
-      value: mockStats.monthlyIncome.toFixed(2),
+      value: showKycOverlay ? mockStats.monthlyIncome.toFixed(2) : stats.monthlyIncome.toFixed(2),
       icon: TrendingUp,
       trend: '+2.1%',
       trendType: 'up'
     },
     {
       title: t('dashboard.monthlyExpenses'),
-      value: mockStats.monthlyExpenses.toFixed(2),
+      value: showKycOverlay ? mockStats.monthlyExpenses.toFixed(2) : stats.monthlyExpenses.toFixed(2),
       icon: TrendingDown,
       trend: '-1.5%',
       trendType: 'down'
     },
     {
       title: t('dashboard.volume24h'),
-      value: mockStats.volume24h.toLocaleString(),
+      value: showKycOverlay ? mockStats.volume24h.toLocaleString() : stats.volume24h.toLocaleString(),
       icon: BarChart3,
       trend: '+8.3%',
       trendType: 'up'
@@ -164,63 +228,143 @@ const Dashboard = () => {
   ];
 
   useEffect(() => {
-    if (!transactions.length) {
+    // Fetch transactions when component mounts
+    fetchTransactions();
+  }, []);
+
+  useEffect(() => {
+    if (!transactions || transactions.length === 0 || showKycOverlay) {
       setHasData(false);
       return;
     }
 
     setHasData(true);
+    
+    // Normalize user ID
+    const userId = String(currentUser?._id || currentUser?.id);
+    // Get the current date and calculate the start date based on timeRange
     const now = new Date();
-    const startDate = new Date(now.setDate(now.getDate() - parseInt(timeRange)));
+    const startDate = new Date(now);
+    startDate.setDate(now.getDate() - parseInt(timeRange));
 
-    const filteredTransactions = transactions.filter(t => 
-      new Date(t.createdAt) >= startDate
-    );
+    // Sort all transactions by date ascending
+    const allSorted = [...transactions].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
 
-    // Calculate basic stats
-    const income = filteredTransactions
-      .filter(t => t.type === 'received')
-      .reduce((acc, t) => acc + (t.amount || 0), 0);
-
-    const outcome = filteredTransactions
-      .filter(t => t.type === 'sent')
-      .reduce((acc, t) => acc + (t.amount || 0), 0);
-
-    const totalTransactions = filteredTransactions.length;
-
-    setStats({
-      totalBalance: currentUser?.balance || 0,
-      monthlyIncome: income,
-      monthlyExpenses: outcome,
-      volume24h: 0,
-      transactions: {
-        total: totalTransactions,
-        sent: filteredTransactions.filter(t => t.type === 'sent').length,
-        received: filteredTransactions.filter(t => t.type === 'received').length
+    // Find the balance at the start of the range
+    let balance = 0;
+    for (const t of allSorted) {
+      const tDate = new Date(t.createdAt);
+      if (tDate < startDate) {
+        if (t.type === 'transfer') {
+          if (t.subtype === 'send' && String(t.userId) === userId) balance -= Math.abs(t.amount);
+          if (t.subtype === 'receive' && String(t.recipientId) === userId) balance += Math.abs(t.amount);
+        }
+        if (t.type === 'bank') {
+          if (t.subtype === 'deposit' && String(t.userId) === userId) balance += Math.abs(t.amount);
+          if (t.subtype === 'withdrawal' && String(t.userId) === userId) balance -= Math.abs(t.amount);
+        }
       }
+    }
+
+    // Filter transactions within the time range
+    const filteredTransactions = allSorted.filter(t => {
+      const transactionDate = new Date(t.createdAt);
+      return transactionDate >= startDate && transactionDate <= now;
     });
 
-    // Prepare daily chart data
-    const dailyData = {};
-    filteredTransactions.forEach(t => {
-      const date = new Date(t.createdAt).toLocaleDateString();
-      if (!dailyData[date]) {
-        dailyData[date] = { income: 0, outcome: 0 };
+    // Calculate income (money received)
+    const income = filteredTransactions.reduce((acc, t) => {
+      if (
+        (t.type === 'transfer' && t.subtype === 'receive' && String(t.recipientId) === userId) ||
+        (t.type === 'bank' && t.subtype === 'deposit' && String(t.userId) === userId)
+      ) {
+        return acc + Math.abs(t.amount || 0);
       }
-      if (t.type === 'received') {
-        dailyData[date].income += (t.amount || 0);
-      } else {
-        dailyData[date].outcome += (t.amount || 0);
+      return acc;
+    }, 0);
+
+    // Calculate expenses (money sent)
+    const expenses = filteredTransactions.reduce((acc, t) => {
+      if (
+        (t.type === 'transfer' && t.subtype === 'send' && String(t.userId) === userId) ||
+        (t.type === 'bank' && t.subtype === 'withdrawal' && String(t.userId) === userId)
+      ) {
+        return acc + Math.abs(t.amount || 0);
       }
-    });
+      return acc;
+    }, 0);
 
-    const chartDataArray = Object.entries(dailyData).map(([date, data]) => ({
-      date,
-      income: data.income,
-      outcome: data.outcome
-    }));
+    // Calculate 24h volume
+    const last24Hours = new Date(now);
+    last24Hours.setHours(now.getHours() - 24);
+    const volume24h = filteredTransactions
+      .filter(t => new Date(t.createdAt) >= last24Hours)
+      .reduce((acc, t) => acc + Math.abs(t.amount || 0), 0);
 
-    setChartData(chartDataArray);
+    // Count transactions
+    const sentCount = filteredTransactions.filter(t => 
+      t.subtype === 'send' && String(t.userId) === userId
+    ).length;
+    
+    const receivedCount = filteredTransactions.filter(t => 
+      t.subtype === 'receive' && String(t.recipientId) === userId
+    ).length;
+
+    // Update stats with real data only for verified users
+    if (!showKycOverlay) {
+      setStats({
+        totalBalance: currentUser?.walletBalance || 0,
+        monthlyIncome: income,
+        monthlyExpenses: expenses,
+        volume24h: volume24h,
+        transactions: {
+          total: filteredTransactions.length,
+          sent: sentCount,
+          received: receivedCount
+        }
+      });
+    }
+
+    // Generate chart data with running balance
+    const chartData = [];
+    let chartBalance = balance;
+    let day = new Date(startDate);
+    while (day <= now) {
+      const dayStr = day.toLocaleDateString();
+      // Get transactions for this day
+      const dayTxs = allSorted.filter(t => new Date(t.createdAt).toLocaleDateString() === dayStr);
+      let dayIncome = 0, dayExpenses = 0;
+      for (const t of dayTxs) {
+        if (t.type === 'transfer') {
+          if (t.subtype === 'send' && String(t.userId) === userId) {
+            chartBalance -= Math.abs(t.amount);
+            dayExpenses += Math.abs(t.amount);
+          }
+          if (t.subtype === 'receive' && String(t.recipientId) === userId) {
+            chartBalance += Math.abs(t.amount);
+            dayIncome += Math.abs(t.amount);
+          }
+        }
+        if (t.type === 'bank') {
+          if (t.subtype === 'deposit' && String(t.userId) === userId) {
+            chartBalance += Math.abs(t.amount);
+            dayIncome += Math.abs(t.amount);
+          }
+          if (t.subtype === 'withdrawal' && String(t.userId) === userId) {
+            chartBalance -= Math.abs(t.amount);
+            dayExpenses += Math.abs(t.amount);
+          }
+        }
+      }
+      chartData.push({
+        name: day.toLocaleDateString(i18n.language, { month: 'short', day: 'numeric' }),
+        income: dayIncome,
+        outcome: dayExpenses,
+        balance: chartBalance
+      });
+      day.setDate(day.getDate() + 1);
+    }
+    setChartData(chartData);
 
     // Prepare pie chart data
     const typeCounts = filteredTransactions.reduce((acc, t) => {
@@ -236,7 +380,7 @@ const Dashboard = () => {
 
     setPieData(pieDataArray);
 
-  }, [transactions, currentUser, timeRange, t]);
+  }, [transactions, currentUser, timeRange, t, i18n.language]);
 
   const handleRefresh = () => {
     fetchTransactions();
@@ -267,49 +411,169 @@ const Dashboard = () => {
     return (
       <>
         <ActionLoader isLoading={true} />
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
+        <div className="flex items-center justify-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
       </>
     );
   }
 
-  if (!hasData && userProfile?.kycStatus === 'verified') {
+  if (!loading && (!transactions || transactions.length === 0)) {
     return (
-      <div className="flex flex-col items-center justify-center h-[70vh] space-y-6">
-        <div className="flex flex-col items-center">
-          <svg width="96" height="96" fill="none" viewBox="0 0 96 96">
-            <circle cx="48" cy="48" r="46" fill="#F3F4F6" stroke="#CBD5E1" strokeWidth="4" />
-            <path d="M32 60c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="#60A5FA" strokeWidth="3" strokeLinecap="round"/>
-            <circle cx="40" cy="44" r="3" fill="#A5B4FC" />
-            <circle cx="56" cy="44" r="3" fill="#A5B4FC" />
-            <ellipse cx="48" cy="68" rx="8" ry="3" fill="#E0E7EF" />
-          </svg>
-          <h2 className="mt-6 text-2xl font-bold text-gray-700">{t('dashboard.welcome')}</h2>
-          <p className="mt-2 text-gray-500 text-lg text-center max-w-md">
-            {t('dashboard.noTransactions')}<br />
-            {t('dashboard.startBy')}
-          </p>
-        </div>
-        <div className="flex gap-4 mt-4">
-          <button
+      <div className="flex flex-col items-center justify-center min-h-[70vh] space-y-8">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col items-center"
+        >
+          <motion.div 
+            className={`w-32 h-32 rounded-full ${
+              isDark ? 'bg-gray-800' : 'bg-gray-100'
+            } flex items-center justify-center mb-6 relative`}
+            animate={{
+              scale: [1, 1.05, 1],
+              rotate: [0, 5, -5, 0],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut"
+            }}
+          >
+            <motion.div
+              animate={{
+                y: [0, -5, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut"
+              }}
+            >
+              <Wallet className={`w-16 h-16 ${isDark ? 'text-gray-600' : 'text-gray-400'}`} />
+            </motion.div>
+            <motion.div
+              className="absolute inset-0 rounded-full"
+              animate={{
+                boxShadow: [
+                  '0 0 0 0 rgba(59, 130, 246, 0)',
+                  '0 0 0 10px rgba(59, 130, 246, 0.1)',
+                  '0 0 0 0 rgba(59, 130, 246, 0)',
+                ],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          </motion.div>
+          <motion.h2 
+            className="text-3xl font-bold text-center mb-3"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            Welcome to Your Dashboard
+          </motion.h2>
+          <motion.p 
+            className="text-lg text-gray-500 dark:text-gray-400 text-center max-w-md leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            You haven't made any transactions yet.<br />
+            Start by making your first transfer!
+          </motion.p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="flex flex-col sm:flex-row gap-4"
+        >
+          <motion.button
             onClick={handleRefresh}
-            className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow"
+            className={`flex items-center justify-center gap-2 px-6 py-3 rounded-xl ${
+              isDark 
+                ? 'bg-gray-800 hover:bg-gray-700 text-white' 
+                : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+            } transition-colors shadow-sm`}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
             <RefreshCw className="w-5 h-5" />
             {t('dashboard.refreshData')}
-          </button>
-          <a
+          </motion.button>
+          <motion.a
             href="/transfer"
-            className="flex items-center gap-2 px-5 py-2.5 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors shadow"
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-colors shadow-sm"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
             <ArrowUpRight className="w-5 h-5" />
             {t('dashboard.makeTransfer')}
-          </a>
-        </div>
-        <div className="mt-8 bg-blue-50 border border-blue-100 rounded-lg px-6 py-4 text-blue-700 text-center max-w-lg">
-          <strong>{t('dashboard.tip')}:</strong> {t('dashboard.tipText')}
-        </div>
+          </motion.a>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className={`p-6 rounded-2xl ${
+            isDark ? 'bg-blue-900/20 border-blue-800' : 'bg-blue-50 border-blue-100'
+          } border max-w-lg backdrop-blur-sm`}
+        >
+          <motion.div 
+            className="flex items-start gap-4"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            <motion.div 
+              className={`p-2 rounded-lg ${
+                isDark ? 'bg-blue-800/50' : 'bg-blue-100'
+              }`}
+              animate={{
+                rotate: [0, 5, -5, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut"
+              }}
+            >
+              <AlertCircle className={`w-6 h-6 ${
+                isDark ? 'text-blue-400' : 'text-blue-600'
+              }`} />
+            </motion.div>
+            <div>
+              <motion.h3 
+                className="font-semibold mb-2"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
+              >
+                {t('dashboard.tip')}
+              </motion.h3>
+              <motion.p 
+                className={`text-sm ${
+                  isDark ? 'text-blue-300' : 'text-blue-700'
+                }`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+              >
+                {t('dashboard.tipText')}
+              </motion.p>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     );
   }
@@ -323,27 +587,34 @@ const Dashboard = () => {
         />
       )}
       {/* Controls */}
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
         <div className="flex items-center gap-4">
-          <select
-            value={timeRange}
-            onChange={(e) => setTimeRange(e.target.value)}
-            className={`px-4 py-2 rounded-lg border ${
-              isDark
-                ? 'bg-gray-800/50 border-gray-700 text-white'
-                : 'bg-white border-gray-300'
-            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-            disabled={!!showKycOverlay}
-          >
-            <option value="7">{t('dashboard.last7Days')}</option>
-            <option value="30">{t('dashboard.last30Days')}</option>
-            <option value="90">{t('dashboard.last90Days')}</option>
-          </select>
+          <div className="relative">
+            <select
+              value={timeRange}
+              onChange={(e) => setTimeRange(e.target.value)}
+              className={`appearance-none pl-4 pr-10 py-2.5 rounded-xl border ${
+                isDark
+                  ? 'bg-gray-800/50 border-gray-700 text-white hover:bg-gray-700/50'
+                  : 'bg-white border-gray-200 hover:bg-gray-50'
+              } focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 shadow-sm cursor-pointer`}
+              disabled={!!showKycOverlay}
+            >
+              <option value="7">{t('dashboard.last7Days')}</option>
+              <option value="30">{t('dashboard.last30Days')}</option>
+              <option value="90">{t('dashboard.last90Days')}</option>
+            </select>
+            <div className={`absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none ${
+              isDark ? 'text-gray-400' : 'text-gray-500'
+            }`}>
+              <ChevronDown className="w-4 h-4" />
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
         {statsCards.map((stat, index) => (
           <motion.div
             key={stat.title}
@@ -352,15 +623,15 @@ const Dashboard = () => {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className={`${
               isDark 
-                ? 'bg-gray-900/50 backdrop-blur-sm border-gray-800' 
-                : 'bg-white border-gray-200'
-            } border rounded-xl p-6`}
+                ? 'bg-gray-900/50 backdrop-blur-sm border-gray-800 hover:bg-gray-800/50' 
+                : 'bg-white border-gray-200 hover:bg-gray-50'
+            } border rounded-xl p-8 transition-all duration-200 shadow-sm`}
           >
-            <div className="flex items-start justify-between mb-4">
-              <div className="p-2 bg-blue-600/20 rounded-lg">
+            <div className="flex items-start justify-between mb-6">
+              <div className="p-3 bg-blue-600/20 rounded-xl">
                 <stat.icon className="w-6 h-6 text-blue-400" />
               </div>
-              <span className={`flex items-center text-sm ${
+              <span className={`flex items-center text-sm font-medium ${
                 stat.trendType === 'up' ? 'text-green-400' : 'text-red-400'
               }`}>
                 {stat.trend}
@@ -371,16 +642,22 @@ const Dashboard = () => {
                 )}
               </span>
             </div>
-            <h3 className={`${isDark ? 'text-gray-400' : 'text-gray-600'} font-medium mb-1`}>
+            <h3 className={`${isDark ? 'text-gray-400' : 'text-gray-600'} font-medium mb-2`}>
               {stat.title}
             </h3>
-            <p className="text-2xl font-semibold">{stat.value}</p>
+            <p className="text-3xl font-semibold">
+              {showKycOverlay ? stat.value : (
+                stat.title === t('dashboard.totalBalance') 
+                  ? (currentUser?.walletBalance || 0).toFixed(2)
+                  : stat.value
+              )}
+            </p>
           </motion.div>
         ))}
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -422,7 +699,7 @@ const Dashboard = () => {
                 />
                 <Area
                   type="monotone"
-                  dataKey="income"
+                  dataKey="balance"
                   stroke="#3B82F6"
                   fillOpacity={1}
                   fill="url(#colorValue)"
@@ -523,40 +800,56 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {(showKycOverlay ? mockTransactions : transactions.slice(0, 5)).map((tx, index) => {
-                // Format transaction type
-                const formattedType = `${t(`history.${tx.type}`)}${tx.subtype ? ' - ' + t(`wallet.${tx.subtype}`) : ''}`;
-
-                // Format amount with proper sign
-                const amount = tx.amount || 0;
-                const formattedAmount = `${amount > 0 ? '+' : ''}${amount} ${tx.currency || 'TND'}`;
-
-                // Format status
-                const status = tx.status?.toLowerCase() || 'pending';
-                const formattedStatus = t(`status.${status}`);
-
-                // Format date
-                const formattedDate = tx.date || new Date(tx.createdAt).toLocaleString();
-
-                return (
-                  <tr key={index} className={`border-b ${
-                    isDark ? 'border-gray-800/50' : 'border-gray-200/50'
-                  }`}>
-                    <td className={`py-4 ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>{formattedType}</td>
-                    <td className={`py-4 ${amount > 0 ? 'text-green-400' : 'text-red-400'} ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>{formattedAmount}</td>
-                    <td className={`py-4 ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        status === 'completed'
-                          ? 'bg-green-500/20 text-green-400'
-                          : 'bg-yellow-500/20 text-yellow-400'
-                      }`}>
-                        {formattedStatus}
-                      </span>
-                    </td>
-                    <td className={`py-4 ${isDark ? 'text-gray-400' : 'text-gray-600'} ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>{formattedDate}</td>
-                  </tr>
-                );
-              })}
+              {(() => {
+                if (showKycOverlay) {
+                  return mockTransactions.map((tx, index) => {
+                    // ... existing mock transaction code ...
+                  });
+                } else {
+                  const userId = String(currentUser?._id || currentUser?.id);
+                  return transactions
+                    .filter(tx => String(tx.userId) === userId || String(tx.recipientId) === userId)
+                    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                    .slice(0, 5)
+                    .map((tx, index) => {
+                      let formattedType = '';
+                      let formattedAmount = '';
+                      if (tx.type === 'transfer') {
+                        if (String(tx.userId) === userId) {
+                          formattedType = `${t(`history.${tx.type}`)} - ${t('wallet.send')}`;
+                          formattedAmount = `-${Math.abs(tx.amount)} ${tx.currency || 'TND'}`;
+                        } else if (String(tx.recipientId) === userId) {
+                          formattedType = `${t(`history.${tx.type}`)} - ${t('wallet.receive')}`;
+                          formattedAmount = `+${Math.abs(tx.amount)} ${tx.currency || 'TND'}`;
+                        }
+                      } else if (tx.type === 'bank') {
+                        formattedType = `${t(`history.${tx.type}`)} - ${t(`history.${tx.subtype}`)}`;
+                        formattedAmount = `${tx.subtype === 'deposit' ? '+' : '-'}${Math.abs(tx.amount)} ${tx.currency || 'TND'}`;
+                      }
+                      const status = tx.status?.toLowerCase() || 'pending';
+                      const formattedStatus = t(`status.${status}`);
+                      const formattedDate = new Date(tx.createdAt).toLocaleString();
+                      return (
+                        <tr key={index} className={`border-b ${
+                          isDark ? 'border-gray-800/50' : 'border-gray-200/50'
+                        }`}>
+                          <td className={`${i18n.language === 'ar' ? 'text-right' : 'text-left'} py-4`}>{formattedType}</td>
+                          <td className={`py-4 ${formattedAmount.startsWith('+') ? 'text-green-400' : 'text-red-400'} ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>{formattedAmount}</td>
+                          <td className={`py-4 ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
+                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                              status === 'completed'
+                                ? 'bg-green-500/20 text-green-400'
+                                : 'bg-yellow-500/20 text-yellow-400'
+                            }`}>
+                              {formattedStatus}
+                            </span>
+                          </td>
+                          <td className={`py-4 ${isDark ? 'text-gray-400' : 'text-gray-600'} ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>{formattedDate}</td>
+                        </tr>
+                      );
+                    });
+                }
+              })()}
             </tbody>
           </table>
         </div>

@@ -9,18 +9,24 @@ import {
   RiEditLine, 
   RiImageAddLine,
   RiMapPinLine,
-  RiLockLine 
+  RiLockLine,
+  RiBankCardLine,
+  RiFileCopyLine
 } from 'react-icons/ri'
 import { useTranslation } from 'react-i18next'
 import ActionLoader from '../assets/animations/ActionLoader'
 import KYCOverlay from '../layouts/KYCOverlay'
 import KYCForm from '../components/ui/KYCForm'
 import ReactDOM from 'react-dom'
-import axios from 'axios'
+import api from '../lib/axios'
+import { getImageUrl } from '../utils/urlUtils'
+import { CheckCircle } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 const Profile = () => {
   const { currentUser, updateUserProfile, startKycVerification } = useAuth() // Get user and update function from context
   const { t } = useTranslation()
+  const navigate = useNavigate()
   
   const [profileImage, setProfileImage] = useState(currentUser?.profilePicture || null)
   const [phoneNumber, setPhoneNumber] = useState(currentUser?.phoneNumber || '')
@@ -31,6 +37,7 @@ const Profile = () => {
   const [showKycForm, setShowKycForm] = useState(false)
   const [bankAccount, setBankAccount] = useState(null)
   const [bankAccountLoading, setBankAccountLoading] = useState(false)
+  const [showCopied, setShowCopied] = useState(false)
 
   // Create a ref for the hidden file input
   const fileInputRef = useRef(null)
@@ -55,16 +62,23 @@ const Profile = () => {
       setIsLoading(true)
       try {
         const formData = new FormData()
-        formData.append('profileImage', file)
+        formData.append('profilePicture', file)
         
-        const updatedUser = await updateUserProfile(formData)
-        if (updatedUser?.profileImage) {
-          setProfileImage(updatedUser.profileImage)
-          toast.success(t('profile.success.imageUpdated'))
+        const response = await api.post('/api/users/profile-picture', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        
+        if (response.data?.user) {
+          // Update the user profile with the new data
+          await updateUserProfile(response.data.user);
+          setProfileImage(response.data.user.profilePicture);
+          toast.success(t('profile.success.imageUpdated'));
         }
       } catch (error) {
         console.error('Error uploading profile image:', error)
-        toast.error(error.response?.data?.message || t('profile.errors.uploadFailed'))
+        toast.error(error.response?.data?.error || t('profile.errors.uploadFailed'))
       } finally {
         setIsLoading(false)
       }
@@ -111,6 +125,14 @@ const Profile = () => {
     }
   };
 
+  const handleCopyRIB = async () => {
+    if (bankAccount?.accountNumber) {
+      await navigator.clipboard.writeText(bankAccount.accountNumber);
+      setShowCopied(true);
+      setTimeout(() => setShowCopied(false), 2000);
+    }
+  };
+
   // Update local state when user data changes
   useEffect(() => {
     if (currentUser) {
@@ -121,19 +143,38 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchBankAccount = async () => {
+      console.log('Current user:', currentUser); // Log current user
       if (currentUser?.associatedBankAccount) {
+        const bankAccountId = typeof currentUser.associatedBankAccount === 'object' 
+          ? currentUser.associatedBankAccount._id 
+          : currentUser.associatedBankAccount;
+        console.log('Fetching bank account with ID:', bankAccountId); // Log bank account ID
         setBankAccountLoading(true);
         try {
           const token = localStorage.getItem('token');
-          const { data } = await axios.get(`/api/bank-accounts/${currentUser.associatedBankAccount}`, {
+          const { data } = await api.get(`/api/bank-accounts/${bankAccountId}`, {
             headers: { Authorization: `Bearer ${token}` }
           });
-          setBankAccount(data.bankAccount);
+          console.log('Bank account response:', data); // Log full response
+          if (data.bankAccount) {
+            setBankAccount(data.bankAccount);
+          } else {
+            console.error('No bank account data in response:', data);
+            setBankAccount(null);
+          }
         } catch (e) {
+          console.error('Error fetching bank account:', {
+            error: e,
+            response: e.response?.data,
+            status: e.response?.status,
+            bankAccountId
+          });
           setBankAccount(null);
         } finally {
           setBankAccountLoading(false);
         }
+      } else {
+        console.log('No associated bank account found for user'); // Log when no bank account is associated
       }
     };
     fetchBankAccount();
@@ -184,9 +225,14 @@ const Profile = () => {
                   {profileImage ? (
                     <>
                       <img
-                        src={profileImage}
+                        src={getImageUrl(profileImage)}
                         alt={`${currentUser.displayName}'s profile`}
                         className="w-full h-full object-cover transition-all duration-300"
+                        onError={(e) => {
+                          console.error('Profile image failed to load:', profileImage);
+                          e.target.src = ''; // Clear the src to prevent infinite error loop
+                          setProfileImage(null); // Reset to default avatar
+                        }}
                       />
                       <div className={`absolute inset-0 bg-black transition-opacity duration-300 flex flex-col items-center justify-center ${isHovered ? 'bg-opacity-50' : 'bg-opacity-0'}`}>
                         <span className={`text-white font-medium transform transition-all duration-300 ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
@@ -356,6 +402,10 @@ const Profile = () => {
             <div className="p-6">
               {currentUser.address ? (
                 <span className="text-gray-900 dark:text-gray-100 font-medium">{currentUser.address}</span>
+              ) : currentUser.kyc?.status === 'pending' ? (
+                <div className="flex items-center text-yellow-500 dark:text-yellow-400">
+                  <span>{t('profile.kycPending')}</span>
+                </div>
               ) : (
                 <div className="flex items-center text-gray-500 dark:text-gray-400">
                   <span>{t('profile.completeKyc')}</span>
@@ -364,20 +414,93 @@ const Profile = () => {
             </div>
           </div>
 
-          {/* Associated Bank Account */}
-          <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-2">{t('wallet.bankAccount')}</h2>
-            {bankAccountLoading ? (
-              <div className="text-gray-500">Loading bank account...</div>
-            ) : bankAccount ? (
-              <div className="p-4 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-                <div className="mb-1 font-medium">{bankAccount.bankName}</div>
-                <div className="mb-1 text-sm text-gray-500">{bankAccount.accountNumber}</div>
-                <div className="text-lg font-bold text-blue-600 dark:text-blue-400">{bankAccount.balance?.toFixed(2) ?? '0.00'} TND</div>
+          {/* Bank Account Section */}
+          <div className="bg-white dark:bg-gray-900/50 backdrop-blur-sm rounded-xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-800">
+            <div className="p-6 border-b border-gray-100 dark:border-gray-800">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <RiBankCardLine className="text-gray-400 dark:text-gray-500 mr-2" size={20} />
+                  <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('profile.bankAccount')}</h2>
+                </div>
+                {currentUser.kyc?.status === 'verified' && (
+                  <div className="flex items-center text-sm text-green-500 dark:text-green-400">
+                    <RiShieldUserLine className="mr-1" size={16} />
+                    {t('profile.verified')}
+                  </div>
+                )}
               </div>
-            ) : (
-              <div className="text-gray-500 dark:text-gray-400">{t('profile.noBankAccount') || 'No bank account assigned yet. Your bank account will be assigned after KYC review.'}</div>
-            )}
+            </div>
+            <div className="p-6">
+              {bankAccountLoading ? (
+                <div className="flex items-center justify-center py-4">
+                  <div className="w-6 h-6 border-2 rounded-full animate-spin border-blue-500 border-t-transparent"></div>
+                </div>
+              ) : bankAccount ? (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">{t('profile.bankName')}</div>
+                      <div className="font-medium">{bankAccount.bankName}</div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">{t('profile.accountHolder')}</div>
+                      <div className="font-medium">{bankAccount.name}</div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">{t('profile.rib')}</div>
+                    <div className="flex items-center gap-2">
+                      <div className="font-mono bg-gray-50 dark:bg-gray-800 px-3 py-2 rounded-lg flex-1">
+                        {bankAccount.accountNumber}
+                      </div>
+                      <button
+                        onClick={handleCopyRIB}
+                        className={`p-2 rounded-lg transition-colors ${
+                          showCopied ? 'bg-green-500 text-white' : 'hover:bg-gray-100 text-gray-500 hover:text-gray-700'
+                        }`}
+                        title={t('profile.copyRIB')}
+                      >
+                        {showCopied ? (
+                          <CheckCircle className="w-5 h-5 text-white" />
+                        ) : (
+                          <RiFileCopyLine className="w-5 h-5" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ) : currentUser.kyc?.status === 'verified' ? (
+                <div className="text-center py-4">
+                  <div className="text-gray-500 dark:text-gray-400 mb-2">
+                    {t('profile.noBankAccount')}
+                  </div>
+                  <button
+                    onClick={() => navigate('/support')}
+                    className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300"
+                  >
+                    {t('profile.contactSupport')}
+                  </button>
+                </div>
+              ) : currentUser.kyc?.status === 'pending' ? (
+                <div className="text-center py-4">
+                  <div className="text-yellow-500 dark:text-yellow-400 mb-2">
+                    {t('profile.kycPending')}
+                  </div>
+                </div>
+              ) : (
+                <div className="text-center py-4">
+                  <div className="text-gray-500 dark:text-gray-400 mb-2">
+                    {t('profile.kycRequired')}
+                  </div>
+                  <button
+                    onClick={() => setShowKycForm(true)}
+                    className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300"
+                  >
+                    {t('profile.completeKyc')}
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

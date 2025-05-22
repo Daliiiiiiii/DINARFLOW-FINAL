@@ -14,27 +14,27 @@ export const useTransactions = () => {
 }
 
 export const TransactionProvider = ({ children }) => {
-  const { user } = useAuth()
+  const { currentUser } = useAuth()
   const { t } = useTranslation()
   const [transactions, setTransactions] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    if (user) {
+    if (currentUser?._id) {
       console.log('User authenticated, fetching transactions...')
       fetchTransactions()
     } else {
       console.log('No user found, skipping transaction fetch')
       setLoading(false)
     }
-  }, [user])
+  }, [currentUser])
 
   const fetchTransactions = async () => {
     try {
       setLoading(true)
       console.log('Making API request to /api/transactions')
-      const { data } = await api.get('/api/transactions')
+      const { data } = await api.get(`/api/transactions?userId=${currentUser._id}`)
       console.log('Received transactions:', data)
       setTransactions(data.transactions || [])
       setError(null)
@@ -49,6 +49,11 @@ export const TransactionProvider = ({ children }) => {
 
   const getFilteredTransactions = (filters) => {
     return transactions.filter(transaction => {
+      // Filter by userId
+      if (filters.userId && transaction.userId !== filters.userId) {
+        return false;
+      }
+
       // Filter by type
       if (filters.type && transaction.type !== filters.type) {
         return false
@@ -81,7 +86,10 @@ export const TransactionProvider = ({ children }) => {
 
   const createTransfer = async (transferData) => {
     try {
-      const { data } = await api.post('/api/transactions/transfer', transferData)
+      const { data } = await api.post('/api/transactions/transfer', {
+        ...transferData,
+        userId: currentUser._id
+      })
       setTransactions(prev => [data.transaction, ...prev])
       return data
     } catch (error) {
@@ -92,7 +100,10 @@ export const TransactionProvider = ({ children }) => {
 
   const createBankTransfer = async (transferData) => {
     try {
-      const { data } = await api.post('/api/transactions/bank-transfer', transferData)
+      const { data } = await api.post('/api/transactions/bank-transfer', {
+        ...transferData,
+        userId: currentUser._id
+      })
       setTransactions(prev => [data.transaction, ...prev])
       return data
     } catch (error) {

@@ -21,9 +21,10 @@ const bankAccountSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    isDefault: {
-        type: Boolean,
-        default: false
+    balance: {
+        type: Number,
+        default: 0,
+        min: 0
     },
     lastUsed: {
         type: Date,
@@ -35,7 +36,6 @@ const bankAccountSchema = new mongoose.Schema({
 
 // Indexes
 bankAccountSchema.index({ userId: 1 });
-bankAccountSchema.index({ userId: 1, isDefault: 1 });
 
 const BankAccount = mongoose.model('BankAccount', bankAccountSchema);
 

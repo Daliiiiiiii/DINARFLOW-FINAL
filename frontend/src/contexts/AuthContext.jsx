@@ -64,7 +64,7 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null)
   const [userProfile, setUserProfile] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [visualRole, setVisualRole] = useState(null)
+  const [visualRole, setVisualRole] = useState('user')
   const { t } = useTranslation()
 
   useEffect(() => {
@@ -88,6 +88,12 @@ export function AuthProvider({ children }) {
         console.log('Formatted user data:', formattedUser);
         setCurrentUser(formattedUser);
         setUserProfile(formattedUser);
+        
+        // Set initial visual role based on user's role and current path
+        if (['admin', 'superadmin'].includes(formattedUser.role)) {
+          const isAdminPath = window.location.pathname.startsWith('/admin');
+          setVisualRole(isAdminPath ? 'admin' : 'user');
+        }
       } catch (error) {
         console.error('Auth check error:', error);
         // Clear tokens and headers on validation failure
@@ -320,8 +326,14 @@ export function AuthProvider({ children }) {
     try {
       const { data: response } = await api.put('/api/users/profile', data);
       const formattedUser = formatUserData(response.user);
+      
+      // Update both states with the new user data
       setCurrentUser(formattedUser);
       setUserProfile(formattedUser);
+      
+      // Store the updated user data in localStorage to persist across reloads
+      localStorage.setItem('user', JSON.stringify(formattedUser));
+      
       return formattedUser;
     } catch (error) {
       console.error('Update profile error:', error);
@@ -340,6 +352,21 @@ export function AuthProvider({ children }) {
       if (!prev) return null;
       const updated = { ...prev, walletBalance: newBalance };
       console.log('[DEBUG] Updating userProfile balance:', updated);
+      return updated;
+    });
+  };
+
+  const updateBankBalance = (newBalance) => {
+    setCurrentUser(prev => {
+      if (!prev) return null;
+      const updated = { ...prev, bankBalance: newBalance };
+      console.log('[DEBUG] Updating currentUser bank balance:', updated);
+      return updated;
+    });
+    setUserProfile(prev => {
+      if (!prev) return null;
+      const updated = { ...prev, bankBalance: newBalance };
+      console.log('[DEBUG] Updating userProfile bank balance:', updated);
       return updated;
     });
   };
@@ -434,7 +461,7 @@ export function AuthProvider({ children }) {
 
   const toggleVisualRole = () => {
     if (['admin', 'superadmin'].includes(currentUser?.role)) {
-      setVisualRole(prev => prev === 'user' ? 'admin' : 'user')
+      setVisualRole(prev => prev === 'user' ? 'admin' : 'user');
     }
   }
 
@@ -451,9 +478,10 @@ export function AuthProvider({ children }) {
     updatePassword,
     updateUserProfile,
     updateWalletBalance,
+    updateBankBalance,
     startKycVerification,
     validatePhoneNumber,
-    visualRole: visualRole || currentUser?.role,
+    visualRole: visualRole || 'user',
     toggleVisualRole,
     isAdmin: ['admin', 'superadmin'].includes(currentUser?.role),
     isSuperAdmin: currentUser?.role === 'superadmin'

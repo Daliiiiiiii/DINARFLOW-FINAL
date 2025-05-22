@@ -85,23 +85,28 @@ router.post('/check-status', [
 // Validate token and get user info
 router.get('/validate', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).select('-password');
+    const user = await User.findById(req.user._id)
+      .select('-password')
+      .populate('associatedBankAccount');
+
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
 
     res.json({
       user: {
-        id: user._id,
+        _id: user._id,
         email: user.email,
         displayName: user.displayName,
         phoneNumber: user.phoneNumber,
         walletBalance: user.walletBalance,
+        bankBalance: user.associatedBankAccount?.balance || 0,
         isVerified: user.kyc?.status === 'verified',
         kyc: user.kyc || { status: 'unverified' },
         emailVerified: user.emailVerified,
         profilePicture: user.profilePicture,
-        role: user.role
+        role: user.role,
+        associatedBankAccount: user.associatedBankAccount || null
       }
     });
   } catch (error) {

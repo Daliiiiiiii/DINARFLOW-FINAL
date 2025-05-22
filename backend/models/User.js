@@ -180,14 +180,19 @@ const userSchema = new mongoose.Schema({
   toJSON: {
     virtuals: true,
     transform: function (doc, ret) {
-      // Use the API_URL from environment, fallback to localhost only in development
+      // Get the base URL from environment variables
       const baseUrl = process.env.NODE_ENV === 'production'
-        ? process.env.API_URL
-        : (process.env.API_URL || 'http://localhost:3000');
+        ? process.env.API_URL || process.env.FRONTEND_URL
+        : process.env.VITE_API_URL || 'http://localhost:3000';
 
       // Transform profile picture URL
-      if (ret.profilePicture && !ret.profilePicture.startsWith('http')) {
-        ret.profilePicture = `${baseUrl}${ret.profilePicture}`;
+      if (ret.profilePicture) {
+        // If it's already a full URL, keep it as is
+        if (!ret.profilePicture.startsWith('http')) {
+          // Remove any leading slashes to prevent double slashes
+          const cleanPath = ret.profilePicture.startsWith('/') ? ret.profilePicture.slice(1) : ret.profilePicture;
+          ret.profilePicture = `${baseUrl}/${cleanPath}`;
+        }
       }
 
       // Transform KYC document URLs for all submissions
@@ -196,7 +201,8 @@ const userSchema = new mongoose.Schema({
           if (sub.documents) {
             Object.keys(sub.documents).forEach(key => {
               if (sub.documents[key] && !sub.documents[key].startsWith('http')) {
-                sub.documents[key] = `${baseUrl}/uploads/${sub.documents[key]}`;
+                const cleanPath = sub.documents[key].startsWith('/') ? sub.documents[key].slice(1) : sub.documents[key];
+                sub.documents[key] = `${baseUrl}/${cleanPath}`;
               }
             });
           }
@@ -207,7 +213,8 @@ const userSchema = new mongoose.Schema({
       if (ret.documents) {
         Object.keys(ret.documents).forEach(key => {
           if (ret.documents[key] && !ret.documents[key].startsWith('http')) {
-            ret.documents[key] = `${baseUrl}/uploads/${ret.documents[key]}`;
+            const cleanPath = ret.documents[key].startsWith('/') ? ret.documents[key].slice(1) : ret.documents[key];
+            ret.documents[key] = `${baseUrl}/${cleanPath}`;
           }
         });
       }

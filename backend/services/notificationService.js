@@ -4,6 +4,7 @@ import sendEmail from '../utils/email.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import User from '../models/User.js';
+import { getIO } from '../services/websocket.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +25,23 @@ export class NotificationService {
 
             // Send email notification if enabled
             await this.sendEmailNotification(userId, type, title, message, data);
+
+            // Emit WebSocket event for real-time notification
+            const io = getIO();
+            if (io) {
+                io.to(`user:${userId}`).emit('notification:received', {
+                    notification: {
+                        _id: notification._id,
+                        type,
+                        title,
+                        message,
+                        data,
+                        priority: notification.priority,
+                        read: false,
+                        createdAt: notification.createdAt
+                    }
+                });
+            }
 
             return notification;
         } catch (error) {
@@ -80,49 +98,69 @@ export class NotificationService {
     }
 
     // Transaction notifications
-    async notifyTransaction(userId, transaction) {
-        const title = this.getTransactionTitle(transaction);
-        const message = this.getTransactionMessage(transaction);
+    async notifyTransaction(transactionData) {
+        if (!transactionData || !transactionData.type) {
+            logger.error('Invalid transaction data for notification:', transactionData);
+            return;
+        }
 
-        await this.createNotification(userId, 'transaction', title, message, {
-            transactionId: transaction._id,
-            amount: transaction.amount,
-            currency: transaction.currency,
-            type: transaction.type,
-            subtype: transaction.subtype
-        });
+        const title = this.getTransactionTitle(transactionData);
+        const message = this.getTransactionMessage(transactionData);
+
+        await this.createNotification(
+            transactionData.userId,
+            'transaction',
+            title,
+            message,
+            {
+                transactionId: transactionData.transactionId,
+                amount: transactionData.amount,
+                currency: transactionData.currency,
+                type: transactionData.type,
+                subtype: transactionData.subtype
+            }
+        );
     }
 
     getTransactionTitle(transaction) {
+        if (!transaction) return 'Transaction Notification';
+
+        const amount = Math.abs(transaction.amount).toFixed(2);
+        const currency = transaction.currency || 'TND';
+
         switch (transaction.type) {
             case 'transfer':
                 return transaction.subtype === 'send'
-                    ? 'Money Sent Successfully'
-                    : 'Money Received';
+                    ? `Sent ${amount} ${currency}`
+                    : `Received ${amount} ${currency}`;
             case 'bank':
                 return transaction.subtype === 'deposit'
-                    ? 'Bank Deposit Successful'
-                    : 'Bank Withdrawal Successful';
+                    ? `Deposited ${amount} ${currency}`
+                    : `Withdrawn ${amount} ${currency}`;
             default:
-                return 'Transaction Completed';
+                return `Transaction: ${amount} ${currency}`;
         }
     }
 
     getTransactionMessage(transaction) {
+        if (!transaction) return 'A transaction has been processed.';
+
         const amount = Math.abs(transaction.amount).toFixed(2);
-        const currency = transaction.currency;
+        const currency = transaction.currency || 'TND';
 
         switch (transaction.type) {
             case 'transfer':
-                return transaction.subtype === 'send'
-                    ? `You have successfully sent ${amount} ${currency} to ${transaction.recipientName}`
-                    : `You have received ${amount} ${currency} from ${transaction.senderName}`;
+                if (transaction.subtype === 'send') {
+                    return `You sent ${amount} ${currency}${transaction.recipientName ? ` to ${transaction.recipientName}` : ''}.`;
+                }
+                return `You received ${amount} ${currency}${transaction.senderName ? ` from ${transaction.senderName}` : ''}.`;
             case 'bank':
-                return transaction.subtype === 'deposit'
-                    ? `Your bank deposit of ${amount} ${currency} has been processed successfully`
-                    : `Your bank withdrawal of ${amount} ${currency} has been processed successfully`;
+                if (transaction.subtype === 'deposit') {
+                    return `You deposited ${amount} ${currency} to your bank account.`;
+                }
+                return `You withdrew ${amount} ${currency} from your bank account.`;
             default:
-                return `Transaction of ${amount} ${currency} has been completed`;
+                return `Transaction processed: ${amount} ${currency}`;
         }
     }
 

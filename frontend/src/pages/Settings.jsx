@@ -29,6 +29,7 @@ import { typography } from '../styles/typography'
 import { format } from 'date-fns'
 import ActionLoader from '../assets/animations/ActionLoader'
 import api from '../lib/axios'
+import { getImageUrl } from '../utils/urlUtils'
 
 const Settings = () => {
   const { t, i18n } = useTranslation()
@@ -614,9 +615,13 @@ const Settings = () => {
               <div className="flex items-center gap-3">
                 {userProfile?.profilePicture ? (
                   <img 
-                    src={userProfile.profilePicture} 
+                    src={getImageUrl(userProfile.profilePicture)} 
                     alt={userProfile.displayName} 
                     className="w-12 h-12 rounded-full object-cover"
+                    onError={(e) => {
+                      console.error('Profile image failed to load:', userProfile.profilePicture);
+                      e.target.src = ''; // Clear the src to prevent infinite error loop
+                    }}
                   />
                 ) : (
                   <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center">

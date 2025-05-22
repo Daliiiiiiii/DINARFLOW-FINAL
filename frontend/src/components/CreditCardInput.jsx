@@ -1,16 +1,18 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CreditCard, X, Calendar, Lock } from 'lucide-react';
+import { CreditCard, X, Calendar, Lock, DollarSign } from 'lucide-react';
 
 const CreditCardInput = ({ isOpen, onClose, onSubmit }) => {
   const [formData, setFormData] = useState({
     number: '',
     name: '',
     expiry: '',
-    cvv: ''
+    cvv: '',
+    amount: ''
   });
   const [isFlipped, setIsFlipped] = useState(false);
   const [lastExpiry, setLastExpiry] = useState('');
+  const [amountError, setAmountError] = useState('');
   const expiryRef = useRef();
 
   const formatCardNumber = (value) => {
@@ -45,10 +47,43 @@ const CreditCardInput = ({ isOpen, onClose, onSubmit }) => {
     }
   };
 
+  const handleAmountChange = (e) => {
+    const value = e.target.value;
+    const numValue = parseFloat(value);
+    
+    if (value === '') {
+      setFormData({ ...formData, amount: '' });
+      setAmountError('');
+      return;
+    }
+
+    if (isNaN(numValue)) {
+      setAmountError('Please enter a valid amount');
+      return;
+    }
+
+    if (numValue < 1) {
+      setAmountError('Minimum amount is 1 TND');
+      return;
+    }
+
+    if (numValue > 1000) {
+      setAmountError('Maximum amount is 1000 TND');
+      return;
+    }
+
+    setFormData({ ...formData, amount: value });
+    setAmountError('');
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     
     if (name === 'number') {
+      // If first character is not a digit, don't update
+      if (value.length === 1 && !/^\d$/.test(value)) {
+        return;
+      }
       setFormData({ ...formData, [name]: formatCardNumber(value) });
     } else if (name === 'expiry') {
       const v = value.replace(/\D/g, '').slice(0, 4);
@@ -97,7 +132,23 @@ const CreditCardInput = ({ isOpen, onClose, onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    
+    // Validate amount
+    const amount = parseFloat(formData.amount);
+    if (isNaN(amount) || amount < 1 || amount > 1000) {
+      setAmountError('Please enter a valid amount between 1 and 1000 TND');
+      return;
+    }
+
+    // Validate card details
+    if (!formData.number || !formData.name || !formData.expiry || !formData.cvv) {
+      return;
+    }
+
+    onSubmit({
+      ...formData,
+      amount: parseFloat(formData.amount)
+    });
   };
 
   return (
@@ -177,6 +228,29 @@ const CreditCardInput = ({ isOpen, onClose, onSubmit }) => {
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-1">
+                  Amount (TND)
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    inputMode="decimal"
+                    name="amount"
+                    value={formData.amount}
+                    onChange={handleAmountChange}
+                    className={`w-full pl-4 pr-10 py-2 bg-gray-800/50 border ${
+                      amountError ? 'border-red-500' : 'border-gray-700'
+                    } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                    placeholder="Enter amount (1-1000 TND)"
+                  />
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">د.ت</span>
+                </div>
+                {amountError && (
+                  <p className="mt-1 text-sm text-red-500">{amountError}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">
                   Card Number
                 </label>
                 <div className="relative">
@@ -253,7 +327,7 @@ const CreditCardInput = ({ isOpen, onClose, onSubmit }) => {
                 type="submit"
                 className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
               >
-                Add Card
+                Top Up Wallet
               </button>
             </form>
           </motion.div>

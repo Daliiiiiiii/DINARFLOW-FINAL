@@ -32,6 +32,7 @@ import { useNotification } from '../contexts/NotificationContext';
 import ActionLoader from '../assets/animations/ActionLoader';
 import api from '../lib/axios';
 import ReactDOM from 'react-dom';
+import { useTranslation } from 'react-i18next';
 
 const AddUserForm = ({ isDark, onClose, onSuccess }) => {
   const [formData, setFormData] = useState({
@@ -307,6 +308,7 @@ const Users = () => {
     dateRange: 'all',
     sortBy: 'newest'
   });
+  const { t } = useTranslation();
 
   // Debounce filter changes
   useEffect(() => {
@@ -494,7 +496,7 @@ const Users = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Users Management</h1>
+        <h1 className="text-2xl font-bold">{t('admin.usersTitle')}</h1>
         <button 
           onClick={() => setShowAddModal(true)}
           className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2"
@@ -671,7 +673,7 @@ const Users = () => {
                       exit={{ opacity: 0 }}
                       className="text-center py-8 text-gray-500 dark:text-gray-400"
                     >
-                      No users found
+                      {t('admin.noUsersFound')}
                     </motion.div>
                   </td>
                 </tr>

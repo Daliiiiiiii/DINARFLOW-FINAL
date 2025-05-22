@@ -40,10 +40,12 @@ import {
   AreaChart,
   Area
 } from 'recharts';
+import { useTranslation } from 'react-i18next';
 
 const Admin = () => {
   const { theme } = useTheme();
   const { showError } = useNotification();
+  const { t } = useTranslation();
   const isDark = theme === 'dark';
   const [activeTab, setActiveTab] = useState('overview');
   const [searchTerm, setSearchTerm] = useState('');
@@ -93,21 +95,21 @@ const Admin = () => {
 
   const userMetrics = [
     {
-      title: 'Total Users',
+      title: t('admin.totalUsers'),
       value: formatNumber(stats.totalUsers),
       change: '+12%',
       isPositive: true,
       icon: Users
     },
     {
-      title: 'Active Wallets',
+      title: t('admin.activeWallets'),
       value: formatNumber(stats.activeWallets),
       change: '+8%',
       isPositive: true,
       icon: Wallet
     },
     {
-      title: '24h Volume',
+      title: t('admin.volume24h'),
       value: formatCurrency(stats.volume24h),
       change: '+25%',
       isPositive: true,
@@ -118,41 +120,41 @@ const Admin = () => {
   const alerts = [
     {
       type: 'high_volume',
-      message: 'Unusual transaction volume detected',
+      message: t('admin.alerts.unusualVolume'),
       severity: 'warning',
-      time: '5 minutes ago'
+      time: t('admin.time.5minAgo')
     },
     {
       type: 'suspicious',
-      message: 'Multiple failed login attempts',
+      message: t('admin.alerts.failedLogins'),
       severity: 'critical',
-      time: '15 minutes ago'
+      time: t('admin.time.15minAgo')
     },
     {
       type: 'system',
-      message: 'System performance degradation',
+      message: t('admin.alerts.systemDegradation'),
       severity: 'warning',
-      time: '1 hour ago'
+      time: t('admin.time.1hAgo')
     }
   ];
 
   const insights = [
     {
-      title: 'Pending KYC',
+      title: t('admin.pendingKyc'),
       value: formatNumber(stats.pendingKyc),
       change: '-5%',
       isPositive: true,
       icon: ShieldCheck
     },
     {
-      title: 'Completed Transactions',
+      title: t('admin.completedTransactions'),
       value: formatNumber(stats.transactions?.completed || 0),
       change: '+8%',
       isPositive: true,
       icon: CheckCircle
     },
     {
-      title: 'Failed Transactions',
+      title: t('admin.failedTransactions'),
       value: formatNumber(stats.transactions?.failed || 0),
       change: '-2%',
       isPositive: true,
@@ -170,12 +172,6 @@ const Admin = () => {
     { hour: '20:00', users: 280, transactions: 150 }
   ];
 
-  const regionData = [
-    { name: 'Tunis', users: 4500, volume: '1.2M' },
-    { name: 'Sfax', users: 2800, volume: '850K' },
-    { name: 'Sousse', users: 2200, volume: '620K' },
-    { name: 'Bizerte', users: 1800, volume: '480K' }
-  ];
 
   return (
     <div className="space-y-6">

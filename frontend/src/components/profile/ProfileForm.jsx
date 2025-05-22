@@ -7,6 +7,7 @@ import { RiShieldLine, RiShieldCheckLine, RiUser3Line } from 'react-icons/ri'
 import KYCForm from '../ui/KYCForm'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
+import { getImageUrl } from '../../utils/urlUtils'
 
 const ProfileForm = () => {
   const { userProfile, updateUserProfile, startKycVerification } = useAuth()
@@ -72,12 +73,6 @@ const ProfileForm = () => {
   const handlePhotoClick = () => {
     fileInputRef.current?.click()
   }
-
-  const getImageUrl = (path) => {
-    if (!path) return null;
-    if (path.startsWith('http')) return path;
-    return `${api.defaults.baseURL}${path}`;
-  };
 
   const handlePhotoChange = async (e) => {
     const file = e.target.files?.[0]

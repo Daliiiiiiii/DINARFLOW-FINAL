@@ -19,11 +19,14 @@ import {
   Filter,
   ArrowLeft,
   MapPin,
-  Ban
+  Ban,
+  CreditCard
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useNotification } from '../contexts/NotificationContext';
 import api from '../lib/axios';
+import { useTranslation } from 'react-i18next';
+import { useAuth } from '../contexts/AuthContext';
 
 const UserProfile = () => {
   const { id } = useParams();
@@ -36,6 +39,7 @@ const UserProfile = () => {
   const [verifying, setVerifying] = useState(false);
   const [rejecting, setRejecting] = useState(false);
   const [suspending, setSuspending] = useState(false);
+  const [generatingBankAccount, setGeneratingBankAccount] = useState(false);
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [filterOptions, setFilterOptions] = useState({
@@ -48,6 +52,8 @@ const UserProfile = () => {
   });
   const [isOnline, setIsOnline] = useState(false);
   const [lastSeen, setLastSeen] = useState(null);
+  const { t } = useTranslation();
+  const { userProfile } = useAuth();
 
   useEffect(() => {
     fetchUserDetails();
@@ -108,6 +114,29 @@ const UserProfile = () => {
       }
     } finally {
       setVerifying(false);
+    }
+  };
+
+  const handleCreateWallet = async () => {
+    try {
+      // Create the wallet directly
+      const response = await api.post('/api/wallet/create', { userId: id });
+      if (response.data) {
+        showSuccess('Wallet created successfully');
+        // Refresh user details to get updated wallet info
+        fetchUserDetails();
+      }
+    } catch (error) {
+      console.error('Error creating wallet:', error);
+      if (error.response?.status === 400) {
+        showError(error.response.data.error || 'Failed to create wallet');
+      } else if (error.response?.status === 404) {
+        showError('User not found');
+      } else if (error.response?.status === 403) {
+        showError('You do not have permission to create wallets');
+      } else {
+        showError('Failed to create wallet. Please try again later.');
+      }
     }
   };
 
@@ -236,6 +265,49 @@ const UserProfile = () => {
     setShowFilterModal(false);
   };
 
+  const handleGenerateBankAccount = async () => {
+    try {
+      setGeneratingBankAccount(true);
+      const response = await api.post(`/api/admin/users/${id}/generate-rib`);
+      if (response.data) {
+        showSuccess('Bank account generated successfully');
+        // Update the user state with the new data from the response
+        setUser(prev => ({
+          ...prev,
+          associatedBankAccount: response.data.bankAccount._id,
+          bankAccount: {
+            bankName: response.data.bankAccount.bankName,
+            accountNumber: response.data.bankAccount.accountNumber
+          }
+        }));
+      }
+    } catch (error) {
+      console.error('Error generating bank account:', error);
+      if (error.response?.status === 400) {
+        showError(error.response.data.error || 'Failed to generate bank account');
+      } else if (error.response?.status === 404) {
+        showError('User not found');
+      } else if (error.response?.status === 403) {
+        showError('You do not have permission to generate bank accounts');
+      } else {
+        showError('Failed to generate bank account. Please try again later.');
+      }
+    } finally {
+      setGeneratingBankAccount(false);
+    }
+  };
+
+  // Add handler for resetting user transaction limits
+  const handleResetLimits = async () => {
+    if (!window.confirm('Are you sure you want to reset this user\'s transaction limits usage for the current day, week, and month?')) return;
+    try {
+      await api.post(`/api/settings/reset-user-limits/${id}`);
+      showSuccess('User transaction limits usage reset successfully.');
+    } catch (error) {
+      showError(error.response?.data?.error || 'Failed to reset user transaction limits.');
+    }
+  };
+
   if (loading) {
     return (
         <div className="flex items-center justify-center h-full">
@@ -247,12 +319,12 @@ const UserProfile = () => {
   if (!user) {
     return (
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">User not found</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('admin.userNotFound')}</h2>
           <button
             onClick={() => navigate('/admin/users')}
             className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
-            Back to Users
+            {t('admin.backToUsers')}
           </button>
         </div>
     );
@@ -378,6 +450,31 @@ const UserProfile = () => {
             </div>
           </div>
           <div className="flex items-center gap-3">
+            <button
+              onClick={handleCreateWallet}
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 ${
+                isDark
+                  ? 'bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 shadow-lg shadow-blue-500/10'
+                  : 'bg-blue-50 text-blue-600 hover:bg-blue-100 shadow-md'
+              } flex items-center gap-2`}
+            >
+              <Wallet className="w-4 h-4" />
+              {t('admin.createWallet')}
+            </button>
+            {!user.bankAccount && (
+              <button
+                onClick={handleGenerateBankAccount}
+                disabled={generatingBankAccount}
+                className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 ${
+                  isDark
+                    ? 'bg-purple-600/20 text-purple-400 hover:bg-purple-600/30 shadow-lg shadow-purple-500/10'
+                    : 'bg-purple-50 text-purple-600 hover:bg-purple-100 shadow-md'
+                } flex items-center gap-2`}
+              >
+                <CreditCard className="w-4 h-4" />
+                {generatingBankAccount ? 'Generating...' : 'Generate Bank Account'}
+              </button>
+            )}
             {user.kyc?.status === 'rejected' && (
               <button
                 onClick={handleVerify}
@@ -457,7 +554,7 @@ const UserProfile = () => {
           >
             <div className="flex items-center gap-3 mb-4">
               <Mail className="w-5 h-5 text-blue-400" />
-              <h3 className="font-medium">Contact</h3>
+              <h3 className="font-medium">{t('admin.contact')}</h3>
             </div>
             <div className="space-y-2">
               <p className="text-gray-500 dark:text-gray-400">{user.email}</p>
@@ -477,7 +574,7 @@ const UserProfile = () => {
           >
             <div className="flex items-center gap-3 mb-4">
               <MapPin className="w-5 h-5 text-orange-400" />
-              <h3 className="font-medium">Address</h3>
+              <h3 className="font-medium">{t('admin.address')}</h3>
             </div>
             <div className="space-y-2">
               <p className="text-gray-500 dark:text-gray-400">
@@ -501,7 +598,7 @@ const UserProfile = () => {
           >
             <div className="flex items-center gap-3 mb-4">
               <Shield className="w-5 h-5 text-purple-400" />
-              <h3 className="font-medium">KYC Information</h3>
+              <h3 className="font-medium">{t('admin.kycInformation')}</h3>
             </div>
             <div className="space-y-2">
               <p className="text-gray-500 dark:text-gray-400">
@@ -525,7 +622,7 @@ const UserProfile = () => {
           >
             <div className="flex items-center gap-3 mb-4">
               <Calendar className="w-5 h-5 text-purple-400" />
-              <h3 className="font-medium">Account Info</h3>
+              <h3 className="font-medium">{t('admin.accountInfo')}</h3>
             </div>
             <div className="space-y-2">
               <p className="text-gray-500 dark:text-gray-400">
@@ -551,7 +648,7 @@ const UserProfile = () => {
         >
           <div className="p-6 border-b border-gray-200 dark:border-gray-700">
             <div className="flex flex-col md:flex-row md:items-center gap-4">
-              <h2 className="text-xl font-semibold">Transaction History</h2>
+              <h2 className="text-xl font-semibold">{t('admin.transactionHistory')}</h2>
               <div className="flex-1" />
               <div className="flex items-center gap-3">
                 <button 
@@ -587,7 +684,7 @@ const UserProfile = () => {
               >
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Transaction Type</label>
+                    <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{t('admin.transactionType')}</label>
                     <select
                       value={filterOptions.type}
                       onChange={(e) => setFilterOptions(prev => ({ ...prev, type: e.target.value }))}
@@ -597,15 +694,15 @@ const UserProfile = () => {
                           : 'border-gray-300 focus:border-purple-500 hover:bg-gray-50'
                       } focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50`}
                     >
-                      <option value="all">All Types</option>
-                      <option value="wallet_in">Wallet In</option>
-                      <option value="wallet_out">Wallet Out</option>
-                      <option value="bank_in">Bank In</option>
-                      <option value="bank_out">Bank Out</option>
+                      <option value="all">{t('admin.allTypes')}</option>
+                      <option value="wallet_in">{t('admin.walletIn')}</option>
+                      <option value="wallet_out">{t('admin.walletOut')}</option>
+                      <option value="bank_in">{t('admin.bankIn')}</option>
+                      <option value="bank_out">{t('admin.bankOut')}</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Status</label>
+                    <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{t('admin.status')}</label>
                     <select
                       value={filterOptions.status}
                       onChange={(e) => setFilterOptions(prev => ({ ...prev, status: e.target.value }))}
@@ -615,13 +712,13 @@ const UserProfile = () => {
                           : 'border-gray-300 focus:border-purple-500 hover:bg-gray-50'
                       } focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50`}
                     >
-                      <option value="all">All Status</option>
-                      <option value="completed">Completed</option>
-                      <option value="pending">Pending</option>
+                      <option value="all">{t('admin.allStatus')}</option>
+                      <option value="completed">{t('admin.completed')}</option>
+                      <option value="pending">{t('admin.pending')}</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Min Amount</label>
+                    <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{t('admin.minAmount')}</label>
                     <div className="relative">
                       <input
                         type="number"
@@ -637,7 +734,7 @@ const UserProfile = () => {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Max Amount</label>
+                    <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{t('admin.maxAmount')}</label>
                     <div className="relative">
                       <input
                         type="number"
@@ -653,7 +750,7 @@ const UserProfile = () => {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Start Date</label>
+                    <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{t('admin.startDate')}</label>
                     <div className="relative">
                       <input
                         type="date"
@@ -669,7 +766,7 @@ const UserProfile = () => {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">End Date</label>
+                    <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{t('admin.endDate')}</label>
                     <div className="relative">
                       <input
                         type="date"
@@ -694,7 +791,7 @@ const UserProfile = () => {
                         : 'bg-gray-50 text-gray-600 hover:bg-gray-100 shadow-md'
                     } flex items-center gap-2`}
                   >
-                    Reset
+                    {t('admin.reset')}
                   </button>
                   <button
                     onClick={applyFilters}
@@ -704,7 +801,7 @@ const UserProfile = () => {
                         : 'bg-blue-50 text-blue-600 hover:bg-blue-100 shadow-md'
                     } flex items-center gap-2`}
                   >
-                    Apply Filters
+                    {t('admin.applyFilters')}
                   </button>
                 </div>
               </motion.div>
@@ -717,11 +814,11 @@ const UserProfile = () => {
                 <tr className={`text-left text-sm ${
                   isDark ? 'bg-gray-800/50' : 'bg-gray-50'
                 }`}>
-                  <th className="px-6 py-4 font-medium text-gray-500 dark:text-gray-400">Type</th>
-                  <th className="px-6 py-4 font-medium text-gray-500 dark:text-gray-400">Amount</th>
-                  <th className="px-6 py-4 font-medium text-gray-500 dark:text-gray-400">Description</th>
-                  <th className="px-6 py-4 font-medium text-gray-500 dark:text-gray-400">Date</th>
-                  <th className="px-6 py-4 font-medium text-gray-500 dark:text-gray-400">Status</th>
+                  <th className="px-6 py-4 font-medium text-gray-500 dark:text-gray-400">{t('admin.type')}</th>
+                  <th className="px-6 py-4 font-medium text-gray-500 dark:text-gray-400">{t('admin.amount')}</th>
+                  <th className="px-6 py-4 font-medium text-gray-500 dark:text-gray-400">{t('admin.description')}</th>
+                  <th className="px-6 py-4 font-medium text-gray-500 dark:text-gray-400">{t('admin.date')}</th>
+                  <th className="px-6 py-4 font-medium text-gray-500 dark:text-gray-400">{t('admin.status')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -764,7 +861,7 @@ const UserProfile = () => {
                 ) : (
                   <tr>
                     <td colSpan="5" className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
-                      No transactions found
+                      {t('admin.noTransactionsFound')}
                     </td>
                   </tr>
                 )}
@@ -772,6 +869,14 @@ const UserProfile = () => {
             </table>
           </div>
         </motion.div>
+        {userProfile?.role === 'superadmin' && (
+          <button
+            className="px-4 py-2 bg-red-600 text-white rounded-lg mt-4 hover:bg-red-700 transition-colors"
+            onClick={handleResetLimits}
+          >
+            Reset Transaction Limits Usage
+          </button>
+        )}
       </div>
 
   );

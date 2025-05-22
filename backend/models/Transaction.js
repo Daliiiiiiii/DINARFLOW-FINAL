@@ -68,7 +68,11 @@ const transactionSchema = new mongoose.Schema({
     type: String,
     size: Number,
     name: String
-  }]
+  }],
+  ignoredForLimits: {
+    type: Boolean,
+    default: false
+  }
 }, {
   timestamps: true
 });

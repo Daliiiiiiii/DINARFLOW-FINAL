@@ -24,6 +24,9 @@ import bankAccountRoutes from './routes/bankAccounts.js';
 import adminRoutes from './routes/admin.js';
 import testRoutes from './routes/test.js';
 import supportRoutes from './routes/support.js';
+import walletRoutes from './routes/walletRoutes.js';
+import { default as p2pRoutes } from './routes/p2pRoutes.js';
+import settingsRoutes from './routes/settings.js';
 
 dotenv.config();
 
@@ -95,9 +98,11 @@ app.use(cors({
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
   exposedHeaders: ['Authorization'],
-  maxAge: 86400 // 24 hours
+  maxAge: 86400, // 24 hours
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 }));
 
 // Rate limiting
@@ -108,6 +113,15 @@ app.use('/api/auth/', authLimiter);
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
+
+// Add security headers
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  next();
+});
 
 // Static files with CORS headers
 app.use('/uploads', (req, res, next) => {
@@ -127,6 +141,9 @@ app.use('/api/bank-accounts', bankAccountRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/test', testRoutes);
 app.use('/api/support', supportRoutes);
+app.use('/api/wallet', walletRoutes);
+app.use('/api/p2p', p2pRoutes);
+app.use('/api/settings', settingsRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {

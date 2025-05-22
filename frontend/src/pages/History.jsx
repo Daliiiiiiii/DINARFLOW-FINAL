@@ -24,7 +24,7 @@ import { useAuth } from '../contexts/AuthContext'
 
 const History = () => {
   const { transactions = [], loading, getFilteredTransactions } = useTransactions()
-  const { userProfile } = useAuth()
+  const { currentUser } = useAuth()
   const [filters, setFilters] = useState({
     type: '',
     subtype: '',
@@ -38,12 +38,15 @@ const History = () => {
   const { t, i18n } = useTranslation()
   
   // Show KYCOverlay if user is not verified
-  const showKycOverlay = userProfile && userProfile.kyc?.status !== 'verified';
-  const kycStatus = userProfile?.kyc?.status || 'unverified';
-  const rejectionReason = userProfile?.kyc?.verificationNotes || '';
+  const showKycOverlay = currentUser && currentUser.kyc?.status !== 'verified';
+  const kycStatus = currentUser?.kyc?.status || 'unverified';
+  const rejectionReason = currentUser?.kyc?.verificationNotes || '';
   
   // Apply filters to get filtered transactions
-  const filteredTransactions = loading ? [] : getFilteredTransactions(filters)
+  const filteredTransactions = loading ? [] : getFilteredTransactions({
+    ...filters,
+    userId: currentUser?._id // Add userId to filters
+  })
 
   // Calculate transaction stats
   const stats = {

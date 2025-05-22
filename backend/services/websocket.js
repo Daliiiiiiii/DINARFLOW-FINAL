@@ -3,9 +3,13 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 import process from 'process';
 
+let io = null;
+
+export const getIO = () => io;
+
 class WebSocketService {
     constructor(server) {
-        this.io = new Server(server, {
+        io = new Server(server, {
             cors: {
                 origin: process.env.NODE_ENV === 'production'
                     ? process.env.FRONTEND_URL
@@ -17,6 +21,7 @@ class WebSocketService {
             pingInterval: 25000
         });
 
+        this.io = io;
         this.initialize();
     }
 
@@ -79,6 +84,11 @@ class WebSocketService {
                 // Handle balance updates
                 socket.on('balance:update', (data) => {
                     this.emitToUser(socket.user._id, 'balance:updated', data);
+                });
+
+                // Handle notification updates
+                socket.on('notification:update', (data) => {
+                    this.emitToUser(socket.user._id, 'notification:received', data);
                 });
 
                 // Handle support ticket message updates
