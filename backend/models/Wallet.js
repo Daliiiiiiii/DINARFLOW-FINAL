@@ -4,15 +4,7 @@ const networkSchema = new mongoose.Schema({
     network: {
         type: String,
         required: true,
-        enum: [
-            'ethereum',
-            'bsc',
-            'polygon',
-            'arbitrum',
-            'tron',
-            'ton',
-            'solana'
-        ]
+        enum: ['ethereum', 'bsc', 'tron', 'ton', 'solana', 'polygon', 'arbitrum']
     },
     address: {
         type: String,
@@ -68,9 +60,20 @@ walletSchema.pre('save', function (next) {
     next();
 });
 
+// Calculate global balance as sum of network balances
+walletSchema.methods.calculateGlobalBalance = function () {
+    const total = this.networks.reduce((sum, network) => {
+        return sum + parseFloat(network.balance || '0');
+    }, 0);
+    this.globalUsdtBalance = total.toFixed(6);
+    return this.globalUsdtBalance;
+};
+
 // Create indexes
 walletSchema.index({ userId: 1 });
 walletSchema.index({ address: 1 });
 walletSchema.index({ 'networks.network': 1, 'networks.address': 1 });
 
-export default mongoose.model('Wallet', walletSchema); 
+const Wallet = mongoose.model('Wallet', walletSchema);
+
+export default Wallet; 

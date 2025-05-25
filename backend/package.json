@@ -9,7 +9,12 @@
     "dev": "nodemon index.js",
     "test": "jest",
     "lint": "eslint .",
-    "test:env": "node scripts/startTestEnvironment.js"
+    "test:env": "node scripts/startTestEnvironment.js",
+    "compile": "hardhat compile",
+    "node:a": "hardhat node --port 8545",
+    "node:b": "hardhat node --port 8546",
+    "deploy": "node scripts/deploy.js",
+    "test:bridge": "node scripts/test-bridge.js"
   },
   "engines": {
     "node": ">=16.0.0"

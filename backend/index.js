@@ -27,6 +27,7 @@ import supportRoutes from './routes/support.js';
 import walletRoutes from './routes/walletRoutes.js';
 import { default as p2pRoutes } from './routes/p2pRoutes.js';
 import settingsRoutes from './routes/settings.js';
+import bridgeRoutes from './routes/bridge.js';
 
 dotenv.config();
 
@@ -151,6 +152,7 @@ app.use('/api/support', supportRoutes);
 app.use('/api/wallet', walletRoutes);
 app.use('/api/p2p', p2pRoutes);
 app.use('/api/settings', settingsRoutes);
+app.use('/api/bridge', bridgeRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {

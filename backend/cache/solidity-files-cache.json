@@ -1,45 +1,6 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "C:\\Users\\Dali\\Downloads\\project\\backend\\contracts\\USDT.sol": {
-      "lastModificationDate": 1748131540009,
-      "contentHash": "41d530b8ac8d61dc16631d44bb76c6b3",
-      "sourceName": "contracts/USDT.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "evmVersion": "paris",
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol",
-        "@openzeppelin/contracts/access/Ownable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "USDT"
-      ]
-    },
     "C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\ERC20.sol": {
       "lastModificationDate": 1748106211465,
       "contentHash": "57d79df281f57bbb1b09214c7914f877",
@@ -227,45 +188,6 @@
       ],
       "artifacts": [
         "IERC20"
-      ]
-    },
-    "C:\\Users\\Dali\\Downloads\\project\\backend\\contracts\\TestUSDT.sol": {
-      "lastModificationDate": 1748112597258,
-      "contentHash": "5200cf08fc62cb9a445646ae68c871c2",
-      "sourceName": "contracts/TestUSDT.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "evmVersion": "paris",
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
-        "@openzeppelin/contracts/access/Ownable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "TestUSDT"
       ]
     },
     "C:\\Users\\Dali\\Downloads\\project\\backend\\node_modules\\@openzeppelin\\contracts\\access\\Ownable.sol": {
@@ -833,10 +755,10 @@
         "Panic"
       ]
     },
-    "C:\\Users\\Dali\\Downloads\\project\\backend\\contracts\\CryptoWallet.sol": {
-      "lastModificationDate": 1748163288424,
-      "contentHash": "dfb868595eded607215605bd44281672",
-      "sourceName": "contracts/CryptoWallet.sol",
+    "C:\\Users\\Dali\\Downloads\\project\\backend\\contracts\\Deposit.sol": {
+      "lastModificationDate": 1748200115907,
+      "contentHash": "03a2e6321431474a19b9409f0a37aa26",
+      "sourceName": "contracts/Deposit.sol",
       "solcConfig": {
         "version": "0.8.20",
         "settings": {
@@ -866,10 +788,49 @@
         "@openzeppelin/contracts/access/Ownable.sol"
       ],
       "versionPragmas": [
-        "^0.8.0"
+        "^0.8.20"
       ],
       "artifacts": [
-        "CryptoWallet"
+        "Deposit"
+      ]
+    },
+    "C:\\Users\\Dali\\Downloads\\project\\backend\\contracts\\MockUSDT.sol": {
+      "lastModificationDate": 1748200107745,
+      "contentHash": "d7158d9b157a16e6554cd551b445b1c1",
+      "sourceName": "contracts/MockUSDT.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        "@openzeppelin/contracts/access/Ownable.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "MockUSDT"
       ]
     }
   }

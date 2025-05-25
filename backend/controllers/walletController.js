@@ -107,7 +107,8 @@ export const getWallet = async (req, res) => {
         const response = {
             address: wallet.address,
             networks,
-            isFrozen: wallet.isFrozen
+            isFrozen: wallet.isFrozen,
+            globalUsdtBalance: wallet.globalUsdtBalance
         };
         console.log('[DEBUG] Sending wallet response:', response);
         res.json(response);
@@ -122,9 +123,10 @@ export const getWallet = async (req, res) => {
 
 export const sendUSDT = async (req, res) => {
     try {
-        console.log('sendUSDT request:', {
+        console.log('sendUSDT request received:', {
             user: req.user,
-            body: req.body
+            body: req.body,
+            headers: req.headers
         });
 
         const userId = req.user._id;
@@ -168,54 +170,38 @@ export const sendUSDT = async (req, res) => {
         }
 
         console.log('Sending USDT with params:', {
+            userId,
             network,
-            fromAddress: networkConfig.address,
             toAddress,
-            amount: amountNum
+            amount: amountNum,
+            walletAddress: wallet.address
         });
 
-        const txHash = await walletService.sendUSDT(
-            network,
-            networkConfig.address,
+        const result = await walletService.sendUSDT(
+            wallet.address,
             toAddress,
-            amount,
-            wallet.privateKey
+            amountNum,
+            network
         );
 
-        console.log('USDT sent successfully:', { txHash });
+        console.log('USDT sent successfully:', result);
 
-        // Fetch real balance from blockchain and update wallet
-        const realBalance = await walletService.getBalance(network, networkConfig.address);
-        const networkIndex = wallet.networks.findIndex(n => n.network === network);
-        if (networkIndex !== -1) {
-            wallet.networks[networkIndex].balance = parseFloat(realBalance).toFixed(6);
-            await wallet.save();
-            console.log(`Updated wallet balance to ${realBalance} USDT from blockchain`);
-        }
-
-        // Create transaction record
-        await Transaction.create({
-            userId,
-            type: 'crypto',
-            subtype: 'usdt',
-            amount: amountNum,
-            currency: 'USDT',
-            status: 'completed',
-            description: 'USDT transfer',
-            reference: txHash,
-            metadata: {
-                network,
-                fromAddress: networkConfig.address,
-                toAddress,
-                txHash
-            }
-        });
+        // Fetch the updated wallet data
+        const updatedWallet = await Wallet.findOne({ userId });
+        console.log('Updated wallet data:', updatedWallet);
 
         res.json({
-            txHash,
+            success: true,
+            txHash: result.txHash,
             message: 'USDT transfer successful',
-            newBalance: realBalance,
-            globalBalance: wallet.globalUsdtBalance
+            newBalance: result.newBalance,
+            feeAmount: result.feeAmount,
+            wallet: {
+                address: updatedWallet.address,
+                networks: updatedWallet.networks,
+                globalUsdtBalance: updatedWallet.globalUsdtBalance,
+                isFrozen: updatedWallet.isFrozen
+            }
         });
     } catch (error) {
         console.error('Error in sendUSDT:', error);
@@ -357,5 +343,93 @@ export const mintInitialUSDT = async (req, res) => {
     } catch (error) {
         console.error('Error in mintInitialUSDT:', error);
         res.status(500).json({ error: error.message || 'Failed to mint initial USDT' });
+    }
+};
+
+export const bridgeUSDT = async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const { fromNetwork, toNetwork, amount } = req.body;
+
+        if (!fromNetwork || !toNetwork || !amount) {
+            return res.status(400).json({ error: 'Source network, target network, and amount are required' });
+        }
+
+        const wallet = await Wallet.findOne({ userId });
+        if (!wallet) {
+            return res.status(404).json({ error: 'Wallet not found' });
+        }
+
+        if (wallet.isFrozen) {
+            return res.status(403).json({ error: 'Wallet is frozen' });
+        }
+
+        // Validate networks
+        const fromNetworkConfig = wallet.networks.find(n => n.network === fromNetwork);
+        const toNetworkConfig = wallet.networks.find(n => n.network === toNetwork);
+
+        if (!fromNetworkConfig || !toNetworkConfig) {
+            return res.status(400).json({ error: 'Invalid network configuration' });
+        }
+
+        if (!fromNetworkConfig.isActive || !toNetworkConfig.isActive) {
+            return res.status(400).json({ error: 'One or both networks are inactive' });
+        }
+
+        // Validate amount
+        const amountNum = parseFloat(amount);
+        if (isNaN(amountNum) || amountNum <= 0) {
+            return res.status(400).json({ error: 'Invalid amount' });
+        }
+
+        const result = await walletService.bridgeUSDT(fromNetwork, toNetwork, amount, userId);
+
+        res.json({
+            message: 'USDT bridge successful',
+            ...result
+        });
+    } catch (error) {
+        console.error('Error in bridgeUSDT:', error);
+        if (error.message.includes('Insufficient')) {
+            return res.status(400).json({ error: error.message });
+        }
+        res.status(500).json({ error: error.message || 'Failed to bridge USDT' });
+    }
+};
+
+export const mintTestUSDT = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const { network } = req.body;
+
+        if (!network) {
+            return res.status(400).json({ error: 'Network is required' });
+        }
+
+        const wallet = await Wallet.findOne({ userId });
+        if (!wallet) {
+            return res.status(404).json({ error: 'Wallet not found' });
+        }
+
+        const networkConfig = wallet.networks.find(n => n.network === network);
+        if (!networkConfig) {
+            return res.status(400).json({ error: 'Invalid network' });
+        }
+
+        const result = await walletService.mintTestUSDT(network, networkConfig.address);
+
+        // Fetch updated wallet data
+        const updatedWallet = await Wallet.findOne({ userId });
+
+        res.json({
+            message: 'Test USDT minted successfully',
+            txHash: result.txHash,
+            blockNumber: result.blockNumber,
+            globalBalance: updatedWallet.globalUsdtBalance,
+            networkBalance: networkConfig.balance
+        });
+    } catch (error) {
+        console.error('Error in mintTestUSDT:', error);
+        res.status(500).json({ error: error.message || 'Failed to mint test USDT' });
     }
 }; 
