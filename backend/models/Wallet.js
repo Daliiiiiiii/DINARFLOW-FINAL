@@ -4,7 +4,15 @@ const networkSchema = new mongoose.Schema({
     network: {
         type: String,
         required: true,
-        enum: ['ethereum', 'bsc', 'tron', 'polygon', 'arbitrum']
+        enum: [
+            'ethereum',
+            'bsc',
+            'polygon',
+            'arbitrum',
+            'tron',
+            'ton',
+            'solana'
+        ]
     },
     address: {
         type: String,
@@ -36,6 +44,10 @@ const walletSchema = new mongoose.Schema({
         required: true
     },
     networks: [networkSchema],
+    globalUsdtBalance: {
+        type: String,
+        default: '0'
+    },
     isFrozen: {
         type: Boolean,
         default: false

@@ -32,6 +32,13 @@ dotenv.config();
 
 // Debug environment variables
 console.log('Environment variables loaded:');
+console.log('ETH_RPC_URL:', process.env.ETH_RPC_URL);
+console.log('BSC_RPC_URL:', process.env.BSC_RPC_URL);
+console.log('TRON_RPC_URL:', process.env.TRON_RPC_URL);
+console.log('TON_RPC_URL:', process.env.TON_RPC_URL);
+console.log('SOLANA_RPC_URL:', process.env.SOLANA_RPC_URL);
+console.log('POLYGON_RPC_URL:', process.env.POLYGON_RPC_URL);
+console.log('ARBITRUM_RPC_URL:', process.env.ARBITRUM_RPC_URL);
 console.log('EMAIL_USER:', process.env.EMAIL_USER ? '***' : 'undefined');
 console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? '***' : 'undefined');
 

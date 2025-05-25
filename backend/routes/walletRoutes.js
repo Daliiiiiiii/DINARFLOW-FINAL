@@ -5,7 +5,8 @@ import {
     sendUSDT,
     freezeWallet,
     unfreezeWallet,
-    topUpWallet
+    topUpWallet,
+    mintInitialUSDT
 } from '../controllers/walletController.js';
 import { auth as authenticate, isAdmin } from '../middleware/auth.js';
 
@@ -13,13 +14,16 @@ const router = express.Router();
 
 // Admin routes
 router.post('/create', authenticate, isAdmin, createWallet);
-router.post('/freeze/:userId', authenticate, isAdmin, freezeWallet);
-router.post('/unfreeze/:userId', authenticate, isAdmin, unfreezeWallet);
 
 // User routes
 router.get('/', authenticate, getWallet);
 router.post('/send', authenticate, sendUSDT);
-router.post('/top-up', authenticate, topUpWallet);
+router.post('/mint-initial', authenticate, mintInitialUSDT);
+
+// Admin only endpoints
+router.post('/freeze/:userId', authenticate, isAdmin, freezeWallet);
+router.post('/unfreeze/:userId', authenticate, isAdmin, unfreezeWallet);
+router.post('/topup', authenticate, topUpWallet);
 
 // Error handling middleware
 router.use((err, req, res, next) => {

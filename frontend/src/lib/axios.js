@@ -15,16 +15,21 @@ api.interceptors.request.use(
         const token = localStorage.getItem('token') || sessionStorage.getItem('token');
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
+            // Also set the default header for all future requests
+            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             console.log('Adding token to request:', {
                 url: config.url,
                 method: config.method,
-                hasToken: !!token
+                hasToken: !!token,
+                headers: config.headers
             });
         } else {
             console.log('No token found for request:', {
                 url: config.url,
                 method: config.method
             });
+            // Clear the default header if no token is found
+            delete api.defaults.headers.common['Authorization'];
         }
         // Don't set Content-Type for FormData, let the browser set it with the boundary
         if (!(config.data instanceof FormData)) {
@@ -52,6 +57,19 @@ api.interceptors.response.use(
     async (error) => {
         const config = error.config;
 
+        // Log detailed error information
+        console.error('API Error Details:', {
+            url: error.config?.url,
+            method: error.config?.method,
+            status: error.response?.status,
+            statusText: error.response?.statusText,
+            data: error.response?.data,
+            message: error.message,
+            headers: error.config?.headers,
+            requestHeaders: error.request?.headers,
+            responseHeaders: error.response?.headers
+        });
+
         // If there's no config or we've already retried, reject
         if (!config || !config.retry) {
             return Promise.reject(error);
@@ -75,16 +93,6 @@ api.interceptors.response.use(
             await backoff;
             return api(config);
         }
-
-        // Log error details
-        console.error('API Error:', {
-            url: error.config?.url,
-            method: error.config?.method,
-            status: error.response?.status,
-            data: error.response?.data,
-            message: error.message,
-            headers: error.config?.headers
-        });
 
         if (error.response?.status === 401) {
             // Only clear token and redirect if it's not a login attempt

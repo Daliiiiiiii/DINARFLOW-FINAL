@@ -33,6 +33,8 @@ import P2P from './pages/P2P'
 import Notifications from './pages/Notifications'
 import CryptoWallet from './pages/CryptoWallet'
 import P2PProfile from './pages/P2PProfile'
+import PendingWallet from './components/PendingWallet'
+import FrozenWallet from './components/FronzeWallet'
 
 // Layouts
 import AuthLayout from './layouts/AuthLayout'
@@ -172,6 +174,8 @@ const AppContent = () => {
             <Route path="p2p/:userId" element={<P2PProfile />} />
             <Route path="notifications" element={<Notifications />} />
             <Route path="crypto-wallet" element={<CryptoWallet />} />
+            <Route path="pending-wallet" element={<PendingWallet />} />
+            <Route path="frozen-wallet" element={<FrozenWallet />} />
           </Route>
 
           {/* Admin Routes - Separated from Dashboard Routes */}

@@ -1,0 +1,600 @@
+import { ethers } from 'ethers';
+import Web3 from 'web3';
+import TronWeb from 'tronweb/dist/TronWeb.node.js';
+import mongoose from 'mongoose';
+import { Connection, PublicKey, Keypair } from '@solana/web3.js';
+import { TonClient, WalletContractV4, internal } from '@ton/ton';
+import { mnemonicToWalletKey } from '@ton/crypto';
+
+// Helper function to parse RPC URLs
+function parseRpcUrl(url) {
+    if (!url) return null;
+    // Split by comma and return the first URL if multiple are provided
+    const urls = url.split(',').map(u => u.trim());
+    return urls[0];
+}
+
+// Helper function to parse fallback RPC URLs
+function parseFallbackRpcUrl(url) {
+    if (!url) return null;
+    const urls = url.split(',').map(u => u.trim());
+    return urls.length > 1 ? urls[1] : urls[0];
+}
+
+// Helper function to validate RPC URL
+function validateRpcUrl(url) {
+    if (!url) return false;
+    return url.startsWith('http://') || url.startsWith('https://') || url.startsWith('wss://');
+}
+
+// Helper function to ensure RPC URL format
+function ensureRpcUrl(url) {
+    if (!url) return null;
+    if (!url.startsWith('http://') && !url.startsWith('https://') && !url.startsWith('wss://')) {
+        return `https://${url}`;
+    }
+    return url;
+}
+
+// Network configurations
+const NETWORKS = {
+    ethereum: {
+        name: 'Ethereum',
+        rpc: ensureRpcUrl(parseRpcUrl(process.env.ETH_RPC_URL)),
+        fallbackRpc: 'https://sepolia.infura.io/v3/c61c9b1aa0f24d64baedd7cdae955d6a',
+        wsUrl: process.env.ETH_WS_URL,
+        chainId: 11155111, // Sepolia testnet
+        usdtContract: process.env.ETH_USDT_ADDRESS || '0x110a13FC3efE6A245B50102D2d529B792aC4c2B6',
+        decimals: 6,
+        maxRetries: 3,
+        retryDelay: 1000
+    },
+    bsc: {
+        name: 'BNB Chain',
+        rpc: ensureRpcUrl(parseRpcUrl(process.env.BSC_RPC_URL)),
+        fallbackRpc: 'https://bsc-testnet.public.blastapi.io',
+        wsUrl: process.env.BSC_WS_URL,
+        chainId: 97, // BSC testnet
+        usdtContract: process.env.BSC_USDT_ADDRESS || '0x337610d27c682E347C9cD60BD4b3b107C9d34dDd',
+        decimals: 18,
+        maxRetries: 3,
+        retryDelay: 1000
+    },
+    tron: {
+        name: 'TRON',
+        rpc: ensureRpcUrl(parseRpcUrl(process.env.TRON_RPC_URL)) || 'https://api.nileex.io',
+        fallbackRpc: 'https://api.nileex.io',
+        wsUrl: process.env.TRON_WS_URL,
+        chainId: 'nile', // Nile testnet
+        usdtContract: process.env.TRON_USDT_ADDRESS || 'TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs',
+        decimals: 6,
+        maxRetries: 3,
+        retryDelay: 1000
+    },
+    polygon: {
+        name: 'Polygon',
+        rpc: ensureRpcUrl(parseRpcUrl(process.env.POLYGON_RPC_URL)),
+        fallbackRpc: 'https://polygon-amoy.infura.io/v3/c61c9b1aa0f24d64baedd7cdae955d6a',
+        wsUrl: process.env.POLYGON_WS_URL,
+        chainId: 80002, // Amoy testnet
+        usdtContract: process.env.POLYGON_USDT_ADDRESS || '0xA02f6adc7926efeBBd59Fd43A84f4E0c0c91e832',
+        decimals: 6,
+        maxRetries: 3,
+        retryDelay: 1000
+    },
+    arbitrum: {
+        name: 'Arbitrum Sepolia',
+        rpc: ensureRpcUrl(parseRpcUrl(process.env.ARBITRUM_RPC_URL)),
+        fallbackRpc: 'https://arbitrum-sepolia.infura.io/v3/c61c9b1aa0f24d64baedd7cdae955d6a',
+        wsUrl: process.env.ARBITRUM_WS_URL,
+        chainId: 421614, // Sepolia testnet
+        usdtContract: process.env.ARBITRUM_USDT_ADDRESS || '0x533046F316650C9B7C9F1E2Ec5B0Ef3CAF0F02D3',
+        decimals: 6,
+        maxRetries: 3,
+        retryDelay: 1000
+    },
+    solana: {
+        name: 'Solana',
+        rpc: ensureRpcUrl(parseRpcUrl(process.env.SOLANA_RPC_URL)),
+        fallbackRpc: 'https://api.devnet.solana.com',
+        wsUrl: process.env.SOLANA_WS_URL,
+        chainId: 'devnet',
+        usdtContract: process.env.SOLANA_USDT_ADDRESS || 'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB',
+        decimals: 6,
+        maxRetries: 3,
+        retryDelay: 1000
+    },
+    ton: {
+        name: 'TON',
+        rpc: ensureRpcUrl(parseRpcUrl(process.env.TON_RPC_URL)),
+        fallbackRpc: 'https://testnet.toncenter.com/api/v2/jsonRPC',
+        wsUrl: process.env.TON_WS_URL,
+        chainId: 'testnet',
+        usdtContract: process.env.TON_USDT_ADDRESS || 'EQD4FPq-PRD4YtM1t4e4yRzqGX7n9Jt8Jt8Jt8Jt8Jt8J',
+        decimals: 9,
+        maxRetries: 3,
+        retryDelay: 1000
+    }
+};
+
+// USDT ABI (minimal for transfers)
+const USDT_ABI = [
+    'function transfer(address to, uint256 amount) returns (bool)',
+    'function balanceOf(address account) view returns (uint256)',
+    'function decimals() view returns (uint8)'
+];
+
+class WalletService {
+    constructor() {
+        this.providers = {};
+        this.initializeProviders();
+    }
+
+    async initializeProvider(network, config) {
+        let retries = 0;
+        const maxRetries = config.maxRetries || 3;
+        const retryDelay = config.retryDelay || 1000;
+
+        // Validate RPC URL
+        if (!validateRpcUrl(config.rpc)) {
+            console.warn(`Invalid RPC URL for ${network}, using fallback`);
+            config.rpc = config.fallbackRpc;
+        }
+
+        while (retries < maxRetries) {
+            try {
+                if (network === 'tron') {
+                    const HttpProvider = TronWeb.providers.HttpProvider;
+                    const fullNode = new HttpProvider(config.rpc);
+                    const solidityNode = new HttpProvider(config.rpc);
+                    const eventServer = new HttpProvider(config.rpc);
+
+                    const tronWeb = new TronWeb({
+                        fullNode,
+                        solidityNode,
+                        eventServer,
+                        headers: { "TRON-PRO-API-KEY": process.env.TRON_API_KEY || '' }
+                    });
+
+                    await tronWeb.trx.getNodeInfo();
+                    console.log(`Successfully connected to TRON network: ${config.rpc}`);
+                    return tronWeb;
+                } else if (network === 'solana') {
+                    if (!validateRpcUrl(config.rpc)) {
+                        throw new Error('Invalid Solana RPC URL');
+                    }
+                    const connection = new Connection(config.rpc, {
+                        commitment: 'confirmed',
+                        confirmTransactionInitialTimeout: 60000
+                    });
+                    // Test the connection
+                    await connection.getVersion();
+                    console.log(`Successfully connected to Solana network: ${config.rpc}`);
+                    return connection;
+                } else if (network === 'ton') {
+                    if (!validateRpcUrl(config.rpc)) {
+                        throw new Error('Invalid TON RPC URL');
+                    }
+                    const client = new TonClient({
+                        endpoint: config.rpc,
+                        apiKey: process.env.TON_API_KEY
+                    });
+                    // Test the connection
+                    await client.getMasterchainInfo();
+                    console.log(`Successfully connected to TON network: ${config.rpc}`);
+                    return client;
+                } else {
+                    // EVM networks
+                    if (!validateRpcUrl(config.rpc)) {
+                        throw new Error('Invalid EVM RPC URL');
+                    }
+
+                    // Create provider with explicit network configuration
+                    const provider = new ethers.providers.JsonRpcProvider(config.rpc, {
+                        name: config.name,
+                        chainId: config.chainId,
+                        _defaultProvider: (providers) => new providers.JsonRpcProvider(config.rpc),
+                        timeout: 30000 // Increase timeout to 30 seconds
+                    });
+
+                    try {
+                        // Test the connection with a simple call
+                        await provider.getBlockNumber();
+                        console.log(`Successfully connected to ${network} network: ${config.rpc}`);
+                        return provider;
+                    } catch (error) {
+                        if (error.code === 'SERVER_ERROR' && error.status === 403) {
+                            console.warn(`API key required for ${network}, using fallback`);
+                            throw error; // This will trigger the fallback
+                        }
+                        console.warn(`Network detection failed for ${network}, retrying with fallback`);
+                        throw error;
+                    }
+                }
+            } catch (error) {
+                console.error(`Attempt ${retries + 1} failed for ${network}:`, error.message);
+                retries++;
+
+                if (retries === maxRetries) {
+                    console.log(`All attempts failed for ${network}, using fallback RPC`);
+                    if (network === 'tron') {
+                        return new TronWeb({
+                            fullHost: config.fallbackRpc
+                        });
+                    } else if (network === 'solana') {
+                        return new Connection(config.fallbackRpc, {
+                            commitment: 'confirmed',
+                            confirmTransactionInitialTimeout: 60000
+                        });
+                    } else if (network === 'ton') {
+                        return new TonClient({
+                            endpoint: config.fallbackRpc,
+                            apiKey: process.env.TON_API_KEY
+                        });
+                    } else {
+                        // For EVM networks, use fallback with explicit configuration
+                        return new ethers.providers.JsonRpcProvider(config.fallbackRpc, {
+                            name: config.name,
+                            chainId: config.chainId,
+                            _defaultProvider: (providers) => new providers.JsonRpcProvider(config.fallbackRpc),
+                            timeout: 30000 // Increase timeout to 30 seconds
+                        });
+                    }
+                }
+
+                await new Promise(resolve => setTimeout(resolve, retryDelay));
+            }
+        }
+    }
+
+    initializeProviders() {
+        // Initialize providers for each network
+        Object.entries(NETWORKS).forEach(([network, config]) => {
+            this.initializeProvider(network, config)
+                .then(provider => {
+                    this.providers[network] = provider;
+                })
+                .catch(error => {
+                    console.error(`Failed to initialize ${network} provider:`, error);
+                    // Use fallback provider
+                    if (network === 'tron') {
+                        this.providers[network] = new TronWeb({
+                            fullHost: config.fallbackRpc
+                        });
+                    } else if (network === 'solana') {
+                        this.providers[network] = new Connection(config.fallbackRpc, {
+                            commitment: 'confirmed',
+                            confirmTransactionInitialTimeout: 60000
+                        });
+                    } else if (network === 'ton') {
+                        this.providers[network] = new TonClient({
+                            endpoint: config.fallbackRpc,
+                            apiKey: process.env.TON_API_KEY
+                        });
+                    } else {
+                        this.providers[network] = new ethers.providers.JsonRpcProvider(config.fallbackRpc, {
+                            name: network,
+                            chainId: config.chainId
+                        });
+                    }
+                });
+        });
+    }
+
+    async createWallet(userId) {
+        try {
+            // Check if MongoDB is connected
+            if (mongoose.connection.readyState !== 1) {
+                throw new Error('Database not connected');
+            }
+
+            // Check if user exists
+            const User = mongoose.model('User');
+            const user = await User.findById(userId);
+            if (!user) {
+                throw new Error('User not found');
+            }
+
+            // Generate testnet wallets for each network
+            const wallets = {
+                // Ethereum Sepolia testnet
+                ethereum: ethers.Wallet.createRandom().connect(
+                    new ethers.providers.JsonRpcProvider(NETWORKS.ethereum.rpc)
+                ),
+                // BSC testnet
+                bsc: ethers.Wallet.createRandom().connect(
+                    new ethers.providers.JsonRpcProvider(NETWORKS.bsc.rpc)
+                ),
+                // Polygon Amoy testnet
+                polygon: ethers.Wallet.createRandom().connect(
+                    new ethers.providers.JsonRpcProvider(NETWORKS.polygon.rpc)
+                ),
+                // Arbitrum Sepolia testnet
+                arbitrum: ethers.Wallet.createRandom().connect(
+                    new ethers.providers.JsonRpcProvider(NETWORKS.arbitrum.rpc)
+                ),
+                // Solana devnet
+                solana: Keypair.generate(),
+                // TON testnet
+                ton: await mnemonicToWalletKey(ethers.Wallet.createRandom().mnemonic.phrase.split(' '))
+            };
+
+            // Ensure all EVM addresses have proper checksums
+            const evmAddresses = {
+                ethereum: ethers.utils.getAddress(wallets.ethereum.address),
+                bsc: ethers.utils.getAddress(wallets.bsc.address),
+                polygon: ethers.utils.getAddress(wallets.polygon.address),
+                arbitrum: ethers.utils.getAddress(wallets.arbitrum.address)
+            };
+
+            // Create wallet document in database
+            const Wallet = mongoose.model('Wallet');
+            const walletDoc = await Wallet.create({
+                userId,
+                address: evmAddresses.ethereum, // Use Ethereum address as primary
+                privateKey: wallets.ethereum.privateKey,
+                networks: [
+                    {
+                        network: 'ethereum',
+                        address: evmAddresses.ethereum,
+                        privateKey: wallets.ethereum.privateKey,
+                        balance: '0',
+                        isActive: true
+                    },
+                    {
+                        network: 'bsc',
+                        address: evmAddresses.bsc,
+                        privateKey: wallets.bsc.privateKey,
+                        balance: '0',
+                        isActive: true
+                    },
+                    {
+                        network: 'polygon',
+                        address: evmAddresses.polygon,
+                        privateKey: wallets.polygon.privateKey,
+                        balance: '0',
+                        isActive: true
+                    },
+                    {
+                        network: 'arbitrum',
+                        address: evmAddresses.arbitrum,
+                        privateKey: wallets.arbitrum.privateKey,
+                        balance: '0',
+                        isActive: true
+                    },
+                    {
+                        network: 'solana',
+                        address: wallets.solana.publicKey.toString(),
+                        privateKey: Buffer.from(wallets.solana.secretKey).toString('hex'),
+                        balance: '0',
+                        isActive: true
+                    },
+                    {
+                        network: 'ton',
+                        address: wallets.ton.publicKey.toString('hex'),
+                        privateKey: wallets.ton.secretKey.toString('hex'),
+                        balance: '0',
+                        isActive: true
+                    }
+                ],
+                isFrozen: false,
+                createdAt: new Date()
+            });
+
+            return {
+                address: walletDoc.address,
+                networks: walletDoc.networks
+            };
+        } catch (error) {
+            console.error('Error creating wallet:', error);
+            if (error.message === 'Database not connected') {
+                throw new Error('Database connection error. Please try again later.');
+            }
+            if (error.message === 'User not found') {
+                throw new Error('User not found');
+            }
+            throw new Error('Failed to create wallet');
+        }
+    }
+
+    async getBalance(network, address) {
+        try {
+            const config = NETWORKS[network];
+            if (!config) throw new Error('Invalid network');
+
+            const provider = this.providers[network];
+            if (!provider) throw new Error('Provider not initialized');
+
+            if (network === 'tron') {
+                // Handle TRON network
+                try {
+                    const balance = await provider.trx.getBalance(address);
+                    return provider.fromSun(balance).toString();
+                } catch (error) {
+                    console.error('Error getting TRON balance:', error);
+                    throw new Error('Failed to get TRON balance');
+                }
+            } else if (network === 'solana') {
+                try {
+                    const publicKey = new PublicKey(address);
+                    const balance = await provider.getBalance(publicKey);
+                    return (balance.value / Math.pow(10, config.decimals)).toString();
+                } catch (error) {
+                    console.error('Error getting Solana balance:', error);
+                    throw new Error('Failed to get Solana balance');
+                }
+            } else if (network === 'ton') {
+                try {
+                    // Ensure TON address is properly formatted
+                    const formattedAddress = address.startsWith('0x') ? address.slice(2) : address;
+                    const balance = await provider.getBalance(formattedAddress);
+                    return (Number(balance) / Math.pow(10, config.decimals)).toString();
+                } catch (error) {
+                    console.error('Error getting TON balance:', error);
+                    throw new Error('Failed to get TON balance');
+                }
+            } else {
+                // Handle EVM networks (Ethereum, BSC, Polygon, Arbitrum)
+                try {
+                    // Ensure address is checksummed
+                    const checksumAddress = ethers.utils.getAddress(address);
+                    const contractAddress = ethers.utils.getAddress(config.usdtContract);
+
+                    const contract = new ethers.Contract(
+                        contractAddress,
+                        USDT_ABI,
+                        provider
+                    );
+
+                    // First check if the contract exists at the address
+                    const code = await provider.getCode(contractAddress);
+                    if (code === '0x') {
+                        throw new Error('Contract not deployed at address');
+                    }
+
+                    const balance = await contract.balanceOf(checksumAddress);
+                    return ethers.utils.formatUnits(balance, config.decimals);
+                } catch (error) {
+                    console.error(`Error getting ${network} balance:`, error);
+                    if (error.code === 'INVALID_ARGUMENT') {
+                        throw new Error(`Invalid address format for ${network}`);
+                    }
+                    throw new Error(`Failed to get ${network} balance`);
+                }
+            }
+        } catch (error) {
+            console.error('Error getting balance:', error);
+            throw new Error('Failed to get balance');
+        }
+    }
+
+    async sendUSDT(network, fromAddress, toAddress, amount, privateKey) {
+        try {
+            const config = NETWORKS[network];
+            if (!config) throw new Error('Invalid network');
+
+            const provider = this.providers[network];
+            if (!provider) throw new Error('Provider not initialized');
+
+            if (network === 'solana') {
+                // For Solana, we'll use USDC as it's more widely available on devnet
+                const fromKeypair = Keypair.fromSecretKey(Buffer.from(privateKey, 'hex'));
+                const toPublicKey = new PublicKey(toAddress);
+                const amountLamports = Math.floor(amount * Math.pow(10, config.decimals));
+
+                const transaction = await provider.transfer(
+                    fromKeypair.publicKey,
+                    toPublicKey,
+                    amountLamports
+                );
+
+                return transaction.signature;
+            } else if (network === 'ton') {
+                const wallet = new WalletContractV4(provider, {
+                    publicKey: Buffer.from(privateKey, 'hex'),
+                    workchain: 0
+                });
+
+                const transfer = await wallet.transfer({
+                    to: toAddress,
+                    value: BigInt(amount * Math.pow(10, config.decimals)),
+                    bounce: true
+                });
+
+                return transfer.hash;
+            } else {
+                const wallet = new ethers.Wallet(privateKey, provider);
+                const contract = new ethers.Contract(config.usdtContract, USDT_ABI, wallet);
+
+                const amountWei = ethers.utils.parseUnits(amount.toString(), config.decimals);
+                const tx = await contract.transfer(toAddress, amountWei);
+                await tx.wait();
+
+                return tx.hash;
+            }
+        } catch (error) {
+            console.error('Error sending USDT:', error);
+            throw new Error('Failed to send USDT');
+        }
+    }
+
+    async freezeWallet(userId) {
+        try {
+            const wallet = await mongoose.model('Wallet').findOne({ userId });
+            if (!wallet) throw new Error('Wallet not found');
+
+            wallet.isFrozen = true;
+            await wallet.save();
+
+            return true;
+        } catch (error) {
+            console.error('Error freezing wallet:', error);
+            throw new Error('Failed to freeze wallet');
+        }
+    }
+
+    async unfreezeWallet(userId) {
+        try {
+            const wallet = await mongoose.model('Wallet').findOne({ userId });
+            if (!wallet) throw new Error('Wallet not found');
+
+            wallet.isFrozen = false;
+            await wallet.save();
+
+            return true;
+        } catch (error) {
+            console.error('Error unfreezing wallet:', error);
+            throw new Error('Failed to unfreeze wallet');
+        }
+    }
+}
+
+export default new WalletService(); 
+
+
+
+
+
+
+
+# Ethereum (Sepolia Testnet)
+ETH_RPC_URL=https://bsc-testnet.blastapi.io/32864a2e-98f4-4c3b-96fb-0a4784f47536
+ETH_WS_URL=wss://bsc-testnet.blastapi.io/32864a2e-98f4-4c3b-96fb-0a4784f47536
+
+# BSC (BSC Testnet) GG
+BSC_RPC_URL=https://bsc-testnet.public.blastapi.io
+BSC_WS_URL=wss://bsc-testnet.public.blastapi.io
+
+# TRON (Nile Testnet) GG
+TRON_RPC_URL=https://nile.trongrid.io
+TRON_WS_URL=wss://nile.trongrid.io
+
+# TON (Testnet) GG
+TON_RPC_URL=https://testnet.toncenter.com/api/v2/jsonRPC
+TON_WS_URL=wss://testnet.toncenter.com/api/v2/websocket
+
+# Solana (Devnet) GG
+SOLANA_RPC_URL=https://api.devnet.solana.com
+SOLANA_WS_URL=wss://api.devnet.solana.com
+
+# Polygon (amoy Testnet)
+POLYGON_RPC_URL=https://polygon-amoy.infura.io/v3/c61c9b1aa0f24d64baedd7cdae955d6a
+POLYGON_WS_URL=wss://polygon-amoy.infura.io/ws/v3/c61c9b1aa0f24d64baedd7cdae955d6a
+
+# Ethereum (Sepolia Testnet)
+ETH_RPC_URL=https://sepolia.infura.io/v3/c61c9b1aa0f24d64baedd7cdae955d6a
+ETH_WS_URL=wss://sepolia.infura.io/ws/v3/c61c9b1aa0f24d64baedd7cdae955d6a
+
+
+# Arbitrum (sepolia Testnet)
+ARBITRUM_RPC_URL=https://arbitrum-sepolia.infura.io/v3/c61c9b1aa0f24d64baedd7cdae955d6a
+ARBITRUM_WS_URL=wss://arbitrum-sepolia.infura.io/ws/v3/c61c9b1aa0f24d64baedd7cdae955d6a
+
+# Testnet USDT Contract Addresses
+ETH_USDT_ADDRESS=0x110a13FC3efE6A245B50102D2d529B792aC4c2B6  # Goerli
+BSC_USDT_ADDRESS=0x337610d27c682E347C9cD60BD4b3b107C9d34dDd  # BSC Testnet
+TRON_USDT_ADDRESS=TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs  # Nile Testnet
+TON_USDT_ADDRESS=EQD4FPq-PRD4YtM3mD1qB7VZQJqXwXqJqJqJqJqJqJqJ  # Testnet
+SOLANA_USDT_ADDRESS=Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB  # Devnet
+POLYGON_USDT_ADDRESS=0xA02f6adc7926efeBBd59Fd43A84f4E0c0c91e832  # Mumbai
+ARBITRUM_USDT_ADDRESS=0x533046F316650C9B7C9F1E2Ec5B0Ef3CAF0F02D3  # Goerli

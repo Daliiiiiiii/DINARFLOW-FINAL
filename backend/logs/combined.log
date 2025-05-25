@@ -3806,3 +3806,419 @@
 2025-05-22T22:34:31.434Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
 2025-05-22T22:34:36.796Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
 2025-05-22T22:35:32.587Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T23:15:31.148Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T23:15:49.485Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T23:17:17.950Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T23:21:05.725Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T23:22:05.414Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T23:22:53.512Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T23:23:45.171Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T23:24:39.395Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T23:25:28.988Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-22T23:27:56.335Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T23:31:27.342Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T23:32:19.987Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T23:33:01.331Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T23:33:12.589Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-22T23:39:44.454Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T23:40:51.347Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-22T23:41:38.371Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T17:29:29.728Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T17:34:33.973Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T17:41:19.853Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T17:55:27.481Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:00:15.108Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:01:15.712Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T18:04:18.572Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T18:06:04.197Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:07:24.505Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T18:07:48.236Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:09:31.141Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T18:11:14.525Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T18:17:27.500Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:18:55.529Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:19:50.613Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:20:08.584Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T18:22:06.491Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T18:22:51.626Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:24:48.742Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T18:24:59.861Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:26:05.898Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:30:30.051Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T18:31:47.051Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T18:38:32.731Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T18:39:43.301Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T18:39:57.172Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T18:40:33.925Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T18:42:07.382Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T18:44:10.395Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T18:44:32.634Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T18:44:38.173Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:44:44.844Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:52:41.322Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T18:53:43.531Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:55:36.652Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:56:41.973Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:56:58.004Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:57:29.136Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:58:03.334Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T18:59:11.541Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T19:00:09.415Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T19:00:29.199Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T19:00:37.628Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T19:01:06.793Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T20:59:56.831Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T21:11:39.485Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T21:11:51.361Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T21:31:02.299Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-23T21:50:39.999Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T21:50:50.986Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T21:50:59.067Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T21:51:15.496Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T21:51:28.497Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T21:52:23.821Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T21:52:40.994Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T21:53:34.627Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T21:54:07.259Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T21:54:30.458Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T21:54:44.081Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T21:54:50.851Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T21:57:13.395Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T21:57:33.935Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T22:01:40.418Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T22:05:47.405Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T22:06:22.118Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T22:06:31.053Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T22:08:15.758Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T22:09:51.581Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T22:09:56.755Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T22:12:36.146Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T22:16:03.231Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T22:16:11.521Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T22:17:57.557Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T22:19:56.796Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T22:23:20.908Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T22:23:48.082Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T22:23:58.846Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T22:24:09.599Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T22:24:21.023Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T22:24:32.986Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T22:24:43.646Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T22:24:59.147Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T22:25:50.142Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T22:26:17.657Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T22:26:42.581Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-23T22:30:13.781Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "feature",
+  "title": "Feature Notification Subscription"
+}
+2025-05-23T22:33:17.481Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T22:33:36.383Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T22:34:27.555Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T22:37:51.743Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-23T22:42:06.962Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-23T22:45:19.229Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T17:02:14.281Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T17:03:08.672Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T17:03:23.038Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T17:03:36.076Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T17:03:52.190Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T17:04:28.979Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T17:04:33.430Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T17:04:43.182Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T17:04:49.027Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T17:04:56.395Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T17:05:42.836Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-24T17:07:31.529Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T17:07:39.219Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T17:07:43.467Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T17:09:33.783Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T17:09:53.232Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T17:09:56.930Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T17:13:59.749Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T17:14:06.375Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T17:22:34.616Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T17:24:28.068Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T17:24:42.845Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T17:31:32.368Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T17:44:26.285Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T17:51:34.648Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-24T17:55:14.300Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T17:58:26.817Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T17:58:46.304Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T18:03:29.933Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T18:24:39.066Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T18:24:48.907Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T18:26:17.721Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T18:27:12.712Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T18:29:09.628Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T18:30:05.649Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T18:30:10.796Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T18:31:03.503Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T18:31:11.225Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T18:31:18.384Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T18:31:28.762Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T18:31:35.536Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T18:32:35.024Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T18:32:45.532Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T18:33:25.255Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T18:33:36.812Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T18:35:58.647Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T18:37:05.786Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T18:37:11.624Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T18:39:34.884Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T18:39:49.856Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T18:40:00.686Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T18:41:19.158Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T18:41:25.923Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T18:41:54.512Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-24T18:44:38.780Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T18:44:53.326Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T18:45:45.296Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T18:45:52.746Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T18:56:28.452Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T18:57:15.525Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T18:58:06.379Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T18:58:30.505Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:03:33.541Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:03:39.037Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:03:45.153Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:03:52.112Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:03:58.416Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:04:06.577Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:04:51.624Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:04:59.954Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:05:16.383Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:13:29.084Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:13:43.846Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:14:23.824Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:14:31.229Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:15:27.658Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:15:49.653Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:18:00.136Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:21:35.211Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:22:50.448Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:22:55.390Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:23:06.790Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:23:36.581Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:24:06.764Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:24:19.448Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:25:23.481Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:25:39.684Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:30:28.797Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:30:35.335Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:30:50.301Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:30:59.035Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:31:05.424Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:33:09.640Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:33:34.806Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:33:43.525Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:33:50.731Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:34:44.152Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:35:00.813Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:38:43.943Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:39:20.633Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:40:36.851Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:41:15.804Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:42:41.342Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:43:16.378Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:44:55.131Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:46:07.029Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:47:39.524Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:48:43.979Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:48:55.837Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:49:03.738Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:49:10.461Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:49:15.179Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:49:19.962Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:49:59.784Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:50:19.177Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:50:51.697Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:50:59.379Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T19:51:46.237Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:51:56.962Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T19:52:05.637Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T19:52:37.102Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T20:18:01.456Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T20:18:11.723Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T20:18:27.894Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T20:18:37.030Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T20:19:04.837Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T20:19:12.324Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T20:19:18.922Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T20:19:27.387Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T20:19:32.879Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T20:20:09.129Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T20:20:17.763Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T20:21:55.219Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T20:22:47.398Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T20:25:25.281Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T20:26:00.748Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T20:26:15.196Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T20:27:19.321Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T20:27:34.546Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T20:29:05.469Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T20:29:17.430Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T20:29:26.472Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T20:29:35.010Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T20:32:57.901Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T20:33:39.120Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T20:34:05.666Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T20:36:26.049Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T20:37:42.574Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T20:40:19.426Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T20:42:13.327Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T20:43:36.144Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T20:50:58.512Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T20:55:09.562Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-24T20:55:38.181Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Sent 100.00 TND"
+}
+2025-05-24T20:55:38.182Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Received 100.00 TND"
+}
+2025-05-24T20:55:44.818Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-24T21:00:23.176Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T21:00:46.270Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-24T21:00:49.066Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-24T21:04:28.587Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T21:04:39.955Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T21:05:47.136Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T21:20:54.427Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T21:21:58.646Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T21:22:33.532Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T21:23:29.069Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T21:24:05.481Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T21:26:35.647Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T21:29:33.692Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T21:29:43.138Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T21:30:41.411Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T21:31:35.809Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T21:32:19.944Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T21:33:55.244Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T21:35:10.032Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T21:36:23.041Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T21:38:02.825Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T21:40:02.714Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T23:23:21.009Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T23:23:45.020Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T23:24:05.153Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T23:24:13.831Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T23:24:52.786Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T23:30:19.745Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T23:30:58.751Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T23:38:40.889Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T23:38:59.460Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T23:42:20.073Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T23:42:47.324Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T23:43:00.241Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T23:43:35.171Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T23:43:48.821Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T23:44:13.619Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T23:49:24.571Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T23:50:54.656Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T23:51:02.103Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T23:51:29.429Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-24T23:54:40.869Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T23:57:08.454Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T23:57:37.166Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-24T23:58:02.706Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T23:58:53.639Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-24T23:59:52.542Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-25T00:00:13.798Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-25T00:00:53.762Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-25T00:01:03.350Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-25T00:05:44.008Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-25T00:05:59.482Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-25T00:08:15.265Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-25T00:08:31.750Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-25T00:08:43.234Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-25T00:08:56.262Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-25T00:11:55.515Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-25T00:12:04.502Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-25T00:12:10.010Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-25T00:12:15.906Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-25T00:14:21.373Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-25T08:47:45.384Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-25T09:05:21.651Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-25T09:12:15.608Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-25T09:13:53.281Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-25T09:13:54.303Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Security Alert"
+}
+2025-05-25T09:32:44.004Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-25T09:34:33.180Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-25T09:51:30.405Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-25T09:52:44.597Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-25T09:52:53.180Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-25T09:53:22.675Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-25T09:53:56.908Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-25T09:54:30.325Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-25T09:54:56.090Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-25T09:56:31.896Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-25T09:57:55.947Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-25T10:03:00.054Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-25T10:03:27.399Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-25T10:10:27.374Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-25T10:11:37.841Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-25T10:11:56.572Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-25T10:14:23.443Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-25T10:15:39.007Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-25T10:17:27.427Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-25T10:18:24.774Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-25T10:18:35.915Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-25T10:18:59.667Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-25T10:19:27.683Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-25T10:19:44.727Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-05-25T10:19:51.418Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-25T10:19:58.159Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-25T10:20:20.767Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-05-25T10:20:30.242Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-05-25T10:29:11.979Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
