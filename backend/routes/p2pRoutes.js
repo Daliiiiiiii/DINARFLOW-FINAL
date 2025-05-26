@@ -7,6 +7,7 @@ const router = express.Router();
 // Profile routes
 router.get('/profile/:userId', authenticate, p2pController.getProfile);
 router.put('/profile', authenticate, p2pController.updateProfile);
+router.post('/profile', authenticate, p2pController.createProfile);
 
 // Offer routes
 router.get('/offers', authenticate, p2pController.getOffers);
@@ -16,8 +17,13 @@ router.delete('/offers/:offerId', authenticate, p2pController.deleteOffer);
 
 // Order routes
 router.get('/orders', authenticate, p2pController.getOrders);
+router.get('/orders/:orderId', authenticate, p2pController.getOrder);
 router.post('/orders', authenticate, p2pController.createOrder);
 router.put('/orders/:orderId', authenticate, p2pController.updateOrder);
+
+// Chat routes
+router.get('/orders/:orderId/messages', authenticate, p2pController.getOrderMessages);
+router.post('/orders/:orderId/messages', authenticate, p2pController.createOrderMessage);
 
 // Review routes
 router.get('/reviews/:userId', authenticate, p2pController.getReviews);

@@ -3,6 +3,7 @@ import P2PProfile from '../models/P2PProfile.js';
 import Order from '../models/Order.js';
 import Review from '../models/Review.js';
 import Offer from '../models/Offer.js';
+import Message from '../models/Message.js';
 
 // Get P2P profile
 export const getProfile = async (req, res) => {
@@ -297,6 +298,100 @@ export const createReview = async (req, res) => {
     }
 };
 
+// Get order details
+export const getOrder = async (req, res) => {
+    try {
+        const { orderId } = req.params;
+        const order = await Order.findById(orderId)
+            .populate('buyer', 'username email')
+            .populate('seller', 'username email')
+            .populate('offer')
+            .lean();
+
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+
+        // Check if user is authorized to view this order
+        if (order.buyer._id.toString() !== req.user.id &&
+            order.seller._id.toString() !== req.user.id) {
+            return res.status(403).json({ message: 'Not authorized to view this order' });
+        }
+
+        res.json(order);
+    } catch (error) {
+        console.error('Error fetching order:', error);
+        res.status(500).json({ message: 'Error fetching order' });
+    }
+};
+
+// Get order messages
+export const getOrderMessages = async (req, res) => {
+    try {
+        const { orderId } = req.params;
+
+        // Check if user has access to this order
+        const order = await Order.findById(orderId);
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+
+        if (order.buyer.toString() !== req.user.id &&
+            order.seller.toString() !== req.user.id) {
+            return res.status(403).json({ message: 'Not authorized to view these messages' });
+        }
+
+        const messages = await Message.find({ orderId })
+            .populate('sender', 'username')
+            .sort({ createdAt: 1 })
+            .lean();
+
+        res.json(messages);
+    } catch (error) {
+        console.error('Error fetching messages:', error);
+        res.status(500).json({ message: 'Error fetching messages' });
+    }
+};
+
+// Create order message
+export const createOrderMessage = async (req, res) => {
+    try {
+        const { orderId } = req.params;
+        const { content } = req.body;
+
+        // Check if user has access to this order
+        const order = await Order.findById(orderId);
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+
+        if (order.buyer.toString() !== req.user.id &&
+            order.seller.toString() !== req.user.id) {
+            return res.status(403).json({ message: 'Not authorized to send messages for this order' });
+        }
+
+        // Create message
+        const message = new Message({
+            orderId,
+            sender: req.user.id,
+            content
+        });
+
+        await message.save();
+
+        // Populate sender info
+        await message.populate('sender', 'username');
+
+        // Emit socket event for real-time updates
+        req.app.get('io').to(orderId).emit('newMessage', message);
+
+        res.status(201).json(message);
+    } catch (error) {
+        console.error('Error creating message:', error);
+        res.status(500).json({ message: 'Error creating message' });
+    }
+};
+
 // Helper function to calculate user stats
 async function calculateUserStats(userId) {
     try {
@@ -384,4 +479,36 @@ async function calculateUserBadges(userId) {
         console.error('Error calculating user badges:', error);
         return [];
     }
-} 
+}
+
+// @desc    Create P2P Profile
+// @route   POST /api/p2p/profile
+// @access  Private
+export const createProfile = async (req, res) => {
+    try {
+        const { nickname, paymentMethods, bankDetails, mobileMoney } = req.body;
+        const userId = req.user.id;
+
+        // Check if user already has a profile
+        const existingProfile = await P2PProfile.findOne({ userId });
+
+        if (existingProfile) {
+            return res.status(400).json({ message: 'User already has a P2P profile' });
+        }
+
+        // Create new profile
+        const profile = new P2PProfile({
+            userId,
+            nickname,
+            paymentMethods,
+            bankDetails,
+            mobileMoney
+        });
+
+        const createdProfile = await profile.save();
+        res.status(201).json(createdProfile);
+    } catch (error) {
+        console.error('Error creating P2P profile:', error);
+        res.status(500).json({ message: 'Error creating profile' });
+    }
+}; 

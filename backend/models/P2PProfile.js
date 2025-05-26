@@ -16,7 +16,7 @@ const p2pProfileSchema = new mongoose.Schema({
     },
     paymentMethods: [{
         type: String,
-        enum: ['bank', 'flouci', 'd17', 'postepay']
+        enum: ['bank', 'flouci', 'd17', 'postepay', 'phone_balance', 'western_union', 'moneygram']
     }],
     createdAt: {
         type: Date,

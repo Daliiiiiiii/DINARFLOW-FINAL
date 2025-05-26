@@ -10,10 +10,6 @@ const networkSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    balance: {
-        type: String,
-        default: '0'
-    },
     isActive: {
         type: Boolean,
         default: true
@@ -59,15 +55,6 @@ walletSchema.pre('save', function (next) {
     this.updatedAt = new Date();
     next();
 });
-
-// Calculate global balance as sum of network balances
-walletSchema.methods.calculateGlobalBalance = function () {
-    const total = this.networks.reduce((sum, network) => {
-        return sum + parseFloat(network.balance || '0');
-    }, 0);
-    this.globalUsdtBalance = total.toFixed(6);
-    return this.globalUsdtBalance;
-};
 
 // Create indexes
 walletSchema.index({ userId: 1 });

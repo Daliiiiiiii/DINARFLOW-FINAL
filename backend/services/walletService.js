@@ -174,6 +174,20 @@ class WalletService {
         }
     }
 
+    // Add calculateTransactionFee method
+    calculateTransactionFee(network) {
+        const feeMap = {
+            'ethereum': 2.50,
+            'bsc': 0.50,
+            'tron': 0.10,
+            'ton': 0.05,
+            'solana': 0.01,
+            'polygon': 0.10,
+            'arbitrum': 0.30
+        };
+        return feeMap[network] || 1.00; // Default to 1.00 if network not found
+    }
+
     async createWallet(userId) {
         try {
             // Check if MongoDB is connected
@@ -362,147 +376,86 @@ class WalletService {
                 network
             });
 
-            // Get sender's wallet
+            // Get the sender's wallet
             const senderWallet = await Wallet.findOne({ address: fromAddress });
             if (!senderWallet) {
-                console.log(`[sendUSDT] Sender wallet not found for address: ${fromAddress}`);
                 throw new Error('Sender wallet not found');
             }
 
             // Calculate transaction fee based on network
-            let feeAmount;
-            if (network === 'ethereum') {
-                feeAmount = '3.000000'; // 3 USDT for Ethereum
-            } else {
-                feeAmount = '1.000000'; // 1 USDT for all other networks
-            }
-            const totalAmount = (parseFloat(amount) + parseFloat(feeAmount)).toFixed(6);
+            const feeAmount = this.calculateTransactionFee(network);
+            console.log(`[sendUSDT] Calculated fee for ${network}:`, feeAmount);
 
-            console.log(`[sendUSDT] Fee calculation:`, {
-                network,
-                amount,
-                feeAmount,
-                totalAmount,
-                currentBalance: senderWallet.globalUsdtBalance
-            });
+            // Check if sender has enough balance
+            const currentBalance = parseFloat(senderWallet.globalUsdtBalance || '0');
+            const totalAmount = parseFloat(amount) + feeAmount;
 
-            // Check if sender has enough balance including fee
-            if (parseFloat(senderWallet.globalUsdtBalance) < parseFloat(totalAmount)) {
+            if (currentBalance < totalAmount) {
                 console.log(`[sendUSDT] Insufficient balance:`, {
-                    currentBalance: senderWallet.globalUsdtBalance,
-                    requiredAmount: totalAmount
+                    currentBalance,
+                    required: totalAmount
                 });
-                throw new Error('Insufficient global USDT balance (including transaction fee)');
+                throw new Error('Insufficient USDT balance');
             }
 
-            // Update sender's network-specific balance
-            const networkIndex = senderWallet.networks.findIndex(n => n.network === network);
-            if (networkIndex !== -1) {
-                const currentNetworkBalance = parseFloat(senderWallet.networks[networkIndex].balance || '0');
-                const newNetworkBalance = (currentNetworkBalance - parseFloat(totalAmount)).toFixed(6);
-                senderWallet.networks[networkIndex].balance = newNetworkBalance;
-                console.log(`[sendUSDT] Updated sender's network balance for ${network} from ${currentNetworkBalance} to ${newNetworkBalance}`);
-            }
-
-            // Debit the amount and fee from sender's global balance
-            const newGlobalBalance = (parseFloat(senderWallet.globalUsdtBalance) - parseFloat(totalAmount)).toFixed(6);
+            // Deduct amount and fee from sender's global balance
+            const newGlobalBalance = (currentBalance - totalAmount).toFixed(6);
             senderWallet.globalUsdtBalance = newGlobalBalance;
-
-            // Save the sender's wallet with updated balances
             await senderWallet.save();
-            console.log(`[sendUSDT] Debited ${totalAmount} USDT (${amount} + ${feeAmount} fee) from user's global balance. New balance: ${newGlobalBalance}`);
+            console.log(`[sendUSDT] Updated sender's global balance to ${newGlobalBalance}`);
 
-            // Get backend hot wallet
+            // Get backend hot wallet private key
             const backendPrivateKey = process.env.BACKEND_HOT_WALLET_PRIVATE_KEY;
             if (!backendPrivateKey) {
-                console.log('[sendUSDT] Backend hot wallet private key not configured');
                 throw new Error('Backend hot wallet private key not configured');
             }
 
-            // Ensure providers are initialized
+            // Initialize provider if not already done
             if (!this.providers[network]) {
-                console.log(`[sendUSDT] Initializing provider for network: ${network}`);
                 await this.initializeProviders();
-                if (!this.providers[network]) {
-                    throw new Error(`Provider not initialized for network: ${network}`);
-                }
             }
 
+            // Create backend wallet instance
             const backendWallet = new ethers.Wallet(backendPrivateKey, this.providers[network]);
-            console.log(`[sendUSDT] Using backend hot wallet address: ${backendWallet.address}`);
+            console.log(`[sendUSDT] Using backend wallet: ${backendWallet.address}`);
 
             // Get USDT contract
-            const usdtContract = new ethers.Contract(
-                NETWORKS[network].usdtAddress,
+            const config = NETWORKS[network];
+            const contract = new ethers.Contract(
+                config.usdtAddress,
                 USDT_ABI,
                 backendWallet
             );
 
             // Check backend wallet's USDT balance
-            const backendBalance = await usdtContract.balanceOf(backendWallet.address);
-            const amountInUnits = ethers.parseUnits(amount.toString(), 6);
-
-            console.log(`[sendUSDT] Backend wallet current balance: ${ethers.formatUnits(backendBalance, 6)} USDT`);
-            console.log(`[sendUSDT] Required amount: ${ethers.formatUnits(amountInUnits, 6)} USDT`);
+            const backendBalance = await contract.balanceOf(backendWallet.address);
+            const minRequiredBalance = ethers.parseUnits('1000', config.decimals);
 
             // If backend wallet doesn't have enough USDT, mint some
-            if (backendBalance < amountInUnits) {
-                console.log(`[sendUSDT] Backend wallet needs more USDT, minting...`);
-
-                // Check if the contract has the mint function
-                const code = await this.providers[network].getCode(NETWORKS[network].usdtAddress);
-                if (code === '0x') {
-                    throw new Error(`No contract found at address ${NETWORKS[network].usdtAddress}`);
-                }
-
-                // Mint to backend wallet
-                const mintTx = await usdtContract.mint(backendWallet.address, amountInUnits);
-                console.log(`[sendUSDT] Mint transaction sent: ${mintTx.hash}`);
+            if (backendBalance < minRequiredBalance) {
+                console.log(`[sendUSDT] Backend wallet needs more USDT. Current balance: ${ethers.formatUnits(backendBalance, config.decimals)}`);
+                const mintTx = await contract.mint(backendWallet.address, minRequiredBalance);
                 await mintTx.wait();
-                console.log(`[sendUSDT] Mint transaction mined`);
-
-                // Verify the mint was successful
-                const newBackendBalance = await usdtContract.balanceOf(backendWallet.address);
-                console.log(`[sendUSDT] Backend wallet new balance: ${ethers.formatUnits(newBackendBalance, 6)} USDT`);
+                console.log(`[sendUSDT] Minted USDT to backend wallet`);
             }
 
-            // Send USDT
-            console.log(`[sendUSDT] Sending amount in units: ${amountInUnits}`);
-            const tx = await usdtContract.transfer(toAddress, amountInUnits);
+            // Send USDT to recipient
+            const amountInWei = ethers.parseUnits(amount.toString(), config.decimals);
+            const tx = await contract.transfer(toAddress, amountInWei);
             console.log(`[sendUSDT] Transaction sent: ${tx.hash}`);
 
             // Wait for transaction to be mined
             const receipt = await tx.wait();
             console.log(`[sendUSDT] Transaction mined in block ${receipt.blockNumber}`);
 
-            // Update recipient's balance if their wallet exists
+            // Update recipient's global balance if their wallet exists
             const recipientWallet = await Wallet.findOne({ address: toAddress });
             if (recipientWallet) {
-                // Update network balance
-                const networkIndex = recipientWallet.networks.findIndex(n => n.network === network);
-                if (networkIndex === -1) {
-                    recipientWallet.networks.push({
-                        network,
-                        address: toAddress,
-                        balance: amount
-                    });
-                } else {
-                    recipientWallet.networks[networkIndex].balance = (
-                        parseFloat(recipientWallet.networks[networkIndex].balance || '0') +
-                        parseFloat(amount)
-                    ).toFixed(6);
-                }
-
-                // Update global balance
-                recipientWallet.globalUsdtBalance = recipientWallet.networks.reduce((sum, n) => sum + parseFloat(n.balance || '0'), 0).toFixed(6);
-
+                const recipientBalance = parseFloat(recipientWallet.globalUsdtBalance || '0');
+                recipientWallet.globalUsdtBalance = (recipientBalance + parseFloat(amount)).toFixed(6);
                 await recipientWallet.save();
                 console.log(`[sendUSDT] Updated recipient's global balance to ${recipientWallet.globalUsdtBalance}`);
             }
-
-            // Verify sender's balance after transaction
-            const updatedSenderWallet = await Wallet.findOne({ address: fromAddress });
-            console.log(`[sendUSDT] Verified sender's final balance: ${updatedSenderWallet.globalUsdtBalance}`);
 
             return {
                 success: true,
@@ -512,34 +465,7 @@ class WalletService {
                 feeAmount: feeAmount
             };
         } catch (error) {
-            console.error(`[sendUSDT] Error sending USDT on ${network}:`, error);
-
-            // If transaction failed after debiting the balance, credit it back
-            if (error.message.includes('transaction failed') || error.message.includes('insufficient funds')) {
-                try {
-                    const senderWallet = await Wallet.findOne({ address: fromAddress });
-                    if (senderWallet) {
-                        const totalAmount = (parseFloat(amount) + parseFloat(feeAmount)).toFixed(6);
-
-                        // Credit back network balance
-                        const networkIndex = senderWallet.networks.findIndex(n => n.network === network);
-                        if (networkIndex !== -1) {
-                            senderWallet.networks[networkIndex].balance = (
-                                parseFloat(senderWallet.networks[networkIndex].balance || '0') +
-                                parseFloat(totalAmount)
-                            ).toFixed(6);
-                        }
-
-                        // Credit back global balance
-                        senderWallet.globalUsdtBalance = (parseFloat(senderWallet.globalUsdtBalance) + parseFloat(totalAmount)).toFixed(6);
-                        await senderWallet.save();
-                        console.log(`[sendUSDT] Credited back ${totalAmount} USDT to user's balances after failed transaction`);
-                    }
-                } catch (rollbackError) {
-                    console.error('[sendUSDT] Error rolling back balance:', rollbackError);
-                }
-            }
-
+            console.error(`[sendUSDT] Error:`, error);
             throw error;
         }
     }
@@ -576,101 +502,62 @@ class WalletService {
 
     async topUpWallet(req, res) { /* ... existing code ... */ }
 
-    async mintTestUSDT(network, address, signer = null) {
+    async mintTestUSDT(network, address) {
         try {
-            console.log(`[mintTestUSDT] Starting mint for ${address} on ${network}`);
+            console.log(`[mintTestUSDT] Starting test USDT mint for ${address} on ${network}`);
 
-            // Ensure providers are initialized
-            if (!this.providers[network]) {
-                await this.initializeProviders();
-                if (!this.providers[network]) {
-                    throw new Error(`Provider still not initialized for network: ${network} during mint`);
-                }
-            }
-
-            const networkConfig = NETWORKS[network];
-            if (!networkConfig || !networkConfig.usdtAddress) {
-                throw new Error(`Invalid network configuration or missing USDT address for ${network}`);
-            }
-
-            // Get backend hot wallet
+            // Get backend hot wallet private key
             const backendPrivateKey = process.env.BACKEND_HOT_WALLET_PRIVATE_KEY;
             if (!backendPrivateKey) {
                 throw new Error('Backend hot wallet private key not configured');
             }
-            const backendWallet = new ethers.Wallet(backendPrivateKey, this.providers[network]);
-            console.log(`[mintTestUSDT] Using backend hot wallet: ${backendWallet.address}`);
 
-            // Create contract instance with backend wallet
+            // Initialize provider if not already done
+            if (!this.providers[network]) {
+                await this.initializeProviders();
+            }
+
+            // Create backend wallet instance
+            const backendWallet = new ethers.Wallet(backendPrivateKey, this.providers[network]);
+            console.log(`[mintTestUSDT] Using backend wallet: ${backendWallet.address}`);
+
+            // Get USDT contract
+            const config = NETWORKS[network];
             const contract = new ethers.Contract(
-                networkConfig.usdtAddress,
+                config.usdtAddress,
                 USDT_ABI,
                 backendWallet
             );
 
-            // Check backend wallet's USDT balance
-            const backendBalance = await contract.balanceOf(backendWallet.address);
-            const minRequiredBalance = ethers.parseUnits('1000', networkConfig.decimals);
+            // Mint USDT to backend wallet first
+            const mintAmount = ethers.parseUnits('1000', config.decimals);
+            console.log(`[mintTestUSDT] Minting ${ethers.formatUnits(mintAmount, config.decimals)} USDT to backend wallet`);
+            const mintTx = await contract.mint(backendWallet.address, mintAmount);
+            await mintTx.wait();
+            console.log(`[mintTestUSDT] Minted USDT to backend wallet`);
 
-            console.log(`[mintTestUSDT] Backend wallet current balance: ${ethers.formatUnits(backendBalance, networkConfig.decimals)} USDT`);
-
-            // If backend wallet doesn't have enough USDT, mint some
-            if (backendBalance < minRequiredBalance) {
-                console.log(`[mintTestUSDT] Backend wallet needs more USDT, minting...`);
-
-                // Check if the contract has the mint function
-                const code = await this.providers[network].getCode(networkConfig.usdtAddress);
-                if (code === '0x') {
-                    throw new Error(`No contract found at address ${networkConfig.usdtAddress}`);
-                }
-
-                // Mint to backend wallet
-                const mintTx = await contract.mint(backendWallet.address, minRequiredBalance);
-                console.log(`[mintTestUSDT] Mint transaction sent: ${mintTx.hash}`);
-                await mintTx.wait();
-                console.log(`[mintTestUSDT] Mint transaction mined`);
-
-                // Verify the mint was successful
-                const newBackendBalance = await contract.balanceOf(backendWallet.address);
-                console.log(`[mintTestUSDT] Backend wallet new balance: ${ethers.formatUnits(newBackendBalance, networkConfig.decimals)} USDT`);
-            }
-
-            // Now transfer to user's address
-            console.log(`[mintTestUSDT] Transferring USDT to user address: ${address}`);
-            const transferTx = await contract.transfer(address, minRequiredBalance);
-            console.log(`[mintTestUSDT] Transfer transaction sent: ${transferTx.hash}`);
+            // Transfer USDT to user's address
+            const transferAmount = ethers.parseUnits('100', config.decimals);
+            console.log(`[mintTestUSDT] Transferring ${ethers.formatUnits(transferAmount, config.decimals)} USDT to ${address}`);
+            const transferTx = await contract.transfer(address, transferAmount);
             const transferReceipt = await transferTx.wait();
-            console.log(`[mintTestUSDT] Transfer transaction mined in block ${transferReceipt.blockNumber}`);
+            console.log(`[mintTestUSDT] Transfer completed in block ${transferReceipt.blockNumber}`);
 
-            // Verify the transfer was successful by checking balance
-            const balance = await contract.balanceOf(address);
-            const formattedBalance = ethers.formatUnits(balance, networkConfig.decimals);
-            console.log(`[mintTestUSDT] Verified balance after transfer: ${formattedBalance} USDT`);
-
-            // Update wallet balances in DB
+            // Update wallet's global balance
             const wallet = await Wallet.findOne({ 'networks.address': address });
             if (wallet) {
-                // Update the specific network balance
-                const networkIndex = wallet.networks.findIndex(n => n.network === network);
-                if (networkIndex !== -1) {
-                    wallet.networks[networkIndex].balance = formattedBalance;
-                }
-
-                // Calculate global balance as sum of all network balances
-                const globalBalance = wallet.networks.reduce((sum, network) => {
-                    return sum + parseFloat(network.balance || '0');
-                }, 0).toFixed(6);
-
-                wallet.globalUsdtBalance = globalBalance;
+                const currentBalance = parseFloat(wallet.globalUsdtBalance || '0');
+                const newBalance = (currentBalance + 100).toFixed(6); // Add 100 USDT to global balance
+                wallet.globalUsdtBalance = newBalance;
                 await wallet.save();
-                console.log(`[mintTestUSDT] Updated wallet balances - Network: ${formattedBalance} USDT, Global: ${globalBalance} USDT`);
+                console.log(`[mintTestUSDT] Updated wallet's global balance to ${newBalance} USDT`);
             }
 
             return {
                 success: true,
                 txHash: transferTx.hash,
                 blockNumber: transferReceipt.blockNumber,
-                balance: formattedBalance
+                balance: '100.000000'
             };
         } catch (error) {
             console.error(`[mintTestUSDT] Error:`, error);

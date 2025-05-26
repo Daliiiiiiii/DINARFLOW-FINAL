@@ -41,6 +41,10 @@ import api from '../lib/axios';
 import { toast } from 'react-hot-toast';
 import PendingWallet from '../components/PendingWallet';
 import FrozenWallet from '../components/FronzeWallet';
+import { QRCodeSVG } from 'qrcode.react';
+import TransactionStatus from '../components/TransactionStatus';
+import QRCodeModal from '../components/QRCodeModal';
+import SendModal from '../components/SendModal';
 
 const networks = [
   { 
@@ -144,7 +148,7 @@ const MemoizedHeader = React.memo(({ isDark, handleRefresh, isRefreshing, global
   </div>
 ));
 
-const MemoizedBalanceCard = React.memo(({ isDark, selectedNetworkData }) => (
+const MemoizedBalanceCard = React.memo(({ isDark, globalBalance }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -172,25 +176,15 @@ const MemoizedBalanceCard = React.memo(({ isDark, selectedNetworkData }) => (
     <div className="relative">
       <div className="flex items-center justify-between mb-4">
         <div className="space-y-1">
-          <div className="text-sm text-gray-500 dark:text-gray-400">Total Balance</div>
+          <div className="text-sm text-gray-500 dark:text-gray-400">Global Balance</div>
           <div className="text-3xl font-bold">
-            {selectedNetworkData?.balance || '0'} USDT
+            {globalBalance || '0'} USDT
           </div>
           <div className="text-lg text-gray-500 dark:text-gray-400">
-            ≈ ${selectedNetworkData?.balance || '0'}
+            ≈ ${globalBalance || '0'}
           </div>
-        </div>
-        <div className="text-right">
-          {/* Trend data might be static or fetched separately */}
-          <div className="flex items-center gap-2 text-green-500">
-            <TrendingUp className="w-4 h-4" />
-            <span>+2.5%</span>
-          </div>
-          <div className="text-sm text-gray-500 dark:text-gray-400">24h Change</div>
         </div>
       </div>
-
-      {/* Send/Receive buttons moved to parent */}
     </div>
   </motion.div>
 ));
@@ -225,9 +219,6 @@ const MemoizedNetworkSelection = React.memo(({ networks, walletNetworksData, sel
           >
             <div className="text-2xl mb-2">{network.icon}</div>
             <div className="font-medium">{network.name}</div>
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              {networkData?.balance || '0'} USDT
-            </div>
             {networkData?.isActive === false && (
               <div className="text-xs text-red-500 mt-1">Inactive</div>
             )}
@@ -307,26 +298,175 @@ const MemoizedAddressCard = React.memo(({ isDark, selectedNetworkData, handleCop
   );
 });
 
-const MemoizedRecentTransactions = React.memo(({ isDark }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.3 }}
-    className={`${
-      isDark 
-        ? 'bg-gray-900/50 backdrop-blur-sm border-gray-800' 
-        : 'bg-white border-gray-200'
-    } border rounded-xl p-6`}
-  >
-    <h2 className="text-xl font-semibold mb-4">Recent Transactions</h2>
-    <div className="space-y-4">
-      {/* Add transaction history here */}
-      <p className="text-gray-500 dark:text-gray-400 text-center">
-        No recent transactions
-      </p>
-    </div>
-  </motion.div>
-));
+// Add MemoizedTransactionList component before CryptoWallet component
+const MemoizedTransactionList = React.memo(({ transactions, isDark }) => {
+  console.log('MemoizedTransactionList rendering with transactions:', transactions);
+
+  if (!transactions || transactions.length === 0) {
+    return (
+      <div className={`p-6 rounded-xl border ${
+        isDark ? 'bg-gray-900/50 border-gray-800' : 'bg-white border-gray-200'
+      }`}>
+        <div className="text-center text-gray-500 dark:text-gray-400">
+          No transactions yet
+        </div>
+      </div>
+    );
+  }
+
+  const formatDate = (dateString) => {
+    try {
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) {
+        return 'Invalid date';
+      }
+      return date.toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    } catch (error) {
+      console.error('Error formatting date:', error);
+      return 'Invalid date';
+    }
+  };
+
+  const getNetworkName = (networkId) => {
+    console.log('Attempting to get network name for ID:', networkId);
+    const network = networks.find(n => n.id === networkId);
+    const networkName = network ? network.name : 'Unknown Network';
+    console.log('Resolved network name:', networkName);
+    return networkName;
+  };
+
+  const getTransactionType = (tx) => {
+    // Prioritize subtype if available
+    if (tx.subtype) {
+        return tx.subtype;
+    } else if (tx.type === 'crypto' || tx.type === 'crypto_transfer') {
+        // If type is crypto/crypto_transfer and no subtype, infer from amount sign
+        return tx.amount < 0 ? 'send' : 'receive';
+    }
+    // Fallback for unexpected structures - assume 'send' if amount is negative
+    return tx.amount < 0 ? 'send' : 'receive';
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className={`p-6 rounded-xl border ${
+        isDark ? 'bg-gray-900/50 border-gray-800' : 'bg-white border-gray-200'
+      }`}
+    >
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-semibold">Recent Transactions</h2>
+      </div>
+      <div className="space-y-4">
+        {transactions.map((tx) => {
+          const txType = getTransactionType(tx);
+          return (
+            <motion.div
+              key={tx._id}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className={`p-4 rounded-lg border ${
+                isDark ? 'border-gray-800 hover:bg-gray-800/50' : 'border-gray-200 hover:bg-gray-50'
+              } transition-colors`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                    txType === 'send' 
+                      ? isDark ? 'bg-red-900/20' : 'bg-red-100'
+                      : isDark ? 'bg-green-900/20' : 'bg-green-100'
+                  }`}>
+                    {txType === 'send' ? (
+                      <ArrowUpRight className={`w-5 h-5 ${
+                        isDark ? 'text-red-400' : 'text-red-500'
+                      }`} />
+                    ) : (
+                      <ArrowDownRight className={`w-5 h-5 ${
+                        isDark ? 'text-green-400' : 'text-green-500'
+                      }`} />
+                    )}
+                  </div>
+                  <div>
+                    <div className="font-medium">
+                      {txType === 'send' ? 'Sent' : 'Received'} USDT
+                    </div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                      {formatDate(tx.createdAt || tx.timestamp)}
+                    </div>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className={`font-medium ${
+                    txType === 'send' 
+                      ? isDark ? 'text-red-400' : 'text-red-500'
+                      : isDark ? 'text-green-400' : 'text-green-500'
+                  }`}>
+                    {txType === 'send' ? '-' : '+'}{Math.abs(tx.amount)} USDT
+                  </div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400">
+                    {getNetworkName(tx.network)}
+                  </div>
+                </div>
+              </div>
+              {tx.status && (
+                <div className="mt-2 flex items-center gap-2 text-sm">
+                  {tx.status === 'completed' ? (
+                    <CheckCircle className="w-4 h-4 text-green-500" />
+                  ) : tx.status === 'pending' ? (
+                    <Clock className="w-4 h-4 text-yellow-500" />
+                  ) : (
+                    <AlertTriangle className="w-4 h-4 text-red-500" />
+                  )}
+                  <span className="capitalize">{tx.status}</span>
+                </div>
+              )}
+              {tx.hash && (
+                <div className="mt-2 text-xs text-gray-500 dark:text-gray-400 break-all">
+                  TX Hash: {tx.hash}
+                </div>
+              )}
+            </motion.div>
+          );
+        })}
+      </div>
+    </motion.div>
+  );
+});
+
+// Add a function to validate network addresses
+const validateNetworkAddress = (address, networkId) => {
+  const network = networks.find(n => n.id === networkId);
+  if (!network) return false;
+
+  switch (networkId) {
+    case 'ethereum':
+    case 'arbitrum':
+    case 'polygon':
+      // Ethereum, Arbitrum, and Polygon addresses start with 0x and are 42 characters long
+      return /^0x[a-fA-F0-9]{40}$/.test(address);
+    case 'bsc':
+      // BSC addresses are similar to Ethereum
+      return /^0x[a-fA-F0-9]{40}$/.test(address);
+    case 'tron':
+      // TRON addresses start with T and are 34 characters long
+      return /^T[a-zA-Z0-9]{33}$/.test(address);
+    case 'solana':
+      // Solana addresses are base58 encoded and 32-44 characters long
+      return /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address);
+    case 'ton':
+      // TON addresses are base64 encoded and start with UQ
+      return /^UQ[a-zA-Z0-9_-]{48}$/.test(address);
+    default:
+      return false;
+  }
+};
 
 const CryptoWallet = () => {
   // ** All Hooks must be defined here, unconditionally **
@@ -346,11 +486,13 @@ const CryptoWallet = () => {
   const [sendAddress, setSendAddress] = useState('');
   const [lastRefresh, setLastRefresh] = useState(Date.now());
   const [globalBalance, setGlobalBalance] = useState('0');
-  const [bridgeBalance, setBridgeBalance] = useState('0');
-  const [isBridging, setIsBridging] = useState(false);
-  const [bridgeAmount, setBridgeAmount] = useState('');
-  const [showBridge, setShowBridge] = useState(false);
   const [isMinting, setIsMinting] = useState(false);
+  const [cryptoTransactions, setCryptoTransactions] = useState([]);
+  const [transactionStatus, setTransactionStatus] = useState(null);
+  const [transactionMessage, setTransactionMessage] = useState('');
+  const [isSending, setIsSending] = useState(false);
+  const [showSendModal, setShowSendModal] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   // Find selected network data (derived state) - **DEFINE BEFORE CALLBACKS USING IT**
   const selectedNetworkData = useMemo(() => {
@@ -358,6 +500,11 @@ const CryptoWallet = () => {
           n => n.network === selectedNetwork.id
       );
   }, [walletData?.networks, selectedNetwork.id]);
+
+  // Add check for superadmin role
+  const isSuperAdmin = useMemo(() => {
+    return userProfile?.role === 'superadmin';
+  }, [userProfile?.role]);
 
   // Define fetchWalletData using useCallback to ensure it's stable
   const fetchWalletData = useCallback(async (networkId = null) => {
@@ -369,20 +516,36 @@ const CryptoWallet = () => {
       setIsLoading(true);
       const start = Date.now();
       console.log('Fetching wallet for network:', networkId);
-      const response = await api.get('/api/wallet', { 
-        params: { 
-          userId: userProfile._id, 
+      const response = await api.get('/api/wallet', {
+        params: {
+          userId: userProfile._id,
           network: networkId,
           _t: lastRefresh
-        } 
+        }
       });
       console.log('Wallet API response in', Date.now() - start, 'ms');
       const data = response.data;
       setWalletData(data);
-      
+
       // Set global balance from fetched data
       if (data && data.globalUsdtBalance !== undefined) {
         setGlobalBalance(data.globalUsdtBalance);
+        // Also update user profile's wallet balance
+        console.log('Attempting to update userProfile with new balance. setUserProfile is:', setUserProfile);
+        if (typeof setUserProfile === 'function') {
+          setUserProfile(prev => {
+            if (!prev) return null;
+            return {
+              ...prev,
+              wallet: {
+                ...prev.wallet,
+                globalUsdtBalance: data.globalUsdtBalance
+              }
+            };
+          });
+        } else {
+          console.warn('setUserProfile is not available. Skipping user profile update.');
+        }
       }
 
       // If a specific network was requested, select it
@@ -403,16 +566,44 @@ const CryptoWallet = () => {
     } finally {
       setIsLoading(false);
     }
+  }, [userProfile, lastRefresh, setUserProfile]);
+
+  // Add function to fetch crypto transactions
+  const fetchCryptoTransactions = useCallback(async () => {
+    if (!userProfile || !userProfile._id) {
+      console.log('fetchCryptoTransactions: userProfile not ready');
+      return;
+    }
+    try {
+      console.log('Fetching crypto transactions...');
+      const response = await api.get('/api/transactions', {
+        params: {
+          userId: userProfile._id,
+          type: 'crypto', // Filter by crypto transactions
+          _t: lastRefresh // Use lastRefresh to help cache bust if needed
+        }
+      });
+      console.log('Crypto transactions fetched successfully.', response.data.transactions);
+      // Log the first few transactions to inspect their structure
+      if (response.data.transactions && response.data.transactions.length > 0) {
+        console.log('First 3 raw crypto transactions from API:', response.data.transactions.slice(0, 3));
+      }
+      setCryptoTransactions(response.data.transactions);
+    } catch (error) {
+      console.error('Error fetching crypto transactions:', error);
+      // Optionally display a toast error
+      // toast.error('Failed to load transactions');
+    }
   }, [userProfile, lastRefresh]);
 
-  // Define useEffect for initial fetch and network changes
+  // Update useEffect to fetch crypto transactions as well
   useEffect(() => {
     console.log('useEffect: userProfile:', userProfile);
-    console.log('useEffect: selectedNetwork.id:', selectedNetwork.id);
-    // Fetch data whenever selectedNetwork.id or userProfile changes
-    fetchWalletData(selectedNetwork.id);
-
-  }, [selectedNetwork.id, userProfile, fetchWalletData]); // Dependencies for useEffect
+    if (userProfile?._id) {
+      fetchWalletData();
+      fetchCryptoTransactions(); // Fetch crypto transactions
+    }
+  }, [userProfile, fetchWalletData, fetchCryptoTransactions]); // Add fetchCryptoTransactions to dependencies
 
   // Define other handlers using useCallback if they are passed to memoized children
   const handleRefresh = useCallback(async () => {
@@ -428,7 +619,9 @@ const CryptoWallet = () => {
       return;
     }
     navigator.clipboard.writeText(text);
+    setIsCopied(true);
     toast.success('Address copied to clipboard');
+    setTimeout(() => setIsCopied(false), 2000);
   }, []);
 
   const handleSend = useCallback(async () => {
@@ -437,7 +630,20 @@ const CryptoWallet = () => {
         return;
     }
 
+    // Validate the recipient address format for the selected network
+    if (!validateNetworkAddress(sendAddress, selectedNetwork.id)) {
+        const errorMsg = `Invalid ${selectedNetwork.name} address format. Please check the address and try again.`;
+        setTransactionStatus('error');
+        setTransactionMessage(errorMsg);
+        toast.error(errorMsg);
+        return;
+    }
+
     try {
+        setIsSending(true);
+        setTransactionStatus('loading');
+        setTransactionMessage('Initiating transaction...');
+        
         console.log('Sending USDT with data:', {
             network: selectedNetwork.id,
             toAddress: sendAddress,
@@ -457,49 +663,57 @@ const CryptoWallet = () => {
             setWalletData(response.data.wallet);
             setGlobalBalance(response.data.newBalance);
             
-            // Update user profile with new balances
-            setUserProfile(prev => ({
-                ...prev,
-                wallet: {
-                    ...prev.wallet,
-                    globalUsdtBalance: response.data.newBalance
-                }
-            }));
-
-            // Update network-specific balance in the UI
-            if (response.data.wallet.networks) {
-                const updatedNetwork = response.data.wallet.networks.find(n => n.network === selectedNetwork.id);
-                if (updatedNetwork) {
-                    setWalletData(prev => ({
+            if (typeof setUserProfile === 'function') {
+                setUserProfile(prev => {
+                    if (!prev) return null;
+                    return {
                         ...prev,
-                        networks: prev.networks.map(n => 
-                            n.network === selectedNetwork.id ? updatedNetwork : n
-                        )
-                    }));
-                }
+                        wallet: {
+                            ...prev.wallet,
+                            globalUsdtBalance: response.data.newBalance
+                        }
+                    };
+                });
             }
         }
 
+        setTransactionStatus('success');
+        setTransactionMessage('Transaction completed successfully');
         toast.success('Transaction sent successfully');
-        setShowSend(false);
-        setSendAmount('');
-        setSendAddress('');
         
-        // Force a refresh of the wallet data
-        setLastRefresh(Date.now());
-        await fetchWalletData(selectedNetwork.id);
+        // Close the send modal and reset form after a delay
+        setTimeout(() => {
+            setShowSend(false);
+            setSendAmount('');
+            setSendAddress('');
+            setTransactionStatus(null);
+            setTransactionMessage('');
+            setIsSending(false);
+            
+            setLastRefresh(Date.now());
+            fetchCryptoTransactions();
+        }, 2000);
+
     } catch (error) {
         console.error('Error sending USDT:', error);
         const errorMessage = error.response?.data?.error || error.message || 'Failed to send USDT';
+        setTransactionStatus('error');
+        setTransactionMessage(errorMessage);
         toast.error(errorMessage);
+        
+        setTimeout(() => {
+            setTransactionStatus(null);
+            setTransactionMessage('');
+            setIsSending(false);
+        }, 2000);
     }
-  }, [selectedNetwork.id, sendAmount, sendAddress, fetchWalletData]);
+  }, [selectedNetwork.id, sendAmount, sendAddress, fetchCryptoTransactions, setUserProfile]);
 
-  // Memoized callback for network selection button
+  // Update the network selection handler to not trigger a fetch
   const onSelectNetwork = useCallback((network) => {
     setSelectedNetwork(network);
-    // The useEffect will handle fetching when selectedNetwork changes
-  }, [setSelectedNetwork]);
+    // Don't fetch wallet data here anymore
+  }, []);
 
   // Memoized callback for viewing on explorer - **USES selectedNetworkData**
   const handleViewOnExplorer = useCallback(() => {
@@ -512,55 +726,6 @@ const CryptoWallet = () => {
       // Add other networks here if needed, e.g., if (selectedNetwork.id === 'bsc') { ... }
       window.open(explorerUrl, '_blank');
   }, [selectedNetworkData?.address]); // Dependency on the address
-
-  // Add bridge-related functions
-  const handleBridge = useCallback(async () => {
-    if (!bridgeAmount || !selectedNetwork || !userProfile?.wallet?.address) {
-      toast.error('Please fill in all fields');
-      return;
-    }
-
-    try {
-      setIsBridging(true);
-      const response = await api.post('/api/bridge/process', {
-        fromNetwork: selectedNetwork.id,
-        amount: bridgeAmount,
-        userAddress: userProfile.wallet.address
-      });
-
-      toast.success('Bridge request submitted successfully');
-      setShowBridge(false);
-      setBridgeAmount('');
-      setLastRefresh(Date.now());
-      await fetchWalletData(selectedNetwork.id);
-      await fetchBridgeBalance();
-    } catch (error) {
-      console.error('Error bridging USDT:', error);
-      const errorMessage = error.response?.data?.error || error.message || 'Failed to bridge USDT';
-      toast.error(errorMessage);
-    } finally {
-      setIsBridging(false);
-    }
-  }, [bridgeAmount, selectedNetwork, userProfile?.wallet?.address, fetchWalletData]);
-
-  // Add function to fetch bridge balance
-  const fetchBridgeBalance = useCallback(async () => {
-    if (!userProfile?.wallet?.address) return;
-    
-    try {
-      const response = await api.get(`/api/bridge/balance/${userProfile.wallet.address}`);
-      setBridgeBalance(response.data.balance);
-    } catch (error) {
-      console.error('Error fetching bridge balance:', error);
-    }
-  }, [userProfile?.wallet?.address]);
-
-  // Update useEffect to fetch bridge balance
-  useEffect(() => {
-    if (userProfile?.wallet?.address) {
-      fetchBridgeBalance();
-    }
-  }, [userProfile?.wallet?.address, fetchBridgeBalance]);
 
   // Add mintTestUSDT function
   const mintTestUSDT = useCallback(async () => {
@@ -577,7 +742,8 @@ const CryptoWallet = () => {
 
         toast.success('Test USDT minted successfully');
         setLastRefresh(Date.now());
-        await fetchWalletData(selectedNetwork.id);
+        // fetchWalletData(); // useEffect will handle this via lastRefresh
+        fetchCryptoTransactions(); // Refresh transactions
     } catch (error) {
         console.error('Error minting test USDT:', error);
         const errorMessage = error.response?.data?.error || error.message || 'Failed to mint test USDT';
@@ -585,7 +751,7 @@ const CryptoWallet = () => {
     } finally {
         setIsMinting(false);
     }
-  }, [selectedNetwork, userProfile?._id, fetchWalletData]);
+  }, [selectedNetwork, userProfile?._id, fetchCryptoTransactions]); // Add fetchCryptoTransactions to dependencies
 
   // ** Conditional Renders based on state **
   if (!walletData) {
@@ -601,259 +767,371 @@ const CryptoWallet = () => {
     <>
       <div className="space-y-6">
         {/* Header */}
-        <MemoizedHeader 
-          isDark={isDark} 
-          handleRefresh={handleRefresh} 
-          isRefreshing={isRefreshing}
-          globalBalance={globalBalance}
-        />
-
-        <h2>Crypto Wallet</h2>
-
-        {/* Display Global USDT Balance */}
-        {userProfile?.wallet?.globalUsdtBalance !== undefined && (
-            <div className="global-balance-display">
-                <h3>Global USDT Balance: {userProfile.wallet.globalUsdtBalance}</h3>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+        >
+          <div className="flex items-center gap-4">
+            <motion.div
+              whileHover={{ scale: 1.05, rotate: 5 }}
+              className={`w-14 h-14 rounded-2xl ${
+                isDark ? 'bg-gray-800' : 'bg-white'
+              } shadow-lg flex items-center justify-center relative group`}
+            >
+              <Wallet className="w-7 h-7 text-blue-500" />
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-xs text-white font-bold shadow-lg"
+              >
+                $
+              </motion.div>
+            </motion.div>
+            <div>
+              <motion.h1
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"
+              >
+                USDT Wallet
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 }}
+                className="text-gray-500 dark:text-gray-400"
+              >
+                Global Balance: {globalBalance} USDT
+              </motion.p>
             </div>
-        )}
+          </div>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleRefresh}
+            className={`p-3 rounded-xl ${
+              isDark ? 'bg-gray-800' : 'bg-white'
+            } shadow-lg hover:shadow-xl transition-all`}
+          >
+            <RefreshCw className={`w-5 h-5 ${isRefreshing ? 'animate-spin' : ''}`} />
+          </motion.button>
+        </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Balance Card */}
-            <MemoizedBalanceCard 
-              isDark={isDark} 
-              selectedNetworkData={selectedNetworkData} 
-            />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`${
+                isDark ? 'bg-gray-800/50' : 'bg-white'
+              } rounded-2xl p-8 relative overflow-hidden backdrop-blur-xl border ${
+                isDark ? 'border-gray-700' : 'border-gray-200'
+              } shadow-xl`}
+            >
+              <div className="absolute inset-0">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10" />
+                <motion.div
+                  animate={{
+                    rotate: [0, 360],
+                  }}
+                  transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  className="absolute inset-0 bg-gradient-conic from-blue-500/5 via-purple-500/5 to-blue-500/5 blur-3xl opacity-50"
+                />
+              </div>
+              <div className="relative">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="space-y-2">
+                    <div className="text-sm text-gray-500 dark:text-gray-400">Total Balance</div>
+                    <div className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+                      {globalBalance} USDT
+                    </div>
+                    <div className="text-lg text-gray-500 dark:text-gray-400">
+                      ≈ ${globalBalance}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
 
-            {/* Add Bridge Balance Display */}
-            <div className={`${
-              isDark 
-                ? 'bg-gray-900/50 backdrop-blur-sm border-gray-800' 
-                : 'bg-white border-gray-200'
-            } border rounded-xl p-6`}>
-              <h3 className="text-lg font-semibold mb-2">Bridge Balance</h3>
-              <p className="text-2xl font-bold">{bridgeBalance} USDT</p>
-            </div>
-
-            {/* Send/Receive/Bridge buttons */}
-            <div className="flex gap-3 px-6 sm:px-0">
-              <button
-                onClick={() => setShowSend(true)}
-                className="flex-1 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors flex items-center justify-center gap-2 group"
+            {/* Action Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+            >
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setShowSendModal(true)}
+                className="p-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:from-blue-600 hover:to-purple-600 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
               >
-                <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                <Send className="w-5 h-5" />
                 Send
-              </button>
-              <button
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setShowQR(true)}
-                className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center justify-center gap-2 group"
+                className="p-4 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium hover:from-purple-600 hover:to-pink-600 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
               >
-                <Download className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
+                <Download className="w-5 h-5" />
                 Receive
-              </button>
-              <button
-                onClick={() => setShowBridge(true)}
-                className="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center justify-center gap-2 group"
-              >
-                <Layers className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-                Bridge
-              </button>
-              <button
-                onClick={mintTestUSDT}
-                disabled={isMinting}
-                className="flex-1 px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg transition-colors flex items-center justify-center gap-2 group disabled:opacity-50"
-              >
-                <RefreshCw className={`w-4 h-4 ${isMinting ? 'animate-spin' : ''}`} />
-                {isMinting ? 'Minting...' : 'Mint Test USDT'}
-              </button>
-            </div>
+              </motion.button>
+              {isSuperAdmin && (
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={mintTestUSDT}
+                  disabled={isMinting}
+                  className="p-4 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-medium hover:from-yellow-600 hover:to-orange-600 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <RefreshCw className={`w-5 h-5 ${isMinting ? 'animate-spin' : ''}`} />
+                  {isMinting ? 'Minting...' : 'Mint Test USDT'}
+                </motion.button>
+              )}
+            </motion.div>
 
             {/* Network Selection */}
-            <MemoizedNetworkSelection 
-              networks={networks} 
-              walletNetworksData={walletData.networks} 
-              selectedNetworkId={selectedNetwork.id} 
-              onSelectNetwork={onSelectNetwork} 
-              isDark={isDark} 
-            />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"
+            >
+              {networks.map((network, index) => {
+                const networkData = walletData?.networks?.find(n => n.network === network.id);
+                return (
+                  <motion.button
+                    key={network.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 + index * 0.1 }}
+                    onClick={() => onSelectNetwork(network)}
+                    className={`p-4 rounded-xl border transition-all ${
+                      selectedNetwork.id === network.id
+                        ? isDark
+                          ? 'bg-blue-900/20 border-blue-500'
+                          : 'bg-blue-50 border-blue-500'
+                        : isDark
+                          ? 'bg-gray-800/50 border-gray-700 hover:border-gray-600'
+                          : 'bg-white border-gray-200 hover:border-gray-300'
+                    } shadow-lg hover:shadow-xl`}
+                  >
+                    <div className="text-2xl mb-2">{network.icon}</div>
+                    <div className="font-medium">{network.name}</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                      Fee: {network.fee}
+                    </div>
+                    {networkData?.isActive === false && (
+                      <div className="text-xs text-red-500 mt-1">Inactive</div>
+                    )}
+                  </motion.button>
+                );
+              })}
+            </motion.div>
 
             {/* Address Card */}
-            <MemoizedAddressCard 
-                isDark={isDark} 
-                selectedNetworkData={selectedNetworkData} 
-                handleCopy={handleCopy} 
-                handleViewOnExplorer={handleViewOnExplorer}
-            />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className={`${
+                isDark ? 'bg-gray-800/50' : 'bg-white'
+              } rounded-2xl p-6 relative overflow-hidden backdrop-blur-xl border ${
+                isDark ? 'border-gray-700' : 'border-gray-200'
+              } shadow-xl`}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-semibold">Wallet Address</h2>
+                <div className="flex items-center gap-2">
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={handleViewOnExplorer}
+                    className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    title="View on Explorer"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => handleCopy(selectedNetworkData?.address)}
+                    className={`p-2 rounded-lg transition-all duration-300 ${
+                      isCopied 
+                        ? 'bg-green-100 dark:bg-green-900/20 text-green-500' 
+                        : 'hover:bg-gray-100 dark:hover:bg-gray-700'
+                    }`}
+                    title="Copy address"
+                  >
+                    <motion.div
+                      initial={false}
+                      animate={{ rotate: isCopied ? 360 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {isCopied ? (
+                        <CheckCircle className="w-5 h-5" />
+                      ) : (
+                        <Copy className="w-5 h-5" />
+                      )}
+                    </motion.div>
+                  </motion.button>
+                </div>
+              </div>
+              <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 break-all font-mono text-sm">
+                {selectedNetworkData?.address || 'Loading address...'}
+              </div>
+            </motion.div>
           </div>
 
-          {/* Sidebar */}
-          <div className="space-y-6">
-            <MemoizedRecentTransactions isDark={isDark} />
-          </div>
+          {/* Right Column - Transactions */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className={`${
+              isDark ? 'bg-gray-800/50' : 'bg-white'
+            } rounded-2xl p-6 relative overflow-hidden backdrop-blur-xl border ${
+              isDark ? 'border-gray-700' : 'border-gray-200'
+            } shadow-xl`}
+          >
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-semibold">Recent Transactions</h2>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={handleRefresh}
+                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              >
+                <RefreshCw className={`w-5 h-5 ${isRefreshing ? 'animate-spin' : ''}`} />
+              </motion.button>
+            </div>
+            <div className="space-y-4">
+              {cryptoTransactions.length === 0 ? (
+                <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                  No transactions yet
+                </div>
+              ) : (
+                cryptoTransactions.map((tx, index) => {
+                  const txType = tx.amount < 0 ? 'send' : 'receive';
+                  return (
+                    <motion.div
+                      key={tx._id}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className={`p-4 rounded-xl border ${
+                        isDark ? 'border-gray-700 hover:bg-gray-700/50' : 'border-gray-200 hover:bg-gray-50'
+                      } transition-colors`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                            txType === 'send' 
+                              ? isDark ? 'bg-red-900/20' : 'bg-red-100'
+                              : isDark ? 'bg-green-900/20' : 'bg-green-100'
+                          }`}>
+                            {txType === 'send' ? (
+                              <ArrowUpRight className={`w-5 h-5 ${
+                                isDark ? 'text-red-400' : 'text-red-500'
+                              }`} />
+                            ) : (
+                              <ArrowDownRight className={`w-5 h-5 ${
+                                isDark ? 'text-green-400' : 'text-green-500'
+                              }`} />
+                            )}
+                          </div>
+                          <div>
+                            <div className="font-medium">
+                              {txType === 'send' ? 'Sent' : 'Received'} USDT
+                            </div>
+                            <div className="text-sm text-gray-500 dark:text-gray-400">
+                              {new Date(tx.createdAt || tx.timestamp).toLocaleString()}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className={`font-medium ${
+                            txType === 'send' 
+                              ? isDark ? 'text-red-400' : 'text-red-500'
+                              : isDark ? 'text-green-400' : 'text-green-500'
+                          }`}>
+                            {txType === 'send' ? '-' : '+'}{Math.abs(tx.amount)} USDT
+                          </div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">
+                            {networks.find(n => n.id === tx.network)?.name || 'Unknown Network'}
+                          </div>
+                        </div>
+                      </div>
+                      {tx.status && (
+                        <div className="mt-2 flex items-center gap-2 text-sm">
+                          {tx.status === 'completed' ? (
+                            <CheckCircle className="w-4 h-4 text-green-500" />
+                          ) : tx.status === 'pending' ? (
+                            <Clock className="w-4 h-4 text-yellow-500" />
+                          ) : (
+                            <AlertTriangle className="w-4 h-4 text-red-500" />
+                          )}
+                          <span className="capitalize">{tx.status}</span>
+                        </div>
+                      )}
+                      {tx.hash && (
+                        <div className="mt-2 text-xs text-gray-500 dark:text-gray-400 break-all">
+                          TX Hash: {tx.hash}
+                        </div>
+                      )}
+                    </motion.div>
+                  );
+                })
+              )}
+            </div>
+          </motion.div>
         </div>
       </div>
 
-      {/* Modals (Send/QR) */}
+      {/* Modals */}
       <AnimatePresence>
-        {showSend && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className={`${
-                isDark ? 'bg-gray-900' : 'bg-white'
-              } rounded-xl p-6 w-full max-w-md`}
-            >
-              <h2 className="text-xl font-semibold mb-4">Send USDT</h2>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Amount (USDT)</label>
-                  <input
-                    type="number"
-                    value={sendAmount}
-                    onChange={(e) => setSendAmount(e.target.value)}
-                    className="w-full px-4 py-2 rounded-lg border dark:bg-gray-800 dark:border-gray-700"
-                    placeholder="0.00"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Recipient Address</label>
-                  <input
-                    type="text"
-                    value={sendAddress}
-                    onChange={(e) => setSendAddress(e.target.value)}
-                    className="w-full px-4 py-2 rounded-lg border dark:bg-gray-800 dark:border-gray-700"
-                    placeholder="0x..."
-                  />
-                </div>
-                <div className="flex gap-3">
-                  <button
-                    onClick={() => setShowSend(false)}
-                    className="flex-1 px-4 py-2 bg-gray-200 dark:bg-gray-800 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={handleSend}
-                    className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                  >
-                    Send
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
+        {showSendModal && (
+          <SendModal
+            isDark={isDark}
+            selectedNetwork={selectedNetwork}
+            sendAmount={sendAmount}
+            setSendAmount={setSendAmount}
+            sendAddress={sendAddress}
+            setSendAddress={setSendAddress}
+            handleSend={handleSend}
+            onClose={() => setShowSendModal(false)}
+            isSending={isSending}
+            transactionStatus={transactionStatus}
+            transactionMessage={transactionMessage}
+          />
         )}
       </AnimatePresence>
 
-      {/* QR Code Modal */}
       <AnimatePresence>
         {showQR && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className={`${
-                isDark ? 'bg-gray-900' : 'bg-white'
-              } rounded-xl p-6 w-full max-w-md`}
-            >
-              <h2 className="text-xl font-semibold mb-4">Receive USDT</h2>
-              <div className="space-y-4">
-                <div className="bg-white p-4 rounded-lg flex items-center justify-center">
-                  {/* Add QR code component here */}
-                  <QrCode className="w-48 h-48" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Your Address</label>
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      value={selectedNetworkData?.address}
-                      readOnly
-                      className="flex-1 px-4 py-2 rounded-lg border dark:bg-gray-800 dark:border-gray-700"
-                    />
-                    <button
-                      onClick={() => handleCopy(selectedNetworkData?.address)}
-                      className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                    >
-                      <Copy className="w-5 h-5" />
-                    </button>
-                  </div>
-                </div>
-                <button
-                  onClick={() => setShowQR(false)}
-                  className="w-full px-4 py-2 bg-gray-200 dark:bg-gray-800 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
-                >
-                  Close
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
+          <QRCodeModal
+            isDark={isDark}
+            selectedNetworkData={selectedNetworkData}
+            handleCopy={handleCopy}
+            onClose={() => setShowQR(false)}
+          />
         )}
       </AnimatePresence>
 
-      {/* Bridge Modal */}
-      <AnimatePresence>
-        {showBridge && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className={`${
-                isDark ? 'bg-gray-900' : 'bg-white'
-              } rounded-xl p-6 w-full max-w-md`}
-            >
-              <h2 className="text-xl font-semibold mb-4">Bridge USDT</h2>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Amount (USDT)</label>
-                  <input
-                    type="number"
-                    value={bridgeAmount}
-                    onChange={(e) => setBridgeAmount(e.target.value)}
-                    className="w-full px-4 py-2 rounded-lg border dark:bg-gray-800 dark:border-gray-700"
-                    placeholder="0.00"
-                  />
-                </div>
-                <div className="flex gap-3">
-                  <button
-                    onClick={() => setShowBridge(false)}
-                    className="flex-1 px-4 py-2 bg-gray-200 dark:bg-gray-800 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={handleBridge}
-                    disabled={isBridging}
-                    className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50"
-                  >
-                    {isBridging ? 'Bridging...' : 'Bridge'}
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <TransactionStatus 
+        show={!!transactionStatus} 
+        type={transactionStatus}
+        message={transactionMessage}
+      />
     </>
   );
 };

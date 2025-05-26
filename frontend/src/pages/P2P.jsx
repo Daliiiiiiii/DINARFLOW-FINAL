@@ -6,6 +6,11 @@ import { Search, Filter, ChevronDown, X, Send, Clock, CheckCircle, AlertTriangle
 import { useTheme } from '../contexts/ThemeContext';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import axios from '../lib/axios';
+import { toast } from 'react-hot-toast';
+import P2PChat from '../components/P2PChat';
+import P2PProfileSetup from '../components/P2PProfileSetup';
+import { io } from 'socket.io-client';
 
 const P2P = () => {
   const { theme } = useTheme();
@@ -22,7 +27,94 @@ const P2P = () => {
   const [selectedOffer, setSelectedOffer] = useState(null);
   const [amount, setAmount] = useState('');
   const [transactionStep, setTransactionStep] = useState(1);
+  const [offers, setOffers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedMethods, setSelectedMethods] = useState([]);
   const navigate = useNavigate();
+  const [activeOrder, setActiveOrder] = useState(null);
+  const socketRef = useRef(null);
+  const [createOfferData, setCreateOfferData] = useState({
+    type: 'buy',
+    price: '',
+    minAmount: '',
+    maxAmount: '',
+    amount: '',
+    description: ''
+  });
+  const [hasProfile, setHasProfile] = useState(false);
+  const [checkingProfile, setCheckingProfile] = useState(true);
+  const [showProfileSetup, setShowProfileSetup] = useState(false);
+
+  // Fetch offers
+  useEffect(() => {
+    const fetchOffers = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('/api/p2p/offers');
+        setOffers(response.data);
+      } catch (error) {
+        console.error('Error fetching offers:', error);
+        toast.error('Failed to fetch offers');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOffers();
+  }, []);
+
+  // Initialize socket connection
+  useEffect(() => {
+    if (currentUser) {
+      socketRef.current = io(import.meta.env.VITE_API_URL, {
+        auth: {
+          token: localStorage.getItem('token')
+        }
+      });
+
+      socketRef.current.on('orderUpdate', (updatedOrder) => {
+        if (activeOrder && activeOrder._id === updatedOrder._id) {
+          setActiveOrder(updatedOrder);
+        }
+      });
+
+      socketRef.current.on('newMessage', (message) => {
+        if (activeOrder && message.orderId === activeOrder._id) {
+          setMessages(prev => [...prev, message]);
+        }
+      });
+
+      return () => {
+        if (socketRef.current) {
+          socketRef.current.disconnect();
+        }
+      };
+    }
+  }, [currentUser, activeOrder]);
+
+  // Check if user has P2P profile
+  useEffect(() => {
+    const checkProfile = async () => {
+      if (!currentUser?.id) {
+        setCheckingProfile(false);
+        return;
+      }
+
+      try {
+        const response = await axios.get(`/api/p2p/profile/${currentUser.id}`);
+        setHasProfile(true);
+      } catch (error) {
+        if (error.response?.status !== 404) {
+          console.error('Error checking profile:', error);
+        }
+        setHasProfile(false);
+      } finally {
+        setCheckingProfile(false);
+      }
+    };
+
+    checkProfile();
+  }, [currentUser]);
 
   // Background animation
   const [{ xy }, set] = useSpring(() => ({ xy: [0, 0] }));
@@ -34,53 +126,6 @@ const P2P = () => {
     { id: 1, type: 'seller', content: "Hello! I see you're interested in buying USDT.", time: '2:30 PM' },
     { id: 2, type: 'buyer', content: 'Yes, I\'d like to buy 500 USDT.', time: '2:31 PM' },
     { id: 3, type: 'seller', content: 'Great! I can process that for you. Please confirm the amount and rate.', time: '2:32 PM' }
-  ];
-
-  const offers = [
-    {
-      id: 1,
-      user: 'TradePro',
-      price: '3.25',
-      available: '25,000',
-      limits: '500-5,000',
-      paymentMethods: ['Bank Transfer', 'Flouci', 'D17'],
-      completionRate: '98%',
-      orders: '2.5k+',
-      response: '< 5 min'
-    },
-    {
-      id: 2,
-      user: 'CryptoKing',
-      price: '3.27',
-      available: '15,000',
-      limits: '1,000-10,000',
-      paymentMethods: ['Bank Transfer', 'Postepay'],
-      completionRate: '99%',
-      orders: '1.2k+',
-      response: '< 10 min'
-    },
-    {
-      id: 3,
-      user: 'BitcoinTrader',
-      price: '3.24',
-      available: '50,000',
-      limits: '1,000-20,000',
-      paymentMethods: ['Bank Transfer', 'Flouci', 'D17', 'Postepay'],
-      completionRate: '97%',
-      orders: '3.8k+',
-      response: '< 3 min'
-    },
-    {
-      id: 4,
-      user: 'CryptoElite',
-      price: '3.26',
-      available: '30,000',
-      limits: '2,000-15,000',
-      paymentMethods: ['Bank Transfer', 'Flouci', 'Postepay'],
-      completionRate: '99%',
-      orders: '1.5k+',
-      response: '< 8 min'
-    }
   ];
 
   const paymentMethods = [
@@ -119,10 +164,35 @@ const P2P = () => {
       processingTime: 'Instant',
       fee: '0%',
       isPopular: true
+    },
+    {
+      id: 'phone_balance',
+      name: 'Phone Balance',
+      icon: Smartphone,
+      description: 'Pay using your phone credit',
+      processingTime: 'Instant',
+      fee: '0%',
+      isPopular: true
+    },
+    {
+      id: 'western_union',
+      name: 'Western Union',
+      icon: Building2,
+      description: 'Send money via Western Union',
+      processingTime: '1-2 hours',
+      fee: '1-2%',
+      isPopular: false
+    },
+    {
+      id: 'moneygram',
+      name: 'MoneyGram',
+      icon: Building2,
+      description: 'Send money via MoneyGram',
+      processingTime: '1-2 hours',
+      fee: '1-2%',
+      isPopular: false
     }
   ];
-
-  const [selectedMethods, setSelectedMethods] = useState([]);
 
   const togglePaymentMethod = (methodId) => {
     setSelectedMethods(prev => 
@@ -132,9 +202,17 @@ const P2P = () => {
     );
   };
 
-  const handleSendMessage = () => {
-    if (!message.trim()) return;
-    setMessage('');
+  const handleSendMessage = async () => {
+    if (!message.trim() || !selectedOffer) return;
+    
+    try {
+      // Here you would implement the chat functionality
+      // For now, we'll just clear the message
+      setMessage('');
+    } catch (error) {
+      console.error('Error sending message:', error);
+      toast.error('Failed to send message');
+    }
   };
 
   const handleKeyPress = (e) => {
@@ -144,19 +222,118 @@ const P2P = () => {
     }
   };
 
-  const handleTransaction = (offer) => {
+  const handleTransaction = async (offer) => {
+    if (!currentUser) {
+      toast.error('Please login to start a transaction');
+      navigate('/login');
+      return;
+    }
     setSelectedOffer(offer);
     setShowTransactionModal(true);
     setTransactionStep(1);
   };
 
-  const handleConfirmTransaction = () => {
-    setTransactionStep(2);
-    // Simulate processing
-    setTimeout(() => {
-      setTransactionStep(3);
-    }, 2000);
+  const handleConfirmTransaction = async () => {
+    if (!amount || !selectedOffer) return;
+
+    try {
+      setTransactionStep(2);
+      
+      // Create the order
+      const response = await axios.post('/api/p2p/orders', {
+        offerId: selectedOffer._id,
+        amount: parseFloat(amount),
+        paymentMethod: selectedMethods[0] // For now, just use the first selected method
+      });
+
+      if (response.data) {
+        setTransactionStep(3);
+        setActiveOrder(response.data);
+        setShowChat(true);
+        toast.success('Order created successfully');
+      }
+    } catch (error) {
+      console.error('Error creating order:', error);
+      toast.error(error.response?.data?.message || 'Failed to create order');
+      setTransactionStep(1);
+    }
   };
+
+  const handleCreateOfferChange = (e) => {
+    const { name, value } = e.target;
+    setCreateOfferData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleCreateOfferSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!currentUser) {
+      toast.error('Please login to create an offer');
+      navigate('/login');
+      return;
+    }
+
+    if (!hasProfile) {
+      toast.error('Please set up your P2P profile first');
+      navigate(`/p2p/${currentUser.id}`);
+      return;
+    }
+
+    if (selectedMethods.length === 0) {
+      toast.error('Please select at least one payment method');
+      return;
+    }
+
+    try {
+      const response = await axios.post('/api/p2p/offers', {
+        ...createOfferData,
+        paymentMethods: selectedMethods
+      });
+      
+      setOffers(prev => [response.data, ...prev]);
+      setShowCreateOffer(false);
+      setCreateOfferData({
+        type: 'buy',
+        price: '',
+        minAmount: '',
+        maxAmount: '',
+        amount: '',
+        description: ''
+      });
+      setSelectedMethods([]);
+      toast.success('Offer created successfully');
+    } catch (error) {
+      console.error('Error creating offer:', error);
+      toast.error(error.response?.data?.message || 'Failed to create offer');
+    }
+  };
+
+  const handleCreateOfferClick = () => {
+    if (!currentUser) {
+      toast.error('Please login to create an offer');
+      navigate('/login');
+      return;
+    }
+
+    if (!hasProfile) {
+      setShowProfileSetup(true);
+      return;
+    }
+
+    setShowCreateOffer(true);
+  };
+
+  // Filter offers based on search term and selected payment methods
+  const filteredOffers = offers.filter(offer => {
+    const matchesSearch = !searchTerm || 
+      (offer.seller?.username?.toLowerCase().includes(searchTerm.toLowerCase()));
+    const matchesPaymentMethods = selectedMethods.length === 0 || 
+      selectedMethods.some(method => offer.paymentMethods?.includes(method));
+    return matchesSearch && matchesPaymentMethods;
+  });
 
   return (
     <>
@@ -319,7 +496,7 @@ const P2P = () => {
                   <span className="text-gray-400 group-hover:text-white transition-colors">My P2P Profile</span>
                 </button>
                 <button
-                  onClick={() => setShowCreateOffer(true)}
+                  onClick={handleCreateOfferClick}
                   className="px-6 py-3 bg-blue-500/10 hover:bg-blue-500/20 backdrop-blur-xl border border-blue-500/20 rounded-xl transition-all flex items-center gap-2 group"
                 >
                   <Plus className="w-5 h-5 text-blue-400 group-hover:rotate-90 transition-transform" />
@@ -379,9 +556,9 @@ const P2P = () => {
 
             {/* Offers List */}
             <div className="space-y-6">
-              {offers.map((offer, index) => (
+              {filteredOffers.map((offer, index) => (
                 <motion.div
-                  key={offer.id}
+                  key={offer._id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -396,22 +573,22 @@ const P2P = () => {
                         </div>
                         <div>
                           <div className="font-medium text-white flex items-center gap-2 cursor-pointer hover:underline"
-                            onClick={() => navigate(`/p2p/${offer.id}`)}
+                            onClick={() => navigate(`/p2p/${offer.seller?._id || offer.seller}`)}
                           >
-                            {offer.user}
+                            {offer.seller?.username || 'Unknown User'}
                             <Star className="w-4 h-4 text-yellow-400" fill="currentColor" />
                           </div>
-                          <div className="text-gray-400">{offer.orders} orders</div>
+                          <div className="text-gray-400">{offer.orders || 0} orders</div>
                         </div>
                       </div>
                       <div className="space-y-2">
                         <div className="flex items-center gap-2 text-gray-400">
                           <ThumbsUp className="w-4 h-4 text-green-400" />
-                          <span>{offer.completionRate} completion</span>
+                          <span>{offer.completionRate || 100}% completion</span>
                         </div>
                         <div className="flex items-center gap-2 text-gray-400">
                           <Clock className="w-4 h-4 text-blue-400" />
-                          <span>{offer.response} response</span>
+                          <span>{offer.response || '0 min'} response</span>
                         </div>
                       </div>
                     </div>
@@ -503,32 +680,34 @@ const P2P = () => {
               </div>
 
               {/* Modal Content */}
-              <div className="p-6 space-y-6">
+              <form onSubmit={handleCreateOfferSubmit} className="p-6 space-y-6">
                 {/* Offer Type */}
                 <div>
                   <label className="block text-sm font-medium text-gray-400 mb-2">Offer Type</label>
                   <div className="flex gap-4">
                     <button
+                      type="button"
                       className={`flex-1 py-3 px-4 rounded-xl backdrop-blur-xl flex items-center justify-center gap-3 transition-all ${
-                        activeTab === 'buy'
+                        createOfferData.type === 'buy'
                           ? 'bg-green-500/10 border border-green-500/20'
                           : 'bg-white/5 border border-white/10 hover:bg-white/10'
                       }`}
-                      onClick={() => setActiveTab('buy')}
+                      onClick={() => setCreateOfferData(prev => ({ ...prev, type: 'buy' }))}
                     >
-                      <DollarSign className={`w-5 h-5 ${activeTab === 'buy' ? 'text-green-400' : 'text-gray-400'}`} />
-                      <span className={activeTab === 'buy' ? 'text-green-400' : 'text-gray-400'}>Buy USDT</span>
+                      <DollarSign className={`w-5 h-5 ${createOfferData.type === 'buy' ? 'text-green-400' : 'text-gray-400'}`} />
+                      <span className={createOfferData.type === 'buy' ? 'text-green-400' : 'text-gray-400'}>Buy USDT</span>
                     </button>
                     <button
+                      type="button"
                       className={`flex-1 py-3 px-4 rounded-xl backdrop-blur-xl flex items-center justify-center gap-3 transition-all ${
-                        activeTab === 'sell'
+                        createOfferData.type === 'sell'
                           ? 'bg-red-500/10 border border-red-500/20'
                           : 'bg-white/5 border border-white/10 hover:bg-white/10'
                       }`}
-                      onClick={() => setActiveTab('sell')}
+                      onClick={() => setCreateOfferData(prev => ({ ...prev, type: 'sell' }))}
                     >
-                      <Wallet className={`w-5 h-5 ${activeTab === 'sell' ? 'text-red-400' : 'text-gray-400'}`} />
-                      <span className={activeTab === 'sell' ? 'text-red-400' : 'text-gray-400'}>Sell USDT</span>
+                      <Wallet className={`w-5 h-5 ${createOfferData.type === 'sell' ? 'text-red-400' : 'text-gray-400'}`} />
+                      <span className={createOfferData.type === 'sell' ? 'text-red-400' : 'text-gray-400'}>Sell USDT</span>
                     </button>
                   </div>
                 </div>
@@ -538,8 +717,12 @@ const P2P = () => {
                   <label className="block text-sm font-medium text-gray-400 mb-2">Price (TND)</label>
                   <input
                     type="number"
+                    name="price"
+                    value={createOfferData.price}
+                    onChange={handleCreateOfferChange}
                     placeholder="Enter price per USDT"
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl backdrop-blur-xl focus:outline-none focus:border-blue-500/50 transition-colors"
+                    required
                   />
                 </div>
 
@@ -549,16 +732,24 @@ const P2P = () => {
                     <label className="block text-sm font-medium text-gray-400 mb-2">Minimum Amount (TND)</label>
                     <input
                       type="number"
+                      name="minAmount"
+                      value={createOfferData.minAmount}
+                      onChange={handleCreateOfferChange}
                       placeholder="Min amount"
                       className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl backdrop-blur-xl focus:outline-none focus:border-blue-500/50 transition-colors"
+                      required
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-400 mb-2">Maximum Amount (TND)</label>
                     <input
                       type="number"
+                      name="maxAmount"
+                      value={createOfferData.maxAmount}
+                      onChange={handleCreateOfferChange}
                       placeholder="Max amount"
                       className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl backdrop-blur-xl focus:outline-none focus:border-blue-500/50 transition-colors"
+                      required
                     />
                   </div>
                 </div>
@@ -568,8 +759,25 @@ const P2P = () => {
                   <label className="block text-sm font-medium text-gray-400 mb-2">Available Amount (USDT)</label>
                   <input
                     type="number"
+                    name="amount"
+                    value={createOfferData.amount}
+                    onChange={handleCreateOfferChange}
                     placeholder="Enter available amount"
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl backdrop-blur-xl focus:outline-none focus:border-blue-500/50 transition-colors"
+                    required
+                  />
+                </div>
+
+                {/* Description */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-2">Description (Optional)</label>
+                  <textarea
+                    name="description"
+                    value={createOfferData.description}
+                    onChange={handleCreateOfferChange}
+                    placeholder="Add any additional details about your offer..."
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl backdrop-blur-xl focus:outline-none focus:border-blue-500/50 transition-colors"
+                    rows={3}
                   />
                 </div>
 
@@ -580,6 +788,7 @@ const P2P = () => {
                     {paymentMethods.map((method) => (
                       <button
                         key={method.id}
+                        type="button"
                         onClick={() => togglePaymentMethod(method.id)}
                         className={`p-4 rounded-xl border ${
                           selectedMethods.includes(method.id)
@@ -608,11 +817,12 @@ const P2P = () => {
 
                 {/* Submit Button */}
                 <button
+                  type="submit"
                   className="w-full py-4 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 rounded-xl transition-all text-blue-400 font-medium"
                 >
                   Create Offer
                 </button>
-              </div>
+              </form>
             </motion.div>
           </motion.div>
         )}
@@ -620,85 +830,44 @@ const P2P = () => {
 
       {/* Chat Modal */}
       <AnimatePresence>
-        {showChat && (
+        {showChat && activeOrder && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-            onClick={() => setShowChat(false)}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
           >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              onClick={e => e.stopPropagation()}
-              className="w-full max-w-lg bg-gray-900/50 border border-white/10 rounded-xl backdrop-blur-xl overflow-hidden"
-            >
-              {/* Chat Header */}
-              <div className="p-4 border-b border-white/10 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-                    <User className="w-5 h-5 text-gray-400" />
-                  </div>
-                  <div>
-                    <div className="font-medium text-white">TradePro</div>
-                    <div className="text-green-400 text-sm">Online</div>
-                  </div>
-                </div>
-                <button
-                  onClick={() => setShowChat(false)}
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Chat Messages */}
-              <div className="h-96 overflow-y-auto p-4 space-y-4" ref={chatContainerRef}>
-                {messages.map((msg) => (
-                  <div
-                    key={msg.id}
-                    className={`flex ${msg.type === 'buyer' ? 'justify-end' : 'justify-start'}`}
-                  >
-                    <div className={`max-w-[70%] rounded-xl p-4 ${
-                      msg.type === 'buyer'
-                        ? 'bg-blue-500/10 border border-blue-500/20'
-                        : 'bg-white/5 border border-white/10'
-                    }`}>
-                      <div className="text-white">{msg.content}</div>
-                      <div className="text-sm text-gray-400 mt-2">{msg.time}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Chat Input */}
-              <div className="p-4 border-t border-white/10">
-                <div className="flex gap-3">
-                  <textarea
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    placeholder="Type your message..."
-                    className="flex-1 resize-none bg-white/5 border border-white/10 rounded-xl p-3 focus:outline-none focus:border-blue-500/50 transition-colors placeholder-gray-500"
-                    rows={1}
-                  />
-                  <button
-                    onClick={handleSendMessage}
-                    disabled={!message.trim()}
-                    className={`px-4 rounded-xl transition-all flex items-center ${
-                      message.trim()
-                        ? 'bg-blue-500/10 border border-blue-500/20 text-blue-400 hover:bg-blue-500/20'
-                        : 'bg-white/5 border border-white/10 text-gray-400'
-                    }`}
-                  >
-                    <Send className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-            </motion.div>
+            <div className="w-full max-w-2xl h-[600px] rounded-xl overflow-hidden">
+              <P2PChat
+                orderId={activeOrder._id}
+                onClose={() => {
+                  setShowChat(false);
+                  setActiveOrder(null);
+                }}
+              />
+            </div>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Profile Setup Modal */}
+      <AnimatePresence>
+        {showProfileSetup && (
+          <P2PProfileSetup
+            onClose={() => {
+              setShowProfileSetup(false);
+              // Refresh profile status
+              const checkProfile = async () => {
+                try {
+                  const response = await axios.get(`/api/p2p/profile/${currentUser.id}`);
+                  setHasProfile(true);
+                } catch (error) {
+                  setHasProfile(false);
+                }
+              };
+              checkProfile();
+            }}
+          />
         )}
       </AnimatePresence>
     </>

@@ -15,9 +15,17 @@ const notificationService = new NotificationService();
 // Get user's transactions
 router.get('/', auth, async (req, res) => {
   try {
-    const transactions = await Transaction.find({
-      userId: req.user._id
-    }).sort({ createdAt: -1 });
+    const userId = req.user._id;
+    const { type } = req.query; // Get the optional type query parameter
+
+    let filter = { userId: userId };
+
+    // If a type is specified, add it to the filter
+    if (type) {
+      filter.type = type;
+    }
+
+    const transactions = await Transaction.find(filter).sort({ createdAt: -1 });
 
     res.json({ transactions });
   } catch (error) {
