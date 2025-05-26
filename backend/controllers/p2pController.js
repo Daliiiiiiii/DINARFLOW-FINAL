@@ -4,6 +4,7 @@ import Order from '../models/Order.js';
 import Review from '../models/Review.js';
 import Offer from '../models/Offer.js';
 import Message from '../models/Message.js';
+import Report from '../models/Report.js';
 
 // Get P2P profile
 export const getProfile = async (req, res) => {
@@ -78,14 +79,133 @@ export const updateProfile = async (req, res) => {
     }
 };
 
-// Get offers
+// Block user
+export const blockUser = async (req, res) => {
+    try {
+        const { targetUserId } = req.params;
+        const userId = req.user.id;
+
+        // Prevent self-blocking
+        if (targetUserId === userId) {
+            return res.status(400).json({ message: 'Cannot block yourself' });
+        }
+
+        // Add user to blocked list
+        await User.findByIdAndUpdate(userId, {
+            $addToSet: { blockedUsers: targetUserId }
+        });
+
+        res.json({ message: 'User blocked successfully' });
+    } catch (error) {
+        console.error('Error blocking user:', error);
+        res.status(500).json({ message: 'Error blocking user' });
+    }
+};
+
+// Unblock user
+export const unblockUser = async (req, res) => {
+    try {
+        const { targetUserId } = req.params;
+        const userId = req.user.id;
+
+        await User.findByIdAndUpdate(userId, {
+            $pull: { blockedUsers: targetUserId }
+        });
+
+        res.json({ message: 'User unblocked successfully' });
+    } catch (error) {
+        console.error('Error unblocking user:', error);
+        res.status(500).json({ message: 'Error unblocking user' });
+    }
+};
+
+// Report user
+export const reportUser = async (req, res) => {
+    try {
+        const { targetUserId } = req.params;
+        const { reason, details } = req.body;
+        const userId = req.user.id;
+
+        // Prevent self-reporting
+        if (targetUserId === userId) {
+            return res.status(400).json({ message: 'Cannot report yourself' });
+        }
+
+        // Create report
+        const report = new Report({
+            reporter: userId,
+            reportedUser: targetUserId,
+            reason,
+            details,
+            status: 'pending'
+        });
+
+        await report.save();
+
+        res.status(201).json({ message: 'User reported successfully' });
+    } catch (error) {
+        console.error('Error reporting user:', error);
+        res.status(500).json({ message: 'Error reporting user' });
+    }
+};
+
+// Modify getOffers to exclude blocked users
 export const getOffers = async (req, res) => {
     try {
-        const offers = await Offer.find({ status: 'active' })
-            .populate('seller', 'username')
+        console.log('Fetching offers...');
+        const { type } = req.query;
+        const userId = req.user.id;
+
+        // Get user's blocked users
+        const user = await User.findById(userId);
+        const blockedUsers = user?.blockedUsers || [];
+
+        // Get users who have blocked the current user
+        const usersWhoBlockedMe = await User.find({
+            blockedUsers: userId
+        }).select('_id');
+
+        const blockedByUsers = usersWhoBlockedMe.map(user => user._id);
+
+        // Build query based on type and blocked users
+        const query = {
+            status: 'active',
+            seller: {
+                $nin: [...blockedUsers, ...blockedByUsers] // Exclude offers from users you blocked AND users who blocked you
+            }
+        };
+        if (type) {
+            query.type = type;
+        }
+
+        const offers = await Offer.find(query)
+            .populate({
+                path: 'seller',
+                select: 'username displayName',
+                populate: {
+                    path: 'p2pProfile',
+                    select: 'nickname'
+                }
+            })
             .sort({ createdAt: -1 })
             .lean();
-        res.json(offers);
+
+        console.log('Raw offers data:', JSON.stringify(offers, null, 2));
+
+        // Transform the data to make it easier to access
+        const transformedOffers = offers.map(offer => {
+            const transformed = {
+                ...offer,
+                seller: {
+                    ...offer.seller,
+                    nickname: offer.seller?.p2pProfile?.nickname || offer.seller?.displayName || offer.seller?.username || 'Unknown User'
+                }
+            };
+            console.log('Transformed offer:', JSON.stringify(transformed, null, 2));
+            return transformed;
+        });
+
+        res.json(transformedOffers);
     } catch (error) {
         console.error('Error fetching offers:', error);
         res.status(500).json({ message: 'Error fetching offers' });
@@ -110,7 +230,29 @@ export const createOffer = async (req, res) => {
         });
 
         await offer.save();
-        res.status(201).json(offer);
+
+        // Populate seller data before sending response
+        const populatedOffer = await Offer.findById(offer._id)
+            .populate({
+                path: 'seller',
+                select: 'username displayName',
+                populate: {
+                    path: 'p2pProfile',
+                    select: 'nickname'
+                }
+            })
+            .lean();
+
+        // Transform the data to match the format expected by the frontend
+        const transformedOffer = {
+            ...populatedOffer,
+            seller: {
+                ...populatedOffer.seller,
+                nickname: populatedOffer.seller?.p2pProfile?.nickname || populatedOffer.seller?.displayName || populatedOffer.seller?.username || 'Unknown User'
+            }
+        };
+
+        res.status(201).json(transformedOffer);
     } catch (error) {
         console.error('Error creating offer:', error);
         res.status(500).json({ message: 'Error creating offer' });
@@ -134,7 +276,28 @@ export const updateOffer = async (req, res) => {
             return res.status(404).json({ message: 'Offer not found' });
         }
 
-        res.json(offer);
+        // Populate seller data before sending response
+        const populatedOffer = await Offer.findById(offer._id)
+            .populate({
+                path: 'seller',
+                select: 'username displayName',
+                populate: {
+                    path: 'p2pProfile',
+                    select: 'nickname'
+                }
+            })
+            .lean();
+
+        // Transform the data to match the format expected by the frontend
+        const transformedOffer = {
+            ...populatedOffer,
+            seller: {
+                ...populatedOffer.seller,
+                nickname: populatedOffer.seller?.p2pProfile?.nickname || populatedOffer.seller?.displayName || populatedOffer.seller?.username || 'Unknown User'
+            }
+        };
+
+        res.json(transformedOffer);
     } catch (error) {
         console.error('Error updating offer:', error);
         res.status(500).json({ message: 'Error updating offer' });
@@ -382,8 +545,11 @@ export const createOrderMessage = async (req, res) => {
         // Populate sender info
         await message.populate('sender', 'username');
 
-        // Emit socket event for real-time updates
-        req.app.get('io').to(orderId).emit('newMessage', message);
+        // Emit socket event for real-time updates if io is available
+        const io = req.app.get('io');
+        if (io) {
+            io.to(orderId).emit('newMessage', message);
+        }
 
         res.status(201).json(message);
     } catch (error) {
@@ -486,7 +652,7 @@ async function calculateUserBadges(userId) {
 // @access  Private
 export const createProfile = async (req, res) => {
     try {
-        const { nickname, paymentMethods, bankDetails, mobileMoney } = req.body;
+        const { nickname, paymentMethods } = req.body;
         const userId = req.user.id;
 
         // Check if user already has a profile
@@ -500,13 +666,15 @@ export const createProfile = async (req, res) => {
         const profile = new P2PProfile({
             userId,
             nickname,
-            paymentMethods,
-            bankDetails,
-            mobileMoney
+            paymentMethods
         });
 
-        const createdProfile = await profile.save();
-        res.status(201).json(createdProfile);
+        await profile.save();
+
+        // Update user with profile reference
+        await User.findByIdAndUpdate(userId, { p2pProfile: profile._id });
+
+        res.status(201).json(profile);
     } catch (error) {
         console.error('Error creating P2P profile:', error);
         res.status(500).json({ message: 'Error creating profile' });

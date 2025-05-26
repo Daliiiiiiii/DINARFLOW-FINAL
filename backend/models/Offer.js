@@ -23,12 +23,12 @@ const offerSchema = new mongoose.Schema({
     },
     paymentMethods: [{
         type: String,
-        enum: ['bank', 'flouci', 'd17', 'postepay'],
+        enum: ['tnd_wallet', 'bank', 'flouci', 'd17', 'postepay', 'phone_balance', 'western_union', 'moneygram'],
         required: true
     }],
     status: {
         type: String,
-        enum: ['active', 'completed', 'cancelled'],
+        enum: ['active', 'inactive', 'completed', 'cancelled'],
         default: 'active'
     },
     minAmount: {
@@ -70,13 +70,21 @@ offerSchema.pre('save', function (next) {
     next();
 });
 
-// Ensure availableAmount is between minAmount and maxAmount
-offerSchema.pre('save', function (next) {
-    if (this.amount < this.minAmount || this.amount > this.maxAmount) {
-        next(new Error('Available amount must be between minimum and maximum amounts'));
+// Remove the strict validation for available amount
+// Instead, add a method to adjust limits based on available amount
+offerSchema.methods.adjustLimits = function () {
+    const availableAmount = this.amount;
+    if (availableAmount < this.minAmount) {
+        // If available amount is less than minimum, set to inactive instead of cancelling
+        this.status = 'inactive';
+        return false;
     }
-    next();
-});
+    if (availableAmount < this.maxAmount) {
+        // If available amount is less than maximum, adjust maximum down
+        this.maxAmount = availableAmount;
+    }
+    return true;
+};
 
 // Add indexes for better query performance
 offerSchema.index({ seller: 1, status: 1 });

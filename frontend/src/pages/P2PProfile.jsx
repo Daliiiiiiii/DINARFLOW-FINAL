@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   Star,
@@ -25,6 +25,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import axios from '../lib/axios';
 import { toast } from 'react-hot-toast';
+import BlockedUsers from '../components/BlockedUsers';
 
 const P2PProfile = () => {
   const { theme } = useTheme();
@@ -39,6 +40,8 @@ const P2PProfile = () => {
   const [selectedMethods, setSelectedMethods] = useState([]);
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
+  const [showErrorAnimation, setShowErrorAnimation] = useState(false);
   
   // Calculate if this is the user's own profile
   const isOwnProfile = !userId || userId === 'undefined' || userId === 'profile' || userId === currentUser?._id;
@@ -46,7 +49,6 @@ const P2PProfile = () => {
   // Handle navigation and profile fetching in a single effect
   useEffect(() => {
     let isMounted = true;
-    const controller = new AbortController();
     let retryCount = 0;
     const maxRetries = 3;
 
@@ -61,32 +63,30 @@ const P2PProfile = () => {
           navigate('/login', { replace: true });
           return;
         }
-        console.log('userId', userId);
 
         // Handle redirect first if needed
         if (!userId || userId === 'undefined' || userId === 'profile') {
           console.log('Redirecting to own profile');
           navigate(`/p2p/${currentUser._id}`, { replace: true });
-          return; // Let the effect re-run with the new URL
+          return;
         }
-        // Use the userId from URL
-        const targetUserId = userId;
-        
-        console.log('Fetching profile for user:', targetUserId);
-        console.log('Current user ID:', currentUser._id);
-        console.log('URL user ID:', userId);
-        console.log('Is own profile:', isOwnProfile);
 
+        const targetUserId = userId;
+        const controller = new AbortController();
+        
         try {
+          console.log('Fetching profile for user:', targetUserId);
           const response = await axios.get(`/api/p2p/profile/${targetUserId}`, {
             signal: controller.signal,
-            timeout: 5000
+            timeout: 10000 // Increased timeout
           });
           
-          if (!isMounted) return;
+          if (!isMounted) {
+            console.log('Component unmounted, aborting state updates');
+            return;
+          }
           
-          console.log('Raw profile fetch response:', JSON.stringify(response.data, null, 2));
-          
+          console.log('Profile fetch successful:', response.data);
           const profileData = {
             ...response.data,
             userId: response.data.userId?._id || response.data.userId,
@@ -104,38 +104,40 @@ const P2PProfile = () => {
             joinedDate: response.data.createdAt || new Date().toISOString()
           };
           
-          console.log('Processed profile data:', JSON.stringify(profileData, null, 2));
           setProfileData(profileData);
           setNickname(profileData.nickname);
           setSelectedMethods(profileData.paymentMethods);
           retryCount = 0;
         } catch (error) {
-          if (!isMounted) return;
+          if (!isMounted) {
+            console.log('Component unmounted during error handling');
+            return;
+          }
+          
+          console.error('Profile fetch error:', error);
           
           if (error.name === 'AbortError' || error.message === 'canceled') {
             console.log('Request was aborted or cancelled');
             return;
           }
 
-          console.error('Profile fetch error:', error.response?.data);
-          console.error('Error status:', error.response?.status);
-          console.error('Error details:', error);
-          
           if (error.response?.status === 404 && isOwnProfile) {
-            console.log('Profile not found for own user, attempting to create');
+            console.log('Profile not found, attempting to create new profile');
             try {
               const createResponse = await axios.put('/api/p2p/profile', {
                 nickname: currentUser.displayName || currentUser.email,
                 paymentMethods: []
               }, {
                 signal: controller.signal,
-                timeout: 5000
+                timeout: 10000
               });
               
-              if (!isMounted) return;
+              if (!isMounted) {
+                console.log('Component unmounted during profile creation');
+                return;
+              }
               
-              console.log('Raw profile creation response:', JSON.stringify(createResponse.data, null, 2));
-              
+              console.log('Profile creation successful:', createResponse.data);
               const newProfileData = {
                 ...createResponse.data,
                 userId: createResponse.data.userId?._id || createResponse.data.userId,
@@ -153,44 +155,55 @@ const P2PProfile = () => {
                 joinedDate: createResponse.data.createdAt || new Date().toISOString()
               };
               
-              console.log('Processed new profile data:', JSON.stringify(newProfileData, null, 2));
               setProfileData(newProfileData);
               setNickname(newProfileData.nickname);
               setSelectedMethods(newProfileData.paymentMethods);
+              setShowSuccessAnimation(true);
               toast.success('P2P profile created successfully');
               retryCount = 0;
+
+              // Hide success animation after 3 seconds
+              setTimeout(() => {
+                setShowSuccessAnimation(false);
+              }, 3000);
             } catch (createError) {
-              if (!isMounted) return;
+              if (!isMounted) {
+                console.log('Component unmounted during profile creation error');
+                return;
+              }
               
+              console.error('Profile creation error:', createError);
               if (createError.name === 'AbortError' || createError.message === 'canceled') {
                 console.log('Create request was aborted or cancelled');
                 return;
               }
 
-              console.error('Failed to create profile:', createError);
-              console.error('Create error response:', createError.response?.data);
+              setShowErrorAnimation(true);
               toast.error(createError.response?.data?.message || 'Failed to create P2P profile');
+              
+              // Hide error animation after 3 seconds
+              setTimeout(() => {
+                setShowErrorAnimation(false);
+              }, 3000);
+              
               navigate('/p2p', { replace: true });
             }
           } else if (retryCount < maxRetries) {
+            console.log(`Retrying profile fetch (${retryCount + 1}/${maxRetries})`);
             retryCount++;
-            console.log(`Retrying profile fetch (${retryCount}/${maxRetries})...`);
             setTimeout(handleProfile, 1000 * retryCount);
-            return;
           } else {
+            console.log('Max retries reached, navigating to P2P page');
             toast.error('Profile not found');
             navigate('/p2p', { replace: true });
           }
         }
       } catch (error) {
-        if (!isMounted) return;
-        
-        if (error.name === 'AbortError' || error.message === 'canceled') {
-          console.log('Request was aborted or cancelled');
+        if (!isMounted) {
+          console.log('Component unmounted during outer error handling');
           return;
         }
-
-        console.error('Profile error:', error);
+        console.error('Outer profile error:', error);
         toast.error('Failed to load profile data');
         navigate('/p2p', { replace: true });
       } finally {
@@ -205,8 +218,8 @@ const P2PProfile = () => {
     }
 
     return () => {
+      console.log('Cleaning up profile effect');
       isMounted = false;
-      controller.abort();
     };
   }, [userId, currentUser, navigate, isOwnProfile]);
 
@@ -329,6 +342,64 @@ const P2PProfile = () => {
 
   return (
     <div className="space-y-6">
+      {/* Success Animation */}
+      <AnimatePresence>
+        {showSuccessAnimation && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            className="fixed top-4 right-4 z-50"
+          >
+            <motion.div
+              initial={{ rotate: -180 }}
+              animate={{ rotate: 0 }}
+              transition={{ duration: 0.5 }}
+              className="bg-green-500/20 backdrop-blur-sm border border-green-500/30 rounded-lg p-4 flex items-center gap-3"
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2 }}
+                className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center"
+              >
+                <CheckCircle className="w-5 h-5 text-green-400" />
+              </motion.div>
+              <div className="text-green-400 font-medium">Profile Created Successfully!</div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Error Animation */}
+      <AnimatePresence>
+        {showErrorAnimation && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            className="fixed top-4 right-4 z-50"
+          >
+            <motion.div
+              initial={{ rotate: -180 }}
+              animate={{ rotate: 0 }}
+              transition={{ duration: 0.5 }}
+              className="bg-red-500/20 backdrop-blur-sm border border-red-500/30 rounded-lg p-4 flex items-center gap-3"
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2 }}
+                className="w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center"
+              >
+                <XCircle className="w-5 h-5 text-red-400" />
+              </motion.div>
+              <div className="text-red-400 font-medium">Failed to Create Profile</div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Back Button */}
       <button
         onClick={() => navigate('/p2p')}
@@ -667,6 +738,12 @@ const P2PProfile = () => {
           )}
         </>
       )}
+
+      {/* Add this section where appropriate in your profile layout */}
+      <div className="mt-8">
+        <h2 className="text-xl font-semibold text-white mb-4">Blocked Users</h2>
+        <BlockedUsers />
+      </div>
     </div>
   );
 };

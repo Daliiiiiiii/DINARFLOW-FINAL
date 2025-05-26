@@ -33,7 +33,7 @@ const orderSchema = new mongoose.Schema({
     },
     paymentMethod: {
         type: String,
-        enum: ['bank', 'flouci', 'd17', 'postepay'],
+        enum: ['tnd_wallet', 'bank', 'flouci', 'd17', 'postepay', 'phone_balance', 'western_union', 'moneygram'],
         required: true
     },
     status: {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Send, Clock, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Send, Clock, CheckCircle, AlertTriangle, X } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 import axios from '../lib/axios';

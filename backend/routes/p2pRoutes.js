@@ -15,6 +15,13 @@ router.post('/offers', authenticate, p2pController.createOffer);
 router.put('/offers/:offerId', authenticate, p2pController.updateOffer);
 router.delete('/offers/:offerId', authenticate, p2pController.deleteOffer);
 
+// Block/Unblock routes
+router.post('/block/:targetUserId', authenticate, p2pController.blockUser);
+router.delete('/block/:targetUserId', authenticate, p2pController.unblockUser);
+
+// Report route
+router.post('/report/:targetUserId', authenticate, p2pController.reportUser);
+
 // Order routes
 router.get('/orders', authenticate, p2pController.getOrders);
 router.get('/orders/:orderId', authenticate, p2pController.getOrder);

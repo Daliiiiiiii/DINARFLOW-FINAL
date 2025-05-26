@@ -167,6 +167,15 @@ const userSchema = new mongoose.Schema({
     ref: 'BankAccount',
     default: null
   },
+  p2pProfile: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'P2PProfile',
+    default: null
+  },
+  blockedUsers: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   createdAt: {
     type: Date,
     default: Date.now
