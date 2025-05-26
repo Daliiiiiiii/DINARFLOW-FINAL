@@ -55,6 +55,8 @@ const P2P = () => {
   const [editingOffer, setEditingOffer] = useState(null);
   const [offerCreationStatus, setOfferCreationStatus] = useState(null); // 'success', 'error', or null
   const [offerCreationMessage, setOfferCreationMessage] = useState('');
+  // Add state for reactivation error animation
+  const [reactivateError, setReactivateError] = useState(null);
 
   const orderLengthOptions = [
     { value: '0.25', label: '15 minutes' },
@@ -131,11 +133,12 @@ const P2P = () => {
     const fetchOffers = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('/api/p2p/offers', {
-          params: {
-            type: activeTab // Pass the active tab as the type parameter
-          }
-        });
+        const params = { type: activeTab };
+        // If viewing 'active' tab and user is logged in, fetch all their offers
+        if (viewMode === 'active' && currentUser?._id) {
+          params.my = 'true';
+        }
+        const response = await axios.get('/api/p2p/offers', { params });
         setOffers(response.data);
       } catch (error) {
         console.error('Error fetching offers:', error);
@@ -144,9 +147,8 @@ const P2P = () => {
         setLoading(false);
       }
     };
-
     fetchOffers();
-  }, [activeTab]); // Add activeTab as a dependency
+  }, [activeTab, viewMode, currentUser]); // Add viewMode and currentUser as dependencies
 
   // Initialize socket connection
   useEffect(() => {
@@ -809,12 +811,23 @@ const P2P = () => {
   // Add this function to handle offer status changes
   const handleOfferStatusChange = async (offerId, newStatus) => {
     try {
-      const response = await axios.put(`/api/p2p/offers/${offerId}`, {
-        status: newStatus
-      });
-      setOffers(prev => prev.map(offer =>
-        offer._id === offerId ? response.data : offer
-      ));
+      if (newStatus === 'active') {
+        const offerToActivate = offers.find(offer => offer._id === offerId);
+        if (!offerToActivate) return;
+        const existingActiveOffer = offers.find(offer => 
+          offer.seller?._id === currentUser._id && 
+          offer.type === offerToActivate.type && 
+          offer.status === 'active' &&
+          offer._id !== offerId
+        );
+        if (existingActiveOffer) {
+          setReactivateError(`You already have an active ${offerToActivate.type} offer. Please deactivate it first.`);
+          setTimeout(() => setReactivateError(null), 2000);
+          return;
+        }
+      }
+      const response = await axios.put(`/api/p2p/offers/${offerId}`, { status: newStatus });
+      setOffers(prev => prev.map(offer => offer._id === offerId ? response.data : offer));
       toast.success(`Offer ${newStatus === 'active' ? 'activated' : 'deactivated'} successfully`);
     } catch (error) {
       console.error('Error updating offer status:', error);
@@ -824,6 +837,17 @@ const P2P = () => {
 
   // Add this function to handle offer editing
   const handleEditOffer = (offer) => {
+    const existingActiveOffer = offers.find(o =>
+      o.seller?._id === currentUser._id &&
+      o.type === offer.type &&
+      o.status === 'active' &&
+      o._id !== offer._id
+    );
+    if (existingActiveOffer) {
+      setReactivateError(`You already have an active ${offer.type} offer. Please deactivate it first.`);
+      setTimeout(() => setReactivateError(null), 2000);
+      return;
+    }
     setEditingOffer(offer);
     setCreateOfferData({
       type: offer.type,
@@ -2050,6 +2074,40 @@ const P2P = () => {
           >
             <AlertTriangle size={20} />
             <span>You have to finish your order with this person before attempting to create a new one</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Reactivate Error Animation */}
+      <AnimatePresence>
+        {reactivateError && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="w-full max-w-md bg-gray-900/90 border border-white/10 rounded-xl backdrop-blur-xl overflow-hidden flex flex-col items-center justify-center p-8"
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="w-20 h-20 rounded-full flex items-center justify-center mb-4 bg-red-500/20"
+              >
+                <X className="w-10 h-10 text-red-400" />
+              </motion.div>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-lg font-medium text-red-400 text-center"
+              >
+                {reactivateError}
+              </motion.p>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

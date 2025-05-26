@@ -169,13 +169,19 @@ export const getOffers = async (req, res) => {
 
         // Build query based on type and blocked users
         const query = {
-            status: 'active',
             seller: {
-                $nin: [...blockedUsers, ...blockedByUsers] // Exclude offers from users you blocked AND users who blocked you
+                $nin: [...blockedUsers, ...blockedByUsers]
             }
         };
         if (type) {
             query.type = type;
+        }
+
+        // If requesting own offers, do not filter by status
+        if (req.query.my === 'true') {
+            query.seller = userId;
+        } else {
+            query.status = 'active';
         }
 
         const offers = await Offer.find(query)
@@ -265,6 +271,22 @@ export const updateOffer = async (req, res) => {
         const { offerId } = req.params;
         const { amount, price, paymentMethods, minAmount, maxAmount, description, status } = req.body;
         const seller = req.user.id;
+
+        // If trying to activate, check for existing active offer of same type
+        if (status === 'active') {
+            const offerToActivate = await Offer.findById(offerId);
+            if (offerToActivate) {
+                const existingActiveOffer = await Offer.findOne({
+                    seller,
+                    type: offerToActivate.type,
+                    status: 'active',
+                    _id: { $ne: offerId }
+                });
+                if (existingActiveOffer) {
+                    return res.status(400).json({ message: 'You already have an active offer of this type. Please deactivate it first.' });
+                }
+            }
+        }
 
         const offer = await Offer.findOneAndUpdate(
             { _id: offerId, seller },
