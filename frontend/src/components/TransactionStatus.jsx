@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, XCircle, Loader2, ArrowUpRight } from 'lucide-react';
+import { CheckCircle2, XCircle, Loader2, ArrowUpRight, X } from 'lucide-react';
 
-const TransactionStatus = ({ show, type, message }) => {
+const TransactionStatus = ({ show, type, message, onClose }) => {
+  useEffect(() => {
+    if (type === 'success') {
+      const timer = setTimeout(() => {
+        onClose?.();
+      }, 3000); // 3 seconds for success
+      return () => clearTimeout(timer);
+    } else if (type === 'error') {
+      const timer = setTimeout(() => {
+        onClose?.();
+      }, 5000); // 5 seconds for error
+      return () => clearTimeout(timer);
+    }
+  }, [type, onClose]);
+
   if (!show) return null;
 
   const getIcon = () => {
@@ -22,7 +36,13 @@ const TransactionStatus = ({ show, type, message }) => {
               transition={{ delay: 0.2, duration: 0.3 }}
               className="absolute inset-0 bg-green-500/20 rounded-full blur-xl"
             />
-            <CheckCircle2 className="w-12 h-12 text-green-500" />
+            <motion.div
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ delay: 0.3, type: "spring", stiffness: 500, damping: 30 }}
+            >
+              <CheckCircle2 className="w-12 h-12 text-green-500" />
+            </motion.div>
           </motion.div>
         );
       case 'error':
@@ -43,7 +63,7 @@ const TransactionStatus = ({ show, type, message }) => {
             <XCircle className="w-12 h-12 text-red-500" />
           </motion.div>
         );
-      default:
+      case 'loading':
         return (
           <motion.div
             animate={{ rotate: 360 }}
@@ -66,6 +86,8 @@ const TransactionStatus = ({ show, type, message }) => {
             <Loader2 className="w-12 h-12 text-blue-500" />
           </motion.div>
         );
+      default:
+        return null;
     }
   };
 
@@ -76,6 +98,8 @@ const TransactionStatus = ({ show, type, message }) => {
         return 'Transaction completed successfully';
       case 'error':
         return 'Transaction failed';
+      case 'loading':
+        return 'Processing transaction...';
       default:
         return 'Processing transaction...';
     }
@@ -96,8 +120,18 @@ const TransactionStatus = ({ show, type, message }) => {
           transition={{ type: "spring", stiffness: 500, damping: 30 }}
           className="relative bg-gray-900/90 backdrop-blur-xl p-8 rounded-2xl border border-gray-800 shadow-2xl max-w-md w-full mx-4"
         >
+          {/* Exit button */}
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={onClose}
+            className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-800/50 transition-colors z-50"
+          >
+            <X className="w-5 h-5 text-gray-400" />
+          </motion.button>
+
           {/* Animated background effects */}
-          <div className="absolute inset-0 overflow-hidden rounded-2xl">
+          <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
             <motion.div
               animate={{
                 scale: [1, 1.2, 1],
@@ -124,7 +158,7 @@ const TransactionStatus = ({ show, type, message }) => {
             />
           </div>
 
-          <div className="relative">
+          <div className="relative z-10">
             {/* Icon */}
             <div className="flex justify-center mb-6">
               {getIcon()}

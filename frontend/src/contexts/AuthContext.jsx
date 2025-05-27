@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect, useCallback } from 'react'
 import { toast } from 'react-toastify'
 import api from '../lib/axios'
 import { useTranslation } from 'react-i18next'
@@ -66,6 +66,19 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
   const [visualRole, setVisualRole] = useState('user')
   const { t } = useTranslation()
+
+  // Add a safe update mechanism for user profile
+  const safeUpdateUserProfile = useCallback((updater) => {
+    setUserProfile(prev => {
+      if (!prev) return null;
+      const newProfile = typeof updater === 'function' ? updater(prev) : updater;
+      // Only update if there are actual changes
+      if (JSON.stringify(prev) === JSON.stringify(newProfile)) {
+        return prev;
+      }
+      return newProfile;
+    });
+  }, []);
 
   useEffect(() => {
     // Check for existing token and validate session
@@ -469,9 +482,11 @@ export function AuthProvider({ children }) {
     currentUser,
     userProfile,
     loading,
+    visualRole,
+    setUserProfile: safeUpdateUserProfile, // Use the safe update mechanism
+    setCurrentUser,
+    setVisualRole,
     signup,
-    verifyEmail,
-    resendVerificationCode,
     login,
     logout,
     resetPassword,
@@ -480,9 +495,10 @@ export function AuthProvider({ children }) {
     updateWalletBalance,
     updateBankBalance,
     startKycVerification,
-    validatePhoneNumber,
-    visualRole: visualRole || 'user',
     toggleVisualRole,
+    verifyEmail,
+    resendVerificationCode,
+    validatePhoneNumber,
     isAdmin: ['admin', 'superadmin'].includes(currentUser?.role),
     isSuperAdmin: currentUser?.role === 'superadmin'
   }

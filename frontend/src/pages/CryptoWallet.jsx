@@ -286,7 +286,17 @@ const MemoizedAddressCard = React.memo(({ isDark, selectedNetworkData, handleCop
               title="Copy address"
               whileTap={{ scale: 0.95 }}
             >
-              <Copy className={`w-5 h-5 ${isCopied ? 'text-green-500' : ''}`} />
+              <motion.div
+                initial={false}
+                animate={{ rotate: isCopied ? 360 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {isCopied ? (
+                  <CheckCircle className="w-5 h-5" />
+                ) : (
+                  <Copy className="w-5 h-5" />
+                )}
+              </motion.div>
             </motion.button>
           </div>
         </div>
@@ -461,8 +471,11 @@ const validateNetworkAddress = (address, networkId) => {
       // Solana addresses are base58 encoded and 32-44 characters long
       return /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address);
     case 'ton':
-      // TON addresses are base64 encoded and start with UQ
-      return /^UQ[a-zA-Z0-9_-]{48}$/.test(address);
+      // TON addresses are base64 encoded and can start with EQ or UQ
+      if (!address.startsWith('EQ') && !address.startsWith('UQ')) return false;
+      if (address.length !== 48) return false;
+      const remainingChars = address.slice(2);
+      return /^[a-zA-Z0-9_-]{46}$/.test(remainingChars);
     default:
       return false;
   }
@@ -493,6 +506,7 @@ const CryptoWallet = () => {
   const [isSending, setIsSending] = useState(false);
   const [showSendModal, setShowSendModal] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
+  const [currentTransactionId, setCurrentTransactionId] = useState(null);
 
   // Find selected network data (derived state) - **DEFINE BEFORE CALLBACKS USING IT**
   const selectedNetworkData = useMemo(() => {
@@ -530,9 +544,10 @@ const CryptoWallet = () => {
       // Set global balance from fetched data
       if (data && data.globalUsdtBalance !== undefined) {
         setGlobalBalance(data.globalUsdtBalance);
-        // Also update user profile's wallet balance
-        console.log('Attempting to update userProfile with new balance. setUserProfile is:', setUserProfile);
-        if (typeof setUserProfile === 'function') {
+        
+        // Only update user profile if the balance has actually changed
+        if (userProfile.wallet?.globalUsdtBalance !== data.globalUsdtBalance) {
+          console.log('Updating user profile with new balance:', data.globalUsdtBalance);
           setUserProfile(prev => {
             if (!prev) return null;
             return {
@@ -543,8 +558,6 @@ const CryptoWallet = () => {
               }
             };
           });
-        } else {
-          console.warn('setUserProfile is not available. Skipping user profile update.');
         }
       }
 
@@ -596,14 +609,13 @@ const CryptoWallet = () => {
     }
   }, [userProfile, lastRefresh]);
 
-  // Update useEffect to fetch crypto transactions as well
+  // Update useEffect to prevent unnecessary fetches
   useEffect(() => {
-    console.log('useEffect: userProfile:', userProfile);
-    if (userProfile?._id) {
+    if (userProfile?._id && !isLoading) {
       fetchWalletData();
-      fetchCryptoTransactions(); // Fetch crypto transactions
+      fetchCryptoTransactions();
     }
-  }, [userProfile, fetchWalletData, fetchCryptoTransactions]); // Add fetchCryptoTransactions to dependencies
+  }, [userProfile?._id, lastRefresh]); // Only depend on userProfile._id and lastRefresh
 
   // Define other handlers using useCallback if they are passed to memoized children
   const handleRefresh = useCallback(async () => {
@@ -630,12 +642,23 @@ const CryptoWallet = () => {
         return;
     }
 
+    // Prevent multiple submissions with more robust checks
+    if (isSending || currentTransactionId) {
+        toast.error('Transaction already in progress');
+        return;
+    }
+
+    // Generate a unique transaction ID
+    const txId = Date.now().toString();
+    setCurrentTransactionId(txId);
+
     // Validate the recipient address format for the selected network
     if (!validateNetworkAddress(sendAddress, selectedNetwork.id)) {
         const errorMsg = `Invalid ${selectedNetwork.name} address format. Please check the address and try again.`;
         setTransactionStatus('error');
         setTransactionMessage(errorMsg);
         toast.error(errorMsg);
+        setCurrentTransactionId(null);
         return;
     }
 
@@ -647,14 +670,26 @@ const CryptoWallet = () => {
         console.log('Sending USDT with data:', {
             network: selectedNetwork.id,
             toAddress: sendAddress,
-            amount: sendAmount
+            amount: sendAmount,
+            transactionId: txId
         });
 
         const response = await api.post('/api/wallet/send', {
             network: selectedNetwork.id,
             toAddress: sendAddress,
-            amount: sendAmount
+            amount: sendAmount,
+            transactionId: txId
         });
+
+        // Verify this is still the current transaction
+        if (currentTransactionId !== txId) {
+            console.log('Transaction was superseded by a newer one');
+            return;
+        }
+
+        if (!response.data) {
+            throw new Error('No response data received');
+        }
 
         console.log('Send USDT response:', response.data);
 
@@ -663,7 +698,8 @@ const CryptoWallet = () => {
             setWalletData(response.data.wallet);
             setGlobalBalance(response.data.newBalance);
             
-            if (typeof setUserProfile === 'function') {
+            // Only update user profile if setUserProfile is available
+            if (setUserProfile && typeof setUserProfile === 'function') {
                 setUserProfile(prev => {
                     if (!prev) return null;
                     return {
@@ -677,37 +713,61 @@ const CryptoWallet = () => {
             }
         }
 
+        // Show success state immediately
         setTransactionStatus('success');
-        setTransactionMessage('Transaction completed successfully');
+        setTransactionMessage('Transaction completed successfully!');
         toast.success('Transaction sent successfully');
         
         // Close the send modal and reset form after a delay
         setTimeout(() => {
-            setShowSend(false);
+            setShowSendModal(false);
             setSendAmount('');
             setSendAddress('');
             setTransactionStatus(null);
             setTransactionMessage('');
             setIsSending(false);
+            setCurrentTransactionId(null);
             
+            // Refresh data
             setLastRefresh(Date.now());
             fetchCryptoTransactions();
-        }, 2000);
+        }, 3000); // Increased to match TransactionStatus timeout
 
     } catch (error) {
         console.error('Error sending USDT:', error);
-        const errorMessage = error.response?.data?.error || error.message || 'Failed to send USDT';
-        setTransactionStatus('error');
-        setTransactionMessage(errorMessage);
-        toast.error(errorMessage);
         
-        setTimeout(() => {
+        // Only show error if this is still the current transaction
+        if (currentTransactionId === txId) {
+            const errorMessage = error.response?.data?.error || error.message || 'Failed to send USDT';
+            setTransactionStatus('error');
+            setTransactionMessage(errorMessage);
+            toast.error(errorMessage);
+            
+            // Reset all states immediately on error
+            setIsSending(false);
             setTransactionStatus(null);
             setTransactionMessage('');
-            setIsSending(false);
-        }, 2000);
+            setCurrentTransactionId(null);
+            
+            // Close modal after error
+            setTimeout(() => {
+                setShowSendModal(false);
+                setSendAmount('');
+                setSendAddress('');
+            }, 2000);
+        }
     }
-  }, [selectedNetwork.id, sendAmount, sendAddress, fetchCryptoTransactions, setUserProfile]);
+}, [selectedNetwork.id, sendAmount, sendAddress, fetchCryptoTransactions, setUserProfile, isSending, currentTransactionId]);
+
+  // Add cleanup on unmount
+  useEffect(() => {
+    return () => {
+      setCurrentTransactionId(null);
+      setIsSending(false);
+      setTransactionStatus(null);
+      setTransactionMessage('');
+    };
+  }, []);
 
   // Update the network selection handler to not trigger a fetch
   const onSelectNetwork = useCallback((network) => {
@@ -1131,6 +1191,17 @@ const CryptoWallet = () => {
         show={!!transactionStatus} 
         type={transactionStatus}
         message={transactionMessage}
+        onClose={() => {
+          if (transactionStatus === 'success') {
+            setShowSendModal(false);
+            setSendAmount('');
+            setSendAddress('');
+          }
+          setTransactionStatus(null);
+          setTransactionMessage('');
+          setIsSending(false);
+          setCurrentTransactionId(null);
+        }}
       />
     </>
   );
