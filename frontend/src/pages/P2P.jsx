@@ -137,6 +137,11 @@ const P2P = () => {
         // If viewing 'active' tab and user is logged in, fetch all their offers
         if (viewMode === 'active' && currentUser?._id) {
           params.my = 'true';
+          params.includeInactive = 'true'; // Include inactive offers
+        }
+        // Always fetch active offers for validation
+        if (currentUser?._id) {
+          params.includeActive = 'true';
         }
         const response = await axios.get('/api/p2p/offers', { params });
         setOffers(response.data);
@@ -528,6 +533,13 @@ const P2P = () => {
       offer.type === createOfferData.type && 
       offer.status === 'active'
     );
+
+    console.log('Checking for existing active offers:', {
+      userId: currentUser._id,
+      offerType: createOfferData.type,
+      existingOffer: existingActiveOffer,
+      allOffers: offers
+    });
 
     if (existingActiveOffer && !editingOffer) {
       setOfferCreationStatus('error');
@@ -1088,7 +1100,7 @@ const P2P = () => {
                     : 'bg-white/5 border border-white/10 hover:bg-white/10'
                   }`}
               >
-                <span className={viewMode === 'active' ? 'text-green-400' : 'text-gray-400'}>My Active Offers</span>
+                <span className={viewMode === 'active' ? 'text-green-400' : 'text-gray-400'}>My Offers</span>
               </button>
               <button
                 onClick={() => setViewMode('open')}
