@@ -45,6 +45,7 @@ import { QRCodeSVG } from 'qrcode.react';
 import TransactionStatus from '../components/TransactionStatus';
 import QRCodeModal from '../components/QRCodeModal';
 import SendModal from '../components/SendModal';
+import { ethers } from 'ethers';
 
 const networks = [
   { 
@@ -308,9 +309,89 @@ const MemoizedAddressCard = React.memo(({ isDark, selectedNetworkData, handleCop
   );
 });
 
-// Add MemoizedTransactionList component before CryptoWallet component
-const MemoizedTransactionList = React.memo(({ transactions, isDark }) => {
-  console.log('MemoizedTransactionList rendering with transactions:', transactions);
+// Add utility functions before MemoizedTransactionList
+const formatDate = (dateString) => {
+  try {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      return 'Invalid date';
+    }
+    return date.toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  } catch (error) {
+    console.error('Error formatting date:', error);
+    return 'Invalid date';
+  }
+};
+
+const getNetworkName = (networkId) => {
+  console.log('=== Network Name Resolution ===');
+  console.log('Input network ID:', networkId);
+  
+  // If no network ID is provided, try to determine from the transaction context
+  if (!networkId) {
+    console.log('No network ID provided, checking transaction context');
+    // Default to the currently selected network
+    const defaultNetwork = networks[0];
+    console.log('Using default network:', defaultNetwork.name);
+    return defaultNetwork.name;
+  }
+  
+  const network = networks.find(n => n.id === networkId);
+  const networkName = network ? network.name : 'Unknown Network';
+  console.log('Resolved network:', {
+    inputId: networkId,
+    found: !!network,
+    name: networkName
+  });
+  return networkName;
+};
+
+const getTransactionType = (tx, selectedNetworkData, currentUserId) => {
+  // First check if we have a subtype
+  if (tx.subtype) {
+    return tx.subtype;
+  }
+
+  // First try to determine user's role using from/to addresses
+  const userAddress = selectedNetworkData?.address?.toLowerCase();
+  const fromAddress = tx.from?.toLowerCase();
+  const toAddress = tx.to?.toLowerCase();
+
+  // If we have from/to addresses, use them to determine the type
+  if (fromAddress && toAddress) {
+    if (userAddress === fromAddress) {
+      return 'send';
+    } else if (userAddress === toAddress) {
+      return 'receive';
+    }
+  }
+
+  // If we have userId, use it to determine if the current user is the sender
+  if (tx.userId && currentUserId) {
+    const isSender = tx.userId === currentUserId;
+    
+    // For received transactions, we need to check if this is a duplicate
+    if (!isSender && tx.amount > 0) {
+      return 'receive';
+    }
+    
+    // For sent transactions
+    return isSender ? 'send' : 'receive';
+  }
+
+  // If we don't have userId or addresses, use the amount sign
+  return tx.amount < 0 ? 'send' : 'receive';
+};
+
+const MemoizedTransactionList = React.memo(({ transactions, isDark, selectedNetworkData, currentUserId }) => {
+  console.log('=== Transaction List Processing ===');
+  console.log('Selected Network Data:', selectedNetworkData);
 
   if (!transactions || transactions.length === 0) {
     return (
@@ -324,44 +405,36 @@ const MemoizedTransactionList = React.memo(({ transactions, isDark }) => {
     );
   }
 
-  const formatDate = (dateString) => {
-    try {
-      const date = new Date(dateString);
-      if (isNaN(date.getTime())) {
-        return 'Invalid date';
-      }
-      return date.toLocaleString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-    } catch (error) {
-      console.error('Error formatting date:', error);
-      return 'Invalid date';
-    }
-  };
+  // First, sort transactions by date (newest first)
+  const sortedTransactions = [...transactions].sort((a, b) => {
+    const dateA = new Date(a.createdAt || a.timestamp);
+    const dateB = new Date(b.createdAt || b.timestamp);
+    return dateB - dateA;
+  });
 
-  const getNetworkName = (networkId) => {
-    console.log('Attempting to get network name for ID:', networkId);
-    const network = networks.find(n => n.id === networkId);
-    const networkName = network ? network.name : 'Unknown Network';
-    console.log('Resolved network name:', networkName);
-    return networkName;
-  };
+  // Create a Set to track seen transaction keys
+  const seenKeys = new Set();
+  
+  // Filter out duplicates
+  const uniqueTransactions = sortedTransactions.filter(tx => {
+    // Create a unique key for this transaction
+    const key = JSON.stringify({
+      amount: tx.amount,
+      createdAt: tx.createdAt || tx.timestamp,
+      type: tx.type,
+      network: tx.network || selectedNetworkData?.network, // Use selected network if tx.network is undefined
+      userId: tx.userId
+    });
 
-  const getTransactionType = (tx) => {
-    // Prioritize subtype if available
-    if (tx.subtype) {
-        return tx.subtype;
-    } else if (tx.type === 'crypto' || tx.type === 'crypto_transfer') {
-        // If type is crypto/crypto_transfer and no subtype, infer from amount sign
-        return tx.amount < 0 ? 'send' : 'receive';
+    // If we've seen this key before, it's a duplicate
+    if (seenKeys.has(key)) {
+      return false;
     }
-    // Fallback for unexpected structures - assume 'send' if amount is negative
-    return tx.amount < 0 ? 'send' : 'receive';
-  };
+
+    // Add this key to our seen set
+    seenKeys.add(key);
+    return true;
+  });
 
   return (
     <motion.div
@@ -375,11 +448,23 @@ const MemoizedTransactionList = React.memo(({ transactions, isDark }) => {
         <h2 className="text-xl font-semibold">Recent Transactions</h2>
       </div>
       <div className="space-y-4">
-        {transactions.map((tx) => {
-          const txType = getTransactionType(tx);
+        {uniqueTransactions.map((tx, index) => {
+          const txType = getTransactionType(tx, selectedNetworkData, currentUserId);
+          const networkId = tx.network || selectedNetworkData?.network;
+          
+          console.log('Rendering transaction:', {
+            id: tx._id,
+            amount: tx.amount,
+            type: txType,
+            network: networkId,
+            selectedNetwork: selectedNetworkData?.network,
+            createdAt: tx.createdAt,
+            index
+          });
+
           return (
             <motion.div
-              key={tx._id}
+              key={`${tx._id}-${tx.createdAt}-${tx.amount}`}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               className={`p-4 rounded-lg border ${
@@ -421,7 +506,7 @@ const MemoizedTransactionList = React.memo(({ transactions, isDark }) => {
                     {txType === 'send' ? '-' : '+'}{Math.abs(tx.amount)} USDT
                   </div>
                   <div className="text-sm text-gray-500 dark:text-gray-400">
-                    {getNetworkName(tx.network)}
+                    {getNetworkName(networkId)}
                   </div>
                 </div>
               </div>
@@ -450,35 +535,299 @@ const MemoizedTransactionList = React.memo(({ transactions, isDark }) => {
   );
 });
 
-// Add a function to validate network addresses
-const validateNetworkAddress = (address, networkId) => {
-  const network = networks.find(n => n.id === networkId);
-  if (!network) return false;
-
-  switch (networkId) {
-    case 'ethereum':
-    case 'arbitrum':
-    case 'polygon':
-      // Ethereum, Arbitrum, and Polygon addresses start with 0x and are 42 characters long
-      return /^0x[a-fA-F0-9]{40}$/.test(address);
-    case 'bsc':
-      // BSC addresses are similar to Ethereum
-      return /^0x[a-fA-F0-9]{40}$/.test(address);
-    case 'tron':
-      // TRON addresses start with T and are 34 characters long
-      return /^T[a-zA-Z0-9]{33}$/.test(address);
-    case 'solana':
-      // Solana addresses are base58 encoded and 32-44 characters long
-      return /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address);
-    case 'ton':
-      // TON addresses are base64 encoded and can start with EQ or UQ
-      if (!address.startsWith('EQ') && !address.startsWith('UQ')) return false;
-      if (address.length !== 48) return false;
-      const remainingChars = address.slice(2);
-      return /^[a-zA-Z0-9_-]{46}$/.test(remainingChars);
-    default:
-      return false;
+// Add these utility functions before validateNetworkAddress
+const isValidEthereumChecksum = (address) => {
+  try {
+    // Remove 0x prefix
+    const addressWithoutPrefix = address.slice(2);
+    
+    // Convert to lowercase for comparison
+    const addressLower = addressWithoutPrefix.toLowerCase();
+    
+    // Calculate checksum using ethers v6 syntax
+    const hash = ethers.keccak256(ethers.toUtf8Bytes(addressLower)).slice(2);
+    
+    // Check each character
+    for (let i = 0; i < 40; i++) {
+      // If the hash byte is 1, the address character should be uppercase
+      if ((parseInt(hash[i], 16) > 7 && addressWithoutPrefix[i].toUpperCase() !== addressWithoutPrefix[i]) ||
+          (parseInt(hash[i], 16) <= 7 && addressWithoutPrefix[i].toLowerCase() !== addressWithoutPrefix[i])) {
+        return false;
+      }
+    }
+    return true;
+  } catch (error) {
+    console.error('Error validating Ethereum checksum:', error);
+    return false;
   }
+};
+
+const detectNetworkFromAddress = (address) => {
+  if (!address) return null;
+  
+  // Check for Ethereum-style addresses (0x prefix)
+  if (address.startsWith('0x')) {
+    // Basic format check
+    if (!/^0x[a-fA-F0-9]{40}$/.test(address)) return null;
+    
+    // Try to validate checksum
+    if (isValidEthereumChecksum(address)) {
+      return 'ethereum';
+    }
+    
+    // If checksum fails but format is correct, it might be BSC or Polygon
+    // We'll need to check the chain ID or other network-specific properties
+    return 'unknown_evm';
+  }
+  
+  // Check for TRON addresses
+  if (address.startsWith('T') && /^T[a-zA-Z0-9]{33}$/.test(address)) {
+    return 'tron';
+  }
+  
+  // Check for Solana addresses
+  if (/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address)) {
+    return 'solana';
+  }
+  
+  // Check for TON addresses
+  if ((address.startsWith('EQ') || address.startsWith('UQ')) && 
+      address.length === 48 && 
+      /^[a-zA-Z0-9_-]{46}$/.test(address.slice(2))) {
+    return 'ton';
+  }
+  
+  return null;
+};
+
+// Update the validateNetworkAddress function
+const validateNetworkAddress = (address, network) => {
+    if (!address) return { isValid: false, message: 'Address is required' };
+
+    // Check if it's a cross-network address
+    const isCrossNetwork = isCrossNetworkAddress(address, network);
+    if (isCrossNetwork) {
+        return {
+            isValid: false,
+            message: 'Cross-network address detected',
+            isCrossNetwork: true,
+            details: {
+                address,
+                network,
+                detectedNetwork: detectNetworkFromAddress(address)
+            }
+        };
+    }
+
+    // Rest of the validation logic
+    switch (network) {
+        case 'ethereum':
+        case 'bsc':
+        case 'polygon':
+        case 'arbitrum':
+            if (!ethers.isAddress(address)) {
+                return { isValid: false, message: 'Invalid EVM address format' };
+            }
+            break;
+        case 'ton':
+            if (!address.startsWith('EQ') && !address.startsWith('UQ')) {
+                return { isValid: false, message: 'TON addresses must start with EQ or UQ' };
+            }
+            if (address.length !== 48) {
+                return { isValid: false, message: 'TON addresses must be 48 characters long' };
+            }
+            if (!/^[a-zA-Z0-9_-]{46}$/.test(address.slice(2))) {
+                return { isValid: false, message: 'TON addresses contain invalid characters' };
+            }
+            break;
+        case 'tron':
+            if (!address.match(/^T[A-Za-z1-9]{33}$/)) {
+                return { isValid: false, message: 'Invalid TRON address format' };
+            }
+            break;
+        case 'solana':
+            if (!address.match(/^[1-9A-HJ-NP-Za-km-z]{32,44}$/)) {
+                return { isValid: false, message: 'Invalid Solana address format' };
+            }
+            break;
+    }
+
+    return { isValid: true };
+};
+
+// Update the CrossNetworkWarning component
+const CrossNetworkWarning = ({ details, onClose, onProceed }) => {
+    const [isVisible, setIsVisible] = useState(true);
+    const [isAnimating, setIsAnimating] = useState(false);
+    const [isVerified, setIsVerified] = useState(false);
+
+    useEffect(() => {
+        setIsAnimating(true);
+        const timer = setTimeout(() => setIsAnimating(false), 500);
+        return () => clearTimeout(timer);
+    }, []);
+
+    const handleClose = () => {
+        setIsAnimating(true);
+        setTimeout(() => {
+            setIsVisible(false);
+            onClose();
+        }, 300);
+    };
+
+    const handleProceed = () => {
+        if (!isVerified) {
+            toast.error('Please verify that you understand the risks');
+            return;
+        }
+        if (typeof onProceed === 'function') {
+            setIsAnimating(true);
+            setTimeout(() => {
+                setIsVisible(false);
+                onProceed();
+            }, 300);
+        } else {
+            console.error('onProceed is not a function');
+            toast.error('An error occurred. Please try again.');
+        }
+    };
+
+    if (!isVisible) return null;
+
+    return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 flex items-center justify-center z-50"
+        >
+            {/* Backdrop */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+                onClick={handleClose}
+            />
+
+            {/* Modal */}
+            <motion.div
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                transition={{ type: "spring", duration: 0.5 }}
+                className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 max-w-md w-full mx-4 overflow-hidden"
+            >
+                {/* Gradient Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-yellow-500/5 to-orange-500/5" />
+                
+                {/* Content */}
+                <div className="relative">
+                    {/* Header */}
+                    <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/20 flex items-center justify-center">
+                                <AlertTriangle className="w-5 h-5 text-red-500" />
+                            </div>
+                            <h3 className="text-xl font-semibold bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
+                                Cross-Network Warning
+                            </h3>
+                        </div>
+                        <button
+                            onClick={handleClose}
+                            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                        >
+                            <svg className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    {/* Network Info */}
+                    <div className="space-y-4">
+                        <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 space-y-3">
+                            <div className="flex items-center justify-between">
+                                <span className="text-sm text-gray-600 dark:text-gray-300">From Network</span>
+                                <span className="font-medium text-gray-900 dark:text-white">{details.network}</span>
+                            </div>
+                            <div className="h-px bg-gray-200 dark:bg-gray-600" />
+                            <div className="flex items-center justify-between">
+                                <span className="text-sm text-gray-600 dark:text-gray-300">To Network</span>
+                                <span className="font-medium text-red-500">{details.detectedNetwork}</span>
+                            </div>
+                        </div>
+
+                        {/* Address */}
+                        <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4">
+                            <div className="text-sm text-gray-600 dark:text-gray-300 mb-2">Address</div>
+                            <div className="font-mono text-sm bg-white dark:bg-gray-800 rounded-lg p-2 break-all">
+                                {details.address}
+                            </div>
+                        </div>
+
+                        {/* Warning Message */}
+                        <div className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                            This address appears to be from a different network. Cross-network transfers may result in permanent loss of funds. Please verify the address and network before proceeding.
+                        </div>
+
+                        {/* Verification Checkbox */}
+                        <div className="flex items-start gap-3 p-4 bg-red-50 dark:bg-red-900/10 rounded-xl">
+                            <div className="pt-0.5">
+                                <input
+                                    type="checkbox"
+                                    id="verify-risk"
+                                    checked={isVerified}
+                                    onChange={(e) => setIsVerified(e.target.checked)}
+                                    className="w-4 h-4 text-red-500 border-gray-300 rounded focus:ring-red-500"
+                                />
+                            </div>
+                            <label htmlFor="verify-risk" className="text-sm text-gray-700 dark:text-gray-300">
+                                I understand that sending funds to an address on a different network may result in permanent loss of funds, and I take full responsibility for any potential losses.
+                            </label>
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex gap-3 pt-2">
+                            <button
+                                onClick={handleClose}
+                                className="flex-1 px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-xl transition-colors"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleProceed}
+                                disabled={!isVerified}
+                                className={`flex-1 px-4 py-2.5 text-sm font-medium text-white rounded-xl transition-all transform hover:scale-[1.02] active:scale-[0.98] ${
+                                    isVerified 
+                                        ? 'bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600'
+                                        : 'bg-gray-400 cursor-not-allowed'
+                                }`}
+                            >
+                                Proceed Anyway
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
+        </motion.div>
+    );
+};
+
+// Add this function before the CryptoWallet component
+const getNetworkWarningMessage = (address, selectedNetworkId) => {
+    const detectedNetwork = detectNetworkFromAddress(address);
+    if (!detectedNetwork || detectedNetwork === selectedNetworkId) return null;
+    
+    const selectedNetwork = networks.find(n => n.id === selectedNetworkId);
+    const detectedNetworkInfo = networks.find(n => n.id === detectedNetwork);
+    
+    if (!selectedNetwork || !detectedNetworkInfo) return null;
+    
+    return {
+        address,
+        network: selectedNetwork.name,
+        detectedNetwork: detectedNetworkInfo.name
+    };
 };
 
 const CryptoWallet = () => {
@@ -507,6 +856,8 @@ const CryptoWallet = () => {
   const [showSendModal, setShowSendModal] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const [currentTransactionId, setCurrentTransactionId] = useState(null);
+  const [crossNetworkWarning, setCrossNetworkWarning] = useState(null);
+  const [lastTransactionHash, setLastTransactionHash] = useState(null);
 
   // Find selected network data (derived state) - **DEFINE BEFORE CALLBACKS USING IT**
   const selectedNetworkData = useMemo(() => {
@@ -596,7 +947,7 @@ const CryptoWallet = () => {
           _t: lastRefresh // Use lastRefresh to help cache bust if needed
         }
       });
-      console.log('Crypto transactions fetched successfully.', response.data.transactions);
+      console.log('Crypto transactions fetched successfully. Data:', response.data);
       // Log the first few transactions to inspect their structure
       if (response.data.transactions && response.data.transactions.length > 0) {
         console.log('First 3 raw crypto transactions from API:', response.data.transactions.slice(0, 3));
@@ -605,7 +956,7 @@ const CryptoWallet = () => {
     } catch (error) {
       console.error('Error fetching crypto transactions:', error);
       // Optionally display a toast error
-      // toast.error('Failed to load transactions');
+      toast.error('Failed to load transactions');
     }
   }, [userProfile, lastRefresh]);
 
@@ -636,7 +987,13 @@ const CryptoWallet = () => {
     setTimeout(() => setIsCopied(false), 2000);
   }, []);
 
-  const handleSend = useCallback(async () => {
+  const handleSend = useCallback(async (e) => {
+    // Prevent default form submission
+    if (e && e.preventDefault) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
     if (!sendAmount || !sendAddress) {
         toast.error('Please fill in all fields');
         return;
@@ -648,19 +1005,33 @@ const CryptoWallet = () => {
         return;
     }
 
+    // Check for network mismatch warning BEFORE any balance checks or API calls
+    const networkWarning = getNetworkWarningMessage(sendAddress, selectedNetwork.id);
+    if (networkWarning) {
+        setCrossNetworkWarning({
+            ...networkWarning,
+            // If the user proceeds despite the warning, then initiate the send
+            onProceed: async () => {
+                // Reset warning state
+                setCrossNetworkWarning(null);
+                // Proceed with the actual send logic
+                await initiateSend();
+            }
+        });
+        // Stop the current handleSend execution here, wait for user decision on warning
+        return;
+    }
+
+    // If no cross-network warning, proceed directly with sending
+    await initiateSend();
+
+}, [sendAmount, sendAddress, selectedNetwork, isSending, currentTransactionId, fetchWalletData, fetchCryptoTransactions]);
+
+// Create a new helper function to contain the core send logic
+const initiateSend = useCallback(async () => {
     // Generate a unique transaction ID
     const txId = Date.now().toString();
     setCurrentTransactionId(txId);
-
-    // Validate the recipient address format for the selected network
-    if (!validateNetworkAddress(sendAddress, selectedNetwork.id)) {
-        const errorMsg = `Invalid ${selectedNetwork.name} address format. Please check the address and try again.`;
-        setTransactionStatus('error');
-        setTransactionMessage(errorMsg);
-        toast.error(errorMsg);
-        setCurrentTransactionId(null);
-        return;
-    }
 
     try {
         setIsSending(true);
@@ -681,83 +1052,56 @@ const CryptoWallet = () => {
             transactionId: txId
         });
 
-        // Verify this is still the current transaction
-        if (currentTransactionId !== txId) {
-            console.log('Transaction was superseded by a newer one');
-            return;
-        }
-
         if (!response.data) {
             throw new Error('No response data received');
         }
 
         console.log('Send USDT response:', response.data);
 
-        // Update wallet data with the response data
         if (response.data.wallet) {
             setWalletData(response.data.wallet);
             setGlobalBalance(response.data.newBalance);
-            
-            // Only update user profile if setUserProfile is available
-            if (setUserProfile && typeof setUserProfile === 'function') {
-                setUserProfile(prev => {
-                    if (!prev) return null;
-                    return {
-                        ...prev,
-                        wallet: {
-                            ...prev.wallet,
-                            globalUsdtBalance: response.data.newBalance
-                        }
-                    };
-                });
-            }
         }
 
-        // Show success state immediately
         setTransactionStatus('success');
-        setTransactionMessage('Transaction completed successfully!');
-        toast.success('Transaction sent successfully');
+        setTransactionMessage('Transaction completed successfully');
+        toast.success('Transaction completed successfully');
         
-        // Close the send modal and reset form after a delay
+        // Close the send modal after 3 seconds
         setTimeout(() => {
             setShowSendModal(false);
             setSendAmount('');
             setSendAddress('');
             setTransactionStatus(null);
             setTransactionMessage('');
-            setIsSending(false);
-            setCurrentTransactionId(null);
-            
-            // Refresh data
-            setLastRefresh(Date.now());
-            fetchCryptoTransactions();
-        }, 3000); // Increased to match TransactionStatus timeout
+            // Clear the last transaction hash after the modal closes
+            setLastTransactionHash(null);
+        }, 3000);
+        
+        // Refresh data without page reload
+        await fetchWalletData(selectedNetwork.id);
+        await fetchCryptoTransactions();
+        
+        // Capture the transaction hash from the response if available
+        if (response.data?.transaction?.hash) {
+            setLastTransactionHash(response.data.transaction.hash);
+            console.log('Captured transaction hash:', response.data.transaction.hash);
+        }
 
     } catch (error) {
         console.error('Error sending USDT:', error);
-        
-        // Only show error if this is still the current transaction
-        if (currentTransactionId === txId) {
-            const errorMessage = error.response?.data?.error || error.message || 'Failed to send USDT';
-            setTransactionStatus('error');
-            setTransactionMessage(errorMessage);
-            toast.error(errorMessage);
-            
-            // Reset all states immediately on error
-            setIsSending(false);
-            setTransactionStatus(null);
-            setTransactionMessage('');
-            setCurrentTransactionId(null);
-            
-            // Close modal after error
-            setTimeout(() => {
-                setShowSendModal(false);
-                setSendAmount('');
-                setSendAddress('');
-            }, 2000);
-        }
+        // Log the full error object to inspect its structure
+        console.log('Full error object:', JSON.stringify(error, null, 2));
+        setTransactionStatus('error');
+        // Access the error message from error.response?.data?.error
+        setTransactionMessage(error.response?.data?.error || 'Failed to send USDT');
+        toast.error(error.response?.data?.error || 'Failed to send USDT');
+    } finally {
+        setIsSending(false);
+        setCurrentTransactionId(null);
     }
-}, [selectedNetwork.id, sendAmount, sendAddress, fetchCryptoTransactions, setUserProfile, isSending, currentTransactionId]);
+
+}, [sendAmount, sendAddress, selectedNetwork, fetchWalletData, fetchCryptoTransactions]);
 
   // Add cleanup on unmount
   useEffect(() => {
@@ -1080,77 +1424,12 @@ const CryptoWallet = () => {
                   No transactions yet
                 </div>
               ) : (
-                cryptoTransactions.map((tx, index) => {
-                  const txType = tx.amount < 0 ? 'send' : 'receive';
-                  return (
-                    <motion.div
-                      key={tx._id}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className={`p-4 rounded-xl border ${
-                        isDark ? 'border-gray-700 hover:bg-gray-700/50' : 'border-gray-200 hover:bg-gray-50'
-                      } transition-colors`}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                            txType === 'send' 
-                              ? isDark ? 'bg-red-900/20' : 'bg-red-100'
-                              : isDark ? 'bg-green-900/20' : 'bg-green-100'
-                          }`}>
-                            {txType === 'send' ? (
-                              <ArrowUpRight className={`w-5 h-5 ${
-                                isDark ? 'text-red-400' : 'text-red-500'
-                              }`} />
-                            ) : (
-                              <ArrowDownRight className={`w-5 h-5 ${
-                                isDark ? 'text-green-400' : 'text-green-500'
-                              }`} />
-                            )}
-                          </div>
-                          <div>
-                            <div className="font-medium">
-                              {txType === 'send' ? 'Sent' : 'Received'} USDT
-                            </div>
-                            <div className="text-sm text-gray-500 dark:text-gray-400">
-                              {new Date(tx.createdAt || tx.timestamp).toLocaleString()}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <div className={`font-medium ${
-                            txType === 'send' 
-                              ? isDark ? 'text-red-400' : 'text-red-500'
-                              : isDark ? 'text-green-400' : 'text-green-500'
-                          }`}>
-                            {txType === 'send' ? '-' : '+'}{Math.abs(tx.amount)} USDT
-                          </div>
-                          <div className="text-sm text-gray-500 dark:text-gray-400">
-                            {networks.find(n => n.id === tx.network)?.name || 'Unknown Network'}
-                          </div>
-                        </div>
-                      </div>
-                      {tx.status && (
-                        <div className="mt-2 flex items-center gap-2 text-sm">
-                          {tx.status === 'completed' ? (
-                            <CheckCircle className="w-4 h-4 text-green-500" />
-                          ) : tx.status === 'pending' ? (
-                            <Clock className="w-4 h-4 text-yellow-500" />
-                          ) : (
-                            <AlertTriangle className="w-4 h-4 text-red-500" />
-                          )}
-                          <span className="capitalize">{tx.status}</span>
-                        </div>
-                      )}
-                      {tx.hash && (
-                        <div className="mt-2 text-xs text-gray-500 dark:text-gray-400 break-all">
-                          TX Hash: {tx.hash}
-                        </div>
-                      )}
-                    </motion.div>
-                  );
-                })
+                <MemoizedTransactionList
+                  transactions={cryptoTransactions}
+                  isDark={isDark}
+                  selectedNetworkData={selectedNetworkData}
+                  currentUserId={userProfile?._id}
+                />
               )}
             </div>
           </motion.div>
@@ -1191,6 +1470,7 @@ const CryptoWallet = () => {
         show={!!transactionStatus} 
         type={transactionStatus}
         message={transactionMessage}
+        transactionHash={lastTransactionHash}
         onClose={() => {
           if (transactionStatus === 'success') {
             setShowSendModal(false);
@@ -1203,6 +1483,14 @@ const CryptoWallet = () => {
           setCurrentTransactionId(null);
         }}
       />
+
+      {crossNetworkWarning && (
+        <CrossNetworkWarning
+            details={crossNetworkWarning}
+            onClose={() => setCrossNetworkWarning(null)}
+            onProceed={crossNetworkWarning.onProceed}
+        />
+      )}
     </>
   );
 };

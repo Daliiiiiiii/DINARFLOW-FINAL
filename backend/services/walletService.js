@@ -5,6 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import '../models/Wallet.js';
+import '../models/Transaction.js';
 
 // Get the directory name in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -158,6 +159,7 @@ const USDT_ABI = [
 ];
 
 const Wallet = mongoose.model('Wallet');
+const Transaction = mongoose.model('Transaction');
 
 class WalletService {
     constructor() {
@@ -214,25 +216,21 @@ class WalletService {
                 throw new Error('Failed to connect to Hardhat network. Please ensure Hardhat node is running.');
             }
 
-            // Generate new wallet using ethers
-            const wallet = ethers.Wallet.createRandom();
-            const address = wallet.address;
+            // Generate a single EVM wallet that will be used for all EVM chains
+            const evmWallet = ethers.Wallet.createRandom();
+            const evmAddress = evmWallet.address;
+            const evmPrivateKey = evmWallet.privateKey;
 
             // Get the first Hardhat account to fund the new wallet
-            // This assumes Hardhat's default accounts and private key
             const fundingPrivateKey = "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
             const fundingAccount = new ethers.Wallet(fundingPrivateKey, this.providers.ethereum);
 
-            // Check funding account balance (optional but good practice)
-            // const fundingBalance = await this.providers.ethereum.getBalance(fundingAccount.address);
-            // console.log(`Funding account balance: ${ethers.formatEther(fundingBalance)} ETH`);
-
             // Fund the new wallet with 1 ETH
-            console.log(`Funding new wallet ${address} with 1 ETH from ${fundingAccount.address}...`);
+            console.log(`Funding new wallet ${evmAddress} with 1 ETH from ${fundingAccount.address}...`);
             const fundingTx = await fundingAccount.sendTransaction({
-                to: address,
+                to: evmAddress,
                 value: ethers.parseEther('1'),
-                gasLimit: 21000 // Standard gas limit for ETH transfers
+                gasLimit: 21000
             });
 
             console.log(`Funding transaction hash: ${fundingTx.hash}`);
@@ -255,11 +253,19 @@ class WalletService {
                 let address, privateKey;
 
                 switch (network) {
+                    case 'ethereum':
+                    case 'bsc':
+                    case 'polygon':
+                    case 'arbitrum':
+                        // Use the same EVM wallet for all EVM chains
+                        address = evmAddress;
+                        privateKey = evmPrivateKey;
+                        break;
+
                     case 'ton':
                         // For TON, generate a random string that starts with EQ
                         const tonRandom = ethers.randomBytes(32);
                         const tonHex = ethers.hexlify(tonRandom);
-                        // Create a TON-like address (48 chars total)
                         address = `EQ${tonHex.slice(2, 48)}`;
                         privateKey = tonHex;
                         break;
@@ -268,25 +274,33 @@ class WalletService {
                         // For TRON, generate a random string that starts with T
                         const tronRandom = ethers.randomBytes(21);
                         const tronHex = ethers.hexlify(tronRandom);
-                        // Create a TRON-like address (34 chars total)
                         address = `T${tronHex.slice(2, 35)}`;
                         privateKey = tronHex;
                         break;
 
                     case 'solana':
-                        // For Solana, generate a random string
+                        // For Solana, generate a proper base58 encoded address
                         const solRandom = ethers.randomBytes(32);
                         const solHex = ethers.hexlify(solRandom);
-                        // Create a Solana-like address (44 chars)
-                        address = solHex.slice(2, 46);
+                        // Convert to base58 (using a simple base58 alphabet)
+                        const base58Chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+                        let num = BigInt('0x' + solHex.slice(2));
+                        let base58 = '';
+                        while (num > 0) {
+                            const mod = Number(num % 58n);
+                            base58 = base58Chars[mod] + base58;
+                            num = num / 58n;
+                        }
+                        // Ensure the address is between 32-44 characters
+                        while (base58.length < 32) {
+                            base58 = '1' + base58;
+                        }
+                        if (base58.length > 44) {
+                            base58 = base58.slice(0, 44);
+                        }
+                        address = base58;
                         privateKey = solHex;
                         break;
-
-                    default:
-                        // For EVM chains (Ethereum, BSC, etc.), use ethers wallet
-                        const evmWallet = ethers.Wallet.createRandom();
-                        address = evmWallet.address;
-                        privateKey = evmWallet.privateKey;
                 }
 
                 return {
@@ -300,9 +314,8 @@ class WalletService {
 
             const walletDoc = await Wallet.create({
                 userId,
-                // Use the generated address/private key for the 'ethereum' network as the main one
-                address: networks.find(n => n.network === 'ethereum').address,
-                privateKey: networks.find(n => n.network === 'ethereum').privateKey,
+                address: evmAddress, // Use the EVM address as the main address
+                privateKey: evmPrivateKey, // Use the EVM private key as the main private key
                 networks,
                 isFrozen: false,
                 createdAt: new Date()
@@ -333,8 +346,31 @@ class WalletService {
     async getBalance(network, address) {
         try {
             console.log(`[getBalance] Attempting to get balance for ${address} on ${network}`);
+
+            // Handle non-EVM chains differently
+            if (['ton', 'tron', 'solana'].includes(network)) {
+                // For non-EVM chains, we'll return the balance from the database
+                const wallet = await Wallet.findOne({ 'networks.address': address });
+                if (!wallet) {
+                    console.log(`[getBalance] No wallet found for address ${address} on ${network}`);
+                    return '0';
+                }
+
+                const networkData = wallet.networks.find(n => n.network === network);
+                if (!networkData) {
+                    console.log(`[getBalance] No network data found for ${network}`);
+                    return '0';
+                }
+
+                // Ensure balance is properly formatted
+                const balance = parseFloat(networkData.balance || '0');
+                console.log(`[getBalance] Found balance in database for ${network}:`, balance);
+                return balance.toFixed(6);
+            }
+
+            // For EVM chains (Ethereum, BSC, Polygon, Arbitrum)
             if (!this.providers[network]) {
-                await this.initializeProviders(); // Ensure providers are initialized if not already
+                await this.initializeProviders();
                 if (!this.providers[network]) {
                     throw new Error(`Provider still not initialized for network: ${network}`);
                 }
@@ -343,9 +379,16 @@ class WalletService {
             const config = NETWORKS[network];
             if (!config || !config.usdtAddress) {
                 console.warn(`[getBalance] Invalid network configuration or missing USDT address for ${network}`);
-                return '0'; // Return 0 if config is invalid
+                return '0';
             }
-            console.log(`[getBalance] Using USDT address: ${config.usdtAddress} and provider for ${network}`);
+
+            // Validate address format for EVM chains
+            try {
+                ethers.getAddress(address);
+            } catch (error) {
+                console.warn(`[getBalance] Invalid EVM address format for ${address}`);
+                return '0';
+            }
 
             // Check if contract exists at the address
             const code = await this.providers[network].getCode(config.usdtAddress);
@@ -402,272 +445,249 @@ class WalletService {
         }
     }
 
-    async sendUSDT(fromAddress, toAddress, amount, network) {
+    async sendUSDT(userId, network, toAddress, amount, walletAddress) {
+        console.log('[sendUSDT] Starting USDT transfer:', {
+            userId,
+            network,
+            toAddress,
+            amount,
+            walletAddress
+        });
+
         try {
-            console.log(`[sendUSDT] Starting USDT transfer:`, {
-                fromAddress,
-                toAddress,
-                amount,
-                network
+            // Validate parameters
+            if (!userId || !network || !toAddress || !amount || !walletAddress) {
+                throw new Error('Please fill in all required fields');
+            }
+
+            // Validate address format based on network
+            if (['ethereum', 'bsc', 'polygon', 'arbitrum'].includes(network)) {
+                try {
+                    ethers.getAddress(toAddress);
+                } catch (error) {
+                    throw new Error('Invalid Ethereum-style address format. Please check the recipient address.');
+                }
+            } else if (network === 'tron') {
+                if (!toAddress.match(/^T[0-9A-Za-z]{25,33}$/)) {
+                    throw new Error('Invalid TRON address format. TRON addresses should start with T and be 25-33 characters long.');
+                }
+            } else if (network === 'ton') {
+                if (!toAddress.startsWith('EQ') && !toAddress.startsWith('UQ') ||
+                    toAddress.length !== 48 ||
+                    !/^[a-zA-Z0-9_-]{46}$/.test(toAddress.slice(2))) {
+                    throw new Error('Invalid TON address format. TON addresses should start with EQ or UQ and be 48 characters long.');
+                }
+            } else if (network === 'solana') {
+                if (!toAddress.match(/^[1-9A-HJ-NP-Za-km-z]{32,44}$/)) {
+                    throw new Error('Invalid Solana address format. Solana addresses should be 32-44 characters long and contain only valid base58 characters.');
+                }
+            }
+
+            // Validate and convert userId to ObjectId if it's a valid MongoDB ObjectId
+            let senderUserId;
+            try {
+                senderUserId = new mongoose.Types.ObjectId(userId);
+            } catch (error) {
+                console.error('[sendUSDT] Invalid userId format:', error);
+                throw new Error('Invalid user session. Please try logging in again.');
+            }
+
+            // Validate amount
+            const parsedAmount = parseFloat(amount);
+            if (isNaN(parsedAmount) || parsedAmount <= 0) {
+                throw new Error('Please enter a valid amount greater than 0');
+            }
+
+            // Get sender's wallet
+            const senderWallet = await Wallet.findOne({ userId: senderUserId });
+            if (!senderWallet) {
+                throw new Error('Your wallet was not found. Please try refreshing the page.');
+            }
+
+            // Check if wallet is frozen
+            if (senderWallet.isFrozen) {
+                throw new Error('Your wallet is currently frozen. Please contact support for assistance.');
+            }
+
+            // Calculate fee
+            const fee = this.calculateTransactionFee(network);
+            console.log('[sendUSDT] Calculated fee for', network + ':', fee);
+
+            // Check if user has enough balance (including fee)
+            const currentGlobalBalance = parseFloat(senderWallet.globalUsdtBalance || '0');
+            const totalRequired = parsedAmount + fee;
+
+            if (currentGlobalBalance < totalRequired) {
+                throw new Error(`Insufficient balance. You need ${totalRequired.toFixed(2)} USDT (${parsedAmount.toFixed(2)} USDT + ${fee.toFixed(2)} USDT fee) but you have ${currentGlobalBalance.toFixed(2)} USDT`);
+            }
+
+            // Get or create recipient's wallet
+            let recipientWallet = await Wallet.findOne({
+                'networks.address': toAddress
             });
 
-            // Get the sender's wallet
-            const senderWallet = await Wallet.findOne({ address: fromAddress });
-            if (!senderWallet) {
-                throw new Error('Sender wallet not found');
+            if (!recipientWallet) {
+                // Create a new wallet for the recipient without a userId
+                const newWallet = {
+                    networks: [{
+                        network,
+                        address: toAddress,
+                        balance: parsedAmount.toFixed(6),
+                        isActive: true
+                    }],
+                    balance: parsedAmount.toFixed(6),
+                    isFrozen: false,
+                    address: toAddress,
+                    privateKey: ethers.randomBytes(32).toString('hex')
+                };
+                recipientWallet = await Wallet.create([newWallet]);
+                recipientWallet = recipientWallet[0];
+            } else {
+                // Check if recipient wallet is frozen
+                if (recipientWallet.isFrozen) {
+                    throw new Error('The recipient wallet is frozen. Please contact support for assistance.');
+                }
+
+                // Update existing recipient wallet
+                const networkIndex = recipientWallet.networks.findIndex(n => n.network === network);
+                if (networkIndex === -1) {
+                    recipientWallet.networks.push({
+                        network,
+                        address: toAddress,
+                        balance: parsedAmount.toFixed(6),
+                        isActive: true
+                    });
+                } else {
+                    const currentBalance = parseFloat(recipientWallet.networks[networkIndex].balance || '0');
+                    const newBalance = (currentBalance + parsedAmount).toFixed(6);
+                    recipientWallet.networks[networkIndex].balance = newBalance;
+                }
+                const currentGlobalBalance = parseFloat(recipientWallet.globalUsdtBalance || '0');
+                recipientWallet.globalUsdtBalance = (currentGlobalBalance + parsedAmount).toFixed(6);
+                await recipientWallet.save();
             }
 
-            // Calculate transaction fee based on network
-            const feeAmount = this.calculateTransactionFee(network);
-            console.log(`[sendUSDT] Calculated fee for ${network}:`, feeAmount);
+            // Create transaction records with retry logic
+            let senderTx, recipientTx;
+            let attempts = 0;
+            const maxAttempts = 3;
+            let session;
 
-            // Check if sender has enough balance
-            const currentBalance = parseFloat(senderWallet.globalUsdtBalance || '0');
-            const totalAmount = parseFloat(amount) + feeAmount;
+            while (attempts < maxAttempts) {
+                try {
+                    session = await mongoose.startSession();
+                    session.startTransaction();
 
-            if (currentBalance < totalAmount) {
-                console.log(`[sendUSDT] Insufficient balance:`, {
-                    currentBalance,
-                    required: totalAmount
-                });
-                throw new Error('Insufficient USDT balance');
-            }
+                    // Update sender's balances within the transaction
+                    const currentGlobalBalance = parseFloat(senderWallet.globalUsdtBalance || '0');
+                    const newGlobalBalance = parseFloat((currentGlobalBalance - parsedAmount - fee).toFixed(6));
+                    senderWallet.globalUsdtBalance = newGlobalBalance;
 
-            // Deduct amount and fee from sender's global balance
-            const newGlobalBalance = (currentBalance - totalAmount).toFixed(6);
-            senderWallet.globalUsdtBalance = newGlobalBalance;
-            await senderWallet.save();
-            console.log(`[sendUSDT] Updated sender's global balance to ${newGlobalBalance}`);
-
-            // Handle different networks
-            switch (network) {
-                case 'ton':
-                    // For TON, validate the address format
-                    console.log(`[sendUSDT] Validating TON address: ${toAddress} (length: ${toAddress.length})`);
-
-                    // Check if address starts with EQ or UQ
-                    if (!toAddress.startsWith('EQ') && !toAddress.startsWith('UQ')) {
-                        console.log(`[sendUSDT] TON address must start with EQ or UQ`);
-                        throw new Error('Invalid TON address format. TON addresses should start with EQ or UQ.');
+                    // Update network-specific balance
+                    const networkIndex = senderWallet.networks.findIndex(n => n.network === network);
+                    if (networkIndex === -1) {
+                        throw new Error('Network not found in your wallet. Please try refreshing the page.');
                     }
+                    const currentNetworkBalance = parseFloat(senderWallet.networks[networkIndex].balance || '0');
+                    const newNetworkBalance = parseFloat((currentNetworkBalance - parsedAmount - fee).toFixed(6));
+                    senderWallet.networks[networkIndex].balance = newNetworkBalance;
 
-                    // Check total length
-                    if (toAddress.length !== 48) {
-                        console.log(`[sendUSDT] TON address must be 48 characters long`);
-                        throw new Error('Invalid TON address format. TON addresses should be 48 characters long.');
-                    }
+                    await senderWallet.save({ session });
 
-                    // Check if remaining characters are valid base64url characters
-                    const remainingChars = toAddress.slice(2);
-                    if (!/^[a-zA-Z0-9_-]{46}$/.test(remainingChars)) {
-                        console.log(`[sendUSDT] TON address contains invalid characters`);
-                        throw new Error('Invalid TON address format. TON addresses should only contain valid base64url characters.');
-                    }
-
-                    console.log(`[sendUSDT] TON address validation passed for: ${toAddress}`);
-
-                    // For TON, we'll simulate the transfer since we're using Hardhat nodes
-                    console.log(`[sendUSDT] Simulating TON transfer of ${amount} USDT to ${toAddress}`);
-
-                    // Update recipient's global balance if their wallet exists
-                    const tonRecipientWallet = await Wallet.findOne({ 'networks.address': toAddress });
-                    if (tonRecipientWallet) {
-                        const recipientBalance = parseFloat(tonRecipientWallet.globalUsdtBalance || '0');
-                        tonRecipientWallet.globalUsdtBalance = (recipientBalance + parseFloat(amount)).toFixed(6);
-                        await tonRecipientWallet.save();
-                        console.log(`[sendUSDT] Updated recipient's global balance to ${tonRecipientWallet.globalUsdtBalance}`);
-                    }
-
-                    // Generate a mock transaction hash for TON
-                    const tonMockTxHash = `ton_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
-
-                    return {
-                        success: true,
-                        txHash: tonMockTxHash,
-                        blockNumber: Date.now(),
-                        newBalance: newGlobalBalance,
-                        feeAmount: feeAmount
-                    };
-
-                case 'tron':
-                    // For TRON, validate the address format
-                    // TRON addresses are typically in the format: T... (base58 encoded)
-                    if (!toAddress.match(/^T[A-Za-z1-9]{33}$/)) {
-                        throw new Error('Invalid TRON address format. TRON addresses should start with T and be 34 characters long.');
-                    }
-
-                    // For TRON, we'll simulate the transfer since we're using Hardhat nodes
-                    console.log(`[sendUSDT] Simulating TRON transfer of ${amount} USDT to ${toAddress}`);
-
-                    // Update recipient's global balance if their wallet exists
-                    const tronRecipientWallet = await Wallet.findOne({ 'networks.address': toAddress });
-                    if (tronRecipientWallet) {
-                        const recipientBalance = parseFloat(tronRecipientWallet.globalUsdtBalance || '0');
-                        tronRecipientWallet.globalUsdtBalance = (recipientBalance + parseFloat(amount)).toFixed(6);
-                        await tronRecipientWallet.save();
-                        console.log(`[sendUSDT] Updated recipient's global balance to ${tronRecipientWallet.globalUsdtBalance}`);
-                    }
-
-                    // Generate a mock transaction hash for TRON
-                    const tronMockTxHash = `trx_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
-
-                    return {
-                        success: true,
-                        txHash: tronMockTxHash,
-                        blockNumber: Date.now(),
-                        newBalance: newGlobalBalance,
-                        feeAmount: feeAmount
-                    };
-
-                case 'solana':
-                    // For Solana, validate the address format
-                    // Solana addresses are typically in the format: base58 encoded, 32-44 characters
-                    if (!toAddress.match(/^[1-9A-HJ-NP-Za-km-z]{32,44}$/)) {
-                        throw new Error('Invalid Solana address format. Solana addresses should be base58 encoded and 32-44 characters long.');
-                    }
-
-                    // For Solana, we'll just update the balances without actual blockchain interaction
-                    console.log(`[sendUSDT] Simulating Solana transfer of ${amount} USDT to ${toAddress}`);
-
-                    // Update recipient's global balance if their wallet exists
-                    const recipientWallet = await Wallet.findOne({ 'networks.address': toAddress });
-                    if (recipientWallet) {
-                        const recipientBalance = parseFloat(recipientWallet.globalUsdtBalance || '0');
-                        recipientWallet.globalUsdtBalance = (recipientBalance + parseFloat(amount)).toFixed(6);
-                        await recipientWallet.save();
-                        console.log(`[sendUSDT] Updated recipient's global balance to ${recipientWallet.globalUsdtBalance}`);
-                    }
-
-                    // Generate a mock transaction hash for Solana
-                    const mockTxHash = `sol_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
-
-                    return {
-                        success: true,
-                        txHash: mockTxHash,
-                        blockNumber: Date.now(),
-                        newBalance: newGlobalBalance,
-                        feeAmount: feeAmount
-                    };
-
-                default:
-                    // For EVM chains (Ethereum, BSC, etc.), validate the address format
-                    try {
-                        ethers.getAddress(toAddress); // This will throw if the address is invalid
-                    } catch (error) {
-                        throw new Error('Invalid EVM address format. Address should be a valid Ethereum address.');
-                    }
-
-                    // For EVM chains (Ethereum, BSC, etc.)
-                    const backendPrivateKey = process.env.BACKEND_HOT_WALLET_PRIVATE_KEY;
-                    if (!backendPrivateKey) {
-                        throw new Error('Backend hot wallet private key not configured');
-                    }
-
-                    // Initialize provider if not already done
-                    if (!this.providers[network]) {
-                        await this.initializeProviders();
-                    }
-
-                    // Create backend wallet instance
-                    const backendWallet = new ethers.Wallet(backendPrivateKey, this.providers[network]);
-                    console.log(`[sendUSDT] Using backend wallet: ${backendWallet.address}`);
-
-                    // Get USDT contract
-                    const config = NETWORKS[network];
-                    if (!config || !config.usdtAddress) {
-                        throw new Error(`USDT contract address not configured for ${network}`);
-                    }
-
-                    // Validate USDT contract address
-                    try {
-                        const code = await this.providers[network].getCode(config.usdtAddress);
-                        if (code === '0x') {
-                            throw new Error(`No contract found at address ${config.usdtAddress}`);
+                    // Create both transactions atomically
+                    const senderTransaction = new Transaction({
+                        userId: senderUserId,
+                        type: 'crypto',
+                        subtype: 'send',
+                        amount: -parsedAmount,
+                        currency: 'USDT',
+                        status: 'completed',
+                        metadata: {
+                            network,
+                            fee,
+                            fromAddress: walletAddress,
+                            toAddress
                         }
-                    } catch (error) {
-                        console.error(`[sendUSDT] Error validating USDT contract:`, error);
-                        throw new Error(`Failed to validate USDT contract: ${error.message}`);
-                    }
+                    });
 
-                    // Create contract instance with error handling
-                    let contract;
-                    try {
-                        contract = new ethers.Contract(
-                            config.usdtAddress,
-                            USDT_ABI,
-                            backendWallet
-                        );
-                    } catch (error) {
-                        console.error(`[sendUSDT] Error creating contract instance:`, error);
-                        throw new Error(`Failed to create USDT contract instance: ${error.message}`);
-                    }
+                    const recipientTransaction = new Transaction({
+                        type: 'crypto',
+                        subtype: 'receive',
+                        amount: parsedAmount,
+                        currency: 'USDT',
+                        status: 'completed',
+                        metadata: {
+                            network,
+                            fee: 0,
+                            fromAddress: walletAddress,
+                            toAddress
+                        }
+                    });
 
-                    // Validate contract interface
-                    try {
-                        await contract.decimals();
-                    } catch (error) {
-                        console.error(`[sendUSDT] Error validating contract interface:`, error);
-                        throw new Error(`Invalid USDT contract interface: ${error.message}`);
-                    }
+                    // Generate references manually to ensure they're unique within the session
+                    const timestamp = Date.now();
+                    senderTransaction.reference = `TRX-${timestamp}-${Math.random().toString(36).substr(2, 9)}`;
+                    recipientTransaction.reference = `TRX-${timestamp}-${Math.random().toString(36).substr(2, 9)}`;
 
-                    // Check backend wallet's USDT balance with error handling
-                    let backendBalance;
-                    try {
-                        backendBalance = await contract.balanceOf(backendWallet.address);
-                    } catch (error) {
-                        console.error(`[sendUSDT] Error checking backend wallet balance:`, error);
-                        throw new Error(`Failed to check backend wallet balance: ${error.message}`);
-                    }
+                    // Save both transactions within the session
+                    [senderTx, recipientTx] = await Promise.all([
+                        senderTransaction.save({ session }),
+                        recipientTransaction.save({ session })
+                    ]);
 
-                    const minRequiredBalance = ethers.parseUnits('1000', config.decimals);
+                    await session.commitTransaction();
+                    session.endSession();
 
-                    // If backend wallet doesn't have enough USDT, mint some
-                    if (backendBalance < minRequiredBalance) {
-                        console.log(`[sendUSDT] Backend wallet needs more USDT. Current balance: ${ethers.formatUnits(backendBalance, config.decimals)}`);
-                        try {
-                            const mintTx = await contract.mint(backendWallet.address, minRequiredBalance);
-                            await mintTx.wait();
-                            console.log(`[sendUSDT] Minted USDT to backend wallet`);
-                        } catch (error) {
-                            console.error(`[sendUSDT] Error minting USDT:`, error);
-                            throw new Error(`Failed to mint USDT: ${error.message}`);
+                    // Emit balance updates
+                    if (this.wsService) {
+                        this.wsService.emitToUser(senderUserId.toString(), 'balance:updated', {
+                            userId: senderUserId,
+                            walletBalance: senderWallet.globalUsdtBalance
+                        });
+
+                        if (recipientWallet.userId) {
+                            this.wsService.emitToUser(recipientWallet.userId.toString(), 'balance:updated', {
+                                userId: recipientWallet.userId,
+                                walletBalance: recipientWallet.globalUsdtBalance
+                            });
                         }
                     }
 
-                    // Send USDT to recipient with error handling
-                    try {
-                        const amountInWei = ethers.parseUnits(amount.toString(), config.decimals);
-                        const tx = await contract.transfer(toAddress, amountInWei);
-                        console.log(`[sendUSDT] Transaction sent: ${tx.hash}`);
+                    return {
+                        success: true,
+                        transaction: senderTx,
+                        message: 'USDT sent successfully'
+                    };
 
-                        // Wait for transaction to be mined
-                        const receipt = await tx.wait();
-                        console.log(`[sendUSDT] Transaction mined in block ${receipt.blockNumber}`);
-
-                        // Update recipient's global balance if their wallet exists
-                        const recipientWallet = await Wallet.findOne({ 'networks.address': toAddress });
-                        if (recipientWallet) {
-                            const recipientBalance = parseFloat(recipientWallet.globalUsdtBalance || '0');
-                            recipientWallet.globalUsdtBalance = (recipientBalance + parseFloat(amount)).toFixed(6);
-                            await recipientWallet.save();
-                            console.log(`[sendUSDT] Updated recipient's global balance to ${recipientWallet.globalUsdtBalance}`);
-                        }
-
-                        return {
-                            success: true,
-                            txHash: tx.hash,
-                            blockNumber: receipt.blockNumber,
-                            newBalance: newGlobalBalance,
-                            feeAmount: feeAmount
-                        };
-                    } catch (error) {
-                        console.error(`[sendUSDT] Error sending USDT:`, error);
-                        throw new Error(`Failed to send USDT: ${error.message}`);
+                } catch (error) {
+                    if (session) {
+                        await session.abortTransaction();
+                        session.endSession();
                     }
+
+                    console.error(`[sendUSDT] Error on attempt ${attempts + 1}:`, error);
+
+                    if (error.code === 11000 ||
+                        (error.code === 251 && error.codeName === 'NoSuchTransaction') ||
+                        error.hasOwnProperty('errorLabels') && error.errorLabels.includes('TransientTransactionError')) {
+                        attempts++;
+                        if (attempts < maxAttempts) {
+                            console.log(`[sendUSDT] Retrying transaction (attempt ${attempts + 1}/${maxAttempts})`);
+                            const backoff = Math.min(1000, Math.pow(2, attempts) * 100 + Math.random() * 100);
+                            await new Promise(resolve => setTimeout(resolve, backoff));
+                            continue;
+                        }
+                    }
+                    throw error;
+                }
             }
+
+            throw new Error('Transaction failed after multiple attempts. Please try again later.');
+
         } catch (error) {
-            console.error(`[sendUSDT] Error:`, error);
-            throw error;
+            console.error('[sendUSDT] Error:', error);
+            // Return the specific error message instead of a generic one
+            throw new Error(error.message || 'An unexpected error occurred. Please try again later.');
         }
     }
 

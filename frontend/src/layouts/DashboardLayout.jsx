@@ -135,13 +135,15 @@ const DashboardLayout = () => {
     const newSocket = io(import.meta.env.VITE_API_URL || 'http://localhost:3000', {
       auth: { token },
       reconnection: true,
-      reconnectionAttempts: 5,
+      reconnectionAttempts: 10,
       reconnectionDelay: 1000,
       reconnectionDelayMax: 5000,
       timeout: 20000,
       transports: ['websocket', 'polling'],
       forceNew: true,
-      autoConnect: true
+      autoConnect: true,
+      path: '/socket.io',
+      withCredentials: true
     });
 
     newSocket.on('connect', () => {
@@ -158,6 +160,12 @@ const DashboardLayout = () => {
         // Token might be invalid, try to refresh or redirect to login
         console.log('[DEBUG] Authentication failed, redirecting to login');
         navigate('/login');
+      } else {
+        // For other errors, try to reconnect
+        console.log('[DEBUG] Connection error, attempting to reconnect...');
+        setTimeout(() => {
+          newSocket.connect();
+        }, 2000);
       }
     });
 

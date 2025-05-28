@@ -168,199 +168,207 @@ const SendModal = ({ isDark, selectedNetwork, sendAmount, setSendAmount, sendAdd
               </div>
             </motion.div>
 
-            {/* Amount Input */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="space-y-2"
-            >
-              <label className="block text-sm font-medium text-gray-500 dark:text-gray-400">
-                Amount (USDT)
-              </label>
-              <div className="relative group">
-                <div className={`absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl blur opacity-50 transition-opacity ${
-                  isAmountFocused ? 'opacity-75' : 'opacity-0'
-                }`} />
-                <div className="relative">
-                  <input
-                    type="number"
-                    value={sendAmount}
-                    onChange={(e) => setSendAmount(e.target.value)}
-                    onFocus={() => setIsAmountFocused(true)}
-                    onBlur={() => setIsAmountFocused(false)}
-                    className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-800 rounded-xl border-0 focus:ring-2 focus:ring-blue-500 transition-all"
-                    placeholder="0.00"
-                    disabled={isSending}
-                  />
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
-                    USDT
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Address Input with QR Scanning */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="space-y-2"
-            >
-              <label className="block text-sm font-medium text-gray-500 dark:text-gray-400">
-                Recipient Address
-              </label>
-              <div className="relative group">
-                <div className={`absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl blur opacity-50 transition-opacity ${
-                  isAddressFocused ? 'opacity-75' : 'opacity-0'
-                }`} />
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={sendAddress}
-                    onChange={(e) => setSendAddress(e.target.value)}
-                    onFocus={() => setIsAddressFocused(true)}
-                    onBlur={() => setIsAddressFocused(false)}
-                    className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-800 rounded-xl border-0 focus:ring-2 focus:ring-blue-500 transition-all pr-24"
-                    placeholder={`Enter ${selectedNetwork.name} address`}
-                    disabled={isSending}
-                  />
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={startScanner}
-                      className="p-2 rounded-lg bg-white dark:bg-gray-700 shadow-lg hover:shadow-xl transition-all"
-                      title="Scan QR code"
-                    >
-                      <Camera className="w-5 h-5" />
-                    </motion.button>
-                    <label className="p-2 rounded-lg bg-white dark:bg-gray-700 shadow-lg hover:shadow-xl transition-all cursor-pointer">
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleFileUpload}
-                        className="hidden"
-                      />
-                      <Upload className="w-5 h-5" />
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                {selectedNetwork.name} addresses {selectedNetwork.id === 'ethereum' || selectedNetwork.id === 'bsc' || selectedNetwork.id === 'arbitrum' || selectedNetwork.id === 'polygon' ? 'start with 0x' : 
-                 selectedNetwork.id === 'tron' ? 'start with T' :
-                 selectedNetwork.id === 'solana' ? 'are base58 encoded' :
-                 selectedNetwork.id === 'ton' ? 'start with UQ' : ''}
-              </p>
-            </motion.div>
-
-            {/* QR Scanner Modal */}
-            <AnimatePresence>
-              {isScanning && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-                >
-                  <motion.div
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.9, opacity: 0 }}
-                    className="relative w-full max-w-md"
-                  >
-                    <div className="relative aspect-square rounded-xl overflow-hidden">
-                      <video
-                        ref={videoRef}
-                        className="w-full h-full object-cover"
-                        playsInline
-                      />
-                      <div className="absolute inset-0 border-2 border-blue-500 rounded-xl pointer-events-none" />
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleSend(e);
+            }}>
+              {/* Amount Input */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="space-y-2"
+              >
+                <label className="block text-sm font-medium text-gray-500 dark:text-gray-400">
+                  Amount (USDT)
+                </label>
+                <div className="relative group">
+                  <div className={`absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl blur opacity-50 transition-opacity ${
+                    isAmountFocused ? 'opacity-75' : 'opacity-0'
+                  }`} />
+                  <div className="relative">
+                    <input
+                      type="number"
+                      value={sendAmount}
+                      onChange={(e) => setSendAmount(e.target.value)}
+                      onFocus={() => setIsAmountFocused(true)}
+                      onBlur={() => setIsAmountFocused(false)}
+                      className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-800 rounded-xl border-0 focus:ring-2 focus:ring-blue-500 transition-all"
+                      placeholder="0.00"
+                      disabled={isSending}
+                    />
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
+                      USDT
                     </div>
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      onClick={stopScanner}
-                      className="absolute top-4 right-4 p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-colors"
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Address Input with QR Scanning */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="space-y-2"
+              >
+                <label className="block text-sm font-medium text-gray-500 dark:text-gray-400">
+                  Recipient Address
+                </label>
+                <div className="relative group">
+                  <div className={`absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl blur opacity-50 transition-opacity ${
+                    isAddressFocused ? 'opacity-75' : 'opacity-0'
+                  }`} />
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={sendAddress}
+                      onChange={(e) => setSendAddress(e.target.value)}
+                      onFocus={() => setIsAddressFocused(true)}
+                      onBlur={() => setIsAddressFocused(false)}
+                      className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-800 rounded-xl border-0 focus:ring-2 focus:ring-blue-500 transition-all pr-24"
+                      placeholder={`Enter ${selectedNetwork.name} address`}
+                      disabled={isSending}
+                    />
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                      <motion.button
+                        type="button"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={startScanner}
+                        className="p-2 rounded-lg bg-white dark:bg-gray-700 shadow-lg hover:shadow-xl transition-all"
+                        title="Scan QR code"
+                      >
+                        <Camera className="w-5 h-5" />
+                      </motion.button>
+                      <label className="p-2 rounded-lg bg-white dark:bg-gray-700 shadow-lg hover:shadow-xl transition-all cursor-pointer">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFileUpload}
+                          className="hidden"
+                        />
+                        <Upload className="w-5 h-5" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  {selectedNetwork.name} addresses {selectedNetwork.id === 'ethereum' || selectedNetwork.id === 'bsc' || selectedNetwork.id === 'arbitrum' || selectedNetwork.id === 'polygon' ? 'start with 0x' : 
+                   selectedNetwork.id === 'tron' ? 'start with T' :
+                   selectedNetwork.id === 'solana' ? 'are base58 encoded' :
+                   selectedNetwork.id === 'ton' ? 'start with UQ' : ''}
+                </p>
+              </motion.div>
+
+              {/* QR Scanner Modal */}
+              <AnimatePresence>
+                {isScanning && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+                  >
+                    <motion.div
+                      initial={{ scale: 0.9, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.9, opacity: 0 }}
+                      className="relative w-full max-w-md"
                     >
-                      <X className="w-6 h-6 text-white" />
-                    </motion.button>
-                    <div className="mt-4 text-center text-white">
-                      Position the QR code within the frame
+                      <div className="relative aspect-square rounded-xl overflow-hidden">
+                        <video
+                          ref={videoRef}
+                          className="w-full h-full object-cover"
+                          playsInline
+                        />
+                        <div className="absolute inset-0 border-2 border-blue-500 rounded-xl pointer-events-none" />
+                      </div>
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={stopScanner}
+                        className="absolute top-4 right-4 p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-colors"
+                      >
+                        <X className="w-6 h-6 text-white" />
+                      </motion.button>
+                      <div className="mt-4 text-center text-white">
+                        Position the QR code within the frame
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Transaction Status */}
+              <AnimatePresence>
+                {transactionStatus && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className={`p-4 rounded-xl ${
+                      transactionStatus === 'error' 
+                        ? 'bg-red-500/10 dark:bg-red-500/20' 
+                        : transactionStatus === 'success'
+                        ? 'bg-green-500/10 dark:bg-green-500/20'
+                        : 'bg-blue-500/10 dark:bg-blue-500/20'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      {transactionStatus === 'error' ? (
+                        <AlertCircle className="w-5 h-5 text-red-500" />
+                      ) : transactionStatus === 'success' ? (
+                        <CheckCircle className="w-5 h-5 text-green-500" />
+                      ) : (
+                        <Loader2 className="w-5 h-5 text-blue-500 animate-spin" />
+                      )}
+                      <span className="text-sm">
+                        {transactionMessage}
+                      </span>
                     </div>
                   </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Transaction Status */}
-            <AnimatePresence>
-              {transactionStatus && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  className={`p-4 rounded-xl ${
-                    transactionStatus === 'error' 
-                      ? 'bg-red-500/10 dark:bg-red-500/20' 
-                      : transactionStatus === 'success'
-                      ? 'bg-green-500/10 dark:bg-green-500/20'
-                      : 'bg-blue-500/10 dark:bg-blue-500/20'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    {transactionStatus === 'error' ? (
-                      <AlertCircle className="w-5 h-5 text-red-500" />
-                    ) : transactionStatus === 'success' ? (
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                    ) : (
-                      <Loader2 className="w-5 h-5 text-blue-500 animate-spin" />
-                    )}
-                    <span className="text-sm">
-                      {transactionMessage}
-                    </span>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Action Buttons */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="flex gap-3"
-            >
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={onClose}
-                disabled={isSending}
-                className="flex-1 px-4 py-3 bg-gray-100 dark:bg-gray-800 rounded-xl font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition-all"
-              >
-                Cancel
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={handleSend}
-                disabled={isSending || !sendAmount || !sendAddress}
-                className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl font-medium hover:from-blue-600 hover:to-purple-600 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-              >
-                {isSending ? (
-                  <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-5 h-5" />
-                    Send USDT
-                  </>
                 )}
-              </motion.button>
-            </motion.div>
+              </AnimatePresence>
+
+              {/* Action Buttons */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="flex gap-3 mt-6"
+              >
+                <motion.button
+                  type="button"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={onClose}
+                  disabled={isSending}
+                  className="flex-1 px-4 py-3 bg-gray-100 dark:bg-gray-800 rounded-xl font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition-all"
+                >
+                  Cancel
+                </motion.button>
+                <motion.button
+                  type="submit"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  disabled={isSending || !sendAmount || !sendAddress}
+                  className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl font-medium hover:from-blue-600 hover:to-purple-600 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {isSending ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      Send USDT
+                    </>
+                  )}
+                </motion.button>
+              </motion.div>
+            </form>
           </div>
         </div>
       </motion.div>

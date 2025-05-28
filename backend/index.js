@@ -58,13 +58,17 @@ const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const server = createServer(app);
 
-// Initialize WebSocket
-const wsService = new WebSocketService(server);
+// CORS configuration
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production'
+    ? process.env.FRONTEND_URL
+    : ['http://localhost:5174', 'http://localhost:5173'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 
-// Make WebSocket service available in routes
-app.set('wsService', wsService);
-
-// Security middleware
+// Security headers
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -72,46 +76,24 @@ app.use(helmet({
       scriptSrc: ["'self'", "'unsafe-inline'"],
       styleSrc: ["'self'", "'unsafe-inline'"],
       imgSrc: ["'self'", "data:", "https:", "http:", "blob:"],
-      connectSrc: ["'self'", process.env.FRONTEND_URL],
+      connectSrc: ["'self'", "ws:", "wss:", "http:", "https:"],
       mediaSrc: ["'self'", "data:", "blob:"],
       frameSrc: ["'self'"],
       objectSrc: ["'none'"],
-      baseUri: ["'self'"]
+      baseUri: ["'self'"],
+      fontSrc: ["'self'", "https:", "data:"],
+      formAction: ["'self'"],
+      frameAncestors: ["'self'"],
+      scriptSrcAttr: ["'none'"],
+      upgradeInsecureRequests: []
     }
   },
-  crossOriginResourcePolicy: { policy: "cross-origin" },
-  crossOriginOpenerPolicy: { policy: "same-origin" },
-  crossOriginEmbedderPolicy: false
+  crossOriginEmbedderPolicy: false,
+  crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 
 // Compression middleware
 app.use(compression());
-
-// CORS configuration
-const allowedOrigins = [
-  'http://localhost:5174',
-  'http://localhost:5173',
-  'https://dinarrflow.netlify.app',
-  process.env.FRONTEND_URL
-].filter(Boolean);
-
-app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
-  exposedHeaders: ['Authorization'],
-  maxAge: 86400, // 24 hours
-  preflightContinue: false,
-  optionsSuccessStatus: 204
-}));
 
 // Rate limiting
 app.use('/api/', apiLimiter);
@@ -246,6 +228,12 @@ app.use((err, req, res, next) => {
     message: err.message
   });
 });
+
+// Initialize WebSocket
+const wsService = new WebSocketService(server);
+
+// Make WebSocket service available in routes
+app.set('wsService', wsService);
 
 // Start server
 const PORT = process.env.PORT || 3000;

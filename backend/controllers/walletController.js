@@ -178,10 +178,11 @@ export const sendUSDT = async (req, res) => {
         });
 
         const result = await walletService.sendUSDT(
-            wallet.address,
+            userId,
+            network,
             toAddress,
             amountNum,
-            network
+            wallet.address
         );
 
         console.log('USDT sent successfully:', result);
@@ -192,10 +193,8 @@ export const sendUSDT = async (req, res) => {
 
         res.json({
             success: true,
-            txHash: result.txHash,
+            transaction: result.transaction,
             message: 'USDT transfer successful',
-            newBalance: result.newBalance,
-            feeAmount: result.feeAmount,
             wallet: {
                 address: updatedWallet.address,
                 networks: updatedWallet.networks,

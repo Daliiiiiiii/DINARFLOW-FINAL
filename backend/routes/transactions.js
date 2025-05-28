@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import mongoose from 'mongoose';
 import { NotificationService } from '../services/notificationService.js';
 import BankAccount from '../models/BankAccount.js';
+import Wallet from '../models/Wallet.js';
 
 const router = express.Router();
 const notificationService = new NotificationService();
@@ -18,14 +19,38 @@ router.get('/', auth, async (req, res) => {
     const userId = req.user._id;
     const { type } = req.query; // Get the optional type query parameter
 
-    let filter = { userId: userId };
+    // Fetch the user's wallet to get their address
+    const userWallet = await Wallet.findOne({ userId });
+    if (!userWallet) {
+      // If no wallet is found, return an empty array of transactions
+      return res.json({ transactions: [] });
+    }
+    const userAddress = userWallet.address; // Assuming EVM address is the main address for filtering received
+
+    let filter = {
+      $or: [
+        { userId: userId }, // Transactions where the user is the sender
+        { 'metadata.toAddress': userAddress } // Transactions where the user's EVM address is the recipient
+        // Note: This assumes the main wallet address is used for receiving on EVM chains.
+        // For other networks, a more complex filter might be needed based on network-specific addresses.
+        // For now, focusing on the main EVM address as a starting point.
+      ]
+    };
 
     // If a type is specified, add it to the filter
+    // Note: This type filter will apply to both sent and received transactions.
+    // If you only want to filter sent/received, you might need a different approach.
     if (type) {
-      filter.type = type;
+      filter.$and = [{ type: type }];
     }
 
-    const transactions = await Transaction.find(filter).sort({ createdAt: -1 });
+    // Add a small delay to allow for potential database replication/indexing lag
+    await new Promise(resolve => setTimeout(resolve, 50));
+
+    // Explicitly disable caching for this query and sort by creation date descending
+    const transactions = await Transaction.find(filter)
+      .sort({ createdAt: -1 })
+      .lean(); // Return plain JavaScript objects
 
     res.json({ transactions });
   } catch (error) {

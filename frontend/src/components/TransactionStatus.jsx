@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, XCircle, Loader2, ArrowUpRight, X } from 'lucide-react';
 
-const TransactionStatus = ({ show, type, message, onClose }) => {
+const TransactionStatus = ({ show, type, message, onClose, transactionHash }) => {
   useEffect(() => {
     if (type === 'success') {
       const timer = setTimeout(() => {
@@ -188,6 +188,20 @@ const TransactionStatus = ({ show, type, message, onClose }) => {
                 >
                   Please wait while we process your transaction
                 </motion.div>
+              )}
+
+              {/* Transaction Hash for Success State */}
+              {type === 'success' && transactionHash && (
+                  <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="text-center mt-4 text-sm text-gray-400"
+                  >
+                      <p>Transaction Hash:</p>
+                      <p className="font-mono break-all">{transactionHash}</p>
+                      <p className="mt-2 text-xs">View on local Hardhat node using: <code className="bg-gray-800 px-1 py-0.5 rounded">npx hardhat debug --code {transactionHash}</code></p>
+                  </motion.div>
               )}
             </motion.div>
 
