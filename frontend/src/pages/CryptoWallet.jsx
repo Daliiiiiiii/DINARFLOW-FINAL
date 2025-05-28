@@ -333,13 +333,9 @@ const getNetworkName = (networkId) => {
   console.log('=== Network Name Resolution ===');
   console.log('Input network ID:', networkId);
   
-  // If no network ID is provided, try to determine from the transaction context
   if (!networkId) {
-    console.log('No network ID provided, checking transaction context');
-    // Default to the currently selected network
-    const defaultNetwork = networks[0];
-    console.log('Using default network:', defaultNetwork.name);
-    return defaultNetwork.name;
+    console.log('No network ID provided, using default network');
+    return 'Ethereum'; // Default to Ethereum if no network specified
   }
   
   const network = networks.find(n => n.id === networkId);
@@ -353,8 +349,22 @@ const getNetworkName = (networkId) => {
 };
 
 const getTransactionType = (tx, selectedNetworkData, currentUserId) => {
-  // First check if we have a subtype
-  if (tx.subtype) {
+  console.log('=== Transaction Type Determination ===');
+  console.log('Transaction:', {
+    id: tx._id,
+    amount: tx.amount,
+    userId: tx.userId,
+    currentUserId,
+    from: tx.from,
+    to: tx.to,
+    type: tx.type,
+    subtype: tx.subtype,
+    createdAt: tx.createdAt
+  });
+
+  // First check if we have a subtype that explicitly tells us
+  if (tx.subtype === 'send' || tx.subtype === 'receive') {
+    console.log('Using explicit subtype:', tx.subtype);
     return tx.subtype;
   }
 
@@ -363,11 +373,19 @@ const getTransactionType = (tx, selectedNetworkData, currentUserId) => {
   const fromAddress = tx.from?.toLowerCase();
   const toAddress = tx.to?.toLowerCase();
 
+  console.log('Addresses:', {
+    userAddress,
+    fromAddress,
+    toAddress
+  });
+
   // If we have from/to addresses, use them to determine the type
   if (fromAddress && toAddress) {
     if (userAddress === fromAddress) {
+      console.log('Determined as SEND using addresses');
       return 'send';
     } else if (userAddress === toAddress) {
+      console.log('Determined as RECEIVE using addresses');
       return 'receive';
     }
   }
@@ -375,23 +393,34 @@ const getTransactionType = (tx, selectedNetworkData, currentUserId) => {
   // If we have userId, use it to determine if the current user is the sender
   if (tx.userId && currentUserId) {
     const isSender = tx.userId === currentUserId;
+    console.log('UserId check:', {
+      isSender,
+      txUserId: tx.userId,
+      currentUserId,
+      amount: tx.amount
+    });
     
     // For received transactions, we need to check if this is a duplicate
     if (!isSender && tx.amount > 0) {
+      console.log('Determined as RECEIVE using userId and amount');
       return 'receive';
     }
     
     // For sent transactions
-    return isSender ? 'send' : 'receive';
+    const type = isSender ? 'send' : 'receive';
+    console.log('Determined as', type.toUpperCase(), 'using userId');
+    return type;
   }
 
   // If we don't have userId or addresses, use the amount sign
-  return tx.amount < 0 ? 'send' : 'receive';
+  const type = tx.amount < 0 ? 'send' : 'receive';
+  console.log('Using amount-based determination:', { amount: tx.amount, determinedType: type });
+  return type;
 };
 
 const MemoizedTransactionList = React.memo(({ transactions, isDark, selectedNetworkData, currentUserId }) => {
   console.log('=== Transaction List Processing ===');
-  console.log('Selected Network Data:', selectedNetworkData);
+  console.log('Raw transactions:', JSON.stringify(transactions, null, 2));
 
   if (!transactions || transactions.length === 0) {
     return (
@@ -405,35 +434,82 @@ const MemoizedTransactionList = React.memo(({ transactions, isDark, selectedNetw
     );
   }
 
-  // First, sort transactions by date (newest first)
-  const sortedTransactions = [...transactions].sort((a, b) => {
+  // First, filter transactions to only show those where the current user is either sender or receiver
+  const userTransactions = transactions.filter(tx => {
+    const isSender = tx.userId === currentUserId;
+    const userAddress = selectedNetworkData?.address?.toLowerCase();
+    const fromAddress = tx.from?.toLowerCase();
+    const toAddress = tx.to?.toLowerCase();
+    
+    // If we have addresses, use them to determine if user is involved
+    if (fromAddress && toAddress && userAddress) {
+      return fromAddress === userAddress || toAddress === userAddress;
+    }
+    
+    // Otherwise use userId
+    return isSender || tx.amount > 0;
+  });
+
+  console.log('Filtered user transactions:', JSON.stringify(userTransactions, null, 2));
+
+  // Then sort by date (newest first)
+  const sortedTransactions = [...userTransactions].sort((a, b) => {
     const dateA = new Date(a.createdAt || a.timestamp);
     const dateB = new Date(b.createdAt || b.timestamp);
     return dateB - dateA;
   });
 
+  console.log('Sorted transactions:', JSON.stringify(sortedTransactions, null, 2));
+
   // Create a Set to track seen transaction keys
   const seenKeys = new Set();
   
-  // Filter out duplicates
+  // Filter out duplicates with more detailed logging
   const uniqueTransactions = sortedTransactions.filter(tx => {
     // Create a unique key for this transaction
-    const key = JSON.stringify({
+    const key = `${tx._id}-${tx.userId === currentUserId ? 'sender' : 'receiver'}`;
+
+    console.log('Processing transaction:', {
+      id: tx._id,
+      key,
+      isDuplicate: seenKeys.has(key),
       amount: tx.amount,
-      createdAt: tx.createdAt || tx.timestamp,
+      createdAt: tx.createdAt,
       type: tx.type,
-      network: tx.network || selectedNetworkData?.network, // Use selected network if tx.network is undefined
-      userId: tx.userId
+      network: tx.network,
+      userId: tx.userId,
+      from: tx.from,
+      to: tx.to,
+      isSender: tx.userId === currentUserId
     });
 
     // If we've seen this key before, it's a duplicate
     if (seenKeys.has(key)) {
+      console.log('Found duplicate transaction:', {
+        id: tx._id,
+        amount: tx.amount,
+        createdAt: tx.createdAt,
+        type: tx.type,
+        network: tx.network,
+        userId: tx.userId,
+        from: tx.from,
+        to: tx.to,
+        isSender: tx.userId === currentUserId
+      });
       return false;
     }
 
     // Add this key to our seen set
     seenKeys.add(key);
     return true;
+  });
+
+  console.log('Transaction deduplication results:', {
+    originalCount: transactions.length,
+    filteredCount: userTransactions.length,
+    uniqueCount: uniqueTransactions.length,
+    duplicatesRemoved: userTransactions.length - uniqueTransactions.length,
+    seenKeys: Array.from(seenKeys)
   });
 
   return (
@@ -450,15 +526,16 @@ const MemoizedTransactionList = React.memo(({ transactions, isDark, selectedNetw
       <div className="space-y-4">
         {uniqueTransactions.map((tx, index) => {
           const txType = getTransactionType(tx, selectedNetworkData, currentUserId);
-          const networkId = tx.network || selectedNetworkData?.network;
-          
           console.log('Rendering transaction:', {
             id: tx._id,
             amount: tx.amount,
             type: txType,
-            network: networkId,
-            selectedNetwork: selectedNetworkData?.network,
+            network: tx.network,
             createdAt: tx.createdAt,
+            from: tx.from,
+            to: tx.to,
+            userId: tx.userId,
+            isSender: tx.userId === currentUserId,
             index
           });
 
@@ -506,7 +583,7 @@ const MemoizedTransactionList = React.memo(({ transactions, isDark, selectedNetw
                     {txType === 'send' ? '-' : '+'}{Math.abs(tx.amount)} USDT
                   </div>
                   <div className="text-sm text-gray-500 dark:text-gray-400">
-                    {getNetworkName(networkId)}
+                    {getNetworkName(tx.network)}
                   </div>
                 </div>
               </div>
