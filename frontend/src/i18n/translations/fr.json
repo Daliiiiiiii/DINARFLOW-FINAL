@@ -8,7 +8,7 @@
     "profile": "Profil",
     "settings": "Paramètres",
     "support": "Support",
-    "p2p": "Trading P2P",
+    "p2p": "Transaction P2P",
     "cryptoWallet": "Portefeuille Crypto",
     "switchToAdmin": "Passer en mode Admin",
     "switchToUser": "Passer en mode Utilisateur",
@@ -227,7 +227,7 @@
     "tipText": "Vous pouvez transférer de l'argent ou consulter l'historique de vos transactions depuis le menu latéral."
   },
   "status": {
-    "completed": "Terminé",
+    "completed": "Terminée",
     "pending": "En attente"
   },
   "kycOverlay": {
@@ -404,6 +404,15 @@
     "pending": "En attente"
   },
   "admin": {
+    "applyFilters": "Appliquer les filtres",
+    "reset": "Réinitialiser",
+    "startDate": "Date de début",
+    "endDate": "Date de fin",
+    "minAmount": "Montant minimum",
+    "maxAmount": "Montant maximum",
+    "allTypes": "Tous les types",
+    "status.completed": "Terminé",
+    "status.pending": "En attente",
     "lastSeen": "Dernière activité : {{date}}",
     "lastLogin": "Dernière connexion: {{date}}",
     "noTransactionsFound": "Aucune transaction trouvée",
@@ -693,6 +702,12 @@
     "searchTicketsPlaceholder": "Rechercher des tickets...",
     "resetTransactionLimitsUsage": "Réinitialiser l'utilisation des limites de transaction",
     "export": "Exporter",
-    "statusHeader": "Statut"
+    "statusHeader": "Statut",
+    "crypto": "Transaction Crypto",
+    "status": {
+      "completed": "Terminée",
+      "pending": "En attente",
+      "active": "Active"
+    }
   }
 }

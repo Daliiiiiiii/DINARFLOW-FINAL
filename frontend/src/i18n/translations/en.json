@@ -468,6 +468,13 @@
     "noRecentTransfers": "No recent transfers"
   },
   "admin": {
+    "applyFilters": "Apply Filters",
+    "reset": "Reset",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "minAmount": "Minimum Amount",
+    "maxAmount": "Maximum Amount",
+    "allTypes": "All Types",
     "lastSeen": "Last seen: {{date}}",
     "status.active": "Active",
     "status.suspended": "Suspended",
@@ -727,6 +734,13 @@
     },
     "searchTicketsPlaceholder": "Search tickets...",
     "export": "Export",
-    "statusHeader": "Status"
+    "statusHeader": "Status",
+    "p2p": "P2P Transaction",
+    "crypto": "Crypto Transaction",
+    "status": {
+      "completed": "Completed",
+      "pending": "Pending",
+      "active": "Active"
+    }
   }
 }

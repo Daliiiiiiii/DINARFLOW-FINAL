@@ -26,7 +26,7 @@
     "transfer": "تحويل",
     "bankTransfer": "تحويل بنكي",
     "support": "الدعم",
-    "p2p": "التداول المباشر",
+    "p2p": "معاملات P2P",
     "cryptoWallet": "محفظة العملات الرقمية",
     "switchToAdmin": "التبديل إلى عرض المسؤول",
     "switchToUser": "التبديل إلى عرض المستخدم",
@@ -264,7 +264,7 @@
     "bank": "بنك",
     "send": "إرسال",
     "receive": "استلام",
-    "crypto": "عملة رقمية",
+    "crypto": "معاملات العملات الرقمية",
     "topup": "شحن رصيد",
     "transactions": "المعاملات",
     "oldestFirst": "الأقدم أولاً",
@@ -480,6 +480,14 @@
     "pending": "قيد الانتظار"
   },
   "admin": {
+    "applyFilters": "تطبيق الفلاتر",
+    "reset": "إعادة تعيين",
+    "startDate": "تاريخ البداية",
+    "endDate": "تاريخ النهاية",
+    "minAmount": "الحد الأدنى للمبلغ",
+    "maxAmount": "الحد الأقصى للمبلغ",
+    "allTypes": "جميع الأنواع",
+    "status.completed": "مكتمل",
     "lastSeen": "آخر ظهور: {{date}}",
     "lastLogin": "آخر تسجيل دخول: {{date}}",
     "noTransactionsFound": "لم يتم العثور على معاملات",
@@ -734,6 +742,13 @@
     },
     "resetTransactionLimitsUsage": "إعادة تعيين استخدام حدود المعاملات",
     "export": "تصدير",
-    "statusHeader": "الحالة"
+    "statusHeader": "الحالة",
+    "p2p": "معاملات P2P",
+    "crypto": "معاملات العملات الرقمية",
+    "status": {
+      "completed": "مكتمل",
+      "pending": "قيد الانتظار",
+      "active": "نشط"
+    }
   }
 }

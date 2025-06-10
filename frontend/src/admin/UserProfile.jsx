@@ -236,7 +236,13 @@ const UserProfile = () => {
   const applyFilters = () => {
     // Filter transactions based on the selected options
     const filteredTransactions = user.transactions.filter(tx => {
-      if (filterOptions.type !== 'all' && tx.type !== filterOptions.type) return false;
+      if (filterOptions.type !== 'all' && tx.type !== filterOptions.type) {
+        // Special handling for p2p and crypto
+        if (filterOptions.type === 'p2p' && tx.type !== 'p2p') return false;
+        if (filterOptions.type === 'crypto' && tx.type !== 'crypto') return false;
+        if (['wallet_in', 'wallet_out', 'bank_in', 'bank_out'].includes(filterOptions.type) && tx.type !== filterOptions.type) return false;
+        if (!['wallet_in', 'wallet_out', 'bank_in', 'bank_out', 'p2p', 'crypto'].includes(filterOptions.type)) return false;
+      }
       if (filterOptions.status !== 'all' && tx.status !== filterOptions.status) return false;
       if (filterOptions.minAmount && tx.amount < parseFloat(filterOptions.minAmount)) return false;
       if (filterOptions.maxAmount && tx.amount > parseFloat(filterOptions.maxAmount)) return false;
@@ -705,10 +711,12 @@ const UserProfile = () => {
                       <option value="wallet_out">{t('admin.walletOut')}</option>
                       <option value="bank_in">{t('admin.bankIn')}</option>
                       <option value="bank_out">{t('admin.bankOut')}</option>
+                      <option value="p2p">{t('admin.p2p')}</option>
+                      <option value="crypto">{t('admin.crypto')}</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{t('admin.status')}</label>
+                    <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{t('admin.statusLabel')}</label>
                     <select
                       value={filterOptions.status}
                       onChange={(e) => setFilterOptions(prev => ({ ...prev, status: e.target.value }))}
@@ -719,8 +727,8 @@ const UserProfile = () => {
                       } focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50`}
                     >
                       <option value="all">{t('admin.allStatus')}</option>
-                      <option value="completed">{t('admin.completed')}</option>
-                      <option value="pending">{t('admin.pending')}</option>
+                      <option value="completed">{t('admin.status.completed')}</option>
+                      <option value="pending">{t('admin.status.pending')}</option>
                     </select>
                   </div>
                   <div>
