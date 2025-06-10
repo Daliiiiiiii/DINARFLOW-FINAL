@@ -404,6 +404,24 @@
     "pending": "En attente"
   },
   "admin": {
+    "lastSeen": "Dernière activité : {{date}}",
+    "lastLogin": "Dernière connexion: {{date}}",
+    "noTransactionsFound": "Aucune transaction trouvée",
+    "noUsersFound": "Aucun utilisateur trouvé",
+    "kycInformation": "Informations KYC",
+    "accountInfo": "Informations du compte",
+    "joined": "Inscrit le",
+    "lastLogin": "Dernière connexion",
+    "showFilters": "Afficher les filtres",
+    "hideFilters": "Masquer les filtres",
+    "transactionHistory": "Historique des transactions",
+    "exportData": "Exporter les données",
+    "type": "Type",
+    "amount": "Montant",
+    "date": "Date",
+    "status": "Statut",
+    "actions": "Actions",
+    "userKYCVerifiedSuccessfully": "KYC vérifié avec succès",
     "totalUsers": "Nombre total d'utilisateurs",
     "enable_maintenance_mode_for_all_users_except_superadmin": "Activer le mode de maintenance pour tous les utilisateurs sauf l'administrateur principal",
     "maintenance_mode_description": "Vous pouvez définir le mode de maintenance pour les mises à jour du système ou d'autres procédures qui doivent être effectuées séparément.",
@@ -536,9 +554,7 @@
     "noTransactionsFound": "Aucune transaction trouvée",
     "online": "En ligne",
     "offline": "Hors ligne",
-    "lastSeen": "Dernière connexion",
     "joined": "Inscrit le",
-    "lastLogin": "Dernière connexion",
     "idType": "Type de pièce d'identité",
     "idNumber": "Numéro d'identité",
     "notProvided": "Non fourni",
@@ -674,6 +690,9 @@
       "passport": "Passeport",
       "national_id": "Carte nationale d'identité"
     },
-    "searchTicketsPlaceholder": "Rechercher des tickets..."
+    "searchTicketsPlaceholder": "Rechercher des tickets...",
+    "resetTransactionLimitsUsage": "Réinitialiser l'utilisation des limites de transaction",
+    "export": "Exporter",
+    "statusHeader": "Statut"
   }
 }

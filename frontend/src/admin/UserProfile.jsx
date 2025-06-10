@@ -52,7 +52,7 @@ const UserProfile = () => {
   });
   const [isOnline, setIsOnline] = useState(false);
   const [lastSeen, setLastSeen] = useState(null);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { userProfile } = useAuth();
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const UserProfile = () => {
       setUser(data);
     } catch (error) {
       console.error('Error fetching user details:', error);
-      showError('Failed to fetch user details');
+      showError(t('admin.failedToFetchUserDetails'));
     } finally {
       setLoading(false);
     }
@@ -91,7 +91,7 @@ const UserProfile = () => {
       setVerifying(true);
       const response = await api.post(`/api/admin/kyc/${id}/approve`);
       if (response.data) {
-        showSuccess('User KYC verified successfully');
+        showSuccess(t('admin.userKYCVerifiedSuccessfully'));
         // Update the user state directly
         setUser(prev => ({
           ...prev,
@@ -106,11 +106,11 @@ const UserProfile = () => {
     } catch (error) {
       console.error('Error verifying user:', error);
       if (error.response?.status === 404) {
-        showError('User not found');
+        showError(t('admin.userNotFound'));
       } else if (error.response?.status === 400) {
-        showError('KYC request is not pending');
+        showError(t('admin.kycRequestIsNotPending'));
       } else {
-        showError(error.response?.data?.error || 'Failed to verify user KYC');
+        showError(error.response?.data?.error || t('admin.failedToVerifyUserKYC'));
       }
     } finally {
       setVerifying(false);
@@ -122,20 +122,20 @@ const UserProfile = () => {
       // Create the wallet directly
       const response = await api.post('/api/wallet/create', { userId: id });
       if (response.data) {
-        showSuccess('Wallet created successfully');
+        showSuccess(t('admin.walletCreatedSuccessfully'));
         // Refresh user details to get updated wallet info
         fetchUserDetails();
       }
     } catch (error) {
       console.error('Error creating wallet:', error);
       if (error.response?.status === 400) {
-        showError(error.response.data.error || 'Failed to create wallet');
+        showError(error.response.data.error || t('admin.failedToCreateWallet'));
       } else if (error.response?.status === 404) {
-        showError('User not found');
+        showError(t('admin.userNotFound'));
       } else if (error.response?.status === 403) {
-        showError('You do not have permission to create wallets');
+        showError(t('admin.youDoNotHavePermissionToCreateWallets'));
       } else {
-        showError('Failed to create wallet. Please try again later.');
+        showError(t('admin.failedToCreateWalletPleaseTryAgainLater'));
       }
     }
   };
@@ -145,7 +145,7 @@ const UserProfile = () => {
       setRejecting(true);
       const response = await api.post(`/api/admin/kyc/${id}/reject`);
       if (response.data) {
-        showSuccess('User KYC rejected successfully');
+        showSuccess(t('admin.userKYCRejectedSuccessfully'));
         // Update the user state directly
         setUser(prev => ({
           ...prev,
@@ -160,11 +160,11 @@ const UserProfile = () => {
     } catch (error) {
       console.error('Error rejecting user:', error);
       if (error.response?.status === 404) {
-        showError('User not found');
+        showError(t('admin.userNotFound'));
       } else if (error.response?.status === 400) {
-        showError('KYC request is not pending');
+        showError(t('admin.kycRequestIsNotPending'));
       } else {
-        showError(error.response?.data?.error || 'Failed to reject user KYC');
+        showError(error.response?.data?.error || t('admin.failedToRejectUserKYC'));
       }
     } finally {
       setRejecting(false);
@@ -172,7 +172,7 @@ const UserProfile = () => {
   };
 
   const handleSuspendAccount = async () => {
-    if (!window.confirm('Are you sure you want to suspend this account?')) {
+    if (!window.confirm(t('admin.areYouSureYouWantToSuspendThisAccount'))) {
       return;
     }
 
@@ -180,7 +180,7 @@ const UserProfile = () => {
       setSuspending(true);
       const response = await api.post(`/api/admin/users/${id}/suspend`);
       if (response.data) {
-        showSuccess('Account suspended successfully');
+        showSuccess(t('admin.accountSuspendedSuccessfully'));
         // Update the user state directly
         setUser(prev => ({
           ...prev,
@@ -191,9 +191,9 @@ const UserProfile = () => {
     } catch (error) {
       console.error('Error suspending account:', error);
       if (error.response?.status === 404) {
-        showError('User not found');
+        showError(t('admin.userNotFound'));
       } else {
-        showError(error.response?.data?.error || 'Failed to suspend account');
+        showError(error.response?.data?.error || t('admin.failedToSuspendAccount'));
       }
     } finally {
       setSuspending(false);
@@ -201,7 +201,7 @@ const UserProfile = () => {
   };
 
   const handleUnsuspendAccount = async () => {
-    if (!window.confirm('Are you sure you want to unsuspend this account?')) {
+    if (!window.confirm(t('admin.areYouSureYouWantToUnsuspendThisAccount'))) {
       return;
     }
 
@@ -209,7 +209,7 @@ const UserProfile = () => {
       setSuspending(true);
       const response = await api.post(`/api/admin/users/${id}/unsuspend`);
       if (response.data) {
-        showSuccess('Account unsuspended successfully');
+        showSuccess(t('admin.accountUnsuspendedSuccessfully'));
         // Update the user state directly
         setUser(prev => ({
           ...prev,
@@ -220,9 +220,9 @@ const UserProfile = () => {
     } catch (error) {
       console.error('Error unsuspending account:', error);
       if (error.response?.status === 404) {
-        showError('User not found');
+        showError(t('admin.userNotFound'));
       } else {
-        showError(error.response?.data?.error || 'Failed to unsuspend account');
+        showError(error.response?.data?.error || t('admin.failedToUnsuspendAccount'));
       }
     } finally {
       setSuspending(false);
@@ -270,7 +270,7 @@ const UserProfile = () => {
       setGeneratingBankAccount(true);
       const response = await api.post(`/api/admin/users/${id}/generate-rib`);
       if (response.data) {
-        showSuccess('Bank account generated successfully');
+        showSuccess(t('admin.bankAccountGeneratedSuccessfully'));
         // Update the user state with the new data from the response
         setUser(prev => ({
           ...prev,
@@ -284,13 +284,13 @@ const UserProfile = () => {
     } catch (error) {
       console.error('Error generating bank account:', error);
       if (error.response?.status === 400) {
-        showError(error.response.data.error || 'Failed to generate bank account');
+        showError(error.response.data.error || t('admin.failedToGenerateBankAccount'));
       } else if (error.response?.status === 404) {
-        showError('User not found');
+        showError(t('admin.userNotFound'));
       } else if (error.response?.status === 403) {
-        showError('You do not have permission to generate bank accounts');
+        showError(t('admin.youDoNotHavePermissionToGenerateBankAccounts'));
       } else {
-        showError('Failed to generate bank account. Please try again later.');
+        showError(t('admin.failedToGenerateBankAccountPleaseTryAgainLater'));
       }
     } finally {
       setGeneratingBankAccount(false);
@@ -299,12 +299,12 @@ const UserProfile = () => {
 
   // Add handler for resetting user transaction limits
   const handleResetLimits = async () => {
-    if (!window.confirm('Are you sure you want to reset this user\'s transaction limits usage for the current day, week, and month?')) return;
+    if (!window.confirm(t('admin.areYouSureYouWantToResetThisUsersTransactionLimitsUsageForTheCurrentDayWeekAndMonth'))) return;
     try {
       await api.post(`/api/settings/reset-user-limits/${id}`);
-      showSuccess('User transaction limits usage reset successfully.');
+      showSuccess(t('admin.userTransactionLimitsUsageResetSuccessfully'));
     } catch (error) {
-      showError(error.response?.data?.error || 'Failed to reset user transaction limits.');
+      showError(error.response?.data?.error || t('admin.failedToResetUserTransactionLimits'));
     }
   };
 
@@ -353,7 +353,7 @@ const UserProfile = () => {
     return (
       <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium ${className}`}>
         <Icon className="w-4 h-4" />
-        {displayStatus.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+        {t('admin.status.' + displayStatus)}
       </span>
     );
   };
@@ -383,7 +383,7 @@ const UserProfile = () => {
     return (
       <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium ${className}`}>
         <Icon className="w-4 h-4" />
-        {status ? status.charAt(0).toUpperCase() + status.slice(1) : 'Unverified'}
+        {t('admin.kycStatus.' + (status || 'unverified'))}
       </span>
     );
   };
@@ -441,10 +441,23 @@ const UserProfile = () => {
                     ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
                     : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-400'
                 }`}>
-                  <div className={`w-2 h-2 rounded-full ${
-                    isOnline ? 'bg-green-500' : 'bg-gray-500'
-                  }`} />
-                  {isOnline ? t('admin.online') : lastSeen ? t('admin.lastSeen', { date: new Date(lastSeen).toLocaleString() }) : t('admin.offline')}
+                  <div className={`w-2 h-2 rounded-full ${isOnline ? 'bg-green-500' : 'bg-gray-500'}`} />
+                  {isOnline
+                    ? t('admin.online')
+                    : lastSeen
+                      ? t('admin.lastSeen', {
+                          date: (() => {
+                            const d = new Date(lastSeen);
+                            if (i18n.language === 'ar') {
+                              const time = d.toLocaleTimeString('ar-TN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+                              const date = d.toLocaleDateString('ar-TN');
+                              return `${time}، ${date}`;
+                            } else {
+                              return d.toLocaleString(i18n.language);
+                            }
+                          })()
+                        })
+                      : t('admin.offline')}
                 </span>
               </div>
             </div>
@@ -503,14 +516,7 @@ const UserProfile = () => {
                 {rejecting ? t('admin.rejecting') : t('admin.rejectUser')}
               </button>
             )}
-            <button className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 ${
-              isDark
-                ? 'bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 shadow-lg shadow-blue-500/10'
-                : 'bg-blue-50 text-blue-600 hover:bg-blue-100 shadow-md'
-            } flex items-center gap-2`}>
-              <Download className="w-4 h-4" />
-              {t('admin.exportData')}
-            </button>
+
             {user.accountStatus === 'suspended' ? (
               <button 
                 onClick={handleUnsuspendAccount}
@@ -818,7 +824,7 @@ const UserProfile = () => {
                   <th className="px-6 py-4 font-medium text-gray-500 dark:text-gray-400">{t('admin.amount')}</th>
                   <th className="px-6 py-4 font-medium text-gray-500 dark:text-gray-400">{t('admin.description')}</th>
                   <th className="px-6 py-4 font-medium text-gray-500 dark:text-gray-400">{t('admin.date')}</th>
-                  <th className="px-6 py-4 font-medium text-gray-500 dark:text-gray-400">{t('admin.status')}</th>
+                  <th className="px-6 py-4 font-medium text-gray-500 dark:text-gray-400">{t('admin.statusHeader')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 dark:divide-gray-700">

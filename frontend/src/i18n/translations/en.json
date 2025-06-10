@@ -468,6 +468,28 @@
     "noRecentTransfers": "No recent transfers"
   },
   "admin": {
+    "lastSeen": "Last seen: {{date}}",
+    "status.active": "Active",
+    "status.suspended": "Suspended",
+    "status.pendingDeletion": "Pending Deletion",
+    "resetTransactionLimitsUsage": "Reset Transaction Limits Usage",
+    "lastSeen": "Last Seen: {{date}}",
+    "lastLogin": "Last Login: {{date}}",
+    "noTransactionsFound": "No transactions found",
+    "noUsersFound": "No users found",
+    "kycInformation": "KYC Information",
+    "accountInfo": "Account Info",
+    "joined": "Joined",
+    "lastLogin": "Last Login",
+    "showFilters": "Show Filters",
+    "hideFilters": "Hide Filters",
+    "transactionHistory": "Transaction History",
+    "exportData": "Export Data",
+    "type": "Type",
+    "amount": "Amount",
+    "date": "Date",
+    "status": "Status",
+    "actions": "Actions",
     "totalUsers": "Total Users",
     "maintenance_mode_description": "You can set maintenance mode for system updates or other procedures that need to be performed separately.",
     "activeWallets": "Active Wallets",
@@ -601,7 +623,7 @@
     "noTransactionsFound": "No transactions found",
     "online": "Online",
     "offline": "Offline",
-    "lastSeen": "Last seen",
+    "lastSeen": "Last seen: {{date}}",
     "joined": "Joined",
     "lastLogin": "Last Login",
     "idType": "ID Type",
@@ -703,6 +725,8 @@
       "passport": "Passport",
       "national_id": "National ID"
     },
-    "searchTicketsPlaceholder": "Search tickets..."
+    "searchTicketsPlaceholder": "Search tickets...",
+    "export": "Export",
+    "statusHeader": "Status"
   }
 }
