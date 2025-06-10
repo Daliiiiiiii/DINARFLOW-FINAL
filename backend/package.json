@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@solana/web3.js": "^1.98.2",
-    "@supabase/supabase-js": "^2.39.0",
+    "@supabase/supabase-js": "^2.50.0",
     "@ton/core": "^0.60.1",
     "@ton/crypto": "^3.3.0",
     "@ton/ton": "^15.2.1",
@@ -45,7 +45,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0",
     "mongoose": "^7.0.0",
-    "multer": "^1.4.5-lts.1",
+    "multer": "^2.0.1",
     "nodemailer": "^6.10.1",
     "sharp": "^0.33.5",
     "socket-io": "^1.0.0",
