@@ -6067,3 +6067,23 @@
   "title": "Security Alert"
 }
 2025-06-10T18:04:29.916Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-06-10T19:34:15.245Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-06-10T19:36:38.582Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.withdrawn"
+}
+2025-06-10T19:56:37.544Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-10T20:23:35.527Z [INFO]: Deleted notification: 68488df5d7334a2b97c2ad44
+	Metadata: {
+  "userId": "682e6bde755cf136feedc20b"
+}
+2025-06-10T20:23:56.094Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}

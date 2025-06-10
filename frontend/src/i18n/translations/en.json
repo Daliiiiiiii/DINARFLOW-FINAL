@@ -742,5 +742,112 @@
       "pending": "Pending",
       "active": "Active"
     }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "subtitle": "Stay updated with your account activity",
+    "categories": {
+      "all": "All",
+      "transactions": "Transactions",
+      "security": "Security",
+      "system": "System",
+      "other": "Other"
+    },
+    "actions": {
+      "markAllRead": "Mark All Read",
+      "clearAll": "Clear All",
+      "markAsRead": "Mark as Read",
+      "delete": "Delete"
+    },
+    "search": {
+      "placeholder": "Search notifications..."
+    },
+    "settings": {
+      "title": "Notification Settings",
+      "pushNotifications": {
+        "title": "Push Notifications",
+        "transactions": {
+          "label": "Transactions",
+          "description": "Get notified about your transactions"
+        },
+        "security": {
+          "label": "Security Alerts",
+          "description": "Important security notifications"
+        },
+        "news": {
+          "label": "News & Updates",
+          "description": "Stay updated with platform news"
+        }
+      },
+      "emailNotifications": {
+        "title": "Email Notifications",
+        "daily": {
+          "label": "Daily Summary",
+          "description": "Receive a daily activity summary"
+        },
+        "marketing": {
+          "label": "Marketing",
+          "description": "Promotional offers and updates"
+        }
+      },
+      "save": "Save Settings"
+    },
+    "empty": {
+      "title": "No notifications found",
+      "description": "You're all caught up!"
+    },
+    "loading": "Loading notifications...",
+    "types": {
+      "transaction": {
+        "title": {
+          "sent": "Sent {{amount}} {{currency}}",
+          "received": "Received {{amount}} {{currency}}",
+          "deposited": "Deposited {{amount}} {{currency}}",
+          "withdrawn": "Withdrawn {{amount}} {{currency}}",
+          "default": "Transaction: {{amount}} {{currency}}"
+        },
+        "message": {
+          "sent": "You sent {{amount}} {{currency}}{{recipient}}",
+          "received": "You received {{amount}} {{currency}}{{sender}}",
+          "deposited": "You deposited {{amount}} {{currency}} to your bank account",
+          "withdrawn": "You withdrew {{amount}} {{currency}} from your bank account",
+          "default": "Transaction processed: {{amount}} {{currency}}"
+        }
+      },
+      "security": {
+        "title": {
+          "login_attempt": "New Login Attempt",
+          "password_change": "Password Changed",
+          "two_factor": "Two-Factor Authentication",
+          "account_locked": "Account Locked",
+          "login_success": "Successful Login",
+          "new_login": "New Login Detected",
+          "default": "Security Alert"
+        },
+        "message": {
+          "login_attempt": "New login attempt from {{location}} using {{device}}",
+          "password_change": "Your password has been changed successfully",
+          "two_factor": "Two-factor authentication has been {{status}}",
+          "account_locked": "Your account has been temporarily locked due to multiple failed login attempts",
+          "login_success": "A successful login was detected on your account",
+          "new_login": "A new login was detected on your account.",
+          "default": "Security alert: {{type}}"
+        }
+      },
+      "system": {
+        "title": {
+          "maintenance": "Scheduled Maintenance",
+          "feature": "New Feature Available",
+          "update": "System Update",
+          "default": "System Update"
+        },
+        "message": {
+          "maintenance": "Scheduled maintenance on {{date}}: {{message}}",
+          "feature": "New feature available: {{featureName}}",
+          "update": "System update: {{message}}",
+          "default": "{{message}}"
+        }
+      }
+    }
   }
 }

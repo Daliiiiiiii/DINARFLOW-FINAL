@@ -709,5 +709,112 @@
       "pending": "En attente",
       "active": "Active"
     }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "subtitle": "Restez informé de l'activité de votre compte",
+    "categories": {
+      "all": "Tout",
+      "transactions": "Transactions",
+      "security": "Sécurité",
+      "system": "Système",
+      "other": "Autre"
+    },
+    "actions": {
+      "markAllRead": "Tout marquer comme lu",
+      "clearAll": "Tout effacer",
+      "markAsRead": "Marquer comme lu",
+      "delete": "Supprimer"
+    },
+    "search": {
+      "placeholder": "Rechercher des notifications..."
+    },
+    "settings": {
+      "title": "Paramètres des notifications",
+      "pushNotifications": {
+        "title": "Notifications push",
+        "transactions": {
+          "label": "Transactions",
+          "description": "Soyez notifié de vos transactions"
+        },
+        "security": {
+          "label": "Alertes de sécurité",
+          "description": "Notifications de sécurité importantes"
+        },
+        "news": {
+          "label": "Actualités et mises à jour",
+          "description": "Restez informé des actualités de la plateforme"
+        }
+      },
+      "emailNotifications": {
+        "title": "Notifications par e-mail",
+        "daily": {
+          "label": "Résumé quotidien",
+          "description": "Recevez un résumé quotidien de l'activité"
+        },
+        "marketing": {
+          "label": "Marketing",
+          "description": "Offres promotionnelles et mises à jour"
+        }
+      },
+      "save": "Enregistrer les paramètres"
+    },
+    "empty": {
+      "title": "Aucune notification trouvée",
+      "description": "Vous êtes à jour !"
+    },
+    "loading": "Chargement des notifications...",
+    "types": {
+      "transaction": {
+        "title": {
+          "sent": "Envoyé {{amount}} {{currency}}",
+          "received": "Reçu {{amount}} {{currency}}",
+          "deposited": "Déposé {{amount}} {{currency}}",
+          "withdrawn": "Retiré {{amount}} {{currency}}",
+          "default": "Transaction : {{amount}} {{currency}}"
+        },
+        "message": {
+          "sent": "Vous avez envoyé {{amount}} {{currency}}{{recipient}}",
+          "received": "Vous avez reçu {{amount}} {{currency}}{{sender}}",
+          "deposited": "Vous avez déposé {{amount}} {{currency}} sur votre compte bancaire",
+          "withdrawn": "Vous avez retiré {{amount}} {{currency}} de votre compte bancaire",
+          "default": "Transaction traitée : {{amount}} {{currency}}"
+        }
+      },
+      "security": {
+        "title": {
+          "login_attempt": "Nouvelle tentative de connexion",
+          "password_change": "Mot de passe modifié",
+          "two_factor": "Authentification à deux facteurs",
+          "account_locked": "Compte verrouillé",
+          "login_success": "Connexion réussie",
+          "new_login": "Nouvelle connexion détectée",
+          "default": "Alerte de sécurité"
+        },
+        "message": {
+          "login_attempt": "Nouvelle tentative de connexion depuis {{location}} avec {{device}}",
+          "password_change": "Votre mot de passe a été modifié avec succès",
+          "two_factor": "L'authentification à deux facteurs a été {{status}}",
+          "account_locked": "Votre compte a été temporairement verrouillé en raison de plusieurs tentatives de connexion échouées",
+          "login_success": "Une connexion réussie a été détectée sur votre compte",
+          "new_login": "Une nouvelle connexion a été détectée sur votre compte.",
+          "default": "Alerte de sécurité : {{type}}"
+        }
+      },
+      "system": {
+        "title": {
+          "maintenance": "Maintenance programmée",
+          "feature": "Nouvelle fonctionnalité disponible",
+          "update": "Mise à jour du système",
+          "default": "Mise à jour du système"
+        },
+        "message": {
+          "maintenance": "Maintenance programmée le {{date}} : {{message}}",
+          "feature": "Nouvelle fonctionnalité disponible : {{featureName}}",
+          "update": "Mise à jour du système : {{message}}",
+          "default": "{{message}}"
+        }
+      }
+    }
   }
 }

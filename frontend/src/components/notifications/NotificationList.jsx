@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Bell, Check, Trash2, X } from 'lucide-react';
 import { useNotification } from '../../contexts/NotificationContext';
 import api from '../../lib/axios';
+import { useTranslation } from 'react-i18next';
 
 const NotificationList = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +15,7 @@ const NotificationList = () => {
     setUnreadCount,
     showError 
   } = useNotification();
+  const { t } = useTranslation();
 
   const fetchNotifications = async () => {
     try {
@@ -100,25 +102,26 @@ const NotificationList = () => {
           >
             <div className="p-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold">Notifications</h3>
+                <h3 className="text-lg font-semibold">{t('notifications.title')}</h3>
                 <div className="flex space-x-2">
                   <button
                     onClick={markAllAsRead}
                     className="p-1 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                    title="Mark all as read"
+                    title={t('notifications.actions.markAllRead')}
                   >
                     <Check className="w-4 h-4" />
                   </button>
                   <button
                     onClick={deleteAllNotifications}
                     className="p-1 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                    title="Delete all"
+                    title={t('notifications.actions.clearAll')}
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => setIsOpen(false)}
                     className="p-1 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                    title={t('common.close')}
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -128,9 +131,9 @@ const NotificationList = () => {
 
             <div className="max-h-96 overflow-y-auto">
               {isLoading ? (
-                <div className="p-4 text-center text-gray-500">Loading...</div>
+                <div className="p-4 text-center text-gray-500">{t('common.loading')}</div>
               ) : notifications.length === 0 ? (
-                <div className="p-4 text-center text-gray-500">No notifications</div>
+                <div className="p-4 text-center text-gray-500">{t('notifications.empty.title')}</div>
               ) : (
                 notifications.map((notification) => (
                   <motion.div
@@ -145,10 +148,34 @@ const NotificationList = () => {
                     <div className="flex items-start">
                       <div className="flex-1">
                         <h4 className="font-medium text-gray-900 dark:text-white">
-                          {notification.title}
+                          {t(notification.title, {
+                            amount: notification.data?.amount,
+                            currency: notification.data?.currency,
+                            recipient: notification.data?.recipientName ? ` to ${notification.data.recipientName}` : '',
+                            sender: notification.data?.senderName ? ` from ${notification.data.senderName}` : '',
+                            location: notification.data?.location,
+                            device: notification.data?.device,
+                            status: notification.data?.enabled ? t('common.enabled') : t('common.disabled'),
+                            type: notification.data?.type,
+                            date: notification.data?.date,
+                            message: notification.data?.message,
+                            featureName: notification.data?.featureName
+                          })}
                         </h4>
                         <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                          {notification.message}
+                          {t(notification.message, {
+                            amount: notification.data?.amount,
+                            currency: notification.data?.currency,
+                            recipient: notification.data?.recipientName ? ` to ${notification.data.recipientName}` : '',
+                            sender: notification.data?.senderName ? ` from ${notification.data.senderName}` : '',
+                            location: notification.data?.location,
+                            device: notification.data?.device,
+                            status: notification.data?.enabled ? t('common.enabled') : t('common.disabled'),
+                            type: notification.data?.type,
+                            date: notification.data?.date,
+                            message: notification.data?.message,
+                            featureName: notification.data?.featureName
+                          })}
                         </p>
                         <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
                           {new Date(notification.createdAt).toLocaleString()}
@@ -159,7 +186,7 @@ const NotificationList = () => {
                           <button
                             onClick={() => markAsRead(notification._id)}
                             className="p-1 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                            title="Mark as read"
+                            title={t('notifications.actions.markAsRead')}
                           >
                             <Check className="w-4 h-4" />
                           </button>
@@ -167,7 +194,7 @@ const NotificationList = () => {
                         <button
                           onClick={() => deleteNotification(notification._id)}
                           className="p-1 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                          title="Delete"
+                          title={t('notifications.actions.delete')}
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>

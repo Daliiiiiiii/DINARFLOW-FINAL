@@ -117,7 +117,9 @@ export class NotificationService {
                 amount: transactionData.amount,
                 currency: transactionData.currency,
                 type: transactionData.type,
-                subtype: transactionData.subtype
+                subtype: transactionData.subtype,
+                recipientName: transactionData.recipientName,
+                senderName: transactionData.senderName
             }
         );
     }
@@ -131,14 +133,14 @@ export class NotificationService {
         switch (transaction.type) {
             case 'transfer':
                 return transaction.subtype === 'send'
-                    ? `Sent ${amount} ${currency}`
-                    : `Received ${amount} ${currency}`;
+                    ? `notifications.types.transaction.title.sent`
+                    : `notifications.types.transaction.title.received`;
             case 'bank':
                 return transaction.subtype === 'deposit'
-                    ? `Deposited ${amount} ${currency}`
-                    : `Withdrawn ${amount} ${currency}`;
+                    ? `notifications.types.transaction.title.deposited`
+                    : `notifications.types.transaction.title.withdrawn`;
             default:
-                return `Transaction: ${amount} ${currency}`;
+                return `notifications.types.transaction.title.default`;
         }
     }
 
@@ -147,26 +149,28 @@ export class NotificationService {
 
         const amount = Math.abs(transaction.amount).toFixed(2);
         const currency = transaction.currency || 'TND';
+        const recipient = transaction.recipientName ? ` to ${transaction.recipientName}` : '';
+        const sender = transaction.senderName ? ` from ${transaction.senderName}` : '';
 
         switch (transaction.type) {
             case 'transfer':
                 if (transaction.subtype === 'send') {
-                    return `You sent ${amount} ${currency}${transaction.recipientName ? ` to ${transaction.recipientName}` : ''}.`;
+                    return `notifications.types.transaction.message.sent`;
                 }
-                return `You received ${amount} ${currency}${transaction.senderName ? ` from ${transaction.senderName}` : ''}.`;
+                return `notifications.types.transaction.message.received`;
             case 'bank':
                 if (transaction.subtype === 'deposit') {
-                    return `You deposited ${amount} ${currency} to your bank account.`;
+                    return `notifications.types.transaction.message.deposited`;
                 }
-                return `You withdrew ${amount} ${currency} from your bank account.`;
+                return `notifications.types.transaction.message.withdrawn`;
             default:
-                return `Transaction processed: ${amount} ${currency}`;
+                return `notifications.types.transaction.message.default`;
         }
     }
 
     // Security notifications
     async notifySecurityAlert(userId, alertType, details) {
-        const title = 'Security Alert';
+        const title = `notifications.types.security.title.${alertType}`;
         const message = this.getSecurityMessage(alertType, details);
 
         await this.createNotification(userId, 'alert', title, message, {
@@ -178,23 +182,23 @@ export class NotificationService {
     getSecurityMessage(alertType, details) {
         switch (alertType) {
             case 'login_attempt':
-                return `New login attempt from ${details.location} using ${details.device}`;
+                return `notifications.types.security.message.login_attempt`;
             case 'password_change':
-                return 'Your password has been changed successfully';
+                return `notifications.types.security.message.password_change`;
             case 'two_factor':
-                return 'Two-factor authentication has been ' + (details.enabled ? 'enabled' : 'disabled');
+                return `notifications.types.security.message.two_factor`;
             case 'account_locked':
-                return 'Your account has been temporarily locked due to multiple failed login attempts';
+                return `notifications.types.security.message.account_locked`;
             case 'login_success':
-                return 'A successful login was detected on your account';
+                return `notifications.types.security.message.login_success`;
             default:
-                return details?.message || 'Security alert: ' + alertType;
+                return `notifications.types.security.message.default`;
         }
     }
 
     // System notifications
     async notifySystemUpdate(userId, updateType, details) {
-        const title = 'System Update';
+        const title = `notifications.types.system.title.${updateType}`;
         const message = this.getSystemMessage(updateType, details);
 
         await this.createNotification(userId, 'system', title, message, {
@@ -206,13 +210,13 @@ export class NotificationService {
     getSystemMessage(updateType, details) {
         switch (updateType) {
             case 'maintenance':
-                return `Scheduled maintenance on ${details.date}: ${details.message}`;
+                return `notifications.types.system.message.maintenance`;
             case 'feature':
-                return `New feature available: ${details.featureName}`;
+                return `notifications.types.system.message.feature`;
             case 'update':
-                return `System update: ${details.message}`;
+                return `notifications.types.system.message.update`;
             default:
-                return details.message;
+                return `notifications.types.system.message.default`;
         }
     }
 

@@ -741,7 +741,7 @@
       "national_id": "بطاقة هوية وطنية"
     },
     "resetTransactionLimitsUsage": "إعادة تعيين استخدام حدود المعاملات",
-    "export": "تصدير",
+    "export": "تصدير البيانات",
     "statusHeader": "الحالة",
     "p2p": "معاملات P2P",
     "crypto": "معاملات العملات الرقمية",
@@ -749,6 +749,121 @@
       "completed": "مكتمل",
       "pending": "قيد الانتظار",
       "active": "نشط"
+    }
+  },
+  "notifications": {
+    "categories": {
+      "all": "الكل",
+      "transactions": "المعاملات",
+      "security": "الأمان",
+      "system": "النظام",
+      "other": "أخرى",
+      "title": "الإشعارات"
+    },
+    "title": "الإشعارات",
+    "subtitle": "ابق على اطلاع بنشاط حسابك",
+    "categories": {
+      "all": "الكل",
+      "transactions": "المعاملات",
+      "security": "الأمان",
+      "system": "النظام",
+      "other": "أخرى"
+    },
+    "actions": {
+      "markAllRead": "تحديد الكل كمقروء",
+      "clearAll": "مسح الكل",
+      "markAsRead": "تحديد كمقروء",
+      "delete": "حذف"
+    },
+    "search": {
+      "placeholder": "البحث في الإشعارات..."
+    },
+    "settings": {
+      "title": "إعدادات الإشعارات",
+      "pushNotifications": {
+        "title": "إشعارات الدفع",
+        "transactions": {
+          "label": "المعاملات",
+          "description": "احصل على إشعارات حول معاملاتك"
+        },
+        "security": {
+          "label": "تنبيهات الأمان",
+          "description": "إشعارات أمان مهمة"
+        },
+        "news": {
+          "label": "الأخبار والتحديثات",
+          "description": "ابق على اطلاع بأخبار المنصة"
+        }
+      },
+      "emailNotifications": {
+        "title": "إشعارات البريد الإلكتروني",
+        "daily": {
+          "label": "ملخص يومي",
+          "description": "استلام ملخص يومي للنشاط"
+        },
+        "marketing": {
+          "label": "التسويق",
+          "description": "العروض الترويجية والتحديثات"
+        }
+      },
+      "save": "حفظ الإعدادات"
+    },
+    "empty": {
+      "title": "لم يتم العثور على إشعارات",
+      "description": "أنت محدث بكل شيء!"
+    },
+    "loading": "جاري تحميل الإشعارات...",
+    "types": {
+      "transaction": {
+        "title": {
+          "sent": "{{amount}} {{currency}} تم إرسال ",
+          "received": "{{amount}} {{currency}} تم إاستلام ",
+          "deposited": "{{amount}} {{currency}} تم إيداع ",
+          "withdrawn": "{{amount}} {{currency}} تم سحب",
+          "default": "{{amount}} {{currency}} :معاملة"
+        },
+        "message": {
+          "sent": "{{amount}} {{currency}}{{recipient}} لقد أرسلت ",
+          "received": "{{amount}} {{currency}}{{sender}} لقد استلمت ",
+          "deposited": "{{amount}} {{currency}} لقد أودعت في حسابك المصرفي",
+          "withdrawn": "{{amount}} {{currency}} لقد سحبت من حسابك المصرفي",
+          "default": "{{amount}} {{currency}} تمت معالجة المعاملة"
+        }
+      },
+      "security": {
+        "title": {
+          "login_attempt": "محاولة تسجيل دخول جديدة",
+          "password_change": "تم تغيير كلمة المرور",
+          "two_factor": "المصادقة الثنائية",
+          "account_locked": "تم قفل الحساب",
+          "login_success": "تسجيل دخول ناجح",
+          "new_login": "تسجيل دخول جديد",
+          "default": "تنبيه أمني"
+        },
+        "message": {
+          "login_attempt": "محاولة تسجيل دخول جديدة من {{location}} باستخدام {{device}}",
+          "password_change": "تم تغيير كلمة المرور بنجاح",
+          "two_factor": "تم {{status}} المصادقة الثنائية",
+          "account_locked": "تم قفل حسابك مؤقتًا بسبب محاولات تسجيل دخول متكررة فاشلة",
+          "login_success": "تم اكتشاف تسجيل دخول ناجح على حسابك",
+          "new_login": "تم اكتشاف تسجيل دخول جديد على حسابك.",
+          "default": "{{type}} :تنبيه أمني"
+        }
+      },
+      "system": {
+        "title": {
+          "maintenance": "صيانة مجدولة",
+          "feature": "ميزة جديدة متاحة",
+          "update": "تحديث النظام",
+          "default": "تحديث النظام"
+        },
+        "message": {
+          "maintenance": "صيانة مجدولة في {{date}}: {{message}}",
+          "feature": "ميزة جديدة متاحة: {{featureName}}",
+          "update": "تحديث النظام: {{message}}",
+          "default": "{{message}}"
+        }
+      }
     }
   }
 }
