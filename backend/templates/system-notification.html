@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Update</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #111827;
+            color: #e5e7eb;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .card {
+            background-color: #1f2937;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #60a5fa;
+        }
+        .content {
+            text-align: center;
+        }
+        .icon-circle {
+            width: 64px;
+            height: 64px;
+            background-color: rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+        .icon-circle svg {
+            width: 32px;
+            height: 32px;
+            color: #60a5fa;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 16px;
+            color: #f3f4f6;
+        }
+        p {
+            margin: 0 0 24px;
+            color: #d1d5db;
+        }
+        .feature-card {
+            background-color: #374151;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 12px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            text-align: left;
+        }
+        .feature-icon {
+            width: 20px;
+            height: 20px;
+            color: #60a5fa;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .feature-content h3 {
+            margin: 0 0 4px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #f3f4f6;
+        }
+        .feature-content p {
+            margin: 0;
+            font-size: 14px;
+            color: #9ca3af;
+        }
+        .info-box {
+            background-color: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 24px 0;
+            text-align: left;
+        }
+        .info-box p {
+            margin: 0;
+            color: #60a5fa;
+        }
+        .button {
+            display: inline-block;
+            background-color: #3b82f6;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        .button:hover {
+            background-color: #2563eb;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+        .footer p {
+            margin: 8px 0;
+        }
+        .footer a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            .card {
+                padding: 32px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="logo">
+                <img src="file:///C:/Users/Dali/Downloads/project/frontend/public/logo.svg" alt="DinarFlow Logo (If you see a broken image, please check your local path)" width="44" height="44" style="display:block; margin:0 auto 4px auto;">
+                <div class="logo-text">DinarFlow</div>
+            </div>
+            
+            <div class="content">
+                <div class="icon-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+
+                <h1>System Update Required</h1>
+                <p>Dear {{displayName}},</p>
+                <p>To ensure the security of your account and comply with the latest regulations, please complete the following actions:</p>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Update Security Settings</h3>
+                        <p>Review and update your security preferences</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Verify Identity</h3>
+                        <p>Complete the identity verification process</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                            <line x1="1" y1="10" x2="23" y2="10"></line>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Update Payment Methods</h3>
+                        <p>Review and update your payment information</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <p>Please complete these actions by {{deadline}} to maintain full access to your account.</p>
+                </div>
+
+                <div>
+                    <a href="{{updateAccountUrl}}" class="button">Update Account</a>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>This is an automated message, please do not reply.</p>
+                <p>&copy; {{currentYear}} DinarFlow. All rights reserved.</p>
+                <p>
+                    <a href="{{supportUrl}}">Support</a> | 
+                    <a href="{{privacyUrl}}">Privacy Policy</a> | 
+                    <a href="{{termsUrl}}">Terms of Service</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
