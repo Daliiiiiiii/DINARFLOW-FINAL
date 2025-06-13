@@ -55,4 +55,7 @@ export const uploadKyc = upload.fields([
     { name: 'signature', maxCount: 1 }
 ]);
 
-export const uploadSingle = upload.single('profilePicture'); 
+export const uploadSingle = upload.single('profilePicture');
+
+// Generic image upload middleware for any field name
+export const uploadImage = (fieldName) => upload.single(fieldName); 

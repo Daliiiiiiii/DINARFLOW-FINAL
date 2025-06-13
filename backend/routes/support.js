@@ -1,5 +1,6 @@
 import express from 'express';
 import { authenticateToken, isAdmin } from '../middleware/auth.js';
+import { uploadImage } from '../middleware/upload.js';
 import {
     createTicket,
     getUserTickets,
@@ -7,7 +8,8 @@ import {
     addMessage,
     getAllTickets,
     updateTicketStatus,
-    addAdminMessage
+    addAdminMessage,
+    uploadTicketImage
 } from '../controllers/support.js';
 
 const router = express.Router();
@@ -18,6 +20,7 @@ router.get('/tickets', authenticateToken, getUserTickets);
 router.get('/tickets/:ticketId', authenticateToken, getTicket);
 router.post('/tickets/:ticketId/messages', authenticateToken, addMessage);
 router.patch('/tickets/:ticketId/status', authenticateToken, updateTicketStatus);
+router.post('/tickets/:ticketId/upload-image', authenticateToken, uploadImage('image'), uploadTicketImage);
 
 // Admin routes
 router.get('/admin/tickets', authenticateToken, isAdmin, getAllTickets);

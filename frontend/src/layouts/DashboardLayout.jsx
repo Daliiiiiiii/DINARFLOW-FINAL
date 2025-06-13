@@ -575,19 +575,21 @@ const DashboardLayout = () => {
             </button>
 
             <div className="flex-1 max-w-xl mx-4">
-              <div className="relative search-bar" dir="ltr">
-                <Search className={`absolute left-3 top-1/2 -translate-y-1/2 -mt-0.5 ${
-                  isDark ? 'text-gray-400' : 'text-gray-500'
-                } w-5 h-5`} />
+              <div className="relative search-bar" dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
+                {i18n.language === 'ar' ? (
+                  <Search className={`absolute right-3 top-1/2 -translate-y-1/2 -mt-0.5 ${isDark ? 'text-gray-400' : 'text-gray-500'} w-5 h-5`} />
+                ) : (
+                  <Search className={`absolute left-3 top-1/2 -translate-y-1/2 -mt-0.5 ${isDark ? 'text-gray-400' : 'text-gray-500'} w-5 h-5`} />
+                )}
                 <input
                   type="text"
                   placeholder={t('common.search')}
-                  className={`w-full pl-11 pr-4 py-2 ${
+                  className={`w-full ${i18n.language === 'ar' ? 'pr-11 pl-4' : 'pl-11 pr-4'} py-2 ${
                     isDark 
                       ? 'bg-gray-900/50 border-gray-800 text-white' 
                       : 'bg-white border-gray-200 text-gray-900'
                   } border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
-                  dir="ltr"
+                  dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}
                 />
               </div>
             </div>

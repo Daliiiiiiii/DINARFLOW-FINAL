@@ -188,4 +188,43 @@ export const addAdminMessage = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Error adding message', error: error.message });
     }
+};
+
+export const uploadTicketImage = async (req, res) => {
+    try {
+        const { ticketId } = req.params;
+        const userId = req.user.id;
+        if (!req.file) {
+            return res.status(400).json({ message: 'No file uploaded' });
+        }
+        const ticket = await SupportTicket.findOne({ _id: ticketId, userId });
+        if (!ticket) {
+            return res.status(404).json({ message: 'Ticket not found' });
+        }
+        if (ticket.status === 'closed') {
+            return res.status(400).json({ message: 'Cannot add image to closed ticket' });
+        }
+        const imageUrl = `/uploads/${req.file.filename}`;
+        const newMessage = {
+            userId,
+            content: imageUrl,
+            type: 'user',
+            timestamp: new Date()
+        };
+        ticket.messages.push(newMessage);
+        await ticket.save();
+        // Emit WebSocket event
+        const wsService = req.app.get('wsService');
+        wsService.emitToUser(ticket.userId, 'support:message:received', {
+            ticket,
+            message: newMessage
+        });
+        wsService.emitToRoom('admin', 'support:message:received', {
+            ticket,
+            message: newMessage
+        });
+        res.json({ ticket, message: newMessage });
+    } catch (error) {
+        res.status(500).json({ message: 'Error uploading image', error: error.message });
+    }
 }; 

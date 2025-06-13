@@ -7,7 +7,7 @@ const Logo = () => {
   const isDark = theme === 'dark';
 
   return (
-    <a href="/" className="flex items-center space-x-2 text-xl font-bold">
+    <div className="flex items-center space-x-2 text-xl font-bold">
       <div className="relative w-10 h-10">
         {/* Main circle with gradient */}
         <div className={`absolute inset-0 rounded-full ${
@@ -34,7 +34,7 @@ const Logo = () => {
       }`}>
         DinarFlow
       </span>
-    </a>
+    </div>
   );
 };
 

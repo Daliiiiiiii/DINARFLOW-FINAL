@@ -210,7 +210,8 @@
     "user": "Utilisateur",
     "profile": "Profil",
     "lightMode": "Mode clair",
-    "darkMode": "Mode sombre"
+    "darkMode": "Mode sombre",
+    "cancel": "Annuler"
   },
   "dashboard": {
     "balanceHistory": "Historique du solde",
@@ -840,6 +841,8 @@
     "currency": {
       "TND": "TND"
     },
+    "popular": "Populaires",
+    "allOffers": "Toutes les offres",
     "orderCount": "{{count}} commandes",
     "completionRate": "{{rate}}% taux de complétion",
     "minResponse": "{{min}} min de réponse",
@@ -892,6 +895,8 @@
       "close": "Fermer"
     },
     "offer": {
+      "editAndReactivate": "Modifier et réactiver",
+      "reactivate": "Réactiver",
       "create": "Créer une offre",
       "edit": "Modifier l'offre",
       "type": "Type d'offre",
@@ -994,6 +999,7 @@
       "cash": "Espèces"
     },
     "order": {
+      "status.disputed": "En litige",
       "status": "Statut",
       "status.completed": "Terminé",
       "status.cancelled": "Annulé",
@@ -1124,5 +1130,182 @@
     "chooseFile": "Choisir le fichier",
     "cancel": "Annuler",
     "submitProof": "Soumettre la preuve"
+  },
+  "cryptoWallet": {
+    "guideTitle": "Guide du Portefeuille Crypto",
+    "guideDescription": "Apprenez à utiliser votre portefeuille crypto en toute sécurité et efficacement",
+    "globalBalance": "Solde Global : {{balance}} USDT",
+    "totalBalance": "Solde Total",
+    "send": "Envoyer",
+    "receive": "Recevoir",
+    "mintTest": "Créer USDT Test",
+    "minting": "Création en cours...",
+    "fee": "Frais : {{fee}}",
+    "inactive": "Inactif",
+    "walletAddress": "Adresse du Portefeuille",
+    "viewOnExplorer": "Voir sur l'Explorateur",
+    "copyAddress": "Copier l'Adresse",
+    "loadingAddress": "Chargement de l'adresse...",
+    "recentTransactions": "Transactions Récentes",
+    "noTransactions": "Aucune transaction",
+    "quickTipsTitle": "Conseils Rapides",
+    "tips": {
+      "doubleCheck": "Vérifiez toujours les adresses avant d'envoyer",
+      "keepPrivate": "Gardez vos clés privées et phrases de récupération en sécurité",
+      "networkFees": "Les frais de réseau varient selon la blockchain",
+      "usdtInfo": "L'USDT est une crypto-monnaie stable indexée sur l'USD",
+      "txTime": "Les temps de transaction varient selon le réseau"
+    },
+    "securityNotesTitle": "Notes de Sécurité",
+    "security": {
+      "phishing": "Méfiez-vous des tentatives de phishing - ne partagez jamais vos clés privées",
+      "unsolicited": "Ne répondez jamais aux demandes non sollicitées de fonds"
+    },
+    "help": {
+      "basics": {
+        "title": "Qu'est-ce que la Blockchain et les Crypto ?",
+        "description": "La blockchain est un registre numérique décentralisé qui enregistre les transactions sur de nombreux ordinateurs. Les crypto-monnaies sont des actifs numériques qui utilisent la technologie blockchain pour des transactions sécurisées."
+      },
+      "balance": {
+        "title": "Comprendre Votre Solde",
+        "description": "Votre solde global montre le total USDT sur tous les réseaux. Chaque réseau maintient son propre solde, et vous pouvez transférer entre les réseaux."
+      },
+      "networks": {
+        "title": "Réseaux Supportés",
+        "description": "Nous prenons en charge plusieurs réseaux dont Ethereum, BNB Chain, TRON, TON, Solana, Polygon et Arbitrum. Chaque réseau a des frais et des temps de transaction différents."
+      },
+      "chart": {
+        "title": "Graphique des Prix",
+        "description": "Le graphique montre les mouvements de prix de l'USDT dans le temps. Vous pouvez voir différentes périodes pour analyser les tendances."
+      },
+      "actions": {
+        "title": "Actions du Portefeuille",
+        "description": "Envoyez des USDT à d'autres adresses, recevez des USDT en partageant votre adresse, et consultez votre historique de transactions."
+      },
+      "transactions": {
+        "title": "Historique des Transactions",
+        "description": "Consultez toutes vos transactions passées, y compris les envois, réceptions et transferts réseau. Chaque transaction affiche des détails comme le montant, le statut et le réseau."
+      }
+    }
+  },
+  "support": {
+    "title": "Centre d'Assistance",
+    "newTicket": "Nouveau Ticket",
+    "tabs": {
+      "home": "Accueil",
+      "tickets": "Mes Tickets",
+      "knowledge": "Base de Connaissances"
+    },
+    "search": {
+      "placeholder": "Rechercher de l'aide..."
+    },
+    "quickActions": {
+      "contactSupport": {
+        "title": "Contacter le Support",
+        "description": "Obtenir l'aide de notre équipe"
+      },
+      "knowledgeBase": {
+        "title": "Base de Connaissances",
+        "description": "Parcourir les guides et FAQ"
+      },
+      "emailSupport": {
+        "title": "Support par Email",
+        "description": "Nous envoyer un email directement"
+      }
+    },
+    "popularGuides": {
+      "title": "Guides Populaires",
+      "readGuide": "Lire le Guide"
+    },
+    "faqs": {
+      "title": "Questions Fréquemment Posées",
+      "gettingStarted": {
+        "category": "Premiers Pas",
+        "createAccount": {
+          "question": "Comment créer un compte ?",
+          "answer": "La création d'un compte est simple. Cliquez sur le bouton 'Commencer', fournissez votre email et numéro de téléphone, et suivez les étapes de vérification."
+        },
+        "verification": {
+          "question": "Quels documents sont nécessaires pour la vérification ?",
+          "answer": "Vous aurez besoin d'une pièce d'identité valide (CNI ou Passeport) et d'une facture récente pour la vérification d'adresse."
+        },
+        "resetPassword": {
+          "question": "Comment réinitialiser mon mot de passe ?",
+          "answer": "Cliquez sur 'Mot de passe oublié' sur la page de connexion, entrez votre adresse email et suivez les instructions envoyées par email pour réinitialiser votre mot de passe."
+        }
+      },
+      "transfers": {
+        "category": "Transferts & Paiements",
+        "transferTime": {
+          "question": "Combien de temps prennent les transferts ?",
+          "answer": "Les transferts internes entre comptes DinarFlow sont instantanés. Les transferts bancaires prennent généralement 1-2 jours ouvrables."
+        },
+        "limits": {
+          "question": "Quelles sont les limites de transfert ?",
+          "answer": "Les limites de transfert quotidiennes sont fixées à 10 000 TND pour les comptes vérifiés. Cela peut être augmenté en contactant le support."
+        },
+        "addBank": {
+          "question": "Comment ajouter un nouveau compte bancaire ?",
+          "answer": "Allez dans Paramètres > Comptes Bancaires > Ajouter un Nouveau Compte. Entrez vos coordonnées bancaires et suivez le processus de vérification."
+        }
+      },
+      "security": {
+        "category": "Sécurité & Confidentialité",
+        "accountSecurity": {
+          "question": "Mon compte est-il sécurisé ?",
+          "answer": "Nous utilisons des mesures de sécurité et de cryptage conformes aux normes de l'industrie, notamment l'authentification à deux facteurs, l'authentification biométrique et la surveillance des fraudes en temps réel."
+        },
+        "twoFactor": {
+          "question": "Comment activer l'authentification à deux facteurs ?",
+          "answer": "Allez dans Paramètres > Sécurité > Authentification à Deux Facteurs et suivez le processus de configuration. Vous pouvez choisir entre SMS ou application d'authentification."
+        },
+        "suspiciousActivity": {
+          "question": "Que faire en cas d'activité suspecte ?",
+          "answer": "Contactez immédiatement notre équipe de support et verrouillez votre compte via les paramètres de Sécurité. Nous vous aiderons à sécuriser votre compte."
+        }
+      },
+      "accountManagement": {
+        "category": "Gestion du Compte",
+        "updateInfo": {
+          "question": "Comment mettre à jour mes informations personnelles ?",
+          "answer": "Allez dans Paramètres > Profil > Modifier les Informations. Vous pouvez mettre à jour vos coordonnées, mais certaines modifications peuvent nécessiter une vérification."
+        },
+        "closeAccount": {
+          "question": "Comment fermer mon compte ?",
+          "answer": "Contactez notre équipe de support pour initier le processus de fermeture de compte. Assurez-vous de retirer tous les fonds restants d'abord."
+        },
+        "multipleAccounts": {
+          "question": "Puis-je avoir plusieurs comptes ?",
+          "answer": "Non, chaque individu n'est autorisé qu'à un seul compte personnel. Les comptes professionnels sont séparés et nécessitent une vérification différente."
+        }
+      }
+    },
+    "newTicket": {
+      "title": "Créer un Nouveau Ticket",
+      "placeholder": "Entrez le titre du ticket...",
+      "create": "Créer"
+    },
+    "knowledge": {
+      "guidesTitle": "Guides d'aide",
+      "searchPlaceholder": "Rechercher dans les guides d'aide..."
+    },
+    "tickets": {
+      "searchPlaceholder": "Rechercher des tickets...",
+      "noTitle": "Pas de titre",
+      "selectTitle": "Sélectionner un ticket",
+      "selectDescription": "Choisissez un ticket pour voir la conversation",
+      "closeButton": "Fermer le ticket",
+      "ticketNumber": "Ticket n°{{id}}",
+      "subjectLabel": "Sujet",
+      "subjectPlaceholder": "Entrez le sujet...",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Décrivez votre problème...",
+      "replyPlaceholder": "Écrivez votre message...",
+      "status": {
+        "open": "Ouvert",
+        "pending": "En attente",
+        "closed": "Fermé"
+      }
+    }
   }
 }

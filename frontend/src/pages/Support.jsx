@@ -28,8 +28,10 @@ import { useTheme } from '../contexts/ThemeContext';
 import ActionLoader from '../assets/animations/ActionLoader';
 import api from '../lib/axios';
 import { io } from 'socket.io-client';
+import { useTranslation } from 'react-i18next';
 
 const Support = () => {
+  const { t, i18n } = useTranslation();
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const [activeTab, setActiveTab] = useState('home');
@@ -38,13 +40,13 @@ const Support = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [expandedFaq, setExpandedFaq] = useState(null);
-  const [showArticle, setShowArticle] = useState(null);
   const [tickets, setTickets] = useState([]);
   const [ticketMessages, setTicketMessages] = useState([]);
   const [newTicketTitle, setNewTicketTitle] = useState('');
   const [showNewTicketModal, setShowNewTicketModal] = useState(false);
   const [socket, setSocket] = useState(null);
   const messagesEndRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   // Fetch tickets on mount
   useEffect(() => {
@@ -112,12 +114,13 @@ const Support = () => {
   };
 
   const handleCreateTicket = async () => {
-    if (!newTicketTitle.trim()) return;
+    if (!newTicketTitle.trim() || !message.trim()) return;
     try {
       setIsLoading(true);
-      const res = await api.post('/api/support/tickets', { subject: newTicketTitle });
+      const res = await api.post('/api/support/tickets', { subject: newTicketTitle, message });
       setShowNewTicketModal(false);
       setNewTicketTitle('');
+      setMessage('');
       await fetchTickets();
       setSelectedTicket(res.data);
       setActiveTab('tickets');
@@ -201,70 +204,113 @@ const Support = () => {
     }
   };
 
+  // Upload image handler
+  const handleUploadImage = async (e) => {
+    const file = e.target.files[0];
+    if (!file || !selectedTicket) return;
+    if (!file.type.startsWith('image/')) {
+      alert('Only image files are allowed.');
+      return;
+    }
+    const formData = new FormData();
+    formData.append('image', file);
+    try {
+      setIsLoading(true);
+      const res = await api.post(`/api/support/tickets/${selectedTicket._id}/upload-image`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      if (res.data && res.data.message) {
+        setTicketMessages((prev) => [...prev, res.data.message]);
+        await fetchTickets();
+      }
+    } catch (err) {
+      alert(err.response?.data?.message || 'Failed to upload image.');
+    } finally {
+      setIsLoading(false);
+      e.target.value = '';
+    }
+  };
+
   const faqs = [
     {
-      category: "Getting Started",
+      category: t('support.faqs.gettingStarted.category'),
       questions: [
         {
           id: 'gs1',
-          question: "How do I create an account?",
-          answer: "Creating an account is simple. Click the 'Get Started' button, provide your email and phone number, and follow the verification steps."
+          question: t('support.faqs.gettingStarted.createAccount.question'),
+          answer: t('support.faqs.gettingStarted.createAccount.answer')
         },
         {
           id: 'gs2',
-          question: "What documents do I need for verification?",
-          answer: "You'll need a valid government-issued ID (National ID or Passport) and a recent utility bill for address verification."
+          question: t('support.faqs.gettingStarted.verification.question'),
+          answer: t('support.faqs.gettingStarted.verification.answer')
+        },
+        {
+          id: 'gs3',
+          question: t('support.faqs.gettingStarted.resetPassword.question'),
+          answer: t('support.faqs.gettingStarted.resetPassword.answer')
         }
       ]
     },
     {
-      category: "Transfers & Payments",
+      category: t('support.faqs.transfers.category'),
       questions: [
         {
           id: 'tp1',
-          question: "How long do transfers take?",
-          answer: "Internal transfers between DinarFlow accounts are instant. Bank transfers typically take 1-2 business days to complete."
+          question: t('support.faqs.transfers.transferTime.question'),
+          answer: t('support.faqs.transfers.transferTime.answer')
         },
         {
           id: 'tp2',
-          question: "What are the transfer limits?",
-          answer: "Daily transfer limits are set at 10,000 TND for verified accounts. This can be increased by contacting support."
+          question: t('support.faqs.transfers.limits.question'),
+          answer: t('support.faqs.transfers.limits.answer')
+        },
+        {
+          id: 'tp3',
+          question: t('support.faqs.transfers.addBank.question'),
+          answer: t('support.faqs.transfers.addBank.answer')
         }
       ]
-    }
-  ];
-
-  const articles = [
-    {
-      id: 'art1',
-      title: "Complete Guide to Account Verification",
-      category: "Account",
-      readTime: "5 min read",
-      content: `
-        <h2>Account Verification Process</h2>
-        <p>Follow these steps to verify your account:</p>
-        <ol>
-          <li>Submit your government-issued ID</li>
-          <li>Provide proof of address</li>
-          <li>Complete facial verification</li>
-          <li>Wait for approval (typically 24-48 hours)</li>
-        </ol>
-      `
     },
     {
-      id: 'art2',
-      title: "Understanding Transfer Fees",
-      category: "Payments",
-      readTime: "3 min read",
-      content: `
-        <h2>Transfer Fee Structure</h2>
-        <p>Our fee structure is transparent and competitive:</p>
-        <ul>
-          <li>Internal transfers: Free</li>
-          <li>Bank transfers: 0.5%</li>
-          <li>International transfers: 1%</li>
-        </ul>
-      `
+      category: t('support.faqs.security.category'),
+      questions: [
+        {
+          id: 'sp1',
+          question: t('support.faqs.security.accountSecurity.question'),
+          answer: t('support.faqs.security.accountSecurity.answer')
+        },
+        {
+          id: 'sp2',
+          question: t('support.faqs.security.twoFactor.question'),
+          answer: t('support.faqs.security.twoFactor.answer')
+        },
+        {
+          id: 'sp3',
+          question: t('support.faqs.security.suspiciousActivity.question'),
+          answer: t('support.faqs.security.suspiciousActivity.answer')
+        }
+      ]
+    },
+    {
+      category: t('support.faqs.accountManagement.category'),
+      questions: [
+        {
+          id: 'am1',
+          question: t('support.faqs.accountManagement.updateInfo.question'),
+          answer: t('support.faqs.accountManagement.updateInfo.answer')
+        },
+        {
+          id: 'am2',
+          question: t('support.faqs.accountManagement.closeAccount.question'),
+          answer: t('support.faqs.accountManagement.closeAccount.answer')
+        },
+        {
+          id: 'am3',
+          question: t('support.faqs.accountManagement.multipleAccounts.question'),
+          answer: t('support.faqs.accountManagement.multipleAccounts.answer')
+        }
+      ]
     }
   ];
 
@@ -300,14 +346,14 @@ const Support = () => {
         >
           {/* Support Hub Navigation */}
           <div className="border-b border-gray-800 p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold">Support Center</h1>
-            <button
+            <div className="flex items-center justify-between mb-6">
+              <h1 className="text-2xl font-bold">{t('support.title')}</h1>
+              <button
                 onClick={handleNewTicket}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2"
-            >
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2"
+              >
                 <Plus className="w-4 h-4" />
-                New Ticket
+                {t('support.newTicket.title')}
               </button>
             </div>
             <div className="flex gap-4">
@@ -322,7 +368,7 @@ const Support = () => {
                 }`}
               >
                 <LifeBuoy className="w-4 h-4" />
-                Home
+                {t('support.tabs.home')}
               </button>
               <button
                 onClick={() => setActiveTab('tickets')}
@@ -335,7 +381,7 @@ const Support = () => {
                 }`}
               >
                 <MessageSquare className="w-4 h-4" />
-                My Tickets
+                {t('support.tabs.tickets')}
               </button>
               <button
                 onClick={() => setActiveTab('knowledge')}
@@ -348,36 +394,41 @@ const Support = () => {
                 }`}
               >
                 <Book className="w-4 h-4" />
-                Knowledge Base
-            </button>
+                {t('support.tabs.knowledge')}
+              </button>
             </div>
-        </div>
+          </div>
 
           <div className="h-[calc(100%-145px)] overflow-y-auto">
-        <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait">
               {activeTab === 'home' && (
-            <motion.div
+                <motion.div
                   key="home"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   className="p-6"
-            >
-              {/* Search */}
+                >
+                  {/* Search */}
                   <div className="max-w-2xl mx-auto mb-8">
                     <div className="relative">
-                      <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <input
-                    type="text"
-                        placeholder="Search for help..."
-                        className={`w-full pl-12 pr-4 py-3 ${
-                      isDark
+                      {i18n.language === 'ar' ? (
+                        <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      ) : (
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      )}
+                      <input
+                        type="text"
+                        placeholder={t('support.search.placeholder')}
+                        className={`w-full ${i18n.language === 'ar' ? 'pr-12 pl-4' : 'pl-12 pr-4'} py-3 ${
+                          isDark
                             ? 'bg-gray-800/50 border-gray-700 text-white'
                             : 'bg-gray-50 border-gray-200 text-gray-900'
                         } border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                  />
-                </div>
-              </div>
+                        dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}
+                      />
+                    </div>
+                  </div>
 
                   {/* Quick Actions */}
                   <div className="grid md:grid-cols-3 gap-6 mb-12">
@@ -396,8 +447,8 @@ const Support = () => {
                         </div>
                         <ChevronRight className="w-5 h-5 text-gray-400 group-hover:translate-x-1 transition-transform" />
                       </div>
-                      <h3 className="text-lg font-semibold mb-2">Contact Support</h3>
-                      <p className="text-gray-400">Get help from our support team</p>
+                      <h3 className="text-lg font-semibold mb-2">{t('support.quickActions.contactSupport.title')}</h3>
+                      <p className="text-gray-400">{t('support.quickActions.contactSupport.description')}</p>
                     </motion.button>
 
                     <motion.button
@@ -415,8 +466,8 @@ const Support = () => {
                         </div>
                         <ChevronRight className="w-5 h-5 text-gray-400 group-hover:translate-x-1 transition-transform" />
                       </div>
-                      <h3 className="text-lg font-semibold mb-2">Knowledge Base</h3>
-                      <p className="text-gray-400">Browse articles and tutorials</p>
+                      <h3 className="text-lg font-semibold mb-2">{t('support.quickActions.knowledgeBase.title')}</h3>
+                      <p className="text-gray-400">{t('support.quickActions.knowledgeBase.description')}</p>
                     </motion.button>
 
                     <motion.a
@@ -434,53 +485,54 @@ const Support = () => {
                         </div>
                         <ExternalLink className="w-5 h-5 text-gray-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                       </div>
-                      <h3 className="text-lg font-semibold mb-2">Email Support</h3>
-                      <p className="text-gray-400">Send us an email directly</p>
+                      <h3 className="text-lg font-semibold mb-2">{t('support.quickActions.emailSupport.title')}</h3>
+                      <p className="text-gray-400">{t('support.quickActions.emailSupport.description')}</p>
                     </motion.a>
                   </div>
 
-                  {/* Popular Articles */}
+                  {/* Popular Help Guides */}
                   <div className="mb-12">
-                    <h2 className="text-xl font-semibold mb-6">Popular Articles</h2>
+                    <h2 className="text-xl font-semibold mb-6">{t('support.popularGuides.title')}</h2>
                     <div className="grid md:grid-cols-2 gap-4">
-                      {articles.slice(0, 2).map((article) => (
-                        <motion.button
-                          key={article.id}
-                          whileHover={{ scale: 1.02 }}
-                          onClick={() => {
-                            setShowArticle(article);
-                            setActiveTab('knowledge');
-                          }}
-                          className={`p-4 rounded-xl border ${
-                      isDark 
-                              ? 'bg-gray-800/50 border-gray-700 hover:bg-gray-800'
-                              : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
-                          } transition-colors text-left group`}
-                        >
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-sm text-gray-400">{article.category}</span>
-                            <span className="text-sm text-gray-400">{article.readTime}</span>
-                          </div>
-                          <h3 className="font-medium mb-2">{article.title}</h3>
-                          <div className="flex items-center text-blue-400 text-sm">
-                            Read Article
-                            <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                          </div>
-                        </motion.button>
+                      {faqs.slice(0, 2).map((category) => (
+                        category.questions.slice(0, 1).map((faq) => (
+                          <motion.button
+                            key={faq.id}
+                            whileHover={{ scale: 1.02 }}
+                            onClick={() => {
+                              setExpandedFaq(faq.id);
+                              setActiveTab('knowledge');
+                            }}
+                            className={`p-4 rounded-xl border ${
+                              isDark 
+                                ? 'bg-gray-800/50 border-gray-700 hover:bg-gray-800'
+                                : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
+                            } transition-colors text-left group`}
+                          >
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-sm text-gray-400">{category.category}</span>
+                            </div>
+                            <h3 className="font-medium mb-2">{faq.question}</h3>
+                            <div className="flex items-center text-blue-400 text-sm">
+                              {t('support.popularGuides.readGuide')}
+                              <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                            </div>
+                          </motion.button>
+                        ))
                       ))}
                     </div>
                   </div>
 
                   {/* FAQs */}
                   <div>
-                    <h2 className="text-xl font-semibold mb-6">Frequently Asked Questions</h2>
+                    <h2 className="text-xl font-semibold mb-6">{t('support.faqs.title')}</h2>
                     <div className="space-y-4">
                       {faqs.map((category) => (
                         <div key={category.category}>
                           <h3 className="text-lg font-medium mb-4">{category.category}</h3>
                           <div className="space-y-2">
                             {category.questions.map((faq) => (
-                          <button
+                              <button
                                 key={faq.id}
                                 onClick={() => setExpandedFaq(expandedFaq === faq.id ? null : faq.id)}
                                 className={`w-full p-4 rounded-xl border ${
@@ -488,28 +540,28 @@ const Support = () => {
                                     ? 'bg-gray-800/50 border-gray-700'
                                     : 'bg-gray-50 border-gray-200'
                                 } transition-colors text-left`}
-                          >
-                            <div className="flex items-center justify-between">
-                              <span className="font-medium">{faq.question}</span>
+                              >
+                                <div className="flex items-center justify-between">
+                                  <span className="font-medium">{faq.question}</span>
                                   <ChevronDown
                                     className={`w-5 h-5 text-gray-400 transition-transform ${
                                       expandedFaq === faq.id ? 'rotate-180' : ''
                                     }`}
                                   />
-                            </div>
-                          <AnimatePresence>
+                                </div>
+                                <AnimatePresence>
                                   {expandedFaq === faq.id && (
-                              <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: 'auto', opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.2 }}
+                                    <motion.div
+                                      initial={{ height: 0, opacity: 0 }}
+                                      animate={{ height: 'auto', opacity: 1 }}
+                                      exit={{ height: 0, opacity: 0 }}
+                                      transition={{ duration: 0.2 }}
                                       className="mt-4 text-gray-400"
-                              >
+                                    >
                                       {faq.answer}
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
+                                    </motion.div>
+                                  )}
+                                </AnimatePresence>
                               </button>
                             ))}
                           </div>
@@ -533,17 +585,22 @@ const Support = () => {
                     <div className="p-6 h-full flex flex-col">
                       <div className="flex items-center gap-4 mb-6">
                         <div className="relative flex-1">
-                          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                          {i18n.language === 'ar' ? (
+                            <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                          ) : (
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                          )}
                           <input
                             type="text"
-                            placeholder="Search tickets..."
+                            placeholder={t('support.tickets.searchPlaceholder')}
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className={`w-full pl-9 pr-4 py-2 ${
+                            className={`w-full ${i18n.language === 'ar' ? 'pr-9 pl-4' : 'pl-9 pr-4'} py-2 ${
                               isDark
                                 ? 'bg-gray-800/50 border-gray-700 text-white'
                                 : 'bg-gray-50 border-gray-200 text-gray-900'
                             } border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}
                           />
                         </div>
                         <button
@@ -574,7 +631,7 @@ const Support = () => {
                             }`}
                           >
                             <div className="flex items-start justify-between mb-2">
-                              <h3 className="font-medium text-left">{ticket.subject || 'No Title'}</h3>
+                              <h3 className="font-medium text-left">{ticket.subject || t('support.tickets.noTitle')}</h3>
                               <span className="text-xs text-gray-400">{ticket.lastUpdate}</span>
                             </div>
                             <div className="flex items-center gap-2 mb-2">
@@ -582,7 +639,7 @@ const Support = () => {
                                 {ticket.priority}
                               </span>
                               <span className={`px-2 py-0.5 rounded-full text-xs ${getStatusColor(ticket.status)}`}>
-                                {ticket.status}
+                                {t('support.tickets.status.' + ticket.status, ticket.status)}
                               </span>
                             </div>
                             <div className="text-sm text-gray-400 text-left">
@@ -600,18 +657,18 @@ const Support = () => {
                       <div className="h-full flex flex-col">
                         <div className="p-6 border-b border-gray-800">
                           <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-xl font-semibold">{selectedTicket.subject || 'No Title'}</h2>
+                            <h2 className="text-xl font-semibold">{selectedTicket.subject || t('support.tickets.noTitle')}</h2>
                             <div className="flex items-center gap-2">
                               <span className={`px-2 py-0.5 rounded-full text-xs ${getPriorityColor(selectedTicket.priority)}`}>
                                 {selectedTicket.priority}
                               </span>
                               <span className={`px-2 py-0.5 rounded-full text-xs ${getStatusColor(selectedTicket.status)}`}>
-                                {selectedTicket.status}
+                                {t('support.tickets.status.' + selectedTicket.status, selectedTicket.status)}
                               </span>
                             </div>
                           </div>
                           <div className="flex items-center gap-4 text-sm text-gray-400">
-                            <span>Ticket #{selectedTicket._id}</span>
+                            <span>{t('support.tickets.ticketNumber', { id: selectedTicket._id })}</span>
                           </div>
                           <div className="mt-4">
                             {selectedTicket.status !== 'closed' && (
@@ -619,7 +676,7 @@ const Support = () => {
                                 onClick={handleCloseTicket}
                                 className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-sm"
                               >
-                                Close Ticket
+                                {t('support.tickets.closeButton')}
                               </button>
                             )}
                           </div>
@@ -651,7 +708,16 @@ const Support = () => {
                                         ? 'bg-gray-800 text-gray-100'
                                         : 'bg-gray-100 text-gray-900'
                                   }`}>
-                                    {message.content}
+                                    {message.content && message.content.startsWith('/uploads/') ? (
+                                      <img
+                                        src={`${import.meta.env.VITE_API_URL || ''}${message.content}`}
+                                        alt="attachment"
+                                        className="max-w-xs max-h-60 rounded-lg border border-gray-200 dark:border-gray-700"
+                                        style={{ objectFit: 'contain' }}
+                                      />
+                                    ) : (
+                                      message.content
+                                    )}
                                   </div>
                                   <div className={`flex items-center gap-2 mt-1 text-xs ${
                                     isDark ? 'text-gray-400' : 'text-gray-500'
@@ -674,7 +740,7 @@ const Support = () => {
                               <textarea
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
-                                placeholder="Type your message..."
+                                placeholder={t('support.tickets.replyPlaceholder', 'Type your message...')}
                                 className={`w-full pr-12 py-3 pl-4 ${
                                   isDark
                                     ? 'bg-gray-800/50 border-gray-700 text-white'
@@ -687,10 +753,18 @@ const Support = () => {
                                 className="absolute right-3 top-1/2 -translate-y-1/2"
                                 type="button"
                                 tabIndex={-1}
-                                disabled
+                                onClick={() => fileInputRef.current && fileInputRef.current.click()}
+                                aria-label="Upload image"
                               >
                                 <Paperclip className="w-5 h-5 text-gray-400" />
                               </button>
+                              <input
+                                type="file"
+                                accept="image/*"
+                                ref={fileInputRef}
+                                style={{ display: 'none' }}
+                                onChange={handleUploadImage}
+                              />
                             </div>
                             <button
                               className={`px-6 py-3 rounded-xl transition-colors flex items-center gap-2 ${
@@ -715,8 +789,8 @@ const Support = () => {
                           <div className="w-16 h-16 bg-blue-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
                             <MessageSquare className="w-8 h-8 text-blue-400" />
                           </div>
-                          <h3 className="text-xl font-semibold mb-2">Select a Ticket</h3>
-                          <p className="text-gray-400">Choose a ticket to view the conversation</p>
+                          <h3 className="text-xl font-semibold mb-2">{t('support.tickets.selectTitle')}</h3>
+                          <p className="text-gray-400">{t('support.tickets.selectDescription')}</p>
                         </div>
                       </div>
                     )}
@@ -732,135 +806,164 @@ const Support = () => {
                   exit={{ opacity: 0 }}
                   className="p-6"
                 >
-                  {showArticle ? (
-                    <div>
-                      <button
-                        onClick={() => setShowArticle(null)}
-                        className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-6"
-                      >
-                        <ChevronLeft className="w-5 h-5" />
-                        Back to Articles
-                      </button>
-
-                      <div className={`p-8 rounded-xl border ${
-                        isDark
-                          ? 'bg-gray-800/50 border-gray-700'
-                          : 'bg-gray-50 border-gray-200'
-                      }`}>
-                        <div className="max-w-3xl mx-auto">
-                          <div className="flex items-center gap-4 mb-2">
-                            <span className="text-sm text-gray-400">{showArticle.category}</span>
-                            <span className="text-sm text-gray-400">{showArticle.readTime}</span>
-                          </div>
-                          <h1 className="text-2xl font-bold mb-8">{showArticle.title}</h1>
-                          <div
-                            className="prose prose-invert max-w-none"
-                            dangerouslySetInnerHTML={{ __html: showArticle.content }}
-                          />
-                          <div className="mt-8 pt-8 border-t border-gray-700">
-                            <p className="text-gray-400 mb-4">Was this article helpful?</p>
-                            <div className="flex items-center gap-4">
-                              <button className={`p-2 rounded-lg ${
-                                isDark
-                                  ? 'hover:bg-gray-700'
-                                  : 'hover:bg-gray-200'
-                              } transition-colors`}>
-                                <ThumbsUp className="w-5 h-5 text-gray-400" />
-                              </button>
-                              <button className={`p-2 rounded-lg ${
-                                isDark
-                                  ? 'hover:bg-gray-700'
-                                  : 'hover:bg-gray-200'
-                              } transition-colors`}>
-                                <ThumbsDown className="w-5 h-5 text-gray-400" />
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                  <div className="max-w-2xl mx-auto mb-8">
+                    <div className="relative">
+                      {i18n.language === 'ar' ? (
+                        <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      ) : (
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      )}
+                      <input
+                        type="text"
+                        placeholder={t('support.knowledge.searchPlaceholder')}
+                        className={`w-full ${i18n.language === 'ar' ? 'pr-12 pl-4' : 'pl-12 pr-4'} py-3 ${
+                          isDark
+                            ? 'bg-gray-800/50 border-gray-700 text-white'
+                            : 'bg-gray-50 border-gray-200 text-gray-900'
+                        } border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                        dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}
+                      />
                     </div>
-                  ) : (
-                    <>
-                      <div className="max-w-2xl mx-auto mb-8">
-                        <div className="relative">
-                          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                          <input
-                            type="text"
-                            placeholder="Search articles..."
-                            className={`w-full pl-12 pr-4 py-3 ${
-                              isDark
-                                ? 'bg-gray-800/50 border-gray-700 text-white'
-                                : 'bg-gray-50 border-gray-200 text-gray-900'
-                            } border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                          />
-                        </div>
-                      </div>
+                  </div>
 
-                      <div className="grid md:grid-cols-2 gap-6">
-                        {articles.map((article) => (
-                          <motion.button
-                            key={article.id}
-                            whileHover={{ scale: 1.02 }}
-                            onClick={() => setShowArticle(article)}
-                            className={`p-6 rounded-xl border ${
-                              isDark
-                                ? 'bg-gray-800/50 border-gray-700 hover:bg-gray-800'
-                                : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
-                            } transition-colors text-left group`}
-                          >
-                            <div className="flex items-center justify-between mb-2">
-                              <span className="text-sm text-gray-400">{article.category}</span>
-                              <span className="text-sm text-gray-400">{article.readTime}</span>
-                            </div>
-                            <h3 className="text-lg font-medium mb-4">{article.title}</h3>
-                            <div className="flex items-center text-blue-400">
-                              Read Article
-                              <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                            </div>
-                          </motion.button>
-                        ))}
-                      </div>
-                    </>
-                  )}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+                  <div>
+                    <h2 className="text-xl font-semibold mb-6">{t('support.knowledge.guidesTitle')}</h2>
+                    <div className="space-y-4">
+                      {faqs.map((category) => (
+                        <div key={category.category}>
+                          <h3 className="text-lg font-medium mb-4">{category.category}</h3>
+                          <div className="space-y-2">
+                            {category.questions.map((faq) => (
+                              <button
+                                key={faq.id}
+                                onClick={() => setExpandedFaq(expandedFaq === faq.id ? null : faq.id)}
+                                className={`w-full p-4 rounded-xl border ${
+                                  isDark
+                                    ? 'bg-gray-800/50 border-gray-700'
+                                    : 'bg-gray-50 border-gray-200'
+                                } transition-colors text-left`}
+                              >
+                                <div className="flex items-center justify-between">
+                                  <span className="font-medium">{faq.question}</span>
+                                  <ChevronDown
+                                    className={`w-5 h-5 text-gray-400 transition-transform ${
+                                      expandedFaq === faq.id ? 'rotate-180' : ''
+                                    }`}
+                                  />
+                                </div>
+                                <AnimatePresence>
+                                  {expandedFaq === faq.id && (
+                                    <motion.div
+                                      initial={{ height: 0, opacity: 0 }}
+                                      animate={{ height: 'auto', opacity: 1 }}
+                                      exit={{ height: 0, opacity: 0 }}
+                                      transition={{ duration: 0.2 }}
+                                      className="mt-4 text-gray-400"
+                                    >
+                                      {faq.answer}
+                                    </motion.div>
+                                  )}
+                                </AnimatePresence>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </motion.div>
       </div>
 
       {/* New Ticket Modal */}
       {showNewTicketModal && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-          <div className={`bg-white dark:bg-gray-900 p-8 rounded-xl shadow-xl w-full max-w-md`}>
-            <h2 className="text-xl font-semibold mb-4">Create New Ticket</h2>
-            <input
-              type="text"
-              value={newTicketTitle}
-              onChange={e => setNewTicketTitle(e.target.value)}
-              placeholder="Enter ticket title..."
-              className="w-full mb-4 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <div className="flex justify-end gap-2">
-              <button
-                onClick={() => setShowNewTicketModal(false)}
-                className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleCreateTicket}
-                className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
-              >
-                Create
-              </button>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className={`relative w-full max-w-lg mx-4 rounded-2xl shadow-2xl p-0 overflow-hidden ${isDark ? 'bg-gray-900 border border-gray-800' : 'bg-white border border-gray-200'}`}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setShowNewTicketModal(false)}
+              className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
+              aria-label="Close"
+            >
+              <XCircle className="w-6 h-6" />
+            </button>
+            {/* Modal Content */}
+            <div className="p-8 pt-6">
+              <h2 className="text-2xl font-bold mb-6 text-center">{t('support.newTicket.title')}</h2>
+              <form onSubmit={e => { e.preventDefault(); handleCreateTicket(); }}>
+                {/* Subject Field */}
+                <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="ticket-subject">
+                  <span className="flex items-center gap-2">
+                    <FileText className="w-5 h-5 text-blue-400" />
+                    {t('support.tickets.subjectLabel', 'Subject')}
+                  </span>
+                </label>
+                <input
+                  id="ticket-subject"
+                  type="text"
+                  value={newTicketTitle}
+                  onChange={e => setNewTicketTitle(e.target.value)}
+                  placeholder={t('support.tickets.subjectPlaceholder', 'Enter subject...')}
+                  className="w-full mb-6 px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 text-base text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+                  maxLength={100}
+                  required
+                  autoFocus
+                />
+                {/* Message Field */}
+                <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="ticket-message">
+                  <span className="flex items-center gap-2">
+                    <MessageSquare className="w-5 h-5 text-blue-400" />
+                    {t('support.tickets.messageLabel', 'Message')}
+                  </span>
+                </label>
+                <div className="relative mb-6">
+                  <textarea
+                    id="ticket-message"
+                    value={message}
+                    onChange={e => setMessage(e.target.value)}
+                    placeholder={t('support.tickets.messagePlaceholder', 'Describe your issue...')}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 text-base text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 resize-none min-h-[100px] max-h-[200px]"
+                    maxLength={1000}
+                    rows={4}
+                    required
+                  />
+                  <span className="absolute bottom-2 right-4 text-xs text-gray-400">{message.length}/1000</span>
+                </div>
+                {/* Actions */}
+                <div className="flex flex-col gap-3 mt-8">
+                  <button
+                    type="submit"
+                    className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg shadow transition-colors flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                    disabled={!newTicketTitle.trim() || !message.trim() || isLoading}
+                  >
+                    <Send className="w-5 h-5" />
+                    {t('support.newTicket.create')}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowNewTicketModal(false)}
+                    className="mx-auto text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm underline"
+                  >
+                    {t('common.cancel')}
+                  </button>
+                </div>
+              </form>
             </div>
-          </div>
+          </motion.div>
         </div>
       )}
 
       <ActionLoader isLoading={isLoading} />
-      </>
+    </>
   );
 };
 

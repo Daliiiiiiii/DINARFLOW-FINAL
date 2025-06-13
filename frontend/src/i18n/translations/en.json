@@ -868,6 +868,8 @@
     "currency": {
       "TND": "TND"
     },
+    "popular": "Popular",
+    "allOffers": "All Offers",
     "completion": "Completion",
     "response": "Response",
     "title": "P2P Trading",
@@ -919,6 +921,8 @@
       "close": "Close"
     },
     "offer": {
+      "editAndReactivate": "Edit and Reactivate",
+      "reactivate": "Reactivate",
       "create": "Create Offer",
       "edit": "Edit Offer",
       "type": "Offer Type",
@@ -1021,6 +1025,7 @@
       "cash": "Cash"
     },
     "order": {
+      "status.disputed": "Disputed",
       "status": "Status",
       "status.completed": "Completed",
       "status.cancelled": "Cancelled",
@@ -1047,6 +1052,7 @@
       "confirmNoPayment": "Please confirm that you have not made any payment",
       "confirmPayment": "Please confirm that you have received the payment"
     },
+    "status.disputed": "Disputed",
     "chat": {
       "title": "Chat",
       "typeMessage": "Type your message...",
@@ -1055,6 +1061,7 @@
       "orderDetails": "Order Details",
       "close": "Close",
       "status": {
+        "disputed": "Disputed",
         "completed": "Transaction Completed!",
         "cancelled": "Order Cancelled",
         "pending": "Order Pending"
@@ -1131,5 +1138,182 @@
     "title": "Order Chat",
     "summary": "Order #{{orderId}} - {{amount}} USDT",
     "verifyPayment": "Verify Payment"
+  },
+  "cryptoWallet": {
+    "guideTitle": "Crypto Wallet Guide",
+    "guideDescription": "Learn how to use your crypto wallet safely and effectively",
+    "globalBalance": "Global Balance: {{balance}} USDT",
+    "totalBalance": "Total Balance",
+    "send": "Send",
+    "receive": "Receive",
+    "mintTest": "Mint Test USDT",
+    "minting": "Minting...",
+    "fee": "Fee: {{fee}}",
+    "inactive": "Inactive",
+    "walletAddress": "Wallet Address",
+    "viewOnExplorer": "View on Explorer",
+    "copyAddress": "Copy Address",
+    "loadingAddress": "Loading address...",
+    "recentTransactions": "Recent Transactions",
+    "noTransactions": "No transactions yet",
+    "quickTipsTitle": "Quick Tips",
+    "tips": {
+      "doubleCheck": "Always double-check addresses before sending",
+      "keepPrivate": "Keep your private keys and seed phrases secure",
+      "networkFees": "Network fees vary by blockchain",
+      "usdtInfo": "USDT is a stablecoin pegged to USD",
+      "txTime": "Transaction times vary by network"
+    },
+    "securityNotesTitle": "Security Notes",
+    "security": {
+      "phishing": "Beware of phishing attempts - never share your private keys",
+      "unsolicited": "Never respond to unsolicited requests for funds"
+    },
+    "help": {
+      "basics": {
+        "title": "What is Blockchain & Crypto?",
+        "description": "Blockchain is a decentralized digital ledger that records transactions across many computers. Cryptocurrencies are digital assets that use blockchain technology for secure transactions."
+      },
+      "balance": {
+        "title": "Understanding Your Balance",
+        "description": "Your global balance shows the total USDT across all networks. Each network maintains its own balance, and you can transfer between networks."
+      },
+      "networks": {
+        "title": "Supported Networks",
+        "description": "We support multiple networks including Ethereum, BNB Chain, TRON, TON, Solana, Polygon, and Arbitrum. Each network has different fees and transaction times."
+      },
+      "chart": {
+        "title": "Price Chart",
+        "description": "The chart shows USDT price movements over time. You can view different time ranges to analyze trends."
+      },
+      "actions": {
+        "title": "Wallet Actions",
+        "description": "Send USDT to other addresses, receive USDT by sharing your address, and view your transaction history."
+      },
+      "transactions": {
+        "title": "Transaction History",
+        "description": "View all your past transactions, including sends, receives, and network transfers. Each transaction shows details like amount, status, and network."
+      }
+    }
+  },
+  "support": {
+    "title": "Support Center",
+    "newTicket": "New Ticket",
+    "tabs": {
+      "home": "Home",
+      "tickets": "My Tickets",
+      "knowledge": "Knowledge Base"
+    },
+    "search": {
+      "placeholder": "Search for help..."
+    },
+    "quickActions": {
+      "contactSupport": {
+        "title": "Contact Support",
+        "description": "Get help from our support team"
+      },
+      "knowledgeBase": {
+        "title": "Knowledge Base",
+        "description": "Browse help guides and FAQs"
+      },
+      "emailSupport": {
+        "title": "Email Support",
+        "description": "Send us an email directly"
+      }
+    },
+    "popularGuides": {
+      "title": "Popular Help Guides",
+      "readGuide": "Read Guide"
+    },
+    "faqs": {
+      "title": "Frequently Asked Questions",
+      "gettingStarted": {
+        "category": "Getting Started",
+        "createAccount": {
+          "question": "How do I create an account?",
+          "answer": "Creating an account is simple. Click the 'Get Started' button, provide your email and phone number, and follow the verification steps."
+        },
+        "verification": {
+          "question": "What documents do I need for verification?",
+          "answer": "You'll need a valid government-issued ID (National ID or Passport) and a recent utility bill for address verification."
+        },
+        "resetPassword": {
+          "question": "How do I reset my password?",
+          "answer": "Click on 'Forgot Password' on the login page, enter your email address, and follow the instructions sent to your email to reset your password."
+        }
+      },
+      "transfers": {
+        "category": "Transfers & Payments",
+        "transferTime": {
+          "question": "How long do transfers take?",
+          "answer": "Internal transfers between DinarFlow accounts are instant. Bank transfers typically take 1-2 business days to complete."
+        },
+        "limits": {
+          "question": "What are the transfer limits?",
+          "answer": "Daily transfer limits are set at 10,000 TND for verified accounts. This can be increased by contacting support."
+        },
+        "addBank": {
+          "question": "How do I add a new bank account?",
+          "answer": "Go to Settings > Bank Accounts > Add New Account. Enter your bank details and follow the verification process."
+        }
+      },
+      "security": {
+        "category": "Security & Privacy",
+        "accountSecurity": {
+          "question": "How secure is my account?",
+          "answer": "We use industry-standard encryption and security measures including 2FA, biometric authentication, and real-time fraud monitoring."
+        },
+        "twoFactor": {
+          "question": "How do I enable two-factor authentication?",
+          "answer": "Go to Settings > Security > Two-Factor Authentication and follow the setup process. You can choose between SMS or authenticator app."
+        },
+        "suspiciousActivity": {
+          "question": "What should I do if I notice suspicious activity?",
+          "answer": "Immediately contact our support team and freeze your account through the Security settings. We'll help you secure your account."
+        }
+      },
+      "accountManagement": {
+        "category": "Account Management",
+        "updateInfo": {
+          "question": "How do I update my personal information?",
+          "answer": "Go to Settings > Profile > Edit Information. You can update your contact details, but some changes may require verification."
+        },
+        "closeAccount": {
+          "question": "How do I close my account?",
+          "answer": "Contact our support team to initiate the account closure process. Make sure to withdraw any remaining funds first."
+        },
+        "multipleAccounts": {
+          "question": "Can I have multiple accounts?",
+          "answer": "No, each individual is allowed only one personal account. Business accounts are separate and require different verification."
+        }
+      }
+    },
+    "newTicket": {
+      "title": "Create New Ticket",
+      "placeholder": "Enter ticket title...",
+      "create": "Create"
+    },
+    "knowledge": {
+      "guidesTitle": "Help Guides",
+      "searchPlaceholder": "Search help guides..."
+    },
+    "tickets": {
+      "searchPlaceholder": "Search tickets...",
+      "noTitle": "No Title",
+      "selectTitle": "Select a Ticket",
+      "selectDescription": "Choose a ticket to view the conversation",
+      "closeButton": "Close Ticket",
+      "ticketNumber": "Ticket #{{id}}",
+      "subjectLabel": "Subject",
+      "subjectPlaceholder": "Enter subject...",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Describe your issue...",
+      "replyPlaceholder": "Type your message...",
+      "status": {
+        "open": "Open",
+        "pending": "Pending",
+        "closed": "Closed"
+      }
+    }
   }
 }
