@@ -180,6 +180,8 @@ const Profile = () => {
     fetchBankAccount();
   }, [currentUser]);
 
+  console.log('KYC object:', currentUser.kyc);
+
   if (isLoading) {
     return <ActionLoader isLoading={true} />;
   }
@@ -393,15 +395,45 @@ const Profile = () => {
                   <RiMapPinLine className="text-gray-400 dark:text-gray-500 mr-2" size={20} />
                   <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('profile.address')}</h2>
                 </div>
-                <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                  <RiLockLine className="mr-1" size={16} />
-                  {t('profile.availableAfterKyc')}
-                </div>
+                {currentUser.kyc?.status === 'verified' && (
+                  <div className="flex items-center text-sm text-green-500 dark:text-green-400">
+                    <RiShieldUserLine className="mr-1" size={16} />
+                    {t('profile.verified')}
+                  </div>
+                )}
               </div>
             </div>
             <div className="p-6">
-              {currentUser.address ? (
-                <span className="text-gray-900 dark:text-gray-100 font-medium">{currentUser.address}</span>
+              {currentUser.kyc?.status === 'verified' ? (
+                (() => {
+                  // Try to get address from latest submission
+                  const submissions = currentUser.kyc.submissions;
+                  let address, city, province, zipCode;
+                  if (submissions && submissions.length > 0) {
+                    const latest = submissions[submissions.length - 1].personalInfo || {};
+                    address = latest.address;
+                    city = latest.city;
+                    province = latest.province;
+                    zipCode = latest.zipCode;
+                  } else if (currentUser.kyc.address) {
+                    // Fallback: address directly on kyc object
+                    address = currentUser.kyc.address;
+                  }
+                  return address ? (
+                    <div className="space-y-2">
+                      <div className="text-gray-900 dark:text-gray-100 font-medium">{address}</div>
+                      {(city || province || zipCode) && (
+                        <div className="text-gray-600 dark:text-gray-300">
+                          {[city, province, zipCode].filter(Boolean).join(', ')}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="text-gray-500 dark:text-gray-400">
+                      {t('profile.noAddressAvailable')}
+                    </div>
+                  );
+                })()
               ) : currentUser.kyc?.status === 'pending' ? (
                 <div className="flex items-center text-yellow-500 dark:text-yellow-400">
                   <span>{t('profile.kycPending')}</span>

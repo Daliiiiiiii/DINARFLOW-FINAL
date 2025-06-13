@@ -59,7 +59,10 @@
     "adminUsers": "Users",
     "adminKYC": "KYC",
     "adminSupport": "Support",
-    "adminSettings": "Settings"
+    "adminSettings": "Settings",
+    "home": "Home",
+    "tickets": "Tickets",
+    "knowledge": "Knowledge"
   },
   "auth": {
     "login": "Login",
@@ -324,43 +327,43 @@
     "pending": "Pending"
   },
   "profile": {
-    "title": "Profile Information",
-    "subtitle": "Manage your profile information and verification status",
+    "title": "Profile",
+    "subtitle": "Manage your personal information and account settings",
     "photo": "Profile Photo",
     "changePhoto": "Change Photo",
+    "removePhoto": "Remove Photo",
+    "photoHelper": "Upload a profile picture (max 5MB)",
     "addPhoto": "Add Photo",
     "removePhoto": "Remove Photo",
-    "photoHelper": "For best results, use a square image (JPG, PNG, GIF, or WebP) under 5MB.",
-    "fullName": "Full Name",
-    "displayName": "Display Name",
-    "readOnly": "Read Only",
-    "phoneNumber": "Phone Number",
-    "edit": "Edit",
-    "cancel": "Cancel",
-    "updatePhone": "Update Phone Number",
-    "enterPhone": "Enter your phone number",
-    "phoneHelper": "Enter your Tunisian phone number (8 digits after +216)",
-    "current": "Current",
-    "address": "Address",
-    "availableAfterKyc": "Available after KYC verification",
-    "completeKyc": "Complete KYC verification to view your address",
+    "photoHelper": "Upload a profile picture (max 5MB)",
     "kycVerification": "KYC Verification",
     "pending": "Pending",
     "verifyIdentity": "Verify your identity to access all features and increase your transaction limits.",
-    "startKyc": "Start KYC Verification",
+    "startKyc": "Start KYC verification",
     "rejected": "Rejected",
     "success": {
-      "imageUpdated": "Profile photo updated successfully",
-      "imageRemoved": "Profile photo removed successfully"
+      "imageUpdated": "Profile picture updated successfully",
+      "imageRemoved": "Profile picture removed successfully"
     },
     "errors": {
       "invalidImageType": "Please upload a valid image file (JPEG, PNG, GIF, or WebP)",
       "imageTooLarge": "Image must be less than 5MB",
-      "uploadFailed": "Failed to upload profile photo",
-      "removeFailed": "Failed to remove profile photo"
+      "uploadFailed": "Profile picture upload failed",
+      "removeFailed": "Profile picture removal failed"
     },
+    "displayName": "Display Name",
+    "fullName": "Full Name",
+    "phoneNumber": "Phone Number",
+    "enterPhone": "Enter phone number",
+    "phoneHelper": "Enter a valid Tunisian phone number",
+    "updatePhone": "Update Phone",
+    "current": "Current",
+    "address": "Address",
+    "readOnly": "Read Only",
+    "availableAfterKyc": "Available after KYC",
     "kycPending": "KYC verification pending",
-    "resubmitKyc": "Resubmit KYC Verification",
+    "completeKyc": "Complete KYC verification",
+    "noAddressAvailable": "No address available",
     "bankAccount": "Bank Account",
     "bankName": "Bank Name",
     "accountHolder": "Account Holder",
@@ -369,7 +372,9 @@
     "noBankAccount": "No bank account linked",
     "contactSupport": "Contact Support",
     "kycRequired": "KYC verification required",
-    "verified": "Verified"
+    "verified": "Verified",
+    "edit": "Edit",
+    "cancel": "Cancel"
   },
   "bankTransfer": {
     "title": "Bank Transfer",
@@ -749,7 +754,10 @@
     "orders": "orders",
     "currency": {
       "TND": "TND"
-    }
+    },
+    "contactSupportDescription": "Open a ticket to get help from our team.",
+    "knowledgeBaseDescription": "Browse guides and FAQs for instant answers.",
+    "emailSupportDescription": "Email us directly for assistance."
   },
   "notifications": {
     "title": "Notifications",
@@ -1298,22 +1306,25 @@
       "searchPlaceholder": "Search help guides..."
     },
     "tickets": {
-      "searchPlaceholder": "Search tickets...",
+      "title": "Tickets",
+      "noMessages": "No messages yet",
       "noTitle": "No Title",
-      "selectTitle": "Select a Ticket",
-      "selectDescription": "Choose a ticket to view the conversation",
-      "closeButton": "Close Ticket",
-      "ticketNumber": "Ticket #{{id}}",
-      "subjectLabel": "Subject",
-      "subjectPlaceholder": "Enter subject...",
-      "messageLabel": "Message",
-      "messagePlaceholder": "Describe your issue...",
-      "replyPlaceholder": "Type your message...",
       "status": {
         "open": "Open",
         "pending": "Pending",
         "closed": "Closed"
-      }
-    }
+      },
+      "closeButton": "Close",
+      "replyPlaceholder": "Type your message...",
+      "closedWarning": "This chat is closed.",
+      "selectDescription": "Select a ticket to view conversation."
+    },
+    "contactSupport": "Contact Support",
+    "knowledgeBase": "Knowledge Base",
+    "emailSupport": "Email Support",
+    "faq": "Frequently Asked Questions",
+    "contactSupportDescription": "Open a ticket to get help from our team.",
+    "knowledgeBaseDescription": "Browse guides and FAQs for instant answers.",
+    "emailSupportDescription": "Email us directly for assistance."
   }
 }

@@ -148,35 +148,15 @@ const NotificationList = () => {
                     <div className="flex items-start">
                       <div className="flex-1">
                         <h4 className="font-medium text-gray-900 dark:text-white">
-                          {t(notification.title, {
-                            amount: notification.data?.amount,
-                            currency: notification.data?.currency,
-                            recipient: notification.data?.recipientName ? ` to ${notification.data.recipientName}` : '',
-                            sender: notification.data?.senderName ? ` from ${notification.data.senderName}` : '',
-                            location: notification.data?.location,
-                            device: notification.data?.device,
-                            status: notification.data?.enabled ? t('common.enabled') : t('common.disabled'),
-                            type: notification.data?.type,
-                            date: notification.data?.date,
-                            message: notification.data?.message,
-                            featureName: notification.data?.featureName
-                          }) !== notification.title ? t(notification.title, {
-                            amount: notification.data?.amount,
-                            currency: notification.data?.currency,
-                            recipient: notification.data?.recipientName ? ` to ${notification.data.recipientName}` : '',
-                            sender: notification.data?.senderName ? ` from ${notification.data.senderName}` : '',
-                            location: notification.data?.location,
-                            device: notification.data?.device,
-                            status: notification.data?.enabled ? t('common.enabled') : t('common.disabled'),
-                            type: notification.data?.type,
-                            date: notification.data?.date,
-                            message: notification.data?.message,
-                            featureName: notification.data?.featureName
-                          }) : t('notifications.unknown')}
-                        </h4>
-                        <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                          {(() => {
-                            const msg = t(notification.message, {
+                          {(
+                            notification.title === 'New Support Ticket' ||
+                            notification.title === 'New Support Message' ||
+                            notification.title === 'Support Replied' ||
+                            notification.title.startsWith('A new message was sent in ticket:')
+                          ) ? (
+                            notification.title
+                          ) : (
+                            t(notification.title, {
                               amount: notification.data?.amount,
                               currency: notification.data?.currency,
                               recipient: notification.data?.recipientName ? ` to ${notification.data.recipientName}` : '',
@@ -188,9 +168,47 @@ const NotificationList = () => {
                               date: notification.data?.date,
                               message: notification.data?.message,
                               featureName: notification.data?.featureName
-                            });
-                            return msg.replace(/\{type\}/g, notification.data?.type ? t(`notifications.types.${notification.data?.type}`) || '' : '');
-                          })()}
+                            }) !== notification.title ? t(notification.title, {
+                              amount: notification.data?.amount,
+                              currency: notification.data?.currency,
+                              recipient: notification.data?.recipientName ? ` to ${notification.data.recipientName}` : '',
+                              sender: notification.data?.senderName ? ` from ${notification.data.senderName}` : '',
+                              location: notification.data?.location,
+                              device: notification.data?.device,
+                              status: notification.data?.enabled ? t('common.enabled') : t('common.disabled'),
+                              type: notification.data?.type,
+                              date: notification.data?.date,
+                              message: notification.data?.message,
+                              featureName: notification.data?.featureName
+                            }) : t('notifications.unknown')
+                          )}
+                        </h4>
+                        <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                          {(
+                            notification.title === 'New Support Ticket' ||
+                            notification.title === 'New Support Message' ||
+                            notification.title === 'Support Replied' ||
+                            notification.title.startsWith('A new message was sent in ticket:')
+                          ) ? (
+                            notification.message
+                          ) : (
+                            (() => {
+                              const msg = t(notification.message, {
+                                amount: notification.data?.amount,
+                                currency: notification.data?.currency,
+                                recipient: notification.data?.recipientName ? ` to ${notification.data.recipientName}` : '',
+                                sender: notification.data?.senderName ? ` from ${notification.data.senderName}` : '',
+                                location: notification.data?.location,
+                                device: notification.data?.device,
+                                status: notification.data?.enabled ? t('common.enabled') : t('common.disabled'),
+                                type: notification.data?.type,
+                                date: notification.data?.date,
+                                message: notification.data?.message,
+                                featureName: notification.data?.featureName
+                              });
+                              return msg.replace(/\{type\}/g, notification.data?.type ? t(`notifications.types.${notification.data?.type}`) || '' : '');
+                            })()
+                          )}
                         </p>
                         <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
                           {new Date(notification.createdAt).toLocaleString('en-US')}

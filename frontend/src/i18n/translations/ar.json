@@ -36,7 +36,10 @@
     "adminUsers": "المستخدمون",
     "adminKYC": "التحقق من الهوية",
     "adminSupport": "الدعم",
-    "adminSettings": "الإعدادات"
+    "adminSettings": "الإعدادات",
+    "home": "الرئيسية",
+    "tickets": "التذاكر",
+    "knowledge": "المعرفة"
   },
   "settings": {
     "language": {
@@ -351,51 +354,51 @@
     "reset": "إعادة تعيين"
   },
   "profile": {
-    "title": "المعلومات الشخصية",
-    "subtitle": "إدارة معلومات ملفك الشخصي وحالة التحقق",
-    "photo": "صورة الملف الشخصي",
-    "changePhoto": "تغيير الصورة",
-    "addPhoto": "إضافة صورة",
-    "removePhoto": "حذف الصورة",
+    "kycVerification": "التحقق من الهوية",
+    "pending": "قيد الانتظار",
+    "verifyIdentity": "التحقق من الهوية للوصول إلى جميع الميزات وزيادة الحدود المتاحة",
+    "startKyc": "بدء التحقق من الهوية",
+    "rejected": "مرفوض",
     "success": {
-      "imageUpdated": "تم تحديث صورة الملف الشخصي بنجاح",
-      "imageRemoved": "تم حذف صورة الملف الشخصي بنجاح"
+      "imageUpdated": "تم تحديث الصورة الشخصية بنجاح",
+      "imageRemoved": "تم حذف الصورة الشخصية بنجاح"
     },
     "errors": {
-      "invalidImageType": "يرجى تحميل ملف صورة صالح (JPEG أو PNG أو GIF أو WebP)",
-      "imageTooLarge": "يجب أن يكون حجم الصورة أقل من 5 ميغابايت",
-      "uploadFailed": "فشل في تحميل صورة الملف الشخصي",
-      "removeFailed": "فشل في حذف صورة الملف الشخصي"
+      "invalidImageType": "يرجى تحميل ملف صورة صالح (JPEG, PNG, GIF أو WebP)",
+      "imageTooLarge": "يجب أن يكون حجم الصورة أقل من 5 ميجابايت",
+      "uploadFailed": "فشل تحميل الصورة الشخصية",
+      "removeFailed": "فشل حذف الصورة الشخصية"
     },
-    "fullName": "الاسم الكامل",
+    "title": "الملف الشخصي",
+    "subtitle": "إدارة معلوماتك الشخصية وإعدادات الحساب",
+    "photo": "الصورة الشخصية",
+    "changePhoto": "تغيير الصورة",
+    "removePhoto": "حذف الصورة",
+    "photoHelper": "قم بتحميل صورة شخصية (الحد الأقصى 5 ميجابايت)",
     "displayName": "اسم العرض",
-    "readOnly": "للقراءة فقط",
+    "fullName": "الاسم الكامل",
     "phoneNumber": "رقم الهاتف",
-    "edit": "تعديل",
-    "cancel": "إلغاء",
+    "enterPhone": "أدخل رقم الهاتف",
+    "phoneHelper": "أدخل رقم هاتف تونسي صالح",
     "updatePhone": "تحديث رقم الهاتف",
-    "enterPhone": "أدخل رقم هاتفك",
-    "phoneHelper": "أدخل رقم هاتفك التونسي (8 أرقام بعد +216)",
     "current": "الحالي",
     "address": "العنوان",
-    "availableAfterKyc": "متاح بعد التحقق KYC",
-    "completeKyc": "أكمل التحقق لعرض عنوانك",
-    "kycVerification": "التحقق من الهوية (KYC)",
-    "pending": "قيد الانتظار",
-    "verifyIdentity": "تحقق من هويتك للوصول إلى جميع الميزات وزيادة حدود معاملاتك.",
-    "startKyc": "بدء التحقق من الهوية (KYC)",
-    "rejected": "مرفوض",
-    "photoHelper": "لأفضل النتائج، استخدم صورة مربعة (JPG أو PNG أو GIF أو WebP) أقل من 5 ميغابايت.",
+    "readOnly": "للقراءة فقط",
+    "availableAfterKyc": "متاح بعد التحقق من الهوية",
     "kycPending": "التحقق من الهوية قيد الانتظار",
-    "resubmitKyc": "إعادة تقديم التحقق من الهوية",
-    "redirectingIn": "سيتم إعادة توجيهك خلال {{seconds}} ثانية...",
+    "completeKyc": "إكمال التحقق من الهوية",
+    "noAddressAvailable": "لا يوجد عنوان متاح",
     "bankAccount": "الحساب المصرفي",
     "bankName": "اسم البنك",
     "accountHolder": "صاحب الحساب",
-    "rib": "الرقم البنكي",
-    "copyRIB": "نسخ الرقم البنكي",
+    "rib": "الرقم المصرفي الدولي",
+    "copyRIB": "نسخ الرقم المصرفي",
     "noBankAccount": "لا يوجد حساب مصرفي مرتبط",
-    "contactSupport": "اتصل بالدعم"
+    "contactSupport": "اتصل بالدعم",
+    "kycRequired": "التحقق من الهوية مطلوب",
+    "verified": "تم التحقق",
+    "edit": "تعديل",
+    "cancel": "إلغاء"
   },
   "kycForm": {
     "kycVerification": "التحقق من الهوية",
@@ -1287,22 +1290,25 @@
       "searchPlaceholder": "ابحث في أدلة المساعدة..."
     },
     "tickets": {
-      "searchPlaceholder": "ابحث في التذاكر...",
+      "title": "التذاكر",
+      "noMessages": "لا توجد رسائل بعد",
       "noTitle": "بدون عنوان",
-      "selectTitle": "اختر تذكرة",
-      "selectDescription": "اختر تذكرة لعرض المحادثة",
-      "closeButton": "إغلاق التذكرة",
-      "ticketNumber": "تذكرة رقم {{id}}",
-      "subjectLabel": "الموضوع",
-      "subjectPlaceholder": "أدخل الموضوع...",
-      "messageLabel": "الرسالة",
-      "messagePlaceholder": "صف مشكلتك...",
-      "replyPlaceholder": "اكتب رسالتك...",
       "status": {
         "open": "مفتوح",
         "pending": "قيد الانتظار",
         "closed": "مغلق"
-      }
-    }
-  }
+      },
+      "closeButton": "إغلاق",
+      "replyPlaceholder": "اكتب رسالتك...",
+      "closedWarning": "تم إغلاق هذه المحادثة",
+      "selectDescription": "اختر تذكرة لعرض المحادثة."
+    },
+    "contactSupportDescription": "افتح تذكرة للحصول على المساعدة من فريقنا.",
+    "knowledgeBaseDescription": "تصفح الأدلة والأسئلة الشائعة للحصول على إجابات فورية.",
+    "emailSupportDescription": "راسلنا مباشرة عبر البريد الإلكتروني للمساعدة.",
+    "faq": "الأسئلة الشائعة"
+  },
+  "contactSupportDescription": "افتح تذكرة للحصول على المساعدة من فريقنا.",
+  "knowledgeBaseDescription": "تصفح الأدلة والأسئلة الشائعة للحصول على إجابات فورية.",
+  "emailSupportDescription": "راسلنا مباشرة عبر البريد الإلكتروني للمساعدة."
 }

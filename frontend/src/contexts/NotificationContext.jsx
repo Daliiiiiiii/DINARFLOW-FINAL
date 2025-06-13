@@ -94,10 +94,15 @@ export const NotificationProvider = ({ children }) => {
       // Play notification sound
       playNotificationSound()
       
-      // Show toast for new notification
-      showNotification('info', notification.title, {
-        description: notification.message
-      })
+      // Only show toast for non-support notifications
+      if (
+        notification.title !== 'New Support Ticket' &&
+        notification.title !== 'New Support Message'
+      ) {
+        showNotification('info', notification.title, {
+          description: notification.message
+        })
+      }
 
       // Refresh notifications to ensure consistency
       refreshNotifications();

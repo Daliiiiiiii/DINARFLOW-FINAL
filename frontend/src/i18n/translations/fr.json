@@ -18,7 +18,10 @@
     "adminUsers": "Utilisateurs",
     "adminKYC": "KYC",
     "adminSupport": "Support",
-    "adminSettings": "Paramètres"
+    "adminSettings": "Paramètres",
+    "home": "Accueil",
+    "tickets": "Tickets",
+    "knowledge": "Base de connaissances"
   },
   "wallet": {
     "title": "Portefeuille",
@@ -360,28 +363,36 @@
     }
   },
   "profile": {
-    "title": "Informations du profil",
-    "kycPending": "Votre vérification KYC est en attente. Nous vous informerons une fois terminée.",
-    "resubmitKyc": "Soumettre à nouveau la vérification KYC",
-    "subtitle": "Gérez les informations de votre profil et le statut de vérification",
+    "title": "Profil",
+    "subtitle": "Gérez vos informations personnelles et paramètres de compte",
     "photo": "Photo de profil",
     "changePhoto": "Changer la photo",
-    "addPhoto": "Ajouter une photo",
     "removePhoto": "Supprimer la photo",
-    "photoHelper": "Pour de meilleurs résultats, utilisez une image carrée (JPG, PNG, GIF ou WebP) de moins de 5 Mo.",
+    "photoHelper": "Téléchargez une photo de profil (max 5MB)",
+    "displayName": "Nom d'affichage",
     "fullName": "Nom complet",
-    "displayName": "Nom affiché",
-    "readOnly": "Lecture seule",
     "phoneNumber": "Numéro de téléphone",
-    "edit": "Modifier",
-    "cancel": "Annuler",
-    "updatePhone": "Mettre à jour le numéro",
-    "enterPhone": "Entrez votre numéro de téléphone",
-    "phoneHelper": "Entrez votre numéro tunisien (8 chiffres après +216)",
+    "enterPhone": "Entrez le numéro de téléphone",
+    "phoneHelper": "Entrez un numéro de téléphone tunisien valide",
+    "updatePhone": "Mettre à jour le téléphone",
     "current": "Actuel",
     "address": "Adresse",
-    "availableAfterKyc": "Disponible après vérification KYC",
-    "completeKyc": "Complétez la vérification KYC pour voir votre adresse",
+    "readOnly": "Lecture seule",
+    "availableAfterKyc": "Disponible après KYC",
+    "kycPending": "Vérification KYC en attente",
+    "completeKyc": "Compléter la vérification KYC",
+    "noAddressAvailable": "Aucune adresse disponible",
+    "bankAccount": "Compte bancaire",
+    "bankName": "Nom de la banque",
+    "accountHolder": "Titulaire du compte",
+    "rib": "RIB",
+    "copyRIB": "Copier le RIB",
+    "noBankAccount": "Aucun compte bancaire lié",
+    "contactSupport": "Contacter le support",
+    "kycRequired": "Vérification KYC requise",
+    "verified": "Vérifié",
+    "edit": "Modifier",
+    "cancel": "Annuler",
     "kycVerification": "Vérification KYC",
     "pending": "En attente",
     "verifyIdentity": "Vérifiez votre identité pour accéder à toutes les fonctionnalités et augmenter vos limites de transaction.",
@@ -396,17 +407,7 @@
       "imageTooLarge": "L'image doit être inférieure à 5 Mo",
       "uploadFailed": "Échec du téléchargement de la photo de profil",
       "removeFailed": "Échec de la suppression de la photo de profil"
-    },
-    "bankAccount": "Compte bancaire",
-    "bankName": "Nom de la banque",
-    "accountHolder": "Titulaire du compte",
-    "rib": "RIB",
-    "copyRIB": "Copier le RIB",
-    "noBankAccount": "Aucun compte bancaire lié",
-    "contactSupport": "Contacter le support",
-    "kycPending": "Vérification KYC en attente",
-    "kycRequired": "Vérification KYC requise",
-    "verified": "Vérifié"
+    }
   },
   "kycStatus": {
     "verified": "Vérifié",
@@ -723,7 +724,9 @@
     "orderCount": "{count} ordres",
     "completionRate": "{rate}% taux d'achèvement",
     "minResponse": "{min} min de réponse",
-    "available": "Disponible: {amount} USDT"
+    "available": "Disponible: {amount} USDT",
+    "knowledgeBaseDescription": "Consultez les guides et FAQ pour des réponses instantanées.",
+    "emailSupportDescription": "Contactez-nous directement par e-mail pour obtenir de l'aide."
   },
   "notifications": {
     "title": "Notifications",
@@ -1290,22 +1293,25 @@
       "searchPlaceholder": "Rechercher dans les guides d'aide..."
     },
     "tickets": {
-      "searchPlaceholder": "Rechercher des tickets...",
+      "title": "Tickets",
+      "noMessages": "Aucun message",
       "noTitle": "Pas de titre",
-      "selectTitle": "Sélectionner un ticket",
-      "selectDescription": "Choisissez un ticket pour voir la conversation",
-      "closeButton": "Fermer le ticket",
-      "ticketNumber": "Ticket n°{{id}}",
-      "subjectLabel": "Sujet",
-      "subjectPlaceholder": "Entrez le sujet...",
-      "messageLabel": "Message",
-      "messagePlaceholder": "Décrivez votre problème...",
-      "replyPlaceholder": "Écrivez votre message...",
       "status": {
         "open": "Ouvert",
         "pending": "En attente",
         "closed": "Fermé"
-      }
-    }
+      },
+      "closeButton": "Fermer",
+      "replyPlaceholder": "Écrivez votre message...",
+      "closedWarning": "Cette discussion est fermée.",
+      "selectDescription": "Sélectionnez un ticket pour voir la conversation."
+    },
+    "contactSupport": "Contacter le support",
+    "knowledgeBase": "Base de connaissances",
+    "emailSupport": "Support par e-mail",
+    "faq": "Questions fréquemment posées",
+    "contactSupportDescription": "Ouvrez un ticket pour obtenir de l'aide de notre équipe.",
+    "knowledgeBaseDescription": "Consultez les guides et FAQ pour des réponses instantanées.",
+    "emailSupportDescription": "Contactez-nous directement par e-mail pour obtenir de l'aide."
   }
 }

@@ -10,12 +10,84 @@ import {
   XCircle,
   Send,
   AlertTriangle,
-  Download
+  Download,
+  Bot,
+  CheckCheck
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import api from '../lib/axios';
 import { io } from 'socket.io-client';
 import { useTranslation } from 'react-i18next';
+
+const ChatBubble = ({ message, isUser, isDark }) => {
+  const [hovered, setHovered] = React.useState(false);
+  const isImage = message.content && message.content.startsWith('/uploads/');
+  const imageUrl = isImage ? `${import.meta.env.VITE_API_URL || ''}${message.content}` : null;
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+      className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-4`}
+    >
+      <div
+        className={`flex gap-3 max-w-[80%] ${isUser ? 'flex-row-reverse' : 'flex-row'}`}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <div className={`w-9 h-9 rounded-full flex items-center justify-center ${
+          isUser
+            ? 'bg-gradient-to-br from-blue-400/30 to-blue-600/20'
+            : 'bg-gradient-to-br from-purple-400/30 to-purple-600/20'
+        }`}>
+          {isUser ? (
+            <User className="w-4 h-4 text-blue-500" />
+          ) : (
+            <Bot className="w-4 h-4 text-purple-500" />
+          )}
+        </div>
+        <div className="flex flex-col">
+          <div
+            className={`relative rounded-2xl px-5 py-3 shadow-md transition-all duration-200 group ${
+              isUser
+                ? 'bg-blue-600 text-white'
+                : isDark
+                  ? 'bg-gray-800 text-gray-100'
+                  : 'bg-gray-100 text-gray-900'
+            } ${hovered ? 'ring-2 ring-blue-300/40 scale-[1.025]' : ''}`}
+          >
+            {isImage ? (
+              <div className="relative group">
+                <img
+                  src={imageUrl}
+                  alt="attachment"
+                  className="max-w-xs max-h-60 rounded-lg border border-gray-200 dark:border-gray-700 object-contain"
+                />
+                {hovered && (
+                  <a
+                    href={imageUrl}
+                    download
+                    className="absolute top-2 right-2 bg-white/80 dark:bg-gray-900/80 rounded-full p-1 shadow hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors"
+                    title="Download image"
+                  >
+                    <Download className="w-5 h-5 text-blue-500" />
+                  </a>
+                )}
+              </div>
+            ) : (
+              message.content
+            )}
+          </div>
+          <div className={`flex items-center gap-1 mt-1 text-xs ${isUser ? 'justify-end' : 'justify-start'} ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
+               style={{ opacity: 0.7 }}>
+            <span>{new Date(message.timestamp).toLocaleTimeString()}</span>
+            {isUser && <CheckCheck className="w-3 h-3 text-blue-300" />}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 const Support = () => {
   const { theme } = useTheme();
@@ -29,6 +101,7 @@ const Support = () => {
   const [socket, setSocket] = useState(null);
   const messagesEndRef = useRef(null);
   const { t, i18n } = useTranslation();
+  const [notification, setNotification] = useState(null);
 
   useEffect(() => {
     fetchTickets();
@@ -59,6 +132,13 @@ const Support = () => {
             ...prev,
             messages: [...prev.messages, data.message]
           };
+        });
+      } else {
+        // Show notification if not currently viewing this ticket
+        setNotification({
+          subject: data.ticket.subject,
+          content: data.message.content,
+          ticketId: data.ticket._id
         });
       }
       // Refresh tickets list to update latest message
@@ -153,16 +233,18 @@ const Support = () => {
     }
   };
 
-  const handleCloseTicket = async () => {
-    if (!selectedTicket) return;
+  const handleCloseTicket = async (ticket) => {
+    if (!ticket) return;
 
     try {
       setIsLoading(true);
-      await api.patch(`/api/support/admin/tickets/${selectedTicket._id}/status`, {
+      await api.patch(`/api/support/admin/tickets/${ticket._id}/status`, {
         status: 'closed'
       });
       await fetchTickets();
-      setSelectedTicket(null);
+      if (selectedTicket && selectedTicket._id === ticket._id) {
+        setSelectedTicket(null);
+      }
     } catch (error) {
       console.error('Error closing ticket:', error);
     } finally {
@@ -228,26 +310,66 @@ const Support = () => {
     }
   }, [selectedTicket?.messages]);
 
+  // Calculate ticket counts by status
+  const openCount = tickets.filter(t => t.status === 'open').length;
+  const inProgressCount = tickets.filter(t => t.status === 'in_progress').length;
+  const closedCount = tickets.filter(t => t.status === 'closed').length;
+
   return (
       <div className="space-y-6">
+        {/* Notification Popup */}
+        {notification && (
+          <div className="fixed top-4 right-4 bg-blue-600 text-white px-4 py-3 rounded-lg shadow-lg z-50 min-w-[260px] max-w-xs animate-fade-in">
+            <div className="font-semibold mb-1">New Support Message</div>
+            <div className="truncate font-medium">{notification.subject}</div>
+            <div className="truncate text-sm mb-2">{notification.content}</div>
+            <div className="flex gap-2 justify-end">
+              <button
+                className="underline text-xs hover:text-blue-200"
+                onClick={() => {
+                  setSelectedTicket(tickets.find(t => t._id === notification.ticketId));
+                  setNotification(null);
+                }}
+              >
+                View
+              </button>
+              <button
+                className="text-xs hover:text-blue-200"
+                onClick={() => setNotification(null)}
+              >
+                Dismiss
+              </button>
+            </div>
+          </div>
+        )}
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold">{t('admin.supportTickets')}</h1>
           <div className="flex items-center gap-3">
-            <span className={`px-3 py-1 rounded-lg ${
-              isDark ? 'bg-gray-800' : 'bg-gray-100'
-            }`}>
-              <span className="text-yellow-400 font-medium">8</span> {t('admin.open')}
-            </span>
-            <span className={`px-3 py-1 rounded-lg ${
-              isDark ? 'bg-gray-800' : 'bg-gray-100'
-            }`}>
-              <span className="text-blue-400 font-medium">5</span> {t('admin.inProgress')}
-            </span>
-            <span className={`px-3 py-1 rounded-lg ${
-              isDark ? 'bg-gray-800' : 'bg-gray-100'
-            }`}>
-              <span className="text-green-400 font-medium">12</span> {t('admin.closed')}
-            </span>
+            {/* Status filter buttons */}
+            <button
+              onClick={() => setStatusFilter('open')}
+              className={`px-3 py-1 rounded-lg flex items-center gap-1 font-medium transition-colors text-sm
+                ${statusFilter === 'open' ? (isDark ? 'bg-yellow-400/20 text-yellow-300' : 'bg-yellow-100 text-yellow-700') : (isDark ? 'bg-gray-800 text-yellow-400' : 'bg-gray-100 text-yellow-400')}
+                focus:outline-none focus:ring-2 focus:ring-yellow-400`}
+            >
+              <span className="font-medium">{openCount}</span> {t('admin.open')}
+            </button>
+            <button
+              onClick={() => setStatusFilter('in_progress')}
+              className={`px-3 py-1 rounded-lg flex items-center gap-1 font-medium transition-colors text-sm
+                ${statusFilter === 'in_progress' ? (isDark ? 'bg-blue-400/20 text-blue-300' : 'bg-blue-100 text-blue-700') : (isDark ? 'bg-gray-800 text-blue-400' : 'bg-gray-100 text-blue-400')}
+                focus:outline-none focus:ring-2 focus:ring-blue-400`}
+            >
+              <span className="font-medium">{inProgressCount}</span> {t('admin.inProgress')}
+            </button>
+            <button
+              onClick={() => setStatusFilter('closed')}
+              className={`px-3 py-1 rounded-lg flex items-center gap-1 font-medium transition-colors text-sm
+                ${statusFilter === 'closed' ? (isDark ? 'bg-green-400/20 text-green-300' : 'bg-green-100 text-green-700') : (isDark ? 'bg-gray-800 text-green-400' : 'bg-gray-100 text-green-400')}
+                focus:outline-none focus:ring-2 focus:ring-green-400`}
+            >
+              <span className="font-medium">{closedCount}</span> {t('admin.closed')}
+            </button>
           </div>
         </div>
 
@@ -293,24 +415,6 @@ const Support = () => {
                   <option value="in_progress">In Progress</option>
                   <option value="closed">Closed</option>
                 </select>
-                <button className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 ${
-                  isDark
-                    ? 'bg-purple-600/20 text-purple-400 hover:bg-purple-600/30 shadow-lg shadow-purple-500/10'
-                    : 'bg-purple-50 text-purple-600 hover:bg-purple-100 shadow-md'
-                } flex items-center gap-2`}
-                >
-                  <Filter className="w-4 h-4" />
-                  Filter
-                </button>
-                <button className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 ${
-                  isDark
-                    ? 'bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 shadow-lg shadow-blue-500/10'
-                    : 'bg-blue-50 text-blue-600 hover:bg-blue-100 shadow-md'
-                } flex items-center gap-2`}
-                >
-                  <Download className="w-4 h-4" />
-                  Export
-                </button>
               </div>
             </div>
           </div>
@@ -382,7 +486,7 @@ const Support = () => {
                         </button>
                         {ticket.status !== 'closed' && (
                           <button
-                            onClick={handleCloseTicket}
+                            onClick={() => handleCloseTicket(ticket)}
                             className="px-3 py-1 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm"
                           >
                             Close
@@ -431,7 +535,20 @@ const Support = () => {
             } border rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto`}>
               <div className="p-6 border-b border-gray-700">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-semibold">Support Ticket</h2>
+                  <div className="flex items-center gap-4">
+                    <h2 className="text-xl font-semibold">{selectedTicket.subject}</h2>
+                    <span className="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
+                      {selectedTicket.status}
+                    </span>
+                    {selectedTicket.status !== 'closed' && (
+                      <button
+                        onClick={() => handleCloseTicket(selectedTicket)}
+                        className="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white text-xs font-semibold transition-colors shadow"
+                      >
+                        Close Ticket
+                      </button>
+                    )}
+                  </div>
                   <button
                     onClick={() => setSelectedTicket(null)}
                     className="text-gray-500 hover:text-gray-400"
@@ -469,50 +586,43 @@ const Support = () => {
                   {/* Messages */}
                   <div className="space-y-4">
                     {selectedTicket.messages.map((message) => (
-                      <div
+                      <ChatBubble
                         key={message._id}
-                        className={`flex ${message.type === 'agent' ? 'justify-end' : 'justify-start'}`}
-                      >
-                        <div className={`max-w-[70%] ${message.type === 'agent' ? 'bg-blue-600/20' : isDark ? 'bg-gray-800' : 'bg-gray-100'} rounded-lg p-4`}>
-                          <div className="text-sm">{message.content}</div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-                            {new Date(message.timestamp).toLocaleString()}
-                          </div>
-                        </div>
-                      </div>
+                        message={message}
+                        isUser={message.type === 'agent'}
+                        isDark={isDark}
+                      />
                     ))}
                     <div ref={messagesEndRef} />
                   </div>
 
                   {/* Reply Box */}
                   {selectedTicket.status !== 'closed' && (
-                    <div className="mt-6">
-                      <div className="flex gap-4">
-                        <input
-                          type="text"
+                    <div className="sticky bottom-0 z-10 bg-white/90 dark:bg-gray-900/90 px-8 py-5 border-t border-gray-200 dark:border-gray-800 flex items-end gap-4 shadow-xl">
+                      <div className="flex-1 relative">
+                        <textarea
                           value={replyMessage}
                           onChange={(e) => setReplyMessage(e.target.value)}
-                          placeholder="Type your reply..."
-                          className={`flex-1 px-4 py-2 rounded-lg border ${
-                            isDark
-                              ? 'bg-gray-800 border-gray-700 text-white focus:border-blue-500'
-                              : 'border-gray-300 focus:border-blue-500'
-                          } focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}
+                          placeholder={t('support.tickets.replyPlaceholder')}
+                          className="w-full rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-800/80 px-5 py-3 pr-14 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none shadow"
+                          rows={1}
+                          style={{ minHeight: '44px', maxHeight: '120px' }}
                         />
-                        <button
-                          onClick={handleSendReply}
-                          disabled={!replyMessage.trim() || isLoading}
-                          className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                            replyMessage.trim() && !isLoading
-                              ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                              : isDark
-                                ? 'bg-gray-800 text-gray-400'
-                                : 'bg-gray-100 text-gray-400'
-                          }`}
-                        >
-                          <Send className="w-5 h-5" />
-                        </button>
                       </div>
+                      <motion.button
+                        whileHover={{ scale: 1.08 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`px-6 py-3 rounded-2xl font-semibold shadow transition-colors flex items-center gap-2 text-lg ${
+                          replyMessage.trim()
+                            ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                            : 'bg-gray-200 dark:bg-gray-800 text-gray-400 cursor-not-allowed'
+                        }`}
+                        onClick={handleSendReply}
+                        disabled={!replyMessage.trim() || isLoading}
+                        type="button"
+                      >
+                        <Send className="w-5 h-5" />
+                      </motion.button>
                     </div>
                   )}
                 </div>
