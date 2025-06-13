@@ -386,9 +386,16 @@
     "startKyc": "بدء التحقق من الهوية (KYC)",
     "rejected": "مرفوض",
     "photoHelper": "لأفضل النتائج، استخدم صورة مربعة (JPG أو PNG أو GIF أو WebP) أقل من 5 ميغابايت.",
-    "kycPending": "التحقق من هويتك قيد الانتظار. سنخطرك بمجرد اكتماله.",
+    "kycPending": "التحقق من الهوية قيد الانتظار",
     "resubmitKyc": "إعادة تقديم التحقق من الهوية",
-    "redirectingIn": "سيتم إعادة توجيهك خلال {{seconds}} ثانية..."
+    "redirectingIn": "سيتم إعادة توجيهك خلال {{seconds}} ثانية...",
+    "bankAccount": "الحساب المصرفي",
+    "bankName": "اسم البنك",
+    "accountHolder": "صاحب الحساب",
+    "rib": "الرقم البنكي",
+    "copyRIB": "نسخ الرقم البنكي",
+    "noBankAccount": "لا يوجد حساب مصرفي مرتبط",
+    "contactSupport": "اتصل بالدعم"
   },
   "kycForm": {
     "kycVerification": "التحقق من الهوية",
@@ -749,35 +756,83 @@
       "completed": "مكتمل",
       "pending": "قيد الانتظار",
       "active": "نشط"
+    },
+    "new": "جديد",
+    "actions": {
+      "viewAll": "عرض جميع الإشعارات"
     }
   },
   "notifications": {
-    "categories": {
-      "all": "الكل",
-      "transactions": "المعاملات",
-      "security": "الأمان",
-      "system": "النظام",
-      "other": "أخرى",
-      "title": "الإشعارات"
-    },
     "title": "الإشعارات",
     "subtitle": "ابق على اطلاع بنشاط حسابك",
     "categories": {
       "all": "الكل",
-      "transactions": "المعاملات",
-      "security": "الأمان",
-      "system": "النظام",
-      "other": "أخرى"
-    },
-    "actions": {
-      "markAllRead": "تحديد الكل كمقروء",
-      "clearAll": "مسح الكل",
-      "markAsRead": "تحديد كمقروء",
-      "delete": "حذف"
+      "alert": "التنبيهات",
+      "transfers": "التحويلات",
+      "p2p": "P2P",
+      "crypto": "العملات المشفرة",
+      "title": "الفئات"
     },
     "search": {
       "placeholder": "البحث في الإشعارات..."
     },
+    "noNotifications": "لم يتم العثور على إشعارات",
+    "markAllRead": "تحديد الكل كمقروء",
+    "deleteAll": "حذف الكل",
+    "actions": {
+      "markAsRead": "تحديد كمقروء",
+      "delete": "حذف",
+      "markAllRead": "تحديد الكل كمقروء",
+      "deleteAll": "حذف الكل",
+      "clearAll": "مسح الكل",
+      "viewAll": "عرض جميع الإشعارات"
+    },
+    "types": {
+      "alert": "تنبيه",
+      "transaction": "معاملة",
+      "p2p": "P2P",
+      "chat": "محادثة",
+      "crypto": "عملة مشفرة",
+      "security": {
+        "title": {
+          "new_login": "تم اكتشاف تسجيل دخول جديد",
+          "default": "تنبيه أمني"
+        },
+        "message": {
+          "new_login": "تم اكتشاف تسجيل دخول جديد على حسابك.",
+          "default": "تنبيه أمني"
+        }
+      }
+    },
+    "messages": {
+      "new_login": "تم اكتشاف تسجيل دخول جديد من {device}",
+      "password_changed": "تم تغيير كلمة المرور الخاصة بك",
+      "email_verified": "تم التحقق من بريدك الإلكتروني",
+      "phone_verified": "تم التحقق من رقم هاتفك",
+      "kyc_approved": "تمت الموافقة على التحقق من هويتك",
+      "kyc_rejected": "تم رفض التحقق من هويتك",
+      "p2p_order_created": "تم إنشاء طلب P2P جديد",
+      "p2p_order_cancelled": "تم إلغاء طلب P2P",
+      "p2p_order_completed": "تم إكمال طلب P2P",
+      "p2p_payment_received": "تم استلام الدفع لطلب P2P",
+      "p2p_payment_sent": "تم إرسال الدفع لطلب P2P",
+      "p2p_dispute_opened": "تم فتح نزاع لطلب P2P",
+      "p2p_dispute_resolved": "تم حل النزاع لطلب P2P",
+      "p2p_message_received": "تم استلام رسالة جديدة",
+      "crypto_send": "تم إرسال {amount} {currency} من العملات المشفرة",
+      "crypto_receive": "تم استلام {amount} {currency} من العملات المشفرة",
+      "crypto_swap": "تم تبديل {fromAmount} {fromCurrency} إلى {toAmount} {toCurrency} من العملات المشفرة",
+      "crypto_stake": "تم رهن {amount} {currency} من العملات المشفرة",
+      "crypto_unstake": "تم إلغاء رهن {amount} {currency} من العملات المشفرة",
+      "crypto_yield": "تم كسب {amount} {currency} من العائد",
+      "crypto_deposit": "تم إيداع {amount} {currency} من العملات المشفرة",
+      "crypto_withdrawal": "تم سحب {amount} {currency} من العملات المشفرة"
+    },
+    "empty": {
+      "title": "لم يتم العثور على إشعارات",
+      "description": "أنت محدث بكل شيء!"
+    },
+    "loading": "جاري تحميل الإشعارات...",
     "settings": {
       "title": "إعدادات الإشعارات",
       "pushNotifications": {
@@ -786,9 +841,13 @@
           "label": "المعاملات",
           "description": "احصل على إشعارات حول معاملاتك"
         },
-        "security": {
-          "label": "تنبيهات الأمان",
-          "description": "إشعارات أمان مهمة"
+        "alert": {
+          "label": "التنبيهات",
+          "description": "إشعارات تنبيه مهمة"
+        },
+        "system": {
+          "label": "النظام",
+          "description": "إشعارات وتحديثات النظام"
         },
         "news": {
           "label": "الأخبار والتحديثات",
@@ -808,62 +867,265 @@
       },
       "save": "حفظ الإعدادات"
     },
-    "empty": {
-      "title": "لم يتم العثور على إشعارات",
-      "description": "أنت محدث بكل شيء!"
+    "unknown": "إشعار غير معروف",
+    "new": "جديد",
+    "actions": {
+      "viewAll": "عرض جميع الإشعارات"
+    }
+  },
+  "p2p": {
+    "p2p": "P2P",
+    "popular": "الأكثر مباعة",
+    "allOffers": "جميع العروض",
+    "title": "التداول المباشر",
+    "subtitle": "تداول العملات الرقمية مع المستخدمين الآخرين",
+    "createOffer": "إنشاء عرض",
+    "myOffers": "عروضي",
+    "myOrders": "طلباتي",
+    "search": "البحث عن العروض...",
+    "filter": "تصفية",
+    "sort": "ترتيب",
+    "buy": "شراء",
+    "sell": "بيع",
+    "price": "السعر",
+    "amount": "المبلغ",
+    "limits": "الحدود",
+    "completion": "نسبة الإكمال",
+    "response": "الاستجابة",
+    "orderCount": "{{count}} طلبات",
+    "completionRate": "٪{{rate}}:نسبة الإكمال",
+    "minResponse": "دقيقة {{min}}: الإستجابة",
+    "available": "متوفر",
+    "orders": "طلبات",
+    "currency": {
+      "TND": "د.ت"
     },
-    "loading": "جاري تحميل الإشعارات...",
-    "types": {
-      "transaction": {
-        "title": {
-          "sent": "{{amount}} {{currency}} تم إرسال ",
-          "received": "{{amount}} {{currency}} تم إاستلام ",
-          "deposited": "{{amount}} {{currency}} تم إيداع ",
-          "withdrawn": "{{amount}} {{currency}} تم سحب",
-          "default": "{{amount}} {{currency}} :معاملة"
-        },
-        "message": {
-          "sent": "{{amount}} {{currency}}{{recipient}} لقد أرسلت ",
-          "received": "{{amount}} {{currency}}{{sender}} لقد استلمت ",
-          "deposited": "{{amount}} {{currency}} لقد أودعت في حسابك المصرفي",
-          "withdrawn": "{{amount}} {{currency}} لقد سحبت من حسابك المصرفي",
-          "default": "{{amount}} {{currency}} تمت معالجة المعاملة"
-        }
+    "paymentMethods": "طرق الدفع",
+    "status": {
+      "active": "نشط",
+      "completed": "مكتمل",
+      "cancelled": "ملغي",
+      "disputed": "متنازع عليه",
+      "pending": "قيد الانتظار"
+    },
+    "order": {
+      "title": "تفاصيل الطلب",
+      "buyer": "المشتري",
+      "seller": "البائع",
+      "amount": "المبلغ",
+      "price": "السعر",
+      "total": "المجموع",
+      "status": "الحالة",
+      "timeRemaining": "الوقت المتبقي",
+      "paymentDetails": "تفاصيل الدفع",
+      "confirmPayment": "تأكيد الدفع",
+      "releaseFunds": "إطلاق الأموال",
+      "cancelOrder": "إلغاء الطلب",
+      "dispute": "فتح نزاع",
+      "chat": "المحادثة",
+      "sendMessage": "إرسال رسالة",
+      "typeMessage": "اكتب رسالتك...",
+      "paymentProof": "إثبات الدفع",
+      "uploadProof": "رفع إثبات الدفع",
+      "confirmRelease": "تأكيد الإطلاق",
+      "confirmCancel": "تأكيد الإلغاء",
+      "confirmDispute": "تأكيد النزاع",
+      "reason": "السبب",
+      "details": "التفاصيل",
+      "submit": "إرسال",
+      "close": "إغلاق"
+    },
+    "offer": {
+      "create": "إنشاء عرض",
+      "edit": "تعديل العرض",
+      "type": "نوع العرض",
+      "buy": "شراء USDT",
+      "sell": "بيع USDT",
+      "price": "السعر (د.ت)",
+      "minAmount": "الحد الأدنى",
+      "maxAmount": "الحد الأقصى",
+      "paymentMethods": "طرق الدفع",
+      "bank": "تحويل بنكي",
+      "cash": "نقدي",
+      "mobile": "المال المتنقل",
+      "terms": "الشروط والأحكام",
+      "submit": "تقديم العرض",
+      "update": "تحديث العرض",
+      "delete": "حذف العرض",
+      "status": {
+        "active": "نشط",
+        "inactive": "غير نشط"
       },
-      "security": {
-        "title": {
-          "login_attempt": "محاولة تسجيل دخول جديدة",
-          "password_change": "تم تغيير كلمة المرور",
-          "two_factor": "المصادقة الثنائية",
-          "account_locked": "تم قفل الحساب",
-          "login_success": "تسجيل دخول ناجح",
-          "new_login": "تسجيل دخول جديد",
-          "default": "تنبيه أمني"
-        },
-        "message": {
-          "login_attempt": "محاولة تسجيل دخول جديدة من {{location}} باستخدام {{device}}",
-          "password_change": "تم تغيير كلمة المرور بنجاح",
-          "two_factor": "تم {{status}} المصادقة الثنائية",
-          "account_locked": "تم قفل حسابك مؤقتًا بسبب محاولات تسجيل دخول متكررة فاشلة",
-          "login_success": "تم اكتشاف تسجيل دخول ناجح على حسابك",
-          "new_login": "تم اكتشاف تسجيل دخول جديد على حسابك.",
-          "default": "{{type}} :تنبيه أمني"
-        }
+      "deactivate": "تعطيل العرض"
+    },
+    "notifications": {
+      "orderCreated": "تم إنشاء طلب جديد",
+      "orderCompleted": "تم إكمال الطلب",
+      "orderCancelled": "تم إلغاء الطلب",
+      "orderDisputed": "تم فتح نزاع على الطلب",
+      "paymentReceived": "تم استلام الدفع",
+      "fundsReleased": "تم إطلاق الأموال",
+      "newMessage": "تم استلام رسالة جديدة"
+    },
+    "errors": {
+      "createOffer": "فشل في إنشاء العرض",
+      "updateOffer": "فشل في تحديث العرض",
+      "deleteOffer": "فشل في حذف العرض",
+      "createOrder": "فشل في إنشاء الطلب",
+      "cancelOrder": "فشل في إلغاء الطلب",
+      "releaseFunds": "فشل في إطلاق الأموال",
+      "uploadProof": "فشل في رفع إثبات الدفع",
+      "sendMessage": "فشل في إرسال الرسالة",
+      "duplicateOrder": "لديك طلب نشط بالفعل مع هذا المستخدم",
+      "insufficientBalance": "الرصيد غير كافٍ",
+      "invalidAmount": "مبلغ غير صالح",
+      "invalidPrice": "سعر غير صالح",
+      "requiredFields": "يرجى ملء جميع الحقول المطلوبة"
+    },
+    "success": {
+      "createOffer": "تم إنشاء العرض بنجاح",
+      "updateOffer": "تم تحديث العرض بنجاح",
+      "deleteOffer": "تم حذف العرض بنجاح",
+      "createOrder": "تم إنشاء الطلب بنجاح",
+      "cancelOrder": "تم إلغاء الطلب بنجاح",
+      "releaseFunds": "تم إطلاق الأموال بنجاح",
+      "uploadProof": "تم رفع إثبات الدفع بنجاح",
+      "sendMessage": "تم إرسال الرسالة بنجاح"
+    },
+    "confirmations": {
+      "releaseFunds": "هل أنت متأكد من رغبتك في إطلاق الأموال؟",
+      "cancelOrder": "هل أنت متأكد من رغبتك في إلغاء هذا الطلب؟",
+      "disputeOrder": "هل أنت متأكد من رغبتك في فتح نزاع؟",
+      "deleteOffer": "هل أنت متأكد من رغبتك في حذف هذا العرض؟",
+      "paymentConfirmation": "يرجى تأكيد أنك قمت بالدفع",
+      "noPaymentMade": "أؤكد أنني لم أقم بأي دفعة للبائع"
+    },
+    "createOfferModal": {
+      "title": "إنشاء عرض جديد",
+      "subtitle": "قم بإعداد عرض تداول USDT الخاص بك",
+      "offerType": "نوع العرض",
+      "price": "السعر (د.ت)",
+      "pricePlaceholder": "أدخل السعر لكل USDT",
+      "minAmount": "الحد الأدنى للمبلغ (د.ت)",
+      "minAmountPlaceholder": "الحد الأدنى (10 د.ت على الأقل)",
+      "minAmountError": "يجب أن يكون الحد الأدنى للمبلغ 10 د.ت على الأقل",
+      "maxAmount": "الحد الأقصى للمبلغ (د.ت)",
+      "maxAmountPlaceholder": "الحد الأقصى (20000 د.ت كحد أقصى)",
+      "maxAmountError": "يجب أن يكون الحد الأقصى للمبلغ أكبر من الحد الأدنى",
+      "maxAmountLimitError": "لا يمكن أن يتجاوز الحد الأقصى للمبلغ 20000 د.ت",
+      "orderLength": "مدة الطلب",
+      "orderLengthOptions": {
+        "15": "15 دقيقة",
+        "30": "30 دقيقة",
+        "45": "45 دقيقة",
+        "60": "60 دقيقة"
       },
-      "system": {
-        "title": {
-          "maintenance": "صيانة مجدولة",
-          "feature": "ميزة جديدة متاحة",
-          "update": "تحديث النظام",
-          "default": "تحديث النظام"
-        },
-        "message": {
-          "maintenance": "صيانة مجدولة في {{date}}: {{message}}",
-          "feature": "ميزة جديدة متاحة: {{featureName}}",
-          "update": "تحديث النظام: {{message}}",
-          "default": "{{message}}"
-        }
+      "availableAmount": "المبلغ المتاح (USDT)",
+      "availableAmountPlaceholder": "أدخل المبلغ المتاح",
+      "available": "المتوفر",
+      "max": "الحد الأقصى",
+      "equivalent": "المعادل",
+      "description": "الوصف (اختياري)",
+      "descriptionPlaceholder": "أضف أي تفاصيل إضافية حول عرضك...",
+      "paymentMethods": "طرق الدفع",
+      "submit": "إنشاء العرض"
+    },
+    "buyUSDT": "شراء USDT",
+    "sellUSDT": "بيع USDT",
+    "paymentMethodNames": {
+      "tnd_wallet": "محفظة د.ت",
+      "bank_transfer": "تحويل بنكي",
+      "cash": "نقدي"
+    },
+    "order": {
+      "status": "الحالة",
+      "status.completed": "مكتمل",
+      "status.cancelled": "ملغي",
+      "status.pending": "قيد الانتظار",
+      "status.disputed": "متنازع عليه",
+      "price": "السعر",
+      "total": "المجموع",
+      "tradingWith": "العميل",
+      "paymentMethod": "طريقة الدفع",
+      "chat": "المحادثة",
+      "verifyPayment": "التحقق من الدفع",
+      "releaseFunds": "إطلاق الأموال",
+      "cancelOrder": "إلغاء الطلب",
+      "confirmCancel": "تأكيد الإلغاء",
+      "confirmRelease": "تأكيد الإطلاق"
+    },
+    "confirmations": {
+      "noPaymentMade": "يرجى تأكيد أنك لم تقم بأي دفعة للبائع قبل إلغاء هذا الطلب.",
+      "releaseFunds": "يرجى تأكيد أنك استلمت الدفع من المشتري قبل إطلاق USDT.",
+      "paymentConfirmation": "أؤكد أنني استلمت الدفع من المشتري"
+    },
+    "errors": {
+      "duplicateOrder": "طلب نشط موجود",
+      "duplicateOrderMessage": "لديك بالفعل طلب نشط مع هذا المستخدم. يرجى إكمال أو إلغاء طلبك الحالي أولاً.",
+      "confirmNoPayment": "يرجى تأكيد أنك لم تقم بأي دفعة",
+      "confirmPayment": "يرجى تأكيد أنك استلمت الدفع"
+    },
+    "chat": {
+      "orderNumber": "الطلب #{{number}}",
+      "status": {
+        "pending": "في انتظار الدفع",
+        "paid": "في انتظار إطلاق USDT من البائع",
+        "completed": "مكتمل",
+        "cancelled": "ملغي",
+        "disputed": "متنازع عليه"
+      },
+      "amount": "المبلغ",
+      "price": "السعر",
+      "total": "الإجمالي",
+      "paymentMethod": "طريقة الدفع",
+      "showDetails": "عرض التفاصيل",
+      "hideDetails": "إخفاء التفاصيل",
+      "cancelOrder": "إلغاء الطلب",
+      "typeMessage": "اكتب رسالتك...",
+      "selectedImage": "الصورة المحددة",
+      "loading": "جاري تحميل المحادثة...",
+      "seller": "البائع",
+      "buyer": "المشتري",
+      "buyerPaymentProof": "قدم المشتري إثبات الدفع. يرجى التحقق من الدفع وإطلاق USDT إذا تم استلامه.",
+      "sellerPaymentInfo": "معلومات الدفع للبائع",
+      "sellerPaymentInfoPlaceholder": "البائع لم يقدم تفاصيل الدفع لهذه الطريقة.",
+      "cancelOrder": "إلغاء الطلب",
+      "messages": {
+        "orderCancelled": "تم إلغاء الطلب",
+        "orderCancelledWithId": "تم إلغاء الطلب #{{orderId}}",
+        "fundsReleased": "تم إطلاق الأموال",
+        "fundsReleasedWithId": "تم إطلاق الأموال للطلب #{{orderId}}"
+      },
+      "errors": {
+        "cancelFailed": "فشل في إلغاء الطلب",
+        "releaseFailed": "فشل في إطلاق الأموال",
+        "imageSize": "يجب أن يكون حجم الصورة أقل من 5 ميجابايت",
+        "imageType": "يرجى اختيار ملف صورة",
+        "noActiveOrder": "لا يوجد طلب نشط",
+        "sendMessage": "فشل في إرسال الرسالة",
+        "releaseConfirm": "يرجى تأكيد أنك استلمت الدفع"
+      },
+      "confirmations": {
+        "cancelTitle": "تأكيد الإلغاء",
+        "cancelMessage": "يرجى تأكيد أنك لم تقم بأي دفعة للبائع قبل إلغاء هذا الطلب.",
+        "cancelCheckbox": "أؤكد أنني لم أقم بأي دفعة للبائع",
+        "close": "إغلاق",
+        "cancelOrder": "إلغاء الطلب",
+        "releaseTitle": "تأكيد الإطلاق",
+        "releaseMessage": "يرجى تأكيد أنك استلمت الدفع من المشتري قبل إطلاق USDT.",
+        "releaseCheckbox": "أؤكد أنني استلمت الدفع من المشتري",
+        "releaseFunds": "إطلاق USDT"
       }
     }
+  },
+  "orderChat": {
+    "title": "محادثة الطلب",
+    "summary": "الطلب #{{orderId}} - {{amount}} USDT",
+    "verifyPayment": "تحقق من الدفع",
+    "uploadProof": "رفع إثبات الدفع",
+    "paymentProof": "إثبات الدفع",
+    "chooseFile": "اختر ملف",
+    "cancel": "إلغاء",
+    "submitProof": "إرسال الإثبات"
   }
 }

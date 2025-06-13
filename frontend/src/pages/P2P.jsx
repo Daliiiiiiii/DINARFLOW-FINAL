@@ -11,9 +11,11 @@ import { toast } from 'react-hot-toast';
 import P2PChat from '../components/P2PChat';
 import P2PProfileSetup from '../components/P2PProfileSetup';
 import { io } from 'socket.io-client';
+import { useTranslation } from 'react-i18next';
 
 // Add new OrderStatusAnimation component
 const OrderStatusAnimation = ({ status, onComplete }) => {
+  const { t } = useTranslation();
   const isSuccess = status === 'completed';
   const isCancelled = status === 'cancelled';
 
@@ -52,7 +54,7 @@ const OrderStatusAnimation = ({ status, onComplete }) => {
           transition={{ delay: 0.3 }}
           className="text-2xl font-semibold mb-2"
         >
-          {isSuccess ? 'Transaction Completed!' : 'Order Cancelled'}
+          {isSuccess ? t('p2p.order.status.completed') : t('p2p.order.status.cancelled')}
         </motion.h3>
 
         <motion.p
@@ -62,8 +64,8 @@ const OrderStatusAnimation = ({ status, onComplete }) => {
           className="text-gray-400 mb-6"
         >
           {isSuccess 
-            ? 'The USDT has been successfully transferred to the buyer.'
-            : 'The order has been cancelled.'}
+            ? t('p2p.order.successMessage')
+            : t('p2p.order.cancelledMessage')}
         </motion.p>
 
         <motion.div
@@ -75,7 +77,7 @@ const OrderStatusAnimation = ({ status, onComplete }) => {
             onClick={onComplete}
             className="px-6 py-3 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 rounded-xl text-blue-400 transition-all"
           >
-            Close
+            {t('common.close')}
           </button>
         </motion.div>
       </motion.div>
@@ -85,6 +87,8 @@ const OrderStatusAnimation = ({ status, onComplete }) => {
 
 // Add new DuplicateOrderAnimation component
 const DuplicateOrderAnimation = ({ onClose }) => {
+  const { t } = useTranslation();
+  
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -114,7 +118,7 @@ const DuplicateOrderAnimation = ({ onClose }) => {
           transition={{ delay: 0.3 }}
           className="text-2xl font-semibold mb-2 text-white"
         >
-          Active Order Exists
+          {t('p2p.errors.duplicateOrder')}
         </motion.h3>
 
         <motion.p
@@ -123,7 +127,7 @@ const DuplicateOrderAnimation = ({ onClose }) => {
           transition={{ delay: 0.4 }}
           className="text-gray-400 mb-6"
         >
-          You already have an active order with this user. Please complete or cancel your existing order first.
+          {t('p2p.errors.duplicateOrderMessage')}
         </motion.p>
 
         <motion.div
@@ -135,7 +139,7 @@ const DuplicateOrderAnimation = ({ onClose }) => {
             onClick={onClose}
             className="px-6 py-3 bg-yellow-500/10 hover:bg-yellow-500/20 border border-yellow-500/20 rounded-xl text-yellow-400 transition-all"
           >
-            Close
+            {t('common.close')}
           </button>
         </motion.div>
       </motion.div>
@@ -145,6 +149,7 @@ const DuplicateOrderAnimation = ({ onClose }) => {
 
 // Add new CancelConfirmation component
 const CancelConfirmation = ({ onConfirm, onClose }) => {
+  const { t } = useTranslation();
   const [confirmed, setConfirmed] = useState(false);
 
   return (
@@ -176,7 +181,7 @@ const CancelConfirmation = ({ onConfirm, onClose }) => {
           transition={{ delay: 0.3 }}
           className="text-xl font-semibold mb-4 text-center"
         >
-          Confirm Cancellation
+          {t('p2p.order.confirmCancel')}
         </motion.h3>
 
         <motion.p
@@ -185,7 +190,7 @@ const CancelConfirmation = ({ onConfirm, onClose }) => {
           transition={{ delay: 0.4 }}
           className="text-gray-400 mb-6 text-center"
         >
-          Please confirm that you have not made any payment to the seller before cancelling this order.
+          {t('p2p.confirmations.noPaymentMade')}
         </motion.p>
 
         <div className="flex items-center gap-3 mb-6">
@@ -197,7 +202,7 @@ const CancelConfirmation = ({ onConfirm, onClose }) => {
             className="w-5 h-5 rounded border-gray-600 bg-gray-800 text-yellow-500 focus:ring-yellow-500/20"
           />
           <label htmlFor="confirm-cancel" className="text-gray-300">
-            I confirm that I have not made any payment to the seller
+            {t('p2p.confirmations.noPaymentMade')}
           </label>
         </div>
 
@@ -206,7 +211,7 @@ const CancelConfirmation = ({ onConfirm, onClose }) => {
             onClick={onClose}
             className="flex-1 px-4 py-3 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-xl text-gray-300 transition-all"
           >
-            Close
+            {t('common.close')}
           </button>
           <button
             onClick={() => {
@@ -214,13 +219,13 @@ const CancelConfirmation = ({ onConfirm, onClose }) => {
                 onConfirm();
                 onClose();
               } else {
-                toast.error('Please confirm that you have not made any payment');
+                toast.error(t('p2p.errors.confirmNoPayment'));
               }
             }}
             className="flex-1 px-4 py-3 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 rounded-xl text-red-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={!confirmed}
           >
-            Cancel Order
+            {t('p2p.order.cancelOrder')}
           </button>
         </div>
       </motion.div>
@@ -230,6 +235,7 @@ const CancelConfirmation = ({ onConfirm, onClose }) => {
 
 // Add new ReleaseConfirmation component
 const ReleaseConfirmation = ({ onConfirm, onClose }) => {
+  const { t } = useTranslation();
   const [confirmed, setConfirmed] = useState(false);
 
   return (
@@ -261,7 +267,7 @@ const ReleaseConfirmation = ({ onConfirm, onClose }) => {
           transition={{ delay: 0.3 }}
           className="text-xl font-semibold mb-4 text-center"
         >
-          Confirm Release
+          {t('p2p.order.confirmRelease')}
         </motion.h3>
 
         <motion.p
@@ -270,7 +276,7 @@ const ReleaseConfirmation = ({ onConfirm, onClose }) => {
           transition={{ delay: 0.4 }}
           className="text-gray-400 mb-6 text-center"
         >
-          Please confirm that you have received the payment from the buyer before releasing the USDT.
+          {t('p2p.confirmations.releaseFunds')}
         </motion.p>
 
         <div className="flex items-center gap-3 mb-6">
@@ -282,7 +288,7 @@ const ReleaseConfirmation = ({ onConfirm, onClose }) => {
             className="w-5 h-5 rounded border-gray-600 bg-gray-800 text-green-500 focus:ring-green-500/20"
           />
           <label htmlFor="confirm-release" className="text-gray-300">
-            I confirm that I have received the payment from the buyer
+            {t('p2p.confirmations.paymentConfirmation')}
           </label>
         </div>
 
@@ -291,7 +297,7 @@ const ReleaseConfirmation = ({ onConfirm, onClose }) => {
             onClick={onClose}
             className="flex-1 px-4 py-3 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-xl text-gray-300 transition-all"
           >
-            Close
+            {t('common.close')}
           </button>
           <button
             onClick={() => {
@@ -299,13 +305,13 @@ const ReleaseConfirmation = ({ onConfirm, onClose }) => {
                 onConfirm();
                 onClose();
               } else {
-                toast.error('Please confirm that you have received the payment');
+                toast.error(t('p2p.errors.confirmPayment'));
               }
             }}
             className="flex-1 px-4 py-3 bg-green-500/10 hover:bg-green-500/20 border border-green-500/20 rounded-xl text-green-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={!confirmed}
           >
-            Release USDT
+            {t('p2p.order.releaseFunds')}
           </button>
         </div>
       </motion.div>
@@ -379,6 +385,7 @@ const P2P = () => {
   const errorTimeoutRef = useRef(null); // Add ref to track timeout
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [cancelReason, setCancelReason] = useState('');
+  const { t } = useTranslation();
 
   const orderLengthOptions = [
     { value: '0.25', label: '15 minutes' },
@@ -1811,10 +1818,9 @@ const P2P = () => {
                 ? 'bg-gray-900/10 backdrop-blur-md border border-gray-800/50 rounded-xl shadow-lg'
                 : 'bg-white border border-gray-300 rounded-xl shadow-lg'} overflow-visible`}>
               <div className={`p-6 border-b ${isDark ? 'border-gray-800' : 'border-gray-300'}`}>
-                <h2 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Payment Methods</h2>
-                <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-700'} mt-1`}>Select your preferred payment methods</p>
+                <h2 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('p2p.paymentMethods')}</h2>
+                <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-700'} mt-1`}>{t('p2p.selectPaymentMethods')}</p>
               </div>
-
               <div className="p-4 space-y-3">
                 {paymentMethods.map((method) => (
                   <motion.button
@@ -1838,33 +1844,32 @@ const P2P = () => {
                     </div>
                     <div className="flex-1 text-left">
                       <div className="flex items-center gap-2">
-                        <span className={`font-medium ${isDark ? 'text-white' : 'text-gray-800'}`}>{method.name}</span>
+                        <span className={`font-medium ${isDark ? 'text-white' : 'text-gray-800'}`}>{t(`p2p.paymentMethodNames.${method.id}`, method.name)}</span>
                         {method.isPopular && (
                           <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-xs rounded-full">
-                            Popular
+                            {t('p2p.popular')}
                           </span>
                         )}
                       </div>
-                      <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'} mt-1`}>{method.description}</p>
+                      <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'} mt-1`}>{t(`p2p.paymentMethodDescriptions.${method.id}`, method.description)}</p>
                       <div className={`flex items-center gap-4 mt-2 text-xs ${isDark ? 'text-gray-500' : 'text-gray-600'}`}>
                         <span className="flex items-center gap-1">
                           <Clock className="w-3 h-3" />
-                          {method.processingTime}
+                          {t(`p2p.processingTime.${method.id}`, method.processingTime)}
                         </span>
-                        <span>Fee: {method.fee}</span>
+                        <span>{t('p2p.fee', { fee: method.fee })}</span>
                       </div>
                     </div>
                   </motion.button>
                 ))}
               </div>
-
               {selectedMethods.length > 0 && (
                 <div className={`p-4 border-t ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
                   <button
                     onClick={() => setSelectedMethods([])}
                     className={`w-full px-4 py-2 ${isDark ? 'bg-white/5 hover:bg-white/10' : 'bg-gray-100 hover:bg-gray-200'} rounded-lg ${isDark ? 'text-gray-400' : 'text-gray-700'} transition-colors text-sm`}
                   >
-                    Clear Selection
+                    {t('p2p.clearSelection')}
                   </button>
                 </div>
               )}
@@ -1876,8 +1881,8 @@ const P2P = () => {
             {/* Header */}
             <div className="flex items-center justify-between mb-8">
               <div className="flex flex-col items-start text-left">
-                <h1 className={`text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-900'} drop-shadow-lg`}>P2P Trading</h1>
-                <p className={`${isDark ? 'text-white' : 'text-gray-700'} drop-shadow mt-2`}>Buy and sell USDT with other users</p>
+                <h1 className={`text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-900'} drop-shadow-lg`}>{t('p2p.title')}</h1>
+                <p className={`${isDark ? 'text-white' : 'text-gray-700'} drop-shadow mt-2`}>{t('p2p.subtitle')}</p>
               </div>
               <div className="flex items-center gap-4">
                 <button
@@ -1885,17 +1890,17 @@ const P2P = () => {
                   className={`px-6 py-3 ${isDark ? 'bg-white/5 hover:bg-white/10 border-white/10' : 'bg-blue-100/90 hover:bg-blue-200 border-blue-300'} backdrop-blur-xl border rounded-xl transition-all flex items-center gap-2 group`}
                 >
                   <User className={`w-5 h-5 ${isDark ? 'text-gray-400 group-hover:text-white' : 'text-blue-700 group-hover:text-blue-900'} transition-colors`} />
-                  <span className={`${isDark ? 'text-gray-400 group-hover:text-white' : 'text-blue-700 group-hover:text-blue-900'} transition-colors`}>My P2P Profile</span>
+                  <span className={`${isDark ? 'text-gray-400 group-hover:text-white' : 'text-blue-700 group-hover:text-blue-900'} transition-colors`}>{t('common.viewProfile')}</span>
                 </button>
                 <button
                   onClick={() => {
                     if (!currentUser) {
-                      toast.error('Please login to create an offer');
+                      toast.error(t('p2p.errors.createOffer'));
                       navigate('/login');
                       return;
                     }
                     if (checkingProfile) {
-                      toast.error('Please wait while we check your profile status');
+                      toast.error(t('p2p.errors.checkingProfile'));
                       return;
                     }
                     if (!hasProfile) {
@@ -1924,7 +1929,7 @@ const P2P = () => {
                   className={`px-6 py-3 ${isDark ? 'bg-blue-500/10 hover:bg-blue-500/20 border-blue-500/20' : 'bg-green-100/90 hover:bg-green-200 border-green-300'} backdrop-blur-xl border rounded-xl transition-all flex items-center gap-2 group`}
                 >
                   <Plus className={`w-5 h-5 ${isDark ? 'text-blue-400' : 'text-green-700 group-hover:text-green-900'} group-hover:rotate-90 transition-transform`} />
-                  <span className={`${isDark ? 'text-blue-400' : 'text-green-700 group-hover:text-green-900'}`}>Create Offer</span>
+                  <span className={`${isDark ? 'text-blue-400' : 'text-green-700 group-hover:text-green-900'}`}>{t('p2p.createOffer')}</span>
                 </button>
               </div>
             </div>
@@ -1941,7 +1946,7 @@ const P2P = () => {
                       : 'bg-blue-100/90 border-blue-300 hover:bg-blue-200'} border scale-105`}
               >
                 <DollarSign className={`w-5 h-5 ${activeTab === 'buy' ? 'text-green-600' : isDark ? 'text-gray-400' : 'text-blue-700'}`} />
-                <span className={activeTab === 'buy' ? 'text-green-600' : isDark ? 'text-gray-400' : 'text-blue-700'}>Buy USDT</span>
+                <span className={activeTab === 'buy' ? 'text-green-600' : isDark ? 'text-gray-400' : 'text-blue-700'}>{t('p2p.buy')}</span>
               </button>
               <button
                 onClick={() => setActiveTab('sell')}
@@ -1953,7 +1958,7 @@ const P2P = () => {
                       : 'bg-blue-100/90 border-blue-300 hover:bg-blue-200'} border scale-105`}
               >
                 <Wallet className={`w-5 h-5 ${activeTab === 'sell' ? 'text-red-600' : isDark ? 'text-gray-400' : 'text-blue-700'}`} />
-                <span className={activeTab === 'sell' ? 'text-red-600' : isDark ? 'text-gray-400' : 'text-blue-700'}>Sell USDT</span>
+                <span className={activeTab === 'sell' ? 'text-red-600' : isDark ? 'text-gray-400' : 'text-blue-700'}>{t('p2p.sell')}</span>
               </button>
             </div>
 
@@ -1968,7 +1973,7 @@ const P2P = () => {
                       ? 'bg-white/5 border-white/10 hover:bg-white/10'
                       : 'bg-blue-100/90 border-blue-300 hover:bg-blue-200'} border scale-105`}
               >
-                <span className={viewMode === 'all' ? 'text-blue-700' : isDark ? 'text-gray-400' : 'text-blue-700'}>All Offers</span>
+                <span className={viewMode === 'all' ? 'text-blue-700' : isDark ? 'text-gray-400' : 'text-blue-700'}>{t('p2p.allOffers')}</span>
               </button>
               <button
                 onClick={() => setViewMode('active')}
@@ -1979,7 +1984,7 @@ const P2P = () => {
                       ? 'bg-white/5 border-white/10 hover:bg-white/10'
                       : 'bg-blue-100/90 border-blue-300 hover:bg-blue-200'} border scale-105`}
               >
-                <span className={viewMode === 'active' ? 'text-green-700' : isDark ? 'text-gray-400' : 'text-blue-700'}>My Offers</span>
+                <span className={viewMode === 'active' ? 'text-green-700' : isDark ? 'text-gray-400' : 'text-blue-700'}>{t('p2p.myOffers')}</span>
               </button>
               <button
                 onClick={() => setViewMode('open')}
@@ -1990,7 +1995,7 @@ const P2P = () => {
                       ? 'bg-white/5 border-white/10 hover:bg-white/10'
                       : 'bg-blue-100/90 border-blue-300 hover:bg-blue-200'} border scale-105`}
               >
-                <span className={viewMode === 'open' ? 'text-yellow-700' : isDark ? 'text-gray-400' : 'text-blue-700'}>Open Orders</span>
+                <span className={viewMode === 'open' ? 'text-yellow-700' : isDark ? 'text-gray-400' : 'text-blue-700'}>{t('p2p.myOrders')}</span>
               </button>
             </div>
 
@@ -2003,7 +2008,7 @@ const P2P = () => {
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Search by price, payment method, or user..."
+                    placeholder={t('p2p.search')}
                     className={`w-full pl-12 pr-4 py-4 ${isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-100 border border-gray-200'} rounded-xl backdrop-blur-xl focus:outline-none ${isDark ? 'focus:border-blue-500/50' : 'focus:border-blue-400'} transition-colors ${isDark ? 'placeholder-gray-400' : 'placeholder-gray-500'}`}
                   />
                 </div>
@@ -2031,13 +2036,13 @@ const P2P = () => {
                               {order.amount} USDT
                             </div>
                             <div className={`${isDark ? 'text-gray-400' : 'text-gray-700'} mt-1`}>
-                              Price: {order.price} TND
+                              {t('p2p.order.price')}: {order.price} TND
                             </div>
                             <div className={`${isDark ? 'text-gray-400' : 'text-gray-700'}`}>
-                              Total: {order.total} TND
+                              {t('p2p.order.total')}: {order.total} TND
                             </div>
                             <div className={`${isDark ? 'text-gray-400' : 'text-gray-700'} mt-2`}>
-                              Trading with:{' '}
+                              {t('p2p.order.tradingWith')}:{' '}
                               <span 
                                 onClick={() => {
                                   const partnerId = order.buyer?._id === currentUser?._id ? 
@@ -2050,13 +2055,13 @@ const P2P = () => {
                                 className="text-blue-400 hover:text-blue-300 cursor-pointer hover:underline"
                               >
                                 {order.buyer?._id === currentUser?._id ? 
-                                  (order.seller?.nickname || order.seller?.username || 'Unknown Seller') : 
-                                  (order.buyer?.nickname || order.buyer?.username || 'Unknown Buyer')}
+                                  (order.seller?.nickname || order.seller?.username || t('p2p.order.unknownSeller')) : 
+                                  (order.buyer?.nickname || order.buyer?.username || t('p2p.order.unknownBuyer'))}
                               </span>
                             </div>
                           </div>
                           <div className="text-right">
-                            <div className={`${isDark ? 'text-gray-400' : 'text-gray-700'}`}>Status</div>
+                            <div className={`${isDark ? 'text-gray-400' : 'text-gray-700'}`}>{t('p2p.order.status')}</div>
                             <div className={`text-sm font-medium ${order.status === 'pending' ? 'text-yellow-400' :
                               order.status === 'paid' ? 'text-blue-400' :
                               order.status === 'completed' ? 'text-green-400' :
@@ -2064,11 +2069,11 @@ const P2P = () => {
                               order.status === 'disputed' ? 'text-orange-400' :
                               isDark ? 'text-gray-400' : 'text-gray-700'
                             }`}>
-                              {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                              {t(`p2p.order.status.${order.status}`)}
                             </div>
                             {order.status === 'pending' && (
                               <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-700'} mt-1`}>
-                                Time remaining: {orderTimers[order._id] || calculateRemainingTime(order)}
+                                {t('p2p.order.timeRemaining')}: {orderTimers[order._id] || calculateRemainingTime(order)}
                               </div>
                             )}
                           </div>
@@ -2076,7 +2081,7 @@ const P2P = () => {
 
                         <div className="flex items-center justify-between">
                           <div className={`${isDark ? 'text-gray-400' : 'text-gray-700'}`}>
-                            Payment Method: {paymentMethods.find(pm => pm.id === order.paymentMethod)?.name || order.paymentMethod}
+                            {t('p2p.order.paymentMethod')}: {t(`p2p.paymentMethodNames.${order.paymentMethod}`, paymentMethods.find(pm => pm.id === order.paymentMethod)?.name || order.paymentMethod)}
                           </div>
                           <div className="flex gap-3">
                             <button
@@ -2086,7 +2091,7 @@ const P2P = () => {
                               }}
                               className="px-4 py-2 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 rounded-lg text-blue-400 transition-all"
                             >
-                              Chat
+                              {t('p2p.order.chat')}
                             </button>
 
                             {/* Order Actions */}
@@ -2098,7 +2103,7 @@ const P2P = () => {
                                 }}
                                 className="px-4 py-2 bg-green-500/10 hover:bg-green-500/20 border border-green-500/20 rounded-lg text-green-400 transition-all"
                               >
-                                Verify Payment
+                                {t('p2p.order.verifyPayment')}
                               </button>
                             )}
 
@@ -2107,7 +2112,7 @@ const P2P = () => {
                                 onClick={() => handleReleaseFunds(order._id)}
                                 className="px-4 py-2 bg-green-500/10 hover:bg-green-500/20 border border-green-500/20 rounded-lg text-green-400 transition-all"
                               >
-                                Release Funds
+                                {t('p2p.order.releaseFunds')}
                               </button>
                             )}
 
@@ -2119,7 +2124,7 @@ const P2P = () => {
                                 }}
                                 className="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 rounded-lg text-red-400 transition-all"
                               >
-                                File Dispute
+                                {t('p2p.order.fileDispute')}
                               </button>
                             )}
 
@@ -2129,7 +2134,7 @@ const P2P = () => {
                                 onClick={() => handleCancelOrder(order._id)}
                                 className="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 rounded-lg text-red-400 transition-all"
                               >
-                                Cancel Order
+                                {t('p2p.order.cancelOrder')}
                               </button>
                             )}
                           </div>
@@ -2170,17 +2175,17 @@ const P2P = () => {
                               {offer.seller?.nickname || offer.seller?.username || 'Unknown User'}
                               <Star className="w-4 h-4 text-yellow-400" fill="currentColor" />
                             </div>
-                            <div className={`${isDark ? 'text-gray-400' : 'text-gray-700'}`}>{offer.orders || 0} orders</div>
+                            <div className={`${isDark ? 'text-gray-400' : 'text-gray-700'}`}>{t('p2p.orderCount', { count: offer.orders || 0 })}</div>
                           </div>
                         </div>
                         <div className="space-y-2">
                           <div className={`flex items-center gap-2 ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>
                             <ThumbsUp className="w-4 h-4 text-green-400" />
-                            <span>{offer.completionRate || 100}% completion</span>
+                            <span>{t('p2p.completionRate', { rate: offer.completionRate || 100 })}</span>
                           </div>
                           <div className={`flex items-center gap-2 ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>
                             <Clock className="w-4 h-4 text-blue-400" />
-                            <span>{offer.response || '0 min'} response</span>
+                            <span>{t('p2p.minResponse', { min: offer.response || '0' })}</span>
                           </div>
                           {currentUser && offer.seller?._id !== currentUser._id && (
                             <div className="flex items-center gap-2 mt-2">
@@ -2238,26 +2243,24 @@ const P2P = () => {
                           <div>
                             <div className={`text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>{offer.price} TND</div>
                             <div className={`${isDark ? 'text-gray-400' : 'text-gray-700'} mt-1`}>
-                              Available: {offer.amount} USDT
+                              {t('p2p.available')}: {offer.amount} USDT
                             </div>
                           </div>
                           <div className="text-right">
-                            <div className={`${isDark ? 'text-gray-400' : 'text-gray-700'}`}>Limits</div>
-                            <div className={`${isDark ? 'text-white' : 'text-gray-900'}`}>
-                              {offer.minAmount} - {offer.maxAmount} TND
-                            </div>
+                            <div className={`${isDark ? 'text-gray-400' : 'text-gray-700'}`}>{t('p2p.limits')}</div>
+                            <div className={`${isDark ? 'text-white' : 'text-gray-900'}`}>{offer.minAmount} - {offer.maxAmount} TND</div>
                           </div>
                         </div>
 
                         <div>
-                          <div className={`${isDark ? 'text-gray-400' : 'text-gray-700'} mb-2`}>Payment Methods</div>
+                          <div className={`${isDark ? 'text-gray-400' : 'text-gray-700'} mb-2`}>{t('p2p.paymentMethods')}</div>
                           <div className="flex flex-wrap gap-2">
                             {offer.paymentMethods.map((method, i) => (
                               <span
                                 key={i}
                                 className={`px-4 py-2 ${isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-100 border border-gray-200'} rounded-lg ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
                               >
-                                {paymentMethods.find(pm => pm.id === method)?.name || method}
+                                {t(`p2p.paymentMethodNames.${method}`, paymentMethods.find(pm => pm.id === method)?.name || method)}
                               </span>
                             ))}
                           </div>
@@ -2274,14 +2277,14 @@ const P2P = () => {
                                   onClick={() => handleEditOffer(offer)}
                                   className="px-6 py-3 bg-blue-500/10 border border-blue-500/20 rounded-xl hover:bg-blue-500/20 transition-all flex items-center gap-2"
                                 >
-                                  <span className="text-blue-400">Edit & Reactivate</span>
+                                  <span className="text-blue-400">{t('p2p.offer.editAndReactivate')}</span>
                                   <ArrowUpRight className="w-5 h-5 text-blue-400" />
                                 </button>
                                 <button
                                   onClick={() => handleOfferStatusChange(offer._id, 'active')}
                                   className="px-6 py-3 bg-green-500/10 border border-green-500/20 rounded-xl hover:bg-green-500/20 transition-all flex items-center gap-2"
                                 >
-                                  <span className="text-green-400">Reactivate</span>
+                                  <span className="text-green-400">{t('p2p.offer.reactivate')}</span>
                                   <ArrowUpRight className="w-5 h-5 text-green-400" />
                                 </button>
                               </>
@@ -2291,7 +2294,7 @@ const P2P = () => {
                                   onClick={() => handleOfferStatusChange(offer._id, 'inactive')}
                                   className="px-6 py-3 bg-yellow-500/10 border border-yellow-500/20 rounded-xl hover:bg-yellow-500/20 transition-all flex items-center gap-2"
                                 >
-                                  <span className="text-yellow-400">Deactivate</span>
+                                  <span className="text-yellow-400">{t('p2p.offer.deactivate')}</span>
                                   <X className="w-5 h-5 text-yellow-400" />
                                 </button>
                                 <button
@@ -2299,15 +2302,15 @@ const P2P = () => {
                                     try {
                                       await axios.delete(`/api/p2p/offers/${offer._id}`);
                                       setOffers(prev => prev.filter(o => o._id !== offer._id));
-                                      toast.success('Offer deleted successfully');
+                                      toast.success(t('p2p.success.deleteOffer'));
                                     } catch (error) {
                                       console.error('Error deleting offer:', error);
-                                      toast.error(error.response?.data?.message || 'Failed to delete offer');
+                                      toast.error(error.response?.data?.message || t('p2p.errors.deleteOffer'));
                                     }
                                   }}
                                   className="px-6 py-3 bg-red-500/10 border border-red-500/20 rounded-xl hover:bg-red-500/20 transition-all flex items-center gap-2"
                                 >
-                                  <span className="text-red-400">Delete</span>
+                                  <span className="text-red-400">{t('p2p.offer.delete')}</span>
                                   <X className="w-5 h-5 text-red-400" />
                                 </button>
                               </>
@@ -2317,12 +2320,12 @@ const P2P = () => {
                           <button
                             onClick={() => {
                               if (!currentUser) {
-                                toast.error('Please login to start a transaction');
+                                toast.error(t('p2p.errors.createOrder'));
                                 navigate('/login');
                                 return;
                               }
                               if (!hasProfile) {
-                                toast.error('Please set up your P2P profile first');
+                                toast.error(t('p2p.errors.profileRequired'));
                                 setShowProfileSetup(true);
                                 return;
                               }
@@ -2330,7 +2333,7 @@ const P2P = () => {
                             }}
                             className="px-6 py-3 bg-blue-500/10 border border-blue-500/20 rounded-xl hover:bg-blue-500/20 transition-all flex items-center gap-2"
                           >
-                            <span className="text-blue-400">{activeTab === 'buy' ? 'Buy' : 'Sell'}</span>
+                            <span className="text-blue-400">{activeTab === 'buy' ? t('p2p.buy') : t('p2p.sell')}</span>
                             <ArrowRight className="w-5 h-5 text-blue-400 group-hover:translate-x-1 transition-transform" />
                           </button>
                         )}
@@ -2364,8 +2367,8 @@ const P2P = () => {
               {/* Modal Header */}
               <div className={`p-6 border-b ${isDark ? 'border-white/10' : 'border-gray-300'} flex items-center justify-between`}>
                 <div>
-                  <h2 className={`text-xl font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Create New Offer</h2>
-                  <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-700'} mt-1`}>Set up your USDT trading offer</p>
+                  <h2 className={`text-xl font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('p2p.createOfferModal.title')}</h2>
+                  <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-700'} mt-1`}>{t('p2p.createOfferModal.subtitle')}</p>
                 </div>
                 {!offerCreationStatus && (
                   <button
@@ -2400,7 +2403,7 @@ const P2P = () => {
                     <div className="space-y-4">
                       <div>
                         <label className={`block text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-700'} mb-2`}>
-                          Offer Type
+                          {t('p2p.createOfferModal.offerType')}
                         </label>
                         <div className="flex gap-4">
                           <button
@@ -2422,7 +2425,7 @@ const P2P = () => {
                             }`}
                           >
                             <DollarSign className="w-5 h-5" />
-                            Buy USDT
+                            {t('p2p.buyUSDT')}
                           </button>
                           <button
                             onClick={() => {
@@ -2443,21 +2446,21 @@ const P2P = () => {
                             }`}
                           >
                             <Wallet className="w-5 h-5" />
-                            Sell USDT
+                            {t('p2p.sellUSDT')}
                           </button>
                         </div>
                       </div>
 
                       {/* Price */}
                       <div>
-                        <label className={`block text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-700'} mb-2`}>Price (TND)</label>
+                        <label className={`block text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-700'} mb-2`}>{t('p2p.createOfferModal.price')}</label>
                         <div className="relative">
                           <input
                             type="text"
                             name="price"
                             value={createOfferData.price}
                             onChange={handleCreateOfferChange}
-                            placeholder="Enter price per USDT"
+                            placeholder={t('p2p.createOfferModal.pricePlaceholder')}
                             className={`w-full px-4 py-3 ${isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-100 border border-gray-300'} rounded-xl backdrop-blur-xl focus:outline-none ${isDark ? 'focus:border-blue-500/50' : 'focus:border-blue-400'} transition-colors ${isDark ? 'placeholder-gray-400' : 'placeholder-gray-500'}`}
                             required
                           />
@@ -2467,43 +2470,43 @@ const P2P = () => {
                       {/* Limits */}
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <label className={`block text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-700'} mb-2`}>Minimum Amount (TND)</label>
+                          <label className={`block text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-700'} mb-2`}>{t('p2p.createOfferModal.minAmount')}</label>
                           <input
                             type="text"
                             name="minAmount"
                             value={createOfferData.minAmount}
                             onChange={handleCreateOfferChange}
-                            placeholder="Min amount (min: 10 TND)"
+                            placeholder={t('p2p.createOfferModal.minAmountPlaceholder')}
                             className={`w-full px-4 py-3 ${isDark ? 'bg-white/5 border' : 'bg-gray-100 border'} ${isDark ? (createOfferData.minAmount && parseFloat(createOfferData.minAmount) < 10 ? 'border-red-500/50' : 'border-white/10') : (createOfferData.minAmount && parseFloat(createOfferData.minAmount) < 10 ? 'border-red-500' : 'border-gray-300')} rounded-xl backdrop-blur-xl focus:outline-none ${isDark ? 'focus:border-blue-500/50' : 'focus:border-blue-400'} transition-colors`}
                             required
                           />
                           {createOfferData.minAmount && parseFloat(createOfferData.minAmount) < 10 && (
-                            <p className="mt-1 text-sm text-red-500">Minimum amount must be at least 10 TND</p>
+                            <p className="mt-1 text-sm text-red-500">{t('p2p.createOfferModal.minAmountError')}</p>
                           )}
                         </div>
                         <div>
-                          <label className={`block text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-700'} mb-2`}>Maximum Amount (TND)</label>
+                          <label className={`block text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-700'} mb-2`}>{t('p2p.createOfferModal.maxAmount')}</label>
                           <input
                             type="text"
                             name="maxAmount"
                             value={createOfferData.maxAmount}
                             onChange={handleCreateOfferChange}
-                            placeholder="Max amount (max: 20000 TND)"
+                            placeholder={t('p2p.createOfferModal.maxAmountPlaceholder')}
                             className={`w-full px-4 py-3 ${isDark ? 'bg-white/5 border' : 'bg-gray-100 border'} ${isDark ? ((createOfferData.maxAmount && createOfferData.minAmount && parseFloat(createOfferData.maxAmount) <= parseFloat(createOfferData.minAmount)) || (createOfferData.maxAmount && parseFloat(createOfferData.maxAmount) > 20000) ? 'border-red-500/50' : 'border-white/10') : ((createOfferData.maxAmount && createOfferData.minAmount && parseFloat(createOfferData.maxAmount) <= parseFloat(createOfferData.minAmount)) || (createOfferData.maxAmount && parseFloat(createOfferData.maxAmount) > 20000) ? 'border-red-500' : 'border-gray-300')} rounded-xl backdrop-blur-xl focus:outline-none ${isDark ? 'focus:border-blue-500/50' : 'focus:border-blue-400'} transition-colors`}
                             required
                           />
                           {createOfferData.maxAmount && createOfferData.minAmount && parseFloat(createOfferData.maxAmount) <= parseFloat(createOfferData.minAmount) && (
-                            <p className="mt-1 text-sm text-red-500">Maximum amount must be greater than minimum amount</p>
+                            <p className="mt-1 text-sm text-red-500">{t('p2p.createOfferModal.maxAmountError')}</p>
                           )}
                           {createOfferData.maxAmount && parseFloat(createOfferData.maxAmount) > 20000 && (
-                            <p className="mt-1 text-sm text-red-500">Maximum amount cannot exceed 20000 TND</p>
+                            <p className="mt-1 text-sm text-red-500">{t('p2p.createOfferModal.maxAmountLimitError')}</p>
                           )}
                         </div>
                       </div>
 
                       {/* Order Length */}
                       <div>
-                        <label className={`block text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-700'} mb-2`}>Order Length</label>
+                        <label className={`block text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-700'} mb-2`}>{t('p2p.createOfferModal.orderLength')}</label>
                         <select
                           name="orderLength"
                           value={createOfferData.orderLength}
@@ -2517,7 +2520,7 @@ const P2P = () => {
                               value={option.value}
                               className={`${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}
                             >
-                              {option.label}
+                              {t(`p2p.createOfferModal.orderLengthOptions.${option.value}`, option.label)}
                             </option>
                           ))}
                         </select>
@@ -2525,21 +2528,21 @@ const P2P = () => {
 
                       {/* Available Amount */}
                       <div>
-                        <label className={`block text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-700'} mb-2`}>Available Amount (USDT)</label>
+                        <label className={`block text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-700'} mb-2`}>{t('p2p.createOfferModal.availableAmount')}</label>
                         <div className="relative">
                           <input
                             type="text"
                             name="amount"
                             value={createOfferData.amount}
                             onChange={handleCreateOfferChange}
-                            placeholder="Enter available amount"
+                            placeholder={t('p2p.createOfferModal.availableAmountPlaceholder')}
                             className={`w-full px-4 py-3 ${isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-100 border border-gray-300'} rounded-xl backdrop-blur-xl focus:outline-none ${isDark ? 'focus:border-blue-500/50' : 'focus:border-blue-400'} transition-colors`}
                             required
                           />
                           {createOfferData.type === 'sell' && (
                             <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
                               <span className="text-sm text-gray-400">
-                                Available: {walletData?.globalUsdtBalance || 0} USDT
+                                {t('p2p.createOfferModal.available')}: {walletData?.globalUsdtBalance || 0} USDT
                               </span>
                               <button
                                 type="button"
@@ -2549,14 +2552,14 @@ const P2P = () => {
                                 }}
                                 className="px-3 py-1 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 rounded-lg text-blue-400 text-sm transition-all"
                               >
-                                MAX
+                                {t('p2p.createOfferModal.max')}
                               </button>
                             </div>
                           )}
                           {createOfferData.type === 'buy' && offerSelectedMethods.includes('tnd_wallet') && (
                             <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
                               <span className="text-sm text-gray-400">
-                                Max: {((currentUser?.walletBalance || 0) / (parseFloat(createOfferData.price) || 1)).toFixed(2)} USDT
+                                {t('p2p.createOfferModal.max')}: {((currentUser?.walletBalance || 0) / (parseFloat(createOfferData.price) || 1)).toFixed(2)} USDT
                               </span>
                               <button
                                 type="button"
@@ -2566,26 +2569,26 @@ const P2P = () => {
                                 }}
                                 className="px-3 py-1 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 rounded-lg text-blue-400 text-sm transition-all"
                               >
-                                MAX
+                                {t('p2p.createOfferModal.max')}
                               </button>
                             </div>
                           )}
                         </div>
                         {createOfferData.amount && createOfferData.price && (
                           <div className="mt-2 text-sm text-gray-500">
-                            Equivalent: {calculateTNDEquivalent(createOfferData.amount, createOfferData.price)} TND
+                            {t('p2p.createOfferModal.equivalent')}: {calculateTNDEquivalent(createOfferData.amount, createOfferData.price)} TND
                           </div>
                         )}
                       </div>
 
                       {/* Description */}
                       <div>
-                        <label className={`block text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-700'} mb-2`}>Description (Optional)</label>
+                        <label className={`block text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-700'} mb-2`}>{t('p2p.createOfferModal.description')}</label>
                         <textarea
                           name="description"
                           value={createOfferData.description}
                           onChange={handleCreateOfferChange}
-                          placeholder="Add any additional details about your offer..."
+                          placeholder={t('p2p.createOfferModal.descriptionPlaceholder')}
                           className={`w-full px-4 py-3 ${isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-100 border border-gray-300'} rounded-xl backdrop-blur-xl focus:outline-none ${isDark ? 'focus:border-blue-500/50' : 'focus:border-blue-400'} transition-colors`}
                           rows={3}
                         />
@@ -2593,7 +2596,7 @@ const P2P = () => {
 
                       {/* Payment Methods */}
                       <div>
-                        <label className={`block text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-700'} mb-2`}>Payment Methods</label>
+                        <label className={`block text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-700'} mb-2`}>{t('p2p.createOfferModal.paymentMethods')}</label>
                         <div className="grid grid-cols-2 gap-3">
                           {paymentMethods.map((method) => (
                             <button
@@ -2615,7 +2618,7 @@ const P2P = () => {
                                       : (isDark ? 'text-gray-400' : 'text-gray-700')
                                     }`} />
                                 </div>
-                                <span className={isDark ? 'text-white' : 'text-gray-900'}>{method.name}</span>
+                                <span className={isDark ? 'text-white' : 'text-gray-900'}>{t(`p2p.paymentMethodNames.${method.id}`, method.name)}</span>
                               </div>
                             </button>
                           ))}
@@ -2650,7 +2653,7 @@ const P2P = () => {
                             : (isDark ? 'bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 text-blue-400' : 'bg-blue-100 hover:bg-blue-200 border border-blue-300 text-blue-700')
                         } border rounded-xl transition-all font-medium`}
                       >
-                        Create Offer
+                        {t('p2p.createOfferModal.submit')}
                       </button>
                     </div>
                   </div>
@@ -2690,7 +2693,7 @@ const P2P = () => {
                         }}
                         className="px-4 py-2 bg-green-500/10 hover:bg-green-500/20 border border-green-500/20 rounded-lg text-green-400 transition-all"
                       >
-                        Verify Payment
+                        {t('orderChat.verifyPayment')}
                       </button>
                     )}
                     {/* Show release funds button for sellers when order is paid */}
@@ -2790,311 +2793,14 @@ const P2P = () => {
             >
               {/* Modal Header */}
               <div className="p-6 border-b border-white/10">
-                <h2 className="text-xl font-semibold text-white">Confirm Transaction</h2>
-                <p className="text-sm text-gray-400 mt-1">
-                  {transactionStep === 1 ? 'Enter the amount you want to trade' :
-                    transactionStep === 2 ? 'Confirm your transaction details' :
-                      'Transaction in progress'}
-                </p>
+                <h2 className="text-xl font-semibold text-white">{t('orderChat.verifyPayment')}</h2>
+                <p className="text-sm text-gray-400 mt-1">{t('orderChat.uploadProof')}</p>
               </div>
 
               {/* Modal Content */}
               <div className="p-6 space-y-6">
-                {transactionStep === 1 && (
-                  <>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-2">Amount (TND)</label>
-                      <input
-                        type="text"
-                        value={tndAmountInput} // Bind to local state
-                        onChange={(e) => {
-                          const tndValue = e.target.value;
-                          setTndAmountInput(tndValue); // Update local state immediately
-                          const parsedTnd = parseFloat(tndValue);
-
-                          // Check and set max amount warning
-                          if (!isNaN(parsedTnd) && selectedOffer?.maxAmount && parsedTnd > selectedOffer.maxAmount) {
-                            setShowMaxAmountWarning(true);
-                          } else {
-                            setShowMaxAmountWarning(false);
-                          }
-
-                          if (!isNaN(parsedTnd) && selectedOffer?.price) {
-                            // Update mirrored USDT amount
-                            setAmount((parsedTnd / selectedOffer.price).toFixed(6));
-                          } else {
-                            setAmount('');
-                          }
-                        }}
-                        placeholder={`Enter amount (${selectedOffer.minAmount} - ${selectedOffer.maxAmount} TND)`}
-                        className={`w-full px-4 py-3 bg-white/5 border ${showMaxAmountWarning ? 'border-red-500/50' : 'border-white/10'} rounded-xl backdrop-blur-xl focus:outline-none focus:border-blue-500/50 transition-colors`}
-                        // Removed min as per user request, keeping max for validation hint
-                        max={selectedOffer.maxAmount}
-                        step="0.01"
-                      />
-
-                      {/* Display max amount warning */}
-                      {showMaxAmountWarning && (
-                        <p className="mt-1 text-sm text-red-400">Amount cannot exceed the offer's maximum limit ({selectedOffer.maxAmount} TND)</p>
-                      )}
-
-                      {/* Add USDT input field */}
-                      <label className="block text-sm font-medium text-gray-400 mb-2 mt-4">Amount (USDT)</label>
-                      <input
-                        type="text"
-                        value={amount} // Bind to USDT amount state
-                        onChange={(e) => {
-                          const usdtValue = e.target.value;
-                          setAmount(usdtValue); // Update USDT state immediately
-                          const parsedUsdt = parseFloat(usdtValue);
-                          if (!isNaN(parsedUsdt) && selectedOffer?.price) {
-                            // Update mirrored TND input
-                            const calculatedTnd = (parsedUsdt * selectedOffer.price);
-                            setTndAmountInput(calculatedTnd.toFixed(2)); // Format TND display
-
-                            // Check and set max amount warning based on calculated TND
-                            if (selectedOffer?.maxAmount && calculatedTnd > selectedOffer.maxAmount) {
-                              setShowMaxAmountWarning(true);
-                            } else {
-                              setShowMaxAmountWarning(false);
-                            }
-
-                          } else {
-                            setTndAmountInput('');
-                            setShowMaxAmountWarning(false);
-                          }
-                        }}
-                        placeholder="Enter amount (USDT)"
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl backdrop-blur-xl focus:outline-none focus:border-blue-500/50 transition-colors"
-                        step="0.000001"
-                      />
-
-                      {/* Keep the equivalent display below the inputs */}
-                      {amount && selectedOffer?.price && (
-                        <div className="mt-2 text-sm text-gray-400">
-                          Equivalent: {calculateTNDEquivalent(amount, selectedOffer.price)} TND
-                        </div>
-                      )}
-                      {modalSelectedPaymentMethod === 'tnd_wallet' && amount && selectedOffer?.price && (
-                        <div className="mt-2 text-sm">
-                          {/* Use enteredTndAmount for balance check here as well */}
-                          {parseFloat(tndAmountInput) > (currentUser?.walletBalance || 0) ? (
-                            <span className="text-red-400">
-                              Insufficient balance. You need {parseFloat(tndAmountInput).toFixed(2)} TND but have {(currentUser?.walletBalance || 0).toFixed(2)} TND
-                            </span>
-                          ) : (
-                            <span className="text-green-400">
-                              Available balance: {(currentUser?.walletBalance || 0).toFixed(2)} TND
-                            </span>
-                          )}
-                        </div>
-                      )}
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-2">Payment Method</label>
-                      <select
-                        value={modalSelectedPaymentMethod}
-                        onChange={(e) => setModalSelectedPaymentMethod(e.target.value)}
-                        className={`w-full px-4 py-3 rounded-xl backdrop-blur-xl focus:outline-none transition-colors ${isDark ? 'bg-white/5 border border-white/10 text-white focus:border-blue-500/50' : 'bg-gray-100 border border-gray-300 text-gray-900 focus:border-blue-400'}`}
-                      >
-                        <option value="" className={`${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}>Select a payment method</option>
-                        {selectedOffer.paymentMethods.map((method) => (
-                          <option 
-                            key={method} 
-                            value={method}
-                            className={`${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}
-                          >
-                            {paymentMethods.find(pm => pm.id === method)?.name || method}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </>
-                )}
-
-                {transactionStep === 2 && (
-                  <div className="space-y-4">
-                    <div className="p-4 bg-white/5 rounded-xl">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-gray-400">Amount:</span>
-                        <span className="text-white">{amount} USDT</span>
-                      </div>
-                      <div className="flex justify-between text-sm mt-2">
-                        <span className="text-gray-400">Price:</span>
-                        <span className="text-white">{selectedOffer.price} TND</span>
-                      </div>
-                      <div className="flex justify-between text-sm mt-2">
-                        <span className="text-gray-400">Total:</span>
-                        <span className="text-white">{calculateTNDEquivalent(amount, selectedOffer.price)} TND</span>
-                      </div>
-                      <div className="flex justify-between text-sm mt-2">
-                        <span className="text-gray-400">Payment Method:</span>
-                        <span className="text-white">
-                          {paymentMethods.find(pm => pm.id === modalSelectedPaymentMethod)?.name || modalSelectedPaymentMethod}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {transactionStep === 3 && (
-                  <div className="text-center py-8">
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-500/20 flex items-center justify-center">
-                      <CheckCircle className="w-8 h-8 text-green-400" />
-                    </div>
-                    <h3 className="text-lg font-medium text-white mb-2">Order Created Successfully</h3>
-                    <p className="text-gray-400">You can now proceed with the payment</p>
-                  </div>
-                )}
-
-                {/* Action Buttons */}
-                <div className="flex gap-4">
-                  {transactionStep === 1 && (
-                    <>
-                      <button
-                        onClick={() => setShowTransactionModal(false)}
-                        className="flex-1 px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-gray-400 transition-colors"
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        onClick={handleConfirmTransaction}
-                        disabled={
-                          !tndAmountInput || // Check if TND input is empty
-                          parseFloat(tndAmountInput) <= 0 || // Ensure TND amount is positive
-                          parseFloat(tndAmountInput) > selectedOffer.maxAmount || // Max limit check
-                          !modalSelectedPaymentMethod || // Use new state variable
-                          (modalSelectedPaymentMethod === 'tnd_wallet' && // Use new state variable
-                            parseFloat(tndAmountInput) > (currentUser?.walletBalance || 0))
-                        }
-                        className={`flex-1 px-4 py-3 ${!tndAmountInput ||
-                            parseFloat(tndAmountInput) <= 0 ||
-                            parseFloat(tndAmountInput) > selectedOffer.maxAmount ||
-                            !modalSelectedPaymentMethod || // Use new state variable
-                            (modalSelectedPaymentMethod === 'tnd_wallet' && // Use new state variable
-                              parseFloat(tndAmountInput) > (currentUser?.walletBalance || 0))
-                            ? 'bg-gray-500/10 border-gray-500/20 cursor-not-allowed'
-                            : 'bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20'
-                          } border rounded-xl transition-all text-blue-400`}
-                      >
-                        Continue
-                      </button>
-                    </>
-                  )}
-
-                  {transactionStep === 2 && (
-                    <>
-                      <button
-                        onClick={() => setTransactionStep(1)}
-                        className="flex-1 px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-gray-400 transition-colors"
-                      >
-                        Back
-                      </button>
-                      <button
-                        onClick={() => {
-                          setShowTransactionModal(false);
-                          setShowChat(true);
-                        }}
-                        className="flex-1 px-4 py-3 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 rounded-xl text-blue-400 transition-all"
-                      >
-                        Start Chat
-                      </button>
-                    </>
-                  )}
-
-                  {transactionStep === 3 && (
-                    <button
-                      onClick={() => {
-                        setShowTransactionModal(false);
-                        setShowChat(true);
-                      }}
-                      className="w-full px-4 py-3 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 rounded-xl text-blue-400 transition-all"
-                    >
-                      Go to Chat
-                    </button>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Add this before the closing div of the main container */}
-      <AnimatePresence>
-        {duplicateOrderMessage && (
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 flex items-center gap-2"
-          >
-            <AlertTriangle size={20} />
-            <span>You have to finish your order with this person before attempting to create a new one</span>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Reactivate Error Animation */}
-      <AnimatePresence>
-        {reactivateError && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-          >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-md bg-gray-900/90 border border-white/10 rounded-xl backdrop-blur-xl overflow-hidden flex flex-col items-center justify-center p-8"
-            >
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="w-20 h-20 rounded-full flex items-center justify-center mb-4 bg-red-500/20"
-              >
-                <X className="w-10 h-10 text-red-400" />
-              </motion.div>
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-lg font-medium text-red-400 text-center"
-              >
-                {reactivateError}
-              </motion.p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Payment Verification Modal */}
-      <AnimatePresence>
-        {showPaymentVerification && selectedOrderForAction && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-            onClick={() => setShowPaymentVerification(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              onClick={e => e.stopPropagation()}
-              className="w-full max-w-md bg-gray-900/50 border border-white/10 rounded-xl backdrop-blur-xl overflow-hidden"
-            >
-              <div className="p-6 border-b border-white/10">
-                <h2 className="text-xl font-semibold text-white">Verify Payment</h2>
-                <p className="text-sm text-gray-400 mt-1">Upload proof of payment</p>
-              </div>
-
-              <div className="p-6 space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">Payment Proof</label>
+                  <label className="block text-sm font-medium text-gray-400 mb-2">{t('orderChat.paymentProof')}</label>
                   <div className="flex items-center gap-4">
                     <input
                       id="payment-proof-upload"
@@ -3107,7 +2813,7 @@ const P2P = () => {
                       htmlFor="payment-proof-upload"
                       className="cursor-pointer px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition font-medium"
                     >
-                      {paymentProof ? paymentProof.name : 'Choose File'}
+                      {paymentProof ? paymentProof.name : t('orderChat.chooseFile')}
                     </label>
                     {paymentProof && (
                       <button
@@ -3126,7 +2832,7 @@ const P2P = () => {
                     onClick={() => setShowPaymentVerification(false)}
                     className="flex-1 px-4 py-3 rounded-lg bg-gray-700 text-gray-300 hover:bg-gray-600 transition font-medium"
                   >
-                    Cancel
+                    {t('orderChat.cancel')}
                   </button>
                   <button
                     onClick={() => {
@@ -3141,7 +2847,7 @@ const P2P = () => {
                     className="flex-1 px-4 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-50"
                     disabled={!paymentProof}
                   >
-                    Submit Proof
+                    {t('orderChat.submitProof')}
                   </button>
                 </div>
               </div>

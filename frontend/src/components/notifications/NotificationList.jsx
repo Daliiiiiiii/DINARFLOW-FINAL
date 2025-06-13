@@ -15,7 +15,7 @@ const NotificationList = () => {
     setUnreadCount,
     showError 
   } = useNotification();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const fetchNotifications = async () => {
     try {
@@ -160,10 +160,7 @@ const NotificationList = () => {
                             date: notification.data?.date,
                             message: notification.data?.message,
                             featureName: notification.data?.featureName
-                          })}
-                        </h4>
-                        <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                          {t(notification.message, {
+                          }) !== notification.title ? t(notification.title, {
                             amount: notification.data?.amount,
                             currency: notification.data?.currency,
                             recipient: notification.data?.recipientName ? ` to ${notification.data.recipientName}` : '',
@@ -175,10 +172,28 @@ const NotificationList = () => {
                             date: notification.data?.date,
                             message: notification.data?.message,
                             featureName: notification.data?.featureName
-                          })}
+                          }) : t('notifications.unknown')}
+                        </h4>
+                        <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                          {(() => {
+                            const msg = t(notification.message, {
+                              amount: notification.data?.amount,
+                              currency: notification.data?.currency,
+                              recipient: notification.data?.recipientName ? ` to ${notification.data.recipientName}` : '',
+                              sender: notification.data?.senderName ? ` from ${notification.data.senderName}` : '',
+                              location: notification.data?.location,
+                              device: notification.data?.device,
+                              status: notification.data?.enabled ? t('common.enabled') : t('common.disabled'),
+                              type: notification.data?.type,
+                              date: notification.data?.date,
+                              message: notification.data?.message,
+                              featureName: notification.data?.featureName
+                            });
+                            return msg.replace(/\{type\}/g, notification.data?.type ? t(`notifications.types.${notification.data?.type}`) || '' : '');
+                          })()}
                         </p>
                         <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                          {new Date(notification.createdAt).toLocaleString()}
+                          {new Date(notification.createdAt).toLocaleString('en-US')}
                         </p>
                       </div>
                       <div className="flex space-x-2 ml-4">

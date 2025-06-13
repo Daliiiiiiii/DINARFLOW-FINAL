@@ -395,7 +395,17 @@
       "imageTooLarge": "L'image doit être inférieure à 5 Mo",
       "uploadFailed": "Échec du téléchargement de la photo de profil",
       "removeFailed": "Échec de la suppression de la photo de profil"
-    }
+    },
+    "bankAccount": "Compte bancaire",
+    "bankName": "Nom de la banque",
+    "accountHolder": "Titulaire du compte",
+    "rib": "RIB",
+    "copyRIB": "Copier le RIB",
+    "noBankAccount": "Aucun compte bancaire lié",
+    "contactSupport": "Contacter le support",
+    "kycPending": "Vérification KYC en attente",
+    "kycRequired": "Vérification KYC requise",
+    "verified": "Vérifié"
   },
   "kycStatus": {
     "verified": "Vérifié",
@@ -708,27 +718,83 @@
       "completed": "Terminée",
       "pending": "En attente",
       "active": "Active"
-    }
+    },
+    "orderCount": "{count} ordres",
+    "completionRate": "{rate}% taux d'achèvement",
+    "minResponse": "{min} min de réponse",
+    "available": "Disponible: {amount} USDT"
   },
   "notifications": {
     "title": "Notifications",
     "subtitle": "Restez informé de l'activité de votre compte",
     "categories": {
       "all": "Tout",
-      "transactions": "Transactions",
-      "security": "Sécurité",
-      "system": "Système",
-      "other": "Autre"
-    },
-    "actions": {
-      "markAllRead": "Tout marquer comme lu",
-      "clearAll": "Tout effacer",
-      "markAsRead": "Marquer comme lu",
-      "delete": "Supprimer"
+      "alert": "Alertes",
+      "transfers": "Transferts",
+      "p2p": "P2P",
+      "crypto": "Crypto",
+      "title": "Catégories"
     },
     "search": {
       "placeholder": "Rechercher des notifications..."
     },
+    "noNotifications": "Aucune notification trouvée",
+    "markAllRead": "Tout marquer comme lu",
+    "deleteAll": "Tout supprimer",
+    "actions": {
+      "deleteAll": "Tout supprimer",
+      "markAllRead": "Tout marquer comme lu",
+      "markAsRead": "Marquer comme lu",
+      "delete": "Supprimer",
+      "clearAll": "Tout effacer",
+      "viewAll": "Voir toutes les notifications"
+    },
+    "types": {
+      "alert": "Alerte",
+      "transaction": "Transaction",
+      "p2p": "P2P",
+      "chat": "Chat",
+      "crypto": "Crypto",
+      "security": {
+        "title": {
+          "new_login": "Nouvelle connexion détectée",
+          "default": "Alerte de sécurité"
+        },
+        "message": {
+          "new_login": "Une nouvelle connexion a été détectée sur votre compte.",
+          "default": "Alerte de sécurité : {type}"
+        }
+      }
+    },
+    "messages": {
+      "new_login": "Nouvelle connexion détectée depuis {device}",
+      "password_changed": "Votre mot de passe a été modifié",
+      "email_verified": "Votre email a été vérifié",
+      "phone_verified": "Votre numéro de téléphone a été vérifié",
+      "kyc_approved": "Votre vérification KYC a été approuvée",
+      "kyc_rejected": "Votre vérification KYC a été rejetée",
+      "p2p_order_created": "Nouvelle commande P2P créée",
+      "p2p_order_cancelled": "Commande P2P annulée",
+      "p2p_order_completed": "Commande P2P terminée",
+      "p2p_payment_received": "Paiement reçu pour la commande P2P",
+      "p2p_payment_sent": "Paiement envoyé pour la commande P2P",
+      "p2p_dispute_opened": "Litige ouvert pour la commande P2P",
+      "p2p_dispute_resolved": "Litige résolu pour la commande P2P",
+      "p2p_message_received": "Nouveau message reçu",
+      "crypto_send": "Crypto envoyé : {amount} {currency}",
+      "crypto_receive": "Crypto reçu : {amount} {currency}",
+      "crypto_swap": "Crypto échangé : {fromAmount} {fromCurrency} vers {toAmount} {toCurrency}",
+      "crypto_stake": "Crypto staké : {amount} {currency}",
+      "crypto_unstake": "Crypto unstaké : {amount} {currency}",
+      "crypto_yield": "Rendement gagné : {amount} {currency}",
+      "crypto_deposit": "Crypto déposé : {amount} {currency}",
+      "crypto_withdrawal": "Crypto retiré : {amount} {currency}"
+    },
+    "empty": {
+      "title": "Aucune notification trouvée",
+      "description": "Vous êtes à jour !"
+    },
+    "loading": "Chargement des notifications...",
     "settings": {
       "title": "Paramètres des notifications",
       "pushNotifications": {
@@ -737,9 +803,13 @@
           "label": "Transactions",
           "description": "Soyez notifié de vos transactions"
         },
-        "security": {
-          "label": "Alertes de sécurité",
-          "description": "Notifications de sécurité importantes"
+        "alert": {
+          "label": "Alertes",
+          "description": "Notifications d'alerte importantes"
+        },
+        "system": {
+          "label": "Système",
+          "description": "Notifications et mises à jour système"
         },
         "news": {
           "label": "Actualités et mises à jour",
@@ -759,62 +829,300 @@
       },
       "save": "Enregistrer les paramètres"
     },
-    "empty": {
-      "title": "Aucune notification trouvée",
-      "description": "Vous êtes à jour !"
+    "unknown": "Notification inconnue",
+    "new": "Nouveau"
+  },
+  "p2p": {
+    "title": "Trading P2P",
+    "completion": "Taux de complétion",
+    "response": "Réponse",
+    "orders": "Commandes",
+    "currency": {
+      "TND": "TND"
     },
-    "loading": "Chargement des notifications...",
-    "types": {
-      "transaction": {
-        "title": {
-          "sent": "Envoyé {{amount}} {{currency}}",
-          "received": "Reçu {{amount}} {{currency}}",
-          "deposited": "Déposé {{amount}} {{currency}}",
-          "withdrawn": "Retiré {{amount}} {{currency}}",
-          "default": "Transaction : {{amount}} {{currency}}"
-        },
-        "message": {
-          "sent": "Vous avez envoyé {{amount}} {{currency}}{{recipient}}",
-          "received": "Vous avez reçu {{amount}} {{currency}}{{sender}}",
-          "deposited": "Vous avez déposé {{amount}} {{currency}} sur votre compte bancaire",
-          "withdrawn": "Vous avez retiré {{amount}} {{currency}} de votre compte bancaire",
-          "default": "Transaction traitée : {{amount}} {{currency}}"
-        }
-      },
-      "security": {
-        "title": {
-          "login_attempt": "Nouvelle tentative de connexion",
-          "password_change": "Mot de passe modifié",
-          "two_factor": "Authentification à deux facteurs",
-          "account_locked": "Compte verrouillé",
-          "login_success": "Connexion réussie",
-          "new_login": "Nouvelle connexion détectée",
-          "default": "Alerte de sécurité"
-        },
-        "message": {
-          "login_attempt": "Nouvelle tentative de connexion depuis {{location}} avec {{device}}",
-          "password_change": "Votre mot de passe a été modifié avec succès",
-          "two_factor": "L'authentification à deux facteurs a été {{status}}",
-          "account_locked": "Votre compte a été temporairement verrouillé en raison de plusieurs tentatives de connexion échouées",
-          "login_success": "Une connexion réussie a été détectée sur votre compte",
-          "new_login": "Une nouvelle connexion a été détectée sur votre compte.",
-          "default": "Alerte de sécurité : {{type}}"
-        }
-      },
-      "system": {
-        "title": {
-          "maintenance": "Maintenance programmée",
-          "feature": "Nouvelle fonctionnalité disponible",
-          "update": "Mise à jour du système",
-          "default": "Mise à jour du système"
-        },
-        "message": {
-          "maintenance": "Maintenance programmée le {{date}} : {{message}}",
-          "feature": "Nouvelle fonctionnalité disponible : {{featureName}}",
-          "update": "Mise à jour du système : {{message}}",
-          "default": "{{message}}"
-        }
+    "orderCount": "{{count}} commandes",
+    "completionRate": "{{rate}}% taux de complétion",
+    "minResponse": "{{min}} min de réponse",
+    "available": "Disponible",
+    "subtitle": "Échangez des USDT avec d'autres utilisateurs",
+    "createOffer": "Créer une offre",
+    "myOffers": "Mes offres",
+    "myOrders": "Mes commandes",
+    "search": "Rechercher des offres...",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "buy": "Acheter",
+    "sell": "Vendre",
+    "price": "Prix",
+    "amount": "Montant",
+    "limits": "Limites",
+    "paymentMethods": "Méthodes de paiement",
+    "status": {
+      "active": "Actif",
+      "completed": "Terminé",
+      "cancelled": "Annulé",
+      "disputed": "En litige",
+      "pending": "En attente"
+    },
+    "order": {
+      "title": "Détails de la commande",
+      "buyer": "Acheteur",
+      "seller": "Vendeur",
+      "amount": "Montant",
+      "price": "Prix",
+      "total": "Total",
+      "status": "Statut",
+      "timeRemaining": "Temps restant",
+      "paymentDetails": "Détails du paiement",
+      "confirmPayment": "Confirmer le paiement",
+      "releaseFunds": "Libérer les fonds",
+      "cancelOrder": "Annuler la commande",
+      "dispute": "Ouvrir un litige",
+      "chat": "Chat",
+      "sendMessage": "Envoyer un message",
+      "typeMessage": "Tapez votre message...",
+      "paymentProof": "Preuve de paiement",
+      "uploadProof": "Télécharger la preuve de paiement",
+      "confirmRelease": "Confirmer la libération",
+      "confirmCancel": "Confirmer l'annulation",
+      "confirmDispute": "Confirmer le litige",
+      "reason": "Raison",
+      "details": "Détails",
+      "submit": "Soumettre",
+      "close": "Fermer"
+    },
+    "offer": {
+      "create": "Créer une offre",
+      "edit": "Modifier l'offre",
+      "type": "Type d'offre",
+      "buy": "Acheter des USDT",
+      "sell": "Vendre des USDT",
+      "price": "Prix (TND)",
+      "minAmount": "Montant minimum",
+      "maxAmount": "Montant maximum",
+      "paymentMethods": "Méthodes de paiement",
+      "bank": "Virement bancaire",
+      "cash": "Espèces",
+      "mobile": "Mobile Money",
+      "terms": "Conditions générales",
+      "submit": "Soumettre l'offre",
+      "update": "Mettre à jour l'offre",
+      "deactivate": "Désactiver l'offre",
+      "delete": "Supprimer l'offre",
+      "status": {
+        "active": "Actif",
+        "inactive": "Inactif"
       }
+    },
+    "notifications": {
+      "orderCreated": "Nouvelle commande créée",
+      "orderCompleted": "Commande terminée",
+      "orderCancelled": "Commande annulée",
+      "orderDisputed": "Commande en litige",
+      "paymentReceived": "Paiement reçu",
+      "fundsReleased": "Fonds libérés",
+      "newMessage": "Nouveau message reçu"
+    },
+    "errors": {
+      "createOffer": "Échec de la création de l'offre",
+      "updateOffer": "Échec de la mise à jour de l'offre",
+      "deleteOffer": "Échec de la suppression de l'offre",
+      "createOrder": "Échec de la création de la commande",
+      "cancelOrder": "Échec de l'annulation de la commande",
+      "releaseFunds": "Échec de la libération des fonds",
+      "uploadProof": "Échec du téléchargement de la preuve de paiement",
+      "sendMessage": "Échec de l'envoi du message",
+      "duplicateOrder": "Vous avez déjà une commande active avec cet utilisateur",
+      "insufficientBalance": "Solde insuffisant",
+      "invalidAmount": "Montant invalide",
+      "invalidPrice": "Prix invalide",
+      "requiredFields": "Veuillez remplir tous les champs obligatoires"
+    },
+    "success": {
+      "createOffer": "Offre créée avec succès",
+      "updateOffer": "Offre mise à jour avec succès",
+      "deleteOffer": "Offre supprimée avec succès",
+      "createOrder": "Commande créée avec succès",
+      "cancelOrder": "Commande annulée avec succès",
+      "releaseFunds": "Fonds libérés avec succès",
+      "uploadProof": "Preuve de paiement téléchargée avec succès",
+      "sendMessage": "Message envoyé avec succès"
+    },
+    "confirmations": {
+      "releaseFunds": "Êtes-vous sûr de vouloir libérer les fonds ?",
+      "cancelOrder": "Êtes-vous sûr de vouloir annuler cette commande ?",
+      "disputeOrder": "Êtes-vous sûr de vouloir ouvrir un litige ?",
+      "deleteOffer": "Êtes-vous sûr de vouloir supprimer cette offre ?",
+      "paymentConfirmation": "Veuillez confirmer que vous avez effectué le paiement",
+      "noPaymentMade": "Je confirme que je n'ai effectué aucun paiement au vendeur"
+    },
+    "createOfferModal": {
+      "title": "Créer une nouvelle offre",
+      "subtitle": "Configurez votre offre de trading USDT",
+      "offerType": "Type d'offre",
+      "price": "Prix (TND)",
+      "pricePlaceholder": "Entrez le prix par USDT",
+      "minAmount": "Montant minimum (TND)",
+      "minAmountPlaceholder": "Montant min (min: 10 TND)",
+      "minAmountError": "Le montant minimum doit être d'au moins 10 TND",
+      "maxAmount": "Montant maximum (TND)",
+      "maxAmountPlaceholder": "Montant max (max: 20000 TND)",
+      "maxAmountError": "Le montant maximum doit être supérieur au montant minimum",
+      "maxAmountLimitError": "Le montant maximum ne peut pas dépasser 20000 TND",
+      "orderLength": "Durée de l'ordre",
+      "orderLengthOptions": {
+        "15": "15 minutes",
+        "30": "30 minutes",
+        "45": "45 minutes",
+        "60": "60 minutes"
+      },
+      "availableAmount": "Montant disponible (USDT)",
+      "availableAmountPlaceholder": "Entrez le montant disponible",
+      "available": "Disponible",
+      "max": "MAX",
+      "equivalent": "Équivalent",
+      "description": "Description (Optionnel)",
+      "descriptionPlaceholder": "Ajoutez des détails supplémentaires sur votre offre...",
+      "paymentMethods": "Méthodes de paiement",
+      "submit": "Créer l'offre"
+    },
+    "buyUSDT": "Acheter USDT",
+    "sellUSDT": "Vendre USDT",
+    "paymentMethodNames": {
+      "tnd_wallet": "Portefeuille TND",
+      "bank_transfer": "Virement bancaire",
+      "cash": "Espèces"
+    },
+    "order": {
+      "status": "Statut",
+      "status.completed": "Terminé",
+      "status.cancelled": "Annulé",
+      "status.pending": "En attente",
+      "price": "Prix",
+      "total": "Total",
+      "tradingWith": "Trading avec",
+      "paymentMethod": "Méthode de paiement",
+      "chat": "Chat",
+      "verifyPayment": "Vérifier le paiement",
+      "releaseFunds": "Libérer les fonds",
+      "cancelOrder": "Annuler l'ordre",
+      "confirmCancel": "Confirmer l'annulation",
+      "confirmRelease": "Confirmer la libération"
+    },
+    "confirmations": {
+      "noPaymentMade": "Veuillez confirmer que vous n'avez pas effectué de paiement au vendeur avant d'annuler cet ordre.",
+      "releaseFunds": "Veuillez confirmer que vous avez reçu le paiement de l'acheteur avant de libérer l'USDT.",
+      "paymentConfirmation": "Je confirme que j'ai reçu le paiement de l'acheteur"
+    },
+    "errors": {
+      "duplicateOrder": "Ordre actif existant",
+      "duplicateOrderMessage": "Vous avez déjà un ordre actif avec cet utilisateur. Veuillez compléter ou annuler votre ordre existant d'abord.",
+      "confirmNoPayment": "Veuillez confirmer que vous n'avez pas effectué de paiement",
+      "confirmPayment": "Veuillez confirmer que vous avez reçu le paiement"
+    },
+    "chat": {
+      "title": "Chat",
+      "typeMessage": "Tapez votre message...",
+      "send": "Envoyer",
+      "uploadImage": "Télécharger une image",
+      "orderDetails": "Détails de la commande",
+      "close": "Fermer",
+      "status": {
+        "completed": "Transaction terminée !",
+        "cancelled": "Commande annulée",
+        "pending": "Commande en attente"
+      },
+      "messages": {
+        "orderCreated": "Une nouvelle commande a été créée pour {{amount}} USDT",
+        "orderCancelled": "La commande #{{orderId}} a été annulée",
+        "orderCompleted": "La commande #{{orderId}} a été complétée",
+        "paymentVerified": "La commande #{{orderId}} a été marquée comme payée",
+        "fundsReleased": "L'USDT a été libéré pour la commande #{{orderId}}",
+        "systemMessage": "Message système"
+      },
+      "errors": {
+        "sendFailed": "Échec de l'envoi du message",
+        "loadFailed": "Échec du chargement des messages",
+        "uploadFailed": "Échec du téléchargement de l'image",
+        "invalidFileType": "Type de fichier invalide. Veuillez télécharger une image.",
+        "fileTooLarge": "La taille du fichier doit être inférieure à 5 Mo"
+      },
+      "confirmations": {
+        "cancelTitle": "Confirmer l'annulation",
+        "cancelMessage": "Veuillez confirmer que vous n'avez pas effectué de paiement au vendeur avant d'annuler cette commande.",
+        "cancelCheckbox": "Je confirme que je n'ai pas effectué de paiement au vendeur",
+        "releaseTitle": "Confirmer la libération",
+        "releaseMessage": "Veuillez confirmer que vous avez reçu le paiement de l'acheteur avant de libérer l'USDT.",
+        "releaseCheckbox": "Je confirme que j'ai reçu le paiement de l'acheteur",
+        "close": "Fermer",
+        "cancelOrder": "Annuler la commande",
+        "releaseUSDT": "Libérer l'USDT"
+      },
+      "loading": "Chargement du chat...",
+      "orderNumber": "Commande #{{number}}",
+      "status": {
+        "pending": "En attente de paiement",
+        "paid": "En attente de la libération de l'USDT par le vendeur",
+        "completed": "Terminé",
+        "cancelled": "Annulé",
+        "disputed": "En litige"
+      },
+      "amount": "Montant",
+      "price": "Prix",
+      "total": "Total",
+      "paymentMethod": "Méthode de paiement",
+      "showDetails": "Afficher les détails",
+      "hideDetails": "Masquer les détails",
+      "cancelOrder": "Annuler la commande",
+      "typeMessage": "Tapez votre message...",
+      "selectedImage": "Image sélectionnée",
+      "loading": "Chargement du chat...",
+      "seller": "Vendeur",
+      "buyer": "Acheteur",
+      "buyerPaymentProof": "L'acheteur a soumis une preuve de paiement. Veuillez vérifier le paiement et libérer l'USDT si reçu.",
+      "sellerPaymentInfo": "Informations de paiement du vendeur",
+      "sellerPaymentInfoPlaceholder": "Le vendeur n'a pas fourni de détails de paiement pour cette méthode.",
+      "cancelOrder": "Annuler la commande",
+      "messages": {
+        "orderCancelled": "Commande annulée",
+        "orderCancelledWithId": "La commande #{{orderId}} a été annulée",
+        "fundsReleased": "Fonds libérés",
+        "fundsReleasedWithId": "Les fonds ont été libérés pour la commande #{{orderId}}"
+      },
+      "errors": {
+        "cancelFailed": "Échec de l'annulation de la commande",
+        "releaseFailed": "Échec de la libération des fonds",
+        "imageSize": "La taille de l'image doit être inférieure à 5 Mo",
+        "imageType": "Veuillez sélectionner un fichier image",
+        "noActiveOrder": "Aucune commande active trouvée",
+        "sendMessage": "Échec de l'envoi du message",
+        "releaseConfirm": "Veuillez confirmer que vous avez reçu le paiement"
+      },
+      "confirmations": {
+        "releaseTitle": "Confirmer la libération",
+        "releaseMessage": "Veuillez confirmer que vous avez reçu le paiement de l'acheteur avant de libérer l'USDT.",
+        "releaseCheckbox": "Je confirme que j'ai reçu le paiement de l'acheteur",
+        "releaseFunds": "Libérer l'USDT",
+        "close": "Fermer"
+      }
+    },
+    "available": "Disponible",
+    "limits": "Limites",
+    "completion": "achèvement",
+    "response": "réponse",
+    "orders": "ordres",
+    "currency": {
+      "TND": "TND"
     }
+  },
+  "orderChat": {
+    "title": "Chat de commande",
+    "summary": "Commande #{{orderId}} - {{amount}} USDT",
+    "verifyPayment": "Vérifier le paiement",
+    "uploadProof": "Télécharger la preuve de paiement",
+    "paymentProof": "Preuve de paiement",
+    "chooseFile": "Choisir le fichier",
+    "cancel": "Annuler",
+    "submitProof": "Soumettre la preuve"
   }
 }

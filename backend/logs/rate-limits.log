@@ -8098,3 +8098,132 @@
   "type": "alert",
   "title": "notifications.types.security.title.new_login"
 }
+2025-06-10T20:27:53.878Z [INFO] RATE LIMIT: Deleted notification: 6848945bd7334a2b97c2b70f
+	Metadata: {
+  "userId": "682e6bde755cf136feedc20b"
+}
+2025-06-10T20:27:58.533Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-10T21:03:37.363Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-10T21:08:53.274Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-10T21:13:02.951Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-10T22:00:02.835Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-10T23:25:48.377Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-10T23:30:30.516Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-11T10:47:45.952Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-11T10:47:46.761Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-11T10:47:52.019Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-11T10:48:26.709Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-11T10:51:47.914Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "682e6bde755cf136feedc20b"
+}
+2025-06-11T10:51:52.572Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-11T10:54:03.328Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-11T10:54:03.334Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-11T10:55:07.156Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-11T10:55:24.196Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-11T10:55:26.672Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-11T10:55:33.897Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-11T10:55:49.164Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-11T11:01:47.313Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-11T12:13:14.069Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-11T12:31:16.867Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-11T12:31:55.838Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-11T12:31:58.444Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-13T16:24:25.090Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-13T16:42:17.609Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}

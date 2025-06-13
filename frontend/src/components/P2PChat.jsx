@@ -7,85 +7,57 @@ import { toast } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import io from 'socket.io-client';
 import { useNotification } from '../contexts/NotificationContext';
+import { useTranslation } from 'react-i18next';
 
 // Add new CancelConfirmation component
 const CancelConfirmation = ({ onConfirm, onClose }) => {
   const [confirmed, setConfirmed] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
     >
       <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
+        initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.8, opacity: 0 }}
-        transition={{ type: "spring", duration: 0.5 }}
-        className="bg-gray-900/90 border border-white/10 rounded-2xl p-8 max-w-md w-full mx-4"
+        exit={{ scale: 0.95, opacity: 0 }}
+        className="w-full max-w-md bg-gray-900/50 border border-white/10 rounded-xl backdrop-blur-xl p-6"
       >
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.2, type: "spring" }}
-          className="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center bg-yellow-500/20"
-        >
-          <AlertTriangle className="w-8 h-8 text-yellow-400" />
-        </motion.div>
-
-        <motion.h3
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-xl font-semibold mb-4 text-center"
-        >
-          Confirm Cancellation
-        </motion.h3>
-
-        <motion.p
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="text-gray-400 mb-6 text-center"
-        >
-          Please confirm that you have not made any payment to the seller before cancelling this order.
-        </motion.p>
-
+        <h3 className="text-lg font-semibold text-white mb-4">{t('p2p.chat.confirmations.cancelTitle')}</h3>
+        <p className="text-gray-400 mb-6">{t('p2p.chat.confirmations.cancelMessage')}</p>
         <div className="flex items-center gap-3 mb-6">
           <input
             type="checkbox"
-            id="confirm-cancel"
+            id="confirmCheckbox"
             checked={confirmed}
             onChange={(e) => setConfirmed(e.target.checked)}
-            className="w-5 h-5 rounded border-gray-600 bg-gray-800 text-yellow-500 focus:ring-yellow-500/20"
+            className="w-4 h-4 rounded border-white/20 bg-white/5 checked:bg-blue-500"
           />
-          <label htmlFor="confirm-cancel" className="text-gray-300">
-            I confirm that I have not made any payment to the seller
+          <label htmlFor="confirmCheckbox" className="text-sm text-gray-400">
+            {t('p2p.chat.confirmations.cancelCheckbox')}
           </label>
         </div>
-
-        <div className="flex gap-4">
+        <div className="flex justify-end gap-3">
           <button
             onClick={onClose}
-            className="flex-1 px-4 py-3 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-xl text-gray-300 transition-all"
+            className="px-4 py-2 text-sm text-gray-400 hover:text-white transition-colors"
           >
-            Close
+            {t('p2p.chat.confirmations.close')}
           </button>
           <button
-            onClick={() => {
-              if (confirmed) {
-                onConfirm();
-                onClose();
-              } else {
-                toast.error('Please confirm that you have not made any payment');
-              }
-            }}
-            className="flex-1 px-4 py-3 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 rounded-xl text-red-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            onClick={onConfirm}
             disabled={!confirmed}
+            className={`px-4 py-2 text-sm rounded-lg transition-colors ${
+              confirmed
+                ? 'bg-red-500/10 hover:bg-red-500/20 text-red-400'
+                : 'bg-white/5 text-gray-400 cursor-not-allowed'
+            }`}
           >
-            Cancel Order
+            {t('p2p.chat.confirmations.cancelOrder')}
           </button>
         </div>
       </motion.div>
@@ -96,6 +68,7 @@ const CancelConfirmation = ({ onConfirm, onClose }) => {
 // Add new ReleaseConfirmation component
 const ReleaseConfirmation = ({ onConfirm, onClose }) => {
   const [confirmed, setConfirmed] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <motion.div
@@ -126,7 +99,7 @@ const ReleaseConfirmation = ({ onConfirm, onClose }) => {
           transition={{ delay: 0.3 }}
           className="text-xl font-semibold mb-4 text-center"
         >
-          Confirm Release
+          {t('p2p.chat.confirmations.releaseTitle')}
         </motion.h3>
 
         <motion.p
@@ -135,7 +108,7 @@ const ReleaseConfirmation = ({ onConfirm, onClose }) => {
           transition={{ delay: 0.4 }}
           className="text-gray-400 mb-6 text-center"
         >
-          Please confirm that you have received the payment from the buyer before releasing the USDT.
+          {t('p2p.chat.confirmations.releaseMessage')}
         </motion.p>
 
         <div className="flex items-center gap-3 mb-6">
@@ -147,7 +120,7 @@ const ReleaseConfirmation = ({ onConfirm, onClose }) => {
             className="w-5 h-5 rounded border-gray-600 bg-gray-800 text-green-500 focus:ring-green-500/20"
           />
           <label htmlFor="confirm-release" className="text-gray-300">
-            I confirm that I have received the payment from the buyer
+            {t('p2p.chat.confirmations.releaseCheckbox')}
           </label>
         </div>
 
@@ -156,7 +129,7 @@ const ReleaseConfirmation = ({ onConfirm, onClose }) => {
             onClick={onClose}
             className="flex-1 px-4 py-3 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-xl text-gray-300 transition-all"
           >
-            Close
+            {t('p2p.chat.confirmations.close')}
           </button>
           <button
             onClick={() => {
@@ -164,13 +137,13 @@ const ReleaseConfirmation = ({ onConfirm, onClose }) => {
                 onConfirm();
                 onClose();
               } else {
-                toast.error('Please confirm that you have received the payment');
+                toast.error(t('p2p.chat.errors.releaseConfirm'));
               }
             }}
             className="flex-1 px-4 py-3 bg-green-500/10 hover:bg-green-500/20 border border-green-500/20 rounded-xl text-green-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={!confirmed}
           >
-            Release USDT
+            {t('p2p.chat.confirmations.releaseFunds')}
           </button>
         </div>
       </motion.div>
@@ -181,6 +154,7 @@ const ReleaseConfirmation = ({ onConfirm, onClose }) => {
 const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
   const { theme } = useTheme();
   const { notifications, setNotifications, unreadCount, setUnreadCount } = useNotification();
+  const { t } = useTranslation();
   const isDark = theme === 'dark';
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
@@ -430,11 +404,11 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 5 * 1024 * 1024) { // 5MB limit
-        toast.error('Image size should be less than 5MB');
+        toast.error(t('p2p.chat.errors.imageSize'));
         return;
       }
       if (!file.type.startsWith('image/')) {
-        toast.error('Please select an image file');
+        toast.error(t('p2p.chat.errors.imageType'));
         return;
       }
       setSelectedImage(file);
@@ -447,7 +421,7 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
 
     // Remove the status check to allow messages in all order statuses
     if (!currentOrder) {
-      toast.error('No active order found');
+      toast.error(t('p2p.chat.errors.noActiveOrder'));
       return;
     }
 
@@ -483,7 +457,7 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
         window.socket.emit('notification:update', {
           orderId: currentOrder._id,
           type: 'transaction',
-          title: 'New Message',
+          title: t('p2p.chat.messages.newMessage'),
           message: `New message in order #${currentOrder._id.slice(-6)}`,
           data: {
             orderId: currentOrder._id,
@@ -499,7 +473,7 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
       setIsTyping(false);
     } catch (error) {
       console.error('Error sending message:', error);
-      toast.error('Failed to send message');
+      toast.error(t('p2p.chat.errors.sendMessage'));
     } finally {
       setUploading(false);
     }
@@ -543,7 +517,7 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
           <div className="mb-2">
             <img 
               src={message.imageUrl} 
-              alt="Shared image" 
+              alt={t('p2p.chat.selectedImage')} 
               className="max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
               onClick={() => window.open(message.imageUrl, '_blank')}
             />
@@ -559,7 +533,7 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
       <div className="flex items-center justify-center h-full bg-gray-900/50 backdrop-blur-xl">
         <div className="flex flex-col items-center gap-4">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-          <p className="text-gray-400">Loading chat...</p>
+          <p className="text-gray-400">{t('p2p.chat.loading')}</p>
         </div>
       </div>
     );
@@ -577,19 +551,19 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
                 <User className="w-6 h-6 text-gray-400" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-white">Order #{currentOrder?._id?.slice(-6)}</h3>
+                <h3 className="text-lg font-semibold text-white">{t('p2p.chat.orderNumber', { number: currentOrder?._id?.slice(-6) })}</h3>
                 <div className="flex items-center gap-2 mt-1">
                   <span className={`text-sm ${getStatusColor(currentOrder?.status)}`}>
-                    {currentOrder?.status === 'pending' ? 'Waiting for payment' : 
-                     currentOrder?.status === 'paid' ? 'Waiting for seller to release USDT' :
-                     currentOrder?.status === 'completed' ? 'Completed' :
-                     currentOrder?.status === 'cancelled' ? 'Cancelled' : 'Disputed'}
+                    {currentOrder?.status === 'pending' ? t('p2p.chat.status.pending') : 
+                     currentOrder?.status === 'paid' ? t('p2p.chat.status.paid') :
+                     currentOrder?.status === 'completed' ? t('p2p.chat.status.completed') :
+                     currentOrder?.status === 'cancelled' ? t('p2p.chat.status.cancelled') : t('p2p.chat.status.disputed')}
                   </span>
                   <button
                     onClick={() => setShowOrderDetails(!showOrderDetails)}
                     className="text-sm text-gray-400 hover:text-white transition-colors"
                   >
-                    {showOrderDetails ? 'Hide Details' : 'Show Details'}
+                    {showOrderDetails ? t('p2p.chat.hideDetails') : t('p2p.chat.showDetails')}
                   </button>
                 </div>
               </div>
@@ -601,7 +575,7 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
                   onClick={() => setShowCancelConfirmation(true)}
                   className="px-6 py-2 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 rounded-lg text-red-400 font-semibold transition-all"
                 >
-                  Cancel Order
+                  {t('p2p.chat.cancelOrder')}
                 </button>
               )}
               <button
@@ -625,33 +599,33 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
                 <div className="p-4 bg-white/5 rounded-xl border border-white/10">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <div className="text-sm text-gray-400">Amount</div>
+                      <div className="text-sm text-gray-400">{t('p2p.chat.amount')}</div>
                       <div className="text-white font-medium">{currentOrder?.amount} USDT</div>
                     </div>
                     <div>
-                      <div className="text-sm text-gray-400">Price</div>
+                      <div className="text-sm text-gray-400">{t('p2p.chat.price')}</div>
                       <div className="text-white font-medium">{currentOrder?.price} TND</div>
                     </div>
                     <div>
-                      <div className="text-sm text-gray-400">Total</div>
+                      <div className="text-sm text-gray-400">{t('p2p.chat.total')}</div>
                       <div className="text-white font-medium">{currentOrder?.total} TND</div>
                     </div>
                     <div>
-                      <div className="text-sm text-gray-400">Payment Method</div>
+                      <div className="text-sm text-gray-400">{t('p2p.chat.paymentMethod')}</div>
                       <div className="text-white font-medium">{currentOrder?.paymentMethod}</div>
                     </div>
                   </div>
                   {currentOrder?.status === 'paid' && currentOrder?.seller?._id === currentUser?._id && (
                     <div className="mt-4 p-3 bg-yellow-500/10 border border-yellow-500/20 rounded text-yellow-400 text-sm">
-                      Buyer has submitted payment proof. Please verify payment and release USDT if received.
+                      {t('p2p.chat.buyerPaymentProof')}
                     </div>
                   )}
                   {/* Seller Payment Info */}
                   <div className="mt-6">
-                    <div className="text-sm text-gray-400 mb-1">Seller Payment Info</div>
+                    <div className="text-sm text-gray-400 mb-1">{t('p2p.chat.sellerPaymentInfo')}</div>
                     <div className="text-white font-medium">
                       {/* Placeholder: Replace with real info if available */}
-                      Seller has not provided payment details for this method.
+                      {t('p2p.chat.sellerPaymentInfoPlaceholder')}
                     </div>
                   </div>
                 </div>
@@ -713,9 +687,9 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
                             const isMessageFromSeller = message.sender._id === currentOrder?.seller?._id;
                             
                             if (message.sender._id === currentUser._id) {
-                              return isCurrentUserSeller ? 'Seller' : 'Buyer';
+                              return isCurrentUserSeller ? t('p2p.chat.seller') : t('p2p.chat.buyer');
                             } else {
-                              return isMessageFromSeller ? 'Seller' : 'Buyer';
+                              return isMessageFromSeller ? t('p2p.chat.seller') : t('p2p.chat.buyer');
                             }
                           })()}
                         </span>
@@ -769,7 +743,7 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
             <div className="mb-4 relative">
               <img 
                 src={URL.createObjectURL(selectedImage)} 
-                alt="Selected" 
+                alt={t('p2p.chat.selectedImage')} 
                 className="max-h-32 rounded-lg"
               />
               <button
@@ -803,7 +777,7 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
                 setNewMessage(e.target.value);
                 handleTyping();
               }}
-              placeholder="Type your message..."
+              placeholder={t('p2p.chat.typeMessage')}
               className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl backdrop-blur-xl focus:outline-none focus:border-blue-500/50 transition-colors text-white placeholder-gray-400"
             />
             <button
@@ -836,16 +810,16 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
                 window.socket.emit('notification:update', {
                   orderId: currentOrder._id,
                   type: 'transaction',
-                  title: 'Order Cancelled',
-                  message: `Order #${currentOrder._id.slice(-6)} has been cancelled`,
+                  title: t('p2p.chat.messages.orderCancelled'),
+                  message: t('p2p.chat.messages.orderCancelledWithId', { orderId: currentOrder._id.slice(-6) }),
                   data: {
                     orderId: currentOrder._id,
                     type: 'order_cancelled'
                   }
                 });
-                toast.success('Order cancelled');
+                toast.success(t('p2p.chat.messages.orderCancelled'));
               } catch (error) {
-                toast.error('Failed to cancel order');
+                toast.error(t('p2p.chat.errors.cancelFailed'));
               }
             }}
             onClose={() => setShowCancelConfirmation(false)}
@@ -859,47 +833,22 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
           <ReleaseConfirmation
             onConfirm={async () => {
               try {
-                // 1. Fetch order details
-                const orderRes = await axios.get(`/api/p2p/orders/${currentOrder._id}`);
-                const order = orderRes.data;
-                // 2. Fetch seller and buyer wallets
-                const [sellerWalletRes, buyerWalletRes] = await Promise.all([
-                  axios.get('/api/wallet', { params: { userId: order.seller._id } }),
-                  axios.get('/api/wallet', { params: { userId: order.buyer._id } })
-                ]);
-                const sellerWallet = sellerWalletRes.data;
-                const buyerWallet = buyerWalletRes.data;
-                // 3. Use the main address and network (default to 'ethereum')
-                const network = 'ethereum';
-                const fromAddress = sellerWallet.address;
-                const toAddress = buyerWallet.address;
-                // 4. Transfer USDT from seller to buyer
-                await axios.post('/api/wallet/send', {
-                  network,
-                  toAddress,
-                  amount: order.amount
-                });
-                // 5. Mark order as completed
-                await axios.put(`/api/p2p/orders/${currentOrder._id}`, {
-                  status: 'completed'
-                });
-                
-                // Emit socket event for real-time update using global socket
+                await axios.put(`/api/p2p/orders/${currentOrder._id}`, { status: 'completed' });
+                // Emit socket event for real-time update
                 window.socket.emit('notification:update', {
                   orderId: currentOrder._id,
                   type: 'transaction',
-                  title: 'Funds Released',
-                  message: `Funds have been released for order #${currentOrder._id.slice(-6)}`,
+                  title: t('p2p.chat.messages.fundsReleased'),
+                  message: t('p2p.chat.messages.fundsReleasedWithId', { orderId: currentOrder._id.slice(-6) }),
                   data: {
                     orderId: currentOrder._id,
                     type: 'funds_released'
                   }
                 });
-                
-                toast.success('Funds released successfully');
+                toast.success(t('p2p.chat.messages.fundsReleased'));
               } catch (error) {
                 console.error('Error releasing funds:', error);
-                toast.error(error.response?.data?.error || 'Failed to release funds');
+                toast.error(error.response?.data?.error || t('p2p.chat.errors.releaseFailed'));
               }
             }}
             onClose={() => setShowReleaseConfirmation(false)}

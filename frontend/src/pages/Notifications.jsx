@@ -62,25 +62,78 @@ const Notifications = () => {
     }
   }, [notifications]);
 
-  // Robust filter: dynamically get all types
-  const allTypes = Array.from(new Set(notifications.map(n => n.type)));
+  // Define P2P-related data types (from P2PChat and any other P2P/chat logic)
+  const P2P_DATA_TYPES = [
+    'funds_released',
+    'order_cancelled',
+    'new_order',
+    'payment_received',
+    'payment_verified',
+    'dispute_opened',
+    'dispute_resolved',
+    // Add any other P2P/chat notification data types here
+  ];
+
+  // Define crypto-related data types
+  const CRYPTO_DATA_TYPES = [
+    'send',
+    'receive',
+    'swap',
+    'stake',
+    'unstake',
+    'yield',
+    'deposit',
+    'withdrawal'
+  ];
+
   const categoryTypeMap = {
     all: null,
-    transactions: 'transaction',
-    alert: 'alert',
-    system: 'system',
-    other: 'other',
+    alert: ['alert'],
+    // Transfers: 'transaction' notifications that are NOT P2P-related or crypto-related
+    transfers: ['transaction'],
+    // P2P: any notification with type 'transaction' and data.type in P2P_DATA_TYPES, or type in P2P/chat types
+    p2p: ['p2p', 'chat', 'p2p_order', 'p2p_message', 'p2p_chat'],
+    // Crypto: notifications with type 'crypto' or 'transaction' with crypto-related data.type
+    crypto: ['crypto']
   };
+
+  const categories = [
+    { id: 'all', label: t('notifications.categories.all') },
+    { id: 'alert', label: t('notifications.categories.alert') },
+    { id: 'transfers', label: t('notifications.categories.transfers') },
+    { id: 'p2p', label: t('notifications.categories.p2p') },
+    { id: 'crypto', label: t('notifications.categories.crypto') }
+  ];
 
   // Filtering logic
   const filteredNotifications = notifications.filter(notification => {
     if (selectedCategory === 'all') return true;
-    if (selectedCategory === 'other') {
-      // Show notifications that are not in the main categories
-      return !['transaction', 'alert', 'system'].includes(notification.type);
+    if (selectedCategory === 'p2p') {
+      // P2P: type in p2p/chat types OR type 'transaction' with data.type in P2P_DATA_TYPES
+      return (
+        categoryTypeMap.p2p.includes(notification.type) ||
+        (notification.type === 'transaction' && P2P_DATA_TYPES.includes(notification.data?.type))
+      );
     }
-    // Map UI category to backend type
-    return notification.type === categoryTypeMap[selectedCategory];
+    if (selectedCategory === 'crypto') {
+      // Crypto: type 'crypto' OR type 'transaction' with data.type in CRYPTO_DATA_TYPES
+      return (
+        notification.type === 'crypto' ||
+        (notification.type === 'transaction' && CRYPTO_DATA_TYPES.includes(notification.data?.type))
+      );
+    }
+    if (selectedCategory === 'transfers') {
+      // Transfers: type 'transaction' but NOT P2P-related or crypto-related
+      return (
+        notification.type === 'transaction' &&
+        !P2P_DATA_TYPES.includes(notification.data?.type) &&
+        !CRYPTO_DATA_TYPES.includes(notification.data?.type)
+      );
+    }
+    if (Array.isArray(categoryTypeMap[selectedCategory])) {
+      return categoryTypeMap[selectedCategory].includes(notification.type);
+    }
+    return false;
   }).filter(notification =>
     (notification.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
      notification.message.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -143,6 +196,33 @@ const Notifications = () => {
     return colors[color] || colors.blue;
   };
 
+  // Update category counts for sidebar
+  const getCategoryCount = (id) => {
+    if (id === 'all') {
+      return notifications.length;
+    } else if (id === 'p2p') {
+      return notifications.filter(n =>
+        categoryTypeMap.p2p.includes(n.type) ||
+        (n.type === 'transaction' && P2P_DATA_TYPES.includes(n.data?.type))
+      ).length;
+    } else if (id === 'crypto') {
+      return notifications.filter(n =>
+        n.type === 'crypto' ||
+        (n.type === 'transaction' && CRYPTO_DATA_TYPES.includes(n.data?.type))
+      ).length;
+    } else if (id === 'transfers') {
+      return notifications.filter(n =>
+        n.type === 'transaction' &&
+        !P2P_DATA_TYPES.includes(n.data?.type) &&
+        !CRYPTO_DATA_TYPES.includes(n.data?.type)
+      ).length;
+    } else if (Array.isArray(categoryTypeMap[id])) {
+      return notifications.filter(n => categoryTypeMap[id].includes(n.type)).length;
+    } else {
+      return 0;
+    }
+  };
+
   return (
     <>
       <div className="space-y-6">
@@ -177,19 +257,14 @@ const Notifications = () => {
             >
               <h2 className="text-lg font-semibold mb-4">{t('notifications.categories.title')}</h2>
               <div className="space-y-2">
-                {['all', 'transactions', 'alert', 'system', 'other'].map((categoryId) => {
-                  const count = categoryId === 'all'
-                    ? notifications.length
-                    : categoryId === 'other'
-                      ? notifications.filter(n => !['transaction', 'alert', 'system'].includes(n.type)).length
-                      : notifications.filter(n => n.type === categoryTypeMap[categoryId]).length;
-                  
+                {categories.map(({ id, label }) => {
+                  const count = getCategoryCount(id);
                   return (
                     <button
-                      key={categoryId}
-                      onClick={() => setSelectedCategory(categoryId)}
+                      key={id}
+                      onClick={() => setSelectedCategory(id)}
                       className={`w-full p-3 rounded-lg transition-colors flex items-center justify-between ${
-                        selectedCategory === categoryId
+                        selectedCategory === id
                           ? isDark
                             ? 'bg-blue-900/20 text-blue-400'
                             : 'bg-blue-50 text-blue-600'
@@ -198,9 +273,9 @@ const Notifications = () => {
                             : 'hover:bg-gray-100'
                       }`}
                     >
-                      <span>{t(`notifications.categories.${categoryId}`)}</span>
+                      <span>{label}</span>
                       <span className={`px-2 py-0.5 rounded-full text-xs ${
-                        selectedCategory === categoryId
+                        selectedCategory === id
                           ? isDark
                             ? 'bg-blue-400/20 text-blue-400'
                             : 'bg-blue-100 text-blue-600'

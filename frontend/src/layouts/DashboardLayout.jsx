@@ -615,26 +615,26 @@ const DashboardLayout = () => {
                       } border rounded-xl shadow-xl overflow-hidden z-50`}
                     >
                       <div className="p-4 border-b border-gray-700 flex items-center justify-between">
-                        <h3 className="font-medium">Notifications</h3>
+                        <h3 className="font-medium">{t('notifications.title')}</h3>
                         <div className="flex items-center gap-2">
                           <Link
                             to="/notifications"
                             className="p-1 text-gray-400 hover:text-gray-300"
-                            title="View all notifications"
+                            title={t('notifications.actions.viewAll')}
                           >
                             <ArrowUpRight className="w-4 h-4" />
                           </Link>
                           <button
                             onClick={handleMarkAllAsRead}
                             className="p-1 text-gray-400 hover:text-gray-300"
-                            title="Mark all as read"
+                            title={t('notifications.actions.markAllRead')}
                           >
                             <Check className="w-4 h-4" />
                           </button>
                           <button
                             onClick={handleDeleteAllNotifications}
                             className="p-1 text-gray-400 hover:text-gray-300"
-                            title="Delete all"
+                            title={t('notifications.actions.deleteAll')}
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -648,9 +648,9 @@ const DashboardLayout = () => {
                       </div>
                       <div className="divide-y divide-gray-700 max-h-96 overflow-y-auto">
                         {isLoading ? (
-                          <div className="p-4 text-center text-gray-400">Loading...</div>
+                          <div className="p-4 text-center text-gray-400">{t('common.loading')}</div>
                         ) : notifications.length === 0 ? (
-                          <div className="p-4 text-center text-gray-400">No notifications</div>
+                          <div className="p-4 text-center text-gray-400">{t('notifications.empty.title')}</div>
                         ) : (
                           notifications.map((notification) => (
                             <motion.div
@@ -677,14 +677,56 @@ const DashboardLayout = () => {
                               </div>
                               <div className="flex-1">
                                 <div className="font-medium flex items-center gap-2">
-                                  {notification.title}
+                                  {t(notification.title, {
+                                    amount: notification.data?.amount,
+                                    currency: notification.data?.currency,
+                                    recipient: notification.data?.recipientName ? ` to ${notification.data.recipientName}` : '',
+                                    sender: notification.data?.senderName ? ` from ${notification.data.senderName}` : '',
+                                    location: notification.data?.location,
+                                    device: notification.data?.device,
+                                    status: notification.data?.enabled ? t('common.enabled') : t('common.disabled'),
+                                    type: notification.data?.type,
+                                    date: notification.data?.date,
+                                    message: notification.data?.message,
+                                    featureName: notification.data?.featureName
+                                  }) !== notification.title ? t(notification.title, {
+                                    amount: notification.data?.amount,
+                                    currency: notification.data?.currency,
+                                    recipient: notification.data?.recipientName ? ` to ${notification.data.recipientName}` : '',
+                                    sender: notification.data?.senderName ? ` from ${notification.data.senderName}` : '',
+                                    location: notification.data?.location,
+                                    device: notification.data?.device,
+                                    status: notification.data?.enabled ? t('common.enabled') : t('common.disabled'),
+                                    type: notification.data?.type,
+                                    date: notification.data?.date,
+                                    message: notification.data?.message,
+                                    featureName: notification.data?.featureName
+                                  }) : t('notifications.unknown')}
                                   {!notification.read && (
-                                    <span className="ml-2 px-2 py-0.5 bg-blue-500/10 text-blue-400 text-xs rounded-full">New</span>
+                                    <span className="ml-2 px-2 py-0.5 bg-blue-500/10 text-blue-400 text-xs rounded-full">{t('notifications.new')}</span>
                                   )}
                                 </div>
-                                <p className="text-sm text-gray-400 mt-0.5">{notification.message}</p>
+                                <p className="text-sm text-gray-400 mt-0.5">
+                                  {(() => {
+                                    const msg = t(notification.message, {
+                                      amount: notification.data?.amount,
+                                      currency: notification.data?.currency,
+                                      recipient: notification.data?.recipientName ? ` to ${notification.data.recipientName}` : '',
+                                      sender: notification.data?.senderName ? ` from ${notification.data.senderName}` : '',
+                                      location: notification.data?.location,
+                                      device: notification.data?.device,
+                                      status: notification.data?.enabled ? t('common.enabled') : t('common.disabled'),
+                                      type: notification.data?.type,
+                                      date: notification.data?.date,
+                                      message: notification.data?.message,
+                                      featureName: notification.data?.featureName
+                                    });
+                                    // If the result still contains {type}, remove or replace it with a user-friendly string
+                                    return msg.replace(/\{type\}/g, notification.data?.type ? t(`notifications.types.${notification.data?.type}`) || '' : '');
+                                  })()}
+                                </p>
                                 <div className="text-xs text-gray-500 mt-1">
-                                  {new Date(notification.createdAt).toLocaleString()}
+                                  {new Date(notification.createdAt).toLocaleString('en-US')}
                                 </div>
                                 <div className="flex gap-2 mt-2">
                                   {!notification.read && (
@@ -692,14 +734,14 @@ const DashboardLayout = () => {
                                       onClick={() => handleMarkAsRead(notification._id)}
                                       className="text-xs text-green-400 hover:underline"
                                     >
-                                      Mark as read
+                                      {t('notifications.actions.markAsRead')}
                                     </button>
                                   )}
                                   <button
                                     onClick={() => handleDeleteNotification(notification._id)}
                                     className="text-xs text-red-400 hover:underline"
                                   >
-                                    Delete
+                                    {t('notifications.actions.delete')}
                                   </button>
                                 </div>
                               </div>
