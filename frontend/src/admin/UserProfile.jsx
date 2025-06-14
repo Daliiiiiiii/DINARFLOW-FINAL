@@ -27,6 +27,8 @@ import { useNotification } from '../contexts/NotificationContext';
 import api from '../lib/axios';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
+import jsPDF from 'jspdf';
+import { autoTable } from 'jspdf-autotable';
 
 const UserProfile = () => {
   const { id } = useParams();
@@ -54,6 +56,7 @@ const UserProfile = () => {
   const [lastSeen, setLastSeen] = useState(null);
   const { t, i18n } = useTranslation();
   const { userProfile } = useAuth();
+  const [creatingWallet, setCreatingWallet] = useState(false);
 
   useEffect(() => {
     fetchUserDetails();
@@ -63,8 +66,15 @@ const UserProfile = () => {
   const fetchUserDetails = async () => {
     try {
       setLoading(true);
-      const { data } = await api.get(`/api/admin/users/${id}`);
-      setUser(data);
+      const [userResponse, transactionsResponse] = await Promise.all([
+        api.get(`/api/admin/users/${id}`),
+        api.get(`/api/admin/users/${id}/transactions`)
+      ]);
+      
+      setUser({
+        ...userResponse.data,
+        transactions: transactionsResponse.data.transactions
+      });
     } catch (error) {
       console.error('Error fetching user details:', error);
       showError(t('admin.failedToFetchUserDetails'));
@@ -119,11 +129,13 @@ const UserProfile = () => {
 
   const handleCreateWallet = async () => {
     try {
-      // Create the wallet directly
+      setCreatingWallet(true);
       const response = await api.post('/api/wallet/create', { userId: id });
       if (response.data) {
         showSuccess(t('admin.walletCreatedSuccessfully'));
-        // Refresh user details to get updated wallet info
+        // Optimistically update user state
+        setUser(prev => ({ ...prev, wallet: response.data.wallet }));
+        // Optionally, fetch user details for full refresh
         fetchUserDetails();
       }
     } catch (error) {
@@ -137,6 +149,8 @@ const UserProfile = () => {
       } else {
         showError(t('admin.failedToCreateWalletPleaseTryAgainLater'));
       }
+    } finally {
+      setCreatingWallet(false);
     }
   };
 
@@ -314,6 +328,94 @@ const UserProfile = () => {
     }
   };
 
+  // Export transactions as PDF (like in History.jsx)
+  const handleExport = () => {
+    const doc = new jsPDF();
+    const projectName = 'DinarFlow';
+    const logoBase64 = '';
+    if (logoBase64) {
+      doc.addImage(logoBase64, 'PNG', 14, 10, 30, 30);
+    }
+    doc.setFontSize(18);
+    doc.text(t('admin.transactionHistory'), logoBase64 ? 50 : 14, 25);
+    const columns = [
+      t('admin.date', 'Date'),
+      t('admin.type', 'Type'),
+      t('admin.participant', 'Participant'),
+      t('admin.amount', 'Amount'),
+      t('admin.statusHeader', 'Status')
+    ];
+    const rows = (user.transactions || []).map(tx => {
+      let participantInfo = '';
+      if (tx.type === 'crypto') {
+        const network = tx.metadata?.network || 'Unknown Network';
+        let addressInfo = '';
+        if (tx.subtype === 'receive') {
+          addressInfo = tx.metadata?.fromAddress;
+        } else if (tx.subtype === 'send') {
+          addressInfo = tx.metadata?.toAddress;
+        }
+        if (addressInfo) {
+          participantInfo = `${addressInfo} (${network})`;
+        } else if (tx.metadata?.txid) {
+          participantInfo = `TXID ${tx.metadata.txid} (${network})`;
+        } else {
+          participantInfo = network;
+        }
+      } else if (tx.subtype === 'send') {
+        const recipient = tx.recipientFullName || tx.metadata?.recipientName || tx.metadata?.recipientIdentifier || '';
+        participantInfo = recipient;
+      } else if (tx.subtype === 'receive') {
+        const sender = tx.senderFullName || tx.metadata?.senderName || tx.metadata?.senderIdentifier || '';
+        participantInfo = sender;
+      } else if (tx.type === 'bank') {
+        participantInfo = tx.metadata?.accountNumber || tx.metadata?.bankName || '';
+      }
+      return [
+        tx.date ? new Date(tx.date).toLocaleString() : tx.createdAt ? new Date(tx.createdAt).toLocaleString() : tx.timestamp ? new Date(tx.timestamp).toLocaleString() : 'N/A',
+        t(`admin.transactionType.${(tx.type || '').toLowerCase()}`, { defaultValue: tx.type ? tx.type.charAt(0).toUpperCase() + tx.type.slice(1) : '' }),
+        participantInfo,
+        `${tx.amount > 0 ? '+' : '-'}${Math.abs(tx.amount)} ${tx.currency}`,
+        t(`admin.status.${(tx.status || '').toLowerCase()}`, { defaultValue: tx.status ? tx.status.charAt(0).toUpperCase() + tx.status.slice(1) : '' })
+      ];
+    });
+    autoTable(doc, {
+      head: [columns],
+      body: rows,
+      startY: logoBase64 ? 45 : 35,
+      styles: { fontSize: 10 },
+      headStyles: { fillColor: [41, 128, 185] },
+    });
+    doc.save('transactions.pdf');
+  };
+
+  const handleFreezeWallet = async () => {
+    try {
+      setCreatingWallet(true);
+      await api.post(`/api/wallet/freeze/${user.id}`);
+      // Optimistically update user state
+      setUser(prev => ({ ...prev, wallet: { ...prev.wallet, isFrozen: true } }));
+      fetchUserDetails();
+    } catch (error) {
+      showError(error.response?.data?.error || t('admin.failedToFreezeWallet'));
+    } finally {
+      setCreatingWallet(false);
+    }
+  };
+
+  const handleUnfreezeWallet = async () => {
+    try {
+      setCreatingWallet(true);
+      await api.post(`/api/wallet/unfreeze/${user.id}`);
+      setUser(prev => ({ ...prev, wallet: { ...prev.wallet, isFrozen: false } }));
+      fetchUserDetails();
+    } catch (error) {
+      showError(error.response?.data?.error || t('admin.failedToUnfreezeWallet'));
+    } finally {
+      setCreatingWallet(false);
+    }
+  };
+
   if (loading) {
     return (
         <div className="flex items-center justify-center h-full">
@@ -469,8 +571,40 @@ const UserProfile = () => {
             </div>
           </div>
           <div className="flex items-center gap-3">
+            {console.log('user.wallet:', user.wallet)}
+            {/* Wallet Button: Create or Freeze */}
+            {(user.wallet || user.walletId || user.walletAddress) ? (
+              user.wallet && user.wallet.isFrozen ? (
+                <button
+                  onClick={handleUnfreezeWallet}
+                  disabled={creatingWallet}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 ${
+                    isDark
+                      ? 'bg-green-600/20 text-green-400 hover:bg-green-600/30 shadow-lg shadow-green-500/10'
+                      : 'bg-green-50 text-green-600 hover:bg-green-100 shadow-md'
+                  } flex items-center gap-2`}
+                >
+                  <Wallet className="w-4 h-4" />
+                  {t('admin.unfreezeWallet')}
+                </button>
+              ) : (
+                <button
+                  onClick={handleFreezeWallet}
+                  disabled={creatingWallet}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 ${
+                    isDark
+                      ? 'bg-pink-600/20 text-pink-400 hover:bg-pink-600/30 shadow-lg shadow-pink-500/10'
+                      : 'bg-pink-50 text-pink-600 hover:bg-pink-100 shadow-md'
+                  } flex items-center gap-2`}
+                >
+                  <Wallet className="w-4 h-4" />
+                  {t('admin.freezeWallet')}
+                </button>
+              )
+            ) : (
             <button
               onClick={handleCreateWallet}
+                disabled={creatingWallet}
               className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 ${
                 isDark
                   ? 'bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 shadow-lg shadow-blue-500/10'
@@ -478,8 +612,9 @@ const UserProfile = () => {
               } flex items-center gap-2`}
             >
               <Wallet className="w-4 h-4" />
-              {t('admin.createWallet')}
+                {creatingWallet ? t('admin.creatingWallet') : t('admin.createWallet')}
             </button>
+            )}
             {!user.bankAccount && (
               <button
                 onClick={handleGenerateBankAccount}
@@ -679,6 +814,7 @@ const UserProfile = () => {
                     ? 'bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 shadow-lg shadow-blue-500/10'
                     : 'bg-blue-50 text-blue-600 hover:bg-blue-100 shadow-md'
                 } flex items-center gap-2`}
+                  onClick={handleExport}
                 >
                   <Download className="w-4 h-4" />
                   {t('admin.export')}
@@ -839,7 +975,7 @@ const UserProfile = () => {
                 {user.transactions?.length > 0 ? (
                   user.transactions.map((tx) => (
                     <motion.tr
-                      key={tx.id}
+                      key={tx._id || tx.id || `tx-${Math.random()}`}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       className={`group hover:${
@@ -849,25 +985,34 @@ const UserProfile = () => {
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
                           {getTransactionIcon(tx.type)}
-                          <span className="capitalize">{t('admin.transactionType.' + tx.type)}</span>
+                          <span className="capitalize">
+                            {t(`admin.transactionType.${(tx.type || '').toLowerCase()}`,
+                              { defaultValue: tx.type ? tx.type.charAt(0).toUpperCase() + tx.type.slice(1) : '' })}
+                          </span>
                         </div>
                       </td>
                       <td className="px-6 py-4">
                         <span className={`font-medium ${
-                          tx.type.includes('in') ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
+                          tx.amount > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
                         }`}>
-                          {tx.type.includes('in') ? '+' : '-'}{tx.amount} {tx.currency}
+                          {tx.amount > 0 ? '+' : '-'}{Math.abs(tx.amount)} {tx.currency}
                         </span>
                       </td>
                       <td className="px-6 py-4">{tx.description}</td>
-                      <td className="px-6 py-4">{new Date(tx.date).toLocaleString()}</td>
+                      <td className="px-6 py-4">
+                        {tx.date ? new Date(tx.date).toLocaleString() : 
+                         tx.createdAt ? new Date(tx.createdAt).toLocaleString() : 
+                         tx.timestamp ? new Date(tx.timestamp).toLocaleString() : 
+                         'N/A'}
+                      </td>
                       <td className="px-6 py-4">
                         <span className={`inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium ${
                           tx.status === 'completed'
                             ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
                             : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
                         }`}>
-                          {t('admin.status.' + tx.status)}
+                          {t(`admin.status.${(tx.status || '').toLowerCase()}`,
+                            { defaultValue: tx.status ? tx.status.charAt(0).toUpperCase() + tx.status.slice(1) : '' })}
                         </span>
                       </td>
                     </motion.tr>

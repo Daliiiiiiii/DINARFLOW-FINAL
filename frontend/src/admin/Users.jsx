@@ -497,13 +497,6 @@ const Users = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">{t('admin.usersTitle')}</h1>
-        <button 
-          onClick={() => setShowAddModal(true)}
-          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2"
-        >
-          <User className="w-4 h-4" />
-          {t('admin.addNewUser')}
-        </button>
       </div>
 
       <motion.div
@@ -552,7 +545,7 @@ const Users = () => {
                   <option value="all">{t('admin.status.all')}</option>
                   <option value="active">{t('admin.status.active')}</option>
                   <option value="suspended">{t('admin.status.suspended')}</option>
-                  <option value="pending_deletion">{t('admin.status.pendingDeletion')}</option>
+                  <option value="pending_deletion">{t('admin.status.pending_deletion')}</option>
                 </select>
                 <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
                   <Filter className="w-4 h-4 text-gray-400" />
@@ -717,7 +710,7 @@ const Users = () => {
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
                         <FileText className="w-4 h-4 text-gray-400" />
-                        {user.kyc?.personalInfo?.idNumber || t('admin.notSubmitted')}
+                        {user.kyc?.submissions?.[user.kyc?.currentSubmission]?.personalInfo?.idNumber || t('admin.notSubmitted')}
                       </div>
                     </td>
                     <td className="px-6 py-4">

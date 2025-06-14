@@ -1,5 +1,6 @@
 import { Navigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
+import RestrictedUser from '../../contexts/RestrictedUser'
 
 const PrivateRoute = ({ children }) => {
     const { currentUser, loading } = useAuth()
@@ -51,6 +52,25 @@ export const SuperAdminRoute = ({ children }) => {
 
     if (currentUser.role !== 'superadmin') {
         return <Navigate to="/dashboard" replace />
+    }
+
+    return children
+}
+
+export const RestrictedRoute = ({ children }) => {
+    const { currentUser, loading } = useAuth()
+    const location = useLocation()
+
+    if (loading) {
+        return <div>Loading...</div>
+    }
+
+    if (!currentUser) {
+        return <Navigate to="/login" state={{ from: location }} replace />
+    }
+
+    if (currentUser.accountStatus === 'suspended') {
+        return <RestrictedUser />
     }
 
     return children

@@ -13,7 +13,7 @@ import { NotificationProvider } from './contexts/NotificationContext'
 import { ThemeProvider } from './contexts/ThemeContext'
 import { TransactionProvider } from './contexts/TransactionContext'
 import { MaintenanceProvider } from './contexts/MaintenanceContext'
-import PrivateRoute, { AdminRoute } from './components/auth/PrivateRoute'
+import PrivateRoute, { AdminRoute, RestrictedRoute } from './components/auth/PrivateRoute'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import EmailVerification from './components/auth/EmailVerification'
@@ -164,10 +164,12 @@ const AppContent = () => {
           <Route path="reset-password" element={<ForgotPassword />} />
 
           {/* Dashboard Routes */}
-          <Route 
+          <Route
             element={
               <ProtectedRoute>
-                <DashboardLayout />
+                <RestrictedRoute>
+                  <DashboardLayout />
+                </RestrictedRoute>
               </ProtectedRoute>
             }
           >

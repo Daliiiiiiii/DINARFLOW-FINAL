@@ -31,14 +31,14 @@ export const auth = async (req, res, next) => {
         return res.status(401).json({ error: 'User not found' });
       }
 
-      // Check if user account is active
-      if (user.accountStatus !== 'active') {
-        console.log('User account not active:', user.accountStatus);
-        return res.status(403).json({
-          error: 'Account not active',
-          details: `Account is ${user.accountStatus}`
-        });
-      }
+      // Allow suspended users to pass through
+      // if (user.accountStatus !== 'active') {
+      //   console.log('User account not active:', user.accountStatus);
+      //   return res.status(403).json({
+      //     error: 'Account not active',
+      //     details: `Account is ${user.accountStatus}`
+      //   });
+      // }
 
       req.user = user;
       next();

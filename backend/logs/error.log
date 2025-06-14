@@ -2517,3 +2517,421 @@
   "userId": "68376e817a03729259c9a14a",
   "type": "alert"
 }
+2025-06-14T20:37:42.575Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T20:37:42.736Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T20:37:42.904Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T21:04:45.915Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:04:47.058Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:04:50.499Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:04:51.632Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:04:53.765Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:04:56.898Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:05:43.587Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:05:44.729Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:05:47.663Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:05:51.676Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:09:36.752Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "system"
+}
+2025-06-14T21:09:50.210Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "system"
+}
+2025-06-14T21:10:34.769Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T21:11:08.708Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T21:11:32.781Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "system"
+}
+2025-06-14T21:11:34.407Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "system"
+}
+2025-06-14T21:12:14.079Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "system"
+}
+2025-06-14T21:12:15.826Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T21:57:36.690Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T22:07:19.046Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T22:08:24.113Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T22:16:25.238Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T22:19:08.819Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T22:38:53.482Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "system"
+}
+2025-06-14T22:38:54.533Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "system"
+}

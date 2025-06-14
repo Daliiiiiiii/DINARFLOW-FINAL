@@ -24,6 +24,21 @@ import ActionLoader from '../assets/animations/ActionLoader';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
+const downloadImage = async (url, filename = 'document.jpg') => {
+  try {
+    const response = await fetch(url, { mode: 'cors' });
+    const blob = await response.blob();
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } catch (err) {
+    alert('Failed to download image.');
+  }
+};
+
 const KYC = () => {
   const { theme } = useTheme();
   const { showError, showSuccess } = useNotification();
@@ -634,13 +649,12 @@ const KYC = () => {
                                   >
                                     {t('admin.zoom')}
                                   </button>
-                                  <a
-                                    href={docs.frontId}
-                                    download
+                                  <button
+                                    onClick={() => downloadImage(docs.frontId, 'front-id.jpg')}
                                     className="px-2 py-1 text-xs rounded bg-green-500 text-white hover:bg-green-600 transition"
                                   >
                                     {t('admin.download')}
-                                  </a>
+                                  </button>
                                 </div>
                               </>
                             ) : (
@@ -663,13 +677,12 @@ const KYC = () => {
                                   >
                                     {t('admin.zoom')}
                                   </button>
-                                  <a
-                                    href={docs.backId}
-                                    download
+                                  <button
+                                    onClick={() => downloadImage(docs.backId, 'back-id.jpg')}
                                     className="px-2 py-1 text-xs rounded bg-green-500 text-white hover:bg-green-600 transition"
                                   >
                                     {t('admin.download')}
-                                  </a>
+                                  </button>
                                 </div>
                               </>
                             ) : (
@@ -692,13 +705,12 @@ const KYC = () => {
                                   >
                                     {t('admin.zoom')}
                                   </button>
-                                  <a
-                                    href={docs.selfieWithId}
-                                    download
+                                  <button
+                                    onClick={() => downloadImage(docs.selfieWithId, 'selfie-with-id.jpg')}
                                     className="px-2 py-1 text-xs rounded bg-green-500 text-white hover:bg-green-600 transition"
                                   >
                                     {t('admin.download')}
-                                  </a>
+                                  </button>
                                 </div>
                               </>
                             ) : (
@@ -721,13 +733,12 @@ const KYC = () => {
                                   >
                                     {t('admin.zoom')}
                                   </button>
-                                  <a
-                                    href={docs.signature}
-                                    download
+                                  <button
+                                    onClick={() => downloadImage(docs.signature, 'signature.jpg')}
                                     className="px-2 py-1 text-xs rounded bg-green-500 text-white hover:bg-green-600 transition"
                                   >
                                     {t('admin.download')}
-                                  </a>
+                                  </button>
                                 </div>
                               </>
                             ) : (

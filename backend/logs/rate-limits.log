@@ -11784,3 +11784,649 @@
   "type": "alert",
   "title": "KYC Approved"
 }
+2025-06-14T19:20:12.479Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T19:22:03.662Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T19:49:53.337Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T20:27:48.027Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T20:37:36.476Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}
+2025-06-14T20:37:42.501Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T20:37:42.575Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T20:37:42.576Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T20:37:42.658Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T20:37:42.736Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T20:37:42.736Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T20:37:42.813Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "KYC Approved"
+}
+2025-06-14T20:37:42.904Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T20:37:42.904Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "KYC Approved"
+}
+2025-06-14T20:43:38.594Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T20:45:24.415Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T21:04:30.230Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T21:04:45.915Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:04:47.058Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:04:50.499Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:04:51.632Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:04:53.765Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:04:56.898Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:05:41.212Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T21:05:43.587Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:05:44.729Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:05:47.663Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:05:51.676Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`wallet` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`wallet` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "wallet"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "wallet"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `wallet` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "wallet"
+}
+2025-06-14T21:07:00.139Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T21:09:28.953Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T21:09:36.625Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "system",
+  "title": "Wallet Unfrozen"
+}
+2025-06-14T21:09:36.752Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "system"
+}
+2025-06-14T21:09:36.754Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "system",
+  "title": "Wallet Unfrozen"
+}
+2025-06-14T21:09:50.088Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "system",
+  "title": "Wallet Frozen"
+}
+2025-06-14T21:09:50.210Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "system"
+}
+2025-06-14T21:09:50.210Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "system",
+  "title": "Wallet Frozen"
+}
+2025-06-14T21:10:34.712Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "KYC Declined"
+}
+2025-06-14T21:10:34.769Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T21:10:34.769Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "KYC Declined"
+}
+2025-06-14T21:11:08.651Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "KYC Declined"
+}
+2025-06-14T21:11:08.708Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T21:11:08.708Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "KYC Declined"
+}
+2025-06-14T21:11:32.660Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "system",
+  "title": "Wallet Unfrozen"
+}
+2025-06-14T21:11:32.781Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "system"
+}
+2025-06-14T21:11:32.781Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "system",
+  "title": "Wallet Unfrozen"
+}
+2025-06-14T21:11:34.291Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "system",
+  "title": "Wallet Frozen"
+}
+2025-06-14T21:11:34.407Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "system"
+}
+2025-06-14T21:11:34.408Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "system",
+  "title": "Wallet Frozen"
+}
+2025-06-14T21:12:13.962Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "system",
+  "title": "Wallet Unfrozen"
+}
+2025-06-14T21:12:14.079Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "system"
+}
+2025-06-14T21:12:14.079Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "system",
+  "title": "Wallet Unfrozen"
+}
+2025-06-14T21:12:15.771Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "KYC Declined"
+}
+2025-06-14T21:12:15.826Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T21:12:15.826Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "KYC Declined"
+}
+2025-06-14T21:50:14.019Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T21:57:36.632Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-14T21:57:36.690Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T21:57:36.691Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-14T22:07:18.985Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-14T22:07:19.046Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T22:07:19.047Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-14T22:08:10.112Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T22:08:24.051Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-14T22:08:24.113Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T22:08:24.114Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-14T22:09:04.268Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T22:09:15.160Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T22:09:59.373Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T22:10:19.490Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T22:10:29.370Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T22:10:39.641Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T22:10:44.110Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T22:13:33.815Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T22:15:51.441Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T22:16:25.178Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-14T22:16:25.238Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T22:16:25.239Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-14T22:19:08.761Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "KYC Declined"
+}
+2025-06-14T22:19:08.819Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T22:19:08.820Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "KYC Declined"
+}
+2025-06-14T22:19:33.224Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T22:38:53.395Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "system",
+  "title": "Wallet Frozen"
+}
+2025-06-14T22:38:53.482Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "system"
+}
+2025-06-14T22:38:53.482Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "system",
+  "title": "Wallet Frozen"
+}
+2025-06-14T22:38:54.418Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "system",
+  "title": "Wallet Unfrozen"
+}
+2025-06-14T22:38:54.533Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "system"
+}
+2025-06-14T22:38:54.534Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "system",
+  "title": "Wallet Unfrozen"
+}

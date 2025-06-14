@@ -7,6 +7,8 @@ import mongoose from 'mongoose';
 import { generateTestRIB } from '../utils/bankUtils.js';
 import BankAccount from '../models/BankAccount.js';
 import KycService from '../services/kycService.js';
+import Wallet from '../models/Wallet.js';
+import Transaction from '../models/Transaction.js';
 
 const router = express.Router();
 const notificationService = new NotificationService();
@@ -469,6 +471,11 @@ router.get('/users/:userId', [auth, adminAuth], async (req, res) => {
             return res.status(404).json({ error: 'User not found' });
         }
 
+        // Fetch wallet info
+        const wallet = await Wallet.findOne({ userId: user._id }).lean();
+        // Fetch bank account info
+        const bankAccount = await BankAccount.findOne({ userId: user._id }).lean();
+
         // Format response
         let kyc = user.kyc ? (user.kyc.toObject ? user.kyc.toObject() : { ...user.kyc }) : {};
         if (user.kyc && user.kyc.currentSubmission >= 0 && user.kyc.submissions && user.kyc.submissions.length > 0) {
@@ -487,7 +494,9 @@ router.get('/users/:userId', [auth, adminAuth], async (req, res) => {
             joinedAt: user.createdAt,
             lastLogin: user.lastLoginAt || user.createdAt,
             kyc,
-            profilePicture: user.profilePicture || null
+            profilePicture: user.profilePicture || null,
+            wallet,
+            bankAccount
         };
 
         res.json(formattedUser);
@@ -860,6 +869,73 @@ router.post('/users/generate-ribs', [auth, adminAuth], async (req, res) => {
     } catch (error) {
         console.error('Error batch generating RIBs:', error);
         res.status(500).json({ error: 'Error batch generating RIBs' });
+    }
+});
+
+// Get user's transactions (admin endpoint)
+router.get('/users/:id/transactions', [auth, adminAuth], async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { type } = req.query;
+
+        // Verify the user exists
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Fetch the user's wallet to get their address
+        const userWallet = await Wallet.findOne({ userId: id });
+        if (!userWallet) {
+            return res.json({ transactions: [] });
+        }
+        const userAddress = userWallet.address;
+
+        let filter = {
+            $or: [
+                { userId: id }, // Transactions where the user is the sender
+                { 'metadata.toAddress': userAddress } // Transactions where the user's EVM address is the recipient
+            ]
+        };
+
+        if (type) {
+            filter.$and = [{ type: type }];
+        }
+
+        const transactions = await Transaction.find(filter)
+            .populate('senderId', 'firstName lastName')
+            .populate('recipientId', 'firstName lastName')
+            .sort({ createdAt: -1 })
+            .lean();
+
+        const transactionsWithFullNames = transactions.map(transaction => {
+            const transactionObject = { ...transaction };
+
+            if (transactionObject.senderId) {
+                transactionObject.senderFullName = `${transactionObject.senderId.firstName} ${transactionObject.senderId.lastName}`.trim();
+                delete transactionObject.senderId;
+            }
+
+            if (transactionObject.recipientId) {
+                transactionObject.recipientFullName = `${transactionObject.recipientId.firstName} ${transactionObject.recipientId.lastName}`.trim();
+                delete transactionObject.recipientId;
+            }
+
+            if (transactionObject.type === 'transfer') {
+                if (transactionObject.subtype === 'receive' && transactionObject.senderFullName) {
+                    transactionObject.metadata = { ...transactionObject.metadata, senderName: transactionObject.senderFullName };
+                } else if (transactionObject.subtype === 'send' && transactionObject.recipientFullName) {
+                    transactionObject.metadata = { ...transactionObject.metadata, recipientName: transactionObject.recipientFullName };
+                }
+            }
+
+            return transactionObject;
+        });
+
+        res.json({ transactions: transactionsWithFullNames });
+    } catch (error) {
+        console.error('Error fetching user transactions:', error);
+        res.status(500).json({ error: error.message });
     }
 });
 

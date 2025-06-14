@@ -93,6 +93,11 @@ router.get('/validate', auth, async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
+    // Allow suspended users to validate
+    // if (user.accountStatus === 'suspended') {
+    //   return res.status(403).json({ error: 'Account suspended' });
+    // }
+
     res.json({
       user: {
         _id: user._id,
@@ -106,7 +111,8 @@ router.get('/validate', auth, async (req, res) => {
         emailVerified: user.emailVerified,
         profilePicture: user.profilePicture,
         role: user.role,
-        associatedBankAccount: user.associatedBankAccount || null
+        associatedBankAccount: user.associatedBankAccount || null,
+        accountStatus: user.accountStatus // Include accountStatus in response
       }
     });
   } catch (error) {

@@ -146,11 +146,11 @@
     "transactionType": "Transaction Type",
     "transactionSubtype": "Transaction Subtype",
     "dateRange": {
-      "all": "All",
+      "all": "All Time",
       "today": "Today",
-      "week": "Last 7 Days",
-      "month": "Last 30 Days",
-      "year": "Last 12 Months"
+      "week": "This Week",
+      "month": "This Month",
+      "year": "This Year"
     },
     "amountRange": "Amount Range",
     "allTypes": "All Types",
@@ -481,6 +481,23 @@
     "noRecentTransfers": "No recent transfers"
   },
   "admin": {
+    "status": {
+      "all": "All",
+      "active": "Active",
+      "suspended": "Suspended",
+      "pending_deletion": "Pending Deletion",
+      "completed": "Completed",
+      "pending": "Pending"
+    },
+    "areYouSureYouWantToUnsuspendThisAccount": "Are you sure you want to unsuspend this account?",
+    "areYouSureYouWantToSuspendThisAccount": "Are you sure you want to suspend this account?",
+    "creatingWallet": "Creating Wallet",
+    "unfreezeWallet": "Unfreeze Wallet",
+    "freezeWallet": "Freeze Wallet",
+    "userKYCRejectedSuccessfully": "User KYC rejected successfully",
+    "userKYCVerifiedSuccessfully": "User KYC verified successfully",
+    "accountSuspendedSuccessfully": "Account suspended successfully",
+    "accountUnsuspendedSuccessfully": "Account unsuspended successfully",
     "signature": "Signature",
     "applyFilters": "Apply Filters",
     "reset": "Reset",
@@ -537,12 +554,6 @@
     "activeAlerts": "Active Alerts",
     "usersTitle": "Users",
     "searchPlaceholder": "Search users...",
-    "status": {
-      "all": "All",
-      "active": "Active",
-      "suspended": "Suspended",
-      "pendingDeletion": "Pending Deletion"
-    },
     "kycStatus": {
       "all": "All",
       "unverified": "Unverified",
@@ -715,8 +726,8 @@
     "notify_when_new_support_tickets_are_created": "Notify when new support tickets are created",
     "addNewUser": "Add New User",
     "sort": {
-      "newest": "Newest First",
-      "oldest": "Oldest First",
+      "newest": "Newest Accounts",
+      "oldest": "Oldest Accounts",
       "nameAZ": "Name (A-Z)",
       "nameZA": "Name (Z-A)"
     },
@@ -752,9 +763,11 @@
     "p2p": "P2P Transaction",
     "crypto": "Crypto Transaction",
     "status": {
+      "all": "All",
+      "suspended": "Suspended",
+      "pending_deletion": "Pending Deletion",
       "completed": "Completed",
-      "pending": "Pending",
-      "active": "Active"
+      "pending": "Pending"
     },
     "available": "Available",
     "limits": "Limits",
@@ -766,7 +779,14 @@
     },
     "contactSupportDescription": "Open a ticket to get help from our team.",
     "knowledgeBaseDescription": "Browse guides and FAQs for instant answers.",
-    "emailSupportDescription": "Email us directly for assistance."
+    "emailSupportDescription": "Email us directly for assistance.",
+    "dateRange": {
+      "all": "All Time",
+      "today": "Today",
+      "week": "This Week",
+      "month": "This Month",
+      "year": "This Year"
+    }
   },
   "notifications": {
     "title": "Notifications",
@@ -878,6 +898,7 @@
   },
   "p2p": {
     "orderCount": "{{count}} orders",
+    "selectPaymentMethods": "Select Payment Methods",
     "completionRate": "{{rate}}% completion rate",
     "minResponse": "{{min}} min response",
     "available": "Available",

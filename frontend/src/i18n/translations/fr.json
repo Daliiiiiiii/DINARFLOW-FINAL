@@ -417,6 +417,15 @@
     "pending": "En attente"
   },
   "admin": {
+    "creatingWallet": "Création du portefeuille",
+    "unfreezeWallet": "Dégeler le portefeuille",
+    "userKYCRejectedSuccessfully": "KYC rejeté avec succès",
+    "userKYCVerifiedSuccessfully": "KYC vérifié avec succès",
+    "accountSuspendedSuccessfully": "Compte suspendu avec succès",
+    "accountUnsuspendedSuccessfully": "Compte réactivé avec succès",
+    "areYouSureYouWantToUnsuspendThisAccount": "Êtes-vous sûr de vouloir réactiver ce compte ?",
+    "areYouSureYouWantToSuspendThisAccount": "Êtes-vous sûr de vouloir suspendre ce compte ?",
+    "freezeWallet": "Geler le portefeuille",
     "signature": "Signature",
     "applyFilters": "Appliquer les filtres",
     "reset": "Réinitialiser",
@@ -425,8 +434,14 @@
     "minAmount": "Montant minimum",
     "maxAmount": "Montant maximum",
     "allTypes": "Tous les types",
-    "status.completed": "Terminé",
-    "status.pending": "En attente",
+    "status": {
+      "all": "Tous",
+      "active": "Actif",
+      "suspended": "Suspendu",
+      "pending_deletion": "Suppression en attente",
+      "completed": "Terminé",
+      "pending": "En attente"
+    },
     "lastSeen": "Dernière activité : {{date}}",
     "lastLogin": "Dernière connexion: {{date}}",
     "noTransactionsFound": "Aucune transaction trouvée",
@@ -434,7 +449,6 @@
     "kycInformation": "Informations KYC",
     "accountInfo": "Informations du compte",
     "joined": "Inscrit le",
-    "lastLogin": "Dernière connexion",
     "showFilters": "Afficher les filtres",
     "hideFilters": "Masquer les filtres",
     "transactionHistory": "Historique des transactions",
@@ -442,7 +456,11 @@
     "type": "Type",
     "amount": "Montant",
     "date": "Date",
-    "status": "Statut",
+    "status": {
+      "active": "Actif",
+      "suspended": "Suspendu",
+      "pending_deletion": "Suppression en attente"
+    },
     "actions": "Actions",
     "userKYCVerifiedSuccessfully": "KYC vérifié avec succès",
     "totalUsers": "Nombre total d'utilisateurs",
@@ -477,7 +495,7 @@
     "status": {
       "active": "Actif",
       "suspended": "Suspendu",
-      "pendingDeletion": "Suppression en attente"
+      "pending_deletion": "Suppression en attente"
     },
     "kycStatus": {
       "all": "Tous",
@@ -494,7 +512,14 @@
     "actions": "Actions",
     "userProfile": "Profil de l'utilisateur",
     "accountStatus": "Statut du compte",
-    "transactionType": "Type de transaction",
+    "transactionType": {
+      "wallet_in": "Entrée portefeuille",
+      "wallet_out": "Sortie portefeuille",
+      "bank_in": "Entrée banque",
+      "bank_out": "Sortie banque",
+      "p2p": "P2P",
+      "crypto": "Crypto"
+    },
     "walletIn": "Entrée portefeuille",
     "walletOut": "Sortie portefeuille",
     "bankIn": "Entrée banque",
@@ -574,7 +599,13 @@
     "amount": "Montant",
     "description": "Description",
     "date": "Date",
-    "status": "Statut",
+    "status": {
+      "active": "Actif",
+      "suspended": "Suspendu",
+      "pending_deletion": "Suppression en attente",
+      "completed": "Terminé",
+      "pending": "En attente"
+    },
     "noTransactionsFound": "Aucune transaction trouvée",
     "online": "En ligne",
     "offline": "Hors ligne",
@@ -654,7 +685,7 @@
       "all": "Tous les statuts de compte",
       "active": "Actif",
       "suspended": "Suspendu",
-      "pendingDeletion": "Suppression en attente"
+      "pending_deletion": "Suppression en attente"
     },
     "kycStatus": {
       "all": "Tous les statuts KYC",
@@ -664,23 +695,23 @@
       "unverified": "Non vérifié"
     },
     "dateRange": {
-      "all": "Tout le temps",
+      "all": "Toute la période",
       "today": "Aujourd'hui",
-      "week": "7 derniers jours",
-      "month": "30 derniers jours",
-      "year": "Dernière année"
+      "week": "Cette semaine",
+      "month": "Ce mois-ci",
+      "year": "Cette année"
     },
     "showingEntries": "Affichage de {{from}} à {{to}} sur {{total}} entrées",
     "previous": "Précédent",
     "next": "Suivant",
     "kycStatusLabel": "Statut KYC",
     "sort": {
-      "newest": "Plus récent",
-      "oldest": "Plus ancien",
+      "newest": "Comptes les plus récents",
+      "oldest": "Comptes les plus anciens",
       "nameAZ": "Nom (A-Z)",
       "nameZA": "Nom (Z-A)"
     },
-    "clearFilters": "Réinitialiser les filtres",
+    "clearFilters": "Effacer les filtres",
     "kycStatus": {
       "pending": "En attente",
       "verified": "Vérifié",
@@ -840,6 +871,7 @@
     "new": "Nouveau"
   },
   "p2p": {
+    "selectPaymentMethods": "Sélectionner les méthodes de paiement",
     "title": "Trading P2P",
     "completion": "Taux de complétion",
     "response": "Réponse",

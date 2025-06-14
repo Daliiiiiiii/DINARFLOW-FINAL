@@ -3,9 +3,11 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Ban, Shield, MessageSquare, Clock, ArrowRight, Lock, AlertTriangle, FileText } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useAuth } from './AuthContext';
 
 const RestrictedUser = () => {
   const { theme } = useTheme();
+  const { logout } = useAuth();
   const isDark = theme === 'dark';
 
   return (
@@ -140,25 +142,12 @@ const RestrictedUser = () => {
             transition={{ delay: 0.5 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Link
-              to="/support"
-              className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors flex items-center gap-2 group"
+            <button
+              onClick={logout}
+              className="px-8 py-4 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors flex items-center gap-2 group shadow-lg hover:shadow-xl"
             >
-              <MessageSquare className="w-5 h-5" />
-              <span>Contact Support</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-
-            <Link
-              to="/settings"
-              className={`px-6 py-3 rounded-lg ${
-                isDark
-                  ? 'bg-gray-800 hover:bg-gray-700'
-                  : 'bg-gray-100 hover:bg-gray-200'
-              } transition-colors`}
-            >
-              Security Settings
-            </Link>
+              <span className="font-medium">Logout</span>
+            </button>
           </motion.div>
 
           {/* Additional Info */}
@@ -188,7 +177,7 @@ const RestrictedUser = () => {
               <div>
                 <p className="text-sm text-red-200 font-medium">Limited Access</p>
                 <p className="text-sm text-red-300 mt-1">
-                  While your account is restricted, you won't be able to make transactions or access certain features.
+                  You can not log in to your account while your account is restricted.
                 </p>
               </div>
             </div>

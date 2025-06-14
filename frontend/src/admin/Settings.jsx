@@ -20,12 +20,15 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import { useMaintenance } from '../contexts/MaintenanceContext';
 import api from '../lib/axios';
+import ComingSoonOverlay from '../components/ui/ComingSoonOverlay';
 
 const Settings = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [showComingSoon, setShowComingSoon] = useState(false);
+  const [comingSoonTitle, setComingSoonTitle] = useState('');
   const { t } = useTranslation();
   const { isMaintenanceMode, toggleMaintenanceMode } = useMaintenance();
 
@@ -313,25 +316,6 @@ const Settings = () => {
 
               <div>
                 <label className="flex items-center justify-between">
-                  <span className="font-medium">{t('admin.error_logging')}</span>
-                  <select className={`px-4 py-2 rounded-lg border ${
-                    isDark
-                      ? 'bg-gray-800/50 border-gray-700 text-white focus:border-blue-500'
-                      : 'border-gray-300 focus:border-blue-500'
-                  } focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}>
-                    <option value="debug">Debug</option>
-                    <option value="info">Info</option>
-                    <option value="warning">Warning</option>
-                    <option value="error">Error</option>
-                  </select>
-                </label>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  {t('admin.set_the_minimum_log_level_for_system_events')}
-                </p>
-              </div>
-
-              <div>
-                <label className="flex items-center justify-between">
                   <span className="font-medium">{t('admin.backup_schedule')}</span>
                   <select className={`px-4 py-2 rounded-lg border ${
                     isDark
@@ -515,35 +499,64 @@ const Settings = () => {
         >
           <h2 className="text-xl font-semibold mb-6">{t('admin.quick_actions')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <button className={`p-4 rounded-lg ${
-              isDark
-                ? 'bg-gray-800 hover:bg-gray-700'
-                : 'bg-gray-100 hover:bg-gray-200'
-              } transition-colors flex items-center gap-3`}
+            <button 
+              onClick={() => {
+                setComingSoonTitle(t('admin.backup_database'));
+                setShowComingSoon(true);
+              }}
+              className={`p-4 rounded-lg ${
+                isDark
+                  ? 'bg-gray-800 hover:bg-gray-700'
+                  : 'bg-gray-100 hover:bg-gray-200'
+                } transition-colors flex items-center gap-3`}
             >
               <Database className="w-5 h-5 text-blue-400" />
               {t('admin.backup_database')}
             </button>
-            <button className={`p-4 rounded-lg ${
-              isDark
-                ? 'bg-gray-800 hover:bg-gray-700'
-                : 'bg-gray-100 hover:bg-gray-200'
-              } transition-colors flex items-center gap-3`}
+            <button 
+              onClick={() => {
+                setComingSoonTitle(t('admin.rotate_api_keys'));
+                setShowComingSoon(true);
+              }}
+              className={`p-4 rounded-lg ${
+                isDark
+                  ? 'bg-gray-800 hover:bg-gray-700'
+                  : 'bg-gray-100 hover:bg-gray-200'
+                } transition-colors flex items-center gap-3`}
             >
               <Key className="w-5 h-5 text-blue-400" />
               {t('admin.rotate_api_keys')}
             </button>
-            <button className={`p-4 rounded-lg ${
-              isDark
-                ? 'bg-gray-800 hover:bg-gray-700'
-                : 'bg-gray-100 hover:bg-gray-200'
-              } transition-colors flex items-center gap-3`}
+            <button 
+              onClick={() => {
+                setComingSoonTitle(t('admin.security_audit'));
+                setShowComingSoon(true);
+              }}
+              className={`p-4 rounded-lg ${
+                isDark
+                  ? 'bg-gray-800 hover:bg-gray-700'
+                  : 'bg-gray-100 hover:bg-gray-200'
+                } transition-colors flex items-center gap-3`}
             >
               <Shield className="w-5 h-5 text-blue-400" />
               {t('admin.security_audit')}
             </button>
           </div>
         </motion.div>
+
+        {showComingSoon && (
+          <ComingSoonOverlay
+            title={comingSoonTitle}
+            description={
+              comingSoonTitle === t('admin.backup_database') 
+                ? t('admin.backup_database_description', 'Create a complete backup of the system database with encryption and compression')
+                : comingSoonTitle === t('admin.rotate_api_keys')
+                ? t('admin.rotate_api_keys_description', 'Generate new API keys and automatically update all integrations')
+                : t('admin.security_audit_description', 'Run a comprehensive security audit of the system and generate detailed reports')
+            }
+            onClose={() => setShowComingSoon(false)}
+          />
+        )}
       </div>
   );
 };

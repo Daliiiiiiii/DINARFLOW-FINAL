@@ -3,6 +3,7 @@ import Wallet from '../models/Wallet.js';
 import User from '../models/User.js';
 import Transaction from '../models/Transaction.js';
 import mongoose from 'mongoose';
+import notificationService from '../services/notificationService.js';
 
 export const createWallet = async (req, res) => {
     try {
@@ -18,6 +19,13 @@ export const createWallet = async (req, res) => {
         }
 
         const wallet = await walletService.createWallet(userId);
+        // Send real-time notification
+        await notificationService.createNotification(
+            userId,
+            'system',
+            'Wallet Created',
+            'Your wallet has been created successfully.'
+        );
         res.status(201).json(wallet);
     } catch (error) {
         console.error('Error in createWallet:', error);
@@ -220,6 +228,13 @@ export const freezeWallet = async (req, res) => {
         }
 
         await walletService.freezeWallet(userId);
+        // Send real-time notification
+        await notificationService.createNotification(
+            userId,
+            'system',
+            'Wallet Frozen',
+            'Your wallet has been frozen by an administrator.'
+        );
         res.json({ message: 'Wallet frozen successfully' });
     } catch (error) {
         console.error('Error in freezeWallet:', error);
@@ -238,6 +253,13 @@ export const unfreezeWallet = async (req, res) => {
         }
 
         await walletService.unfreezeWallet(userId);
+        // Send real-time notification
+        await notificationService.createNotification(
+            userId,
+            'system',
+            'Wallet Unfrozen',
+            'Your wallet has been unfrozen by an administrator.'
+        );
         res.json({ message: 'Wallet unfrozen successfully' });
     } catch (error) {
         console.error('Error in unfreezeWallet:', error);
