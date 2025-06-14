@@ -1119,6 +1119,17 @@
         "releaseCheckbox": "أؤكد أنني استلمت الدفع من المشتري",
         "releaseFunds": "إطلاق USDT"
       }
+    },
+    "transactionModal": {
+      "title": "بدء المعاملة",
+      "subtitle": "أدخل المبلغ واختر طريقة الدفع لبدء طلبك.",
+      "amount": "المبلغ (USDT)",
+      "amountPlaceholder": "أدخل المبلغ بالدولار الرقمي USDT",
+      "equivalentinTND": "المقابل بالدينار",
+      "equivalent": "المقابل بالدينار",
+      "paymentMethod": "طريقة الدفع",
+      "selectPaymentMethod": "اختر طريقة الدفع",
+      "confirm": "تأكيد الطلب"
     }
   },
   "orderChat": {
@@ -1307,6 +1318,15 @@
     "knowledgeBaseDescription": "تصفح الأدلة والأسئلة الشائعة للحصول على إجابات فورية.",
     "emailSupportDescription": "راسلنا مباشرة عبر البريد الإلكتروني للمساعدة.",
     "faq": "الأسئلة الشائعة"
+  },
+  "diputes": {
+    "title": "المنازعات",
+    "description": "المنازعات",
+    "status": {
+      "open": "مفتوح",
+      "pending": "قيد الانتظار",
+      "closed": "مغلق"
+    }
   },
   "contactSupportDescription": "افتح تذكرة للحصول على المساعدة من فريقنا.",
   "knowledgeBaseDescription": "تصفح الأدلة والأسئلة الشائعة للحصول على إجابات فورية.",

@@ -903,6 +903,8 @@
     },
     "order": {
       "title": "Order Details",
+      "timeRemaining": "Time Remaining",
+      "fileDispute": "File Dispute",
       "buyer": "Buyer",
       "seller": "Seller",
       "amount": "Amount",
@@ -1140,6 +1142,17 @@
         "releaseFunds": "Release USDT",
         "close": "Close"
       }
+    },
+    "transactionModal": {
+      "title": "Start Transaction",
+      "subtitle": "Enter the amount and select a payment method to begin your order.",
+      "amount": "Amount (USDT)",
+      "amountPlaceholder": "Enter amount in USDT",
+      "equivalentinTND": "Equivalent in TND",
+      "equivalent": "Equivalent in TND",
+      "paymentMethod": "Payment Method",
+      "selectPaymentMethod": "Select payment method",
+      "confirm": "Confirm Order"
     }
   },
   "orderChat": {
@@ -1318,6 +1331,15 @@
       "replyPlaceholder": "Type your message...",
       "closedWarning": "This chat is closed.",
       "selectDescription": "Select a ticket to view conversation."
+    },
+    "diputes": {
+      "title": "Disputes",
+      "description": "Disputes",
+      "status": {
+        "open": "Open",
+        "pending": "Pending",
+        "closed": "Closed"
+      }
     },
     "contactSupport": "Contact Support",
     "knowledgeBase": "Knowledge Base",

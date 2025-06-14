@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSpring, animated } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
-import { Search, Filter, ChevronDown, X, Send, Clock, CheckCircle, AlertTriangle, Shield, DollarSign, CreditCard, Ban as Bank, Wallet, ArrowRight, Plus, MessageSquare, Star, ThumbsUp, User, ArrowUpRight, Building2, Smartphone, Cast as Cash, XCircle } from 'lucide-react';
+import { Search, Filter, ChevronDown, X, Send, Clock, CheckCircle, AlertTriangle, Shield, DollarSign, CreditCard, Ban as Bank, Wallet, ArrowRight, Plus, MessageSquare, Star, ThumbsUp, User, ArrowUpRight, Building2, Smartphone, Cast as Cash, XCircle, AlertOctagon } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
@@ -12,6 +12,8 @@ import P2PChat from '../components/P2PChat';
 import P2PProfileSetup from '../components/P2PProfileSetup';
 import { io } from 'socket.io-client';
 import { useTranslation } from 'react-i18next';
+import LoadingSpinner from '../assets/animations/LoadingSpinner';
+import ActionLoader from '../assets/animations/ActionLoader';
 
 // Add new OrderStatusAnimation component
 const OrderStatusAnimation = ({ status, onComplete }) => {
@@ -319,6 +321,165 @@ const ReleaseConfirmation = ({ onConfirm, onClose }) => {
   );
 };
 
+// Add new DisputesModal component
+const DisputesModal = ({ onClose }) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  const [disputes, setDisputes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchDisputes = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('/api/p2p/disputes');
+        // Ensure all required fields are present
+        const validDisputes = response.data.filter(dispute => 
+          dispute && 
+          dispute._id && 
+          dispute.offer && 
+          dispute.buyer && 
+          dispute.seller
+        );
+        setDisputes(validDisputes);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching disputes:', err);
+        setError('Failed to load disputes. Please try again.');
+        toast.error('Failed to load disputes');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDisputes();
+  }, []);
+
+  const handleResolveDispute = async (disputeId, resolution) => {
+    try {
+      await axios.post(`/api/p2p/disputes/${disputeId}/resolve`, { resolution });
+      toast.success('Dispute resolved successfully');
+      // Refresh the disputes list
+      const response = await axios.get('/api/p2p/disputes');
+      const validDisputes = response.data.filter(dispute => 
+        dispute && 
+        dispute._id && 
+        dispute.offer && 
+        dispute.buyer && 
+        dispute.seller
+      );
+      setDisputes(validDisputes);
+    } catch (err) {
+      console.error('Error resolving dispute:', err);
+      toast.error('Failed to resolve dispute');
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+    >
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.8, opacity: 0 }}
+        transition={{ type: "spring", duration: 0.5 }}
+        className={`${isDark ? 'bg-gray-900' : 'bg-white'} border ${isDark ? 'border-white/10' : 'border-gray-200'} rounded-2xl p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto`}
+      >
+        <div className="flex justify-between items-center mb-6">
+          <h2 className={`text-2xl font-semibold flex items-center gap-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            <AlertOctagon className="w-6 h-6 text-red-400" />
+            Disputes
+          </h2>
+          <button
+            onClick={onClose}
+            className={`p-2 ${isDark ? 'hover:bg-white/5' : 'hover:bg-gray-100'} rounded-lg transition-colors`}
+          >
+            <X className={`w-6 h-6 ${isDark ? 'text-white' : 'text-gray-900'}`} />
+          </button>
+        </div>
+
+        {error && (
+          <div className="mb-4 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400">
+            {error}
+          </div>
+        )}
+
+        {loading ? (
+          <div className="flex justify-center items-center h-40">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+          </div>
+        ) : disputes.length === 0 ? (
+          <div className={`text-center py-8 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+            No disputes found
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {disputes.map((dispute) => (
+              <div
+                key={dispute._id}
+                className={`${isDark ? 'bg-gray-800' : 'bg-gray-50'} border ${isDark ? 'border-white/5' : 'border-gray-200'} rounded-xl p-4 hover:${isDark ? 'bg-gray-700' : 'bg-gray-100'} transition-colors`}
+              >
+                <div className="flex justify-between items-start mb-3">
+                  <div>
+                    <h3 className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>Order #{dispute.offer._id}</h3>
+                    <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                      {new Date(dispute.disputedAt).toLocaleString()}
+                    </p>
+                  </div>
+                  <span className={`px-3 py-1 rounded-full text-sm ${
+                    dispute.status === 'pending' 
+                      ? isDark ? 'bg-yellow-500/20 text-yellow-400' : 'bg-yellow-100 text-yellow-600'
+                      : isDark ? 'bg-green-500/20 text-green-400' : 'bg-green-100 text-green-600'
+                  }`}>
+                    {dispute.status}
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <p className={`${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Buyer</p>
+                    <p className={isDark ? 'text-white' : 'text-gray-900'}>{dispute.buyer.username}</p>
+                  </div>
+                  <div>
+                    <p className={`${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Seller</p>
+                    <p className={isDark ? 'text-white' : 'text-gray-900'}>{dispute.seller.username}</p>
+                  </div>
+                  <div>
+                    <p className={`${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Amount</p>
+                    <p className={isDark ? 'text-white' : 'text-gray-900'}>{dispute.amount} {dispute.offer.currency}</p>
+                  </div>
+                  <div>
+                    <p className={`${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Reason</p>
+                    <p className={isDark ? 'text-white' : 'text-gray-900'}>{dispute.reason}</p>
+                  </div>
+                </div>
+                <div className="mt-4 flex justify-end gap-2">
+                  <button 
+                    onClick={() => handleResolveDispute(dispute._id, 'refund_buyer')}
+                    className={`px-4 py-2 ${isDark ? 'bg-blue-500/10 hover:bg-blue-500/20 border-blue-500/20 text-blue-400' : 'bg-blue-50 hover:bg-blue-100 border-blue-200 text-blue-600'} border rounded-lg transition-all`}
+                  >
+                    Refund Buyer
+                  </button>
+                  <button 
+                    onClick={() => handleResolveDispute(dispute._id, 'release_seller')}
+                    className={`px-4 py-2 ${isDark ? 'bg-green-500/10 hover:bg-green-500/20 border-green-500/20 text-green-400' : 'bg-green-50 hover:bg-green-100 border-green-200 text-green-600'} border rounded-lg transition-all`}
+                  >
+                    Release to Seller
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </motion.div>
+    </motion.div>
+  );
+};
+
 const P2P = () => {
   const { theme } = useTheme();
   const { currentUser } = useAuth();
@@ -386,6 +547,8 @@ const P2P = () => {
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [cancelReason, setCancelReason] = useState('');
   const { t } = useTranslation();
+  const isAdmin = currentUser?.role === 'admin' || currentUser?.role === 'superadmin';
+  const [showDisputes, setShowDisputes] = useState(false);
 
   const orderLengthOptions = [
     { value: '0.25', label: '15 minutes' },
@@ -895,7 +1058,7 @@ const P2P = () => {
         toast.success('Order created successfully');
         
         // Update orders list
-        setUserOrders(prevOrders => [response.data, ...prevOrders]);
+        setUserOrders(prevOrders => [response.data, ...prevOrders.filter(order => order._id !== response.data._id)]);
 
         // Update the offer in the offers list
         if (response.data.offer) {
@@ -919,10 +1082,8 @@ const P2P = () => {
           }
         });
 
-        // Close transaction modal after success
-        setTimeout(() => {
-          setShowTransactionModal(false);
-        }, 2000);
+        // Close transaction modal immediately after success
+        setShowTransactionModal(false);
       }
     } catch (error) {
       console.error('Error creating order:', error);
@@ -1503,18 +1664,37 @@ const P2P = () => {
 
   const handleDispute = async (orderId, reason, details) => {
     try {
-      await axios.put(`/api/p2p/orders/${orderId}`, {
-        status: 'disputed',
-        disputeReason: reason,
-        disputeDetails: details
+      await axios.post(`/api/p2p/orders/${orderId}/dispute`, {
+        reason,
+        details
       });
+
       // Refresh orders
       const response = await axios.get('/api/p2p/orders');
       setUserOrders(response.data);
+
+      // Show success message
       toast.success('Dispute filed successfully');
+
+      // Close the dispute modal
+      setShowDisputeModal(false);
+      setDisputeReason('');
+      setDisputeDetails('');
+
+      // Emit socket event for real-time update
+      window.socket.emit('notification:update', {
+        orderId,
+        type: 'dispute',
+        title: 'New Dispute Filed',
+        message: `A dispute has been filed for order #${orderId.slice(-6)}`,
+        data: {
+          orderId,
+          type: 'dispute_created'
+        }
+      });
     } catch (error) {
       console.error('Error filing dispute:', error);
-      toast.error('Failed to file dispute');
+      toast.error(error.response?.data?.message || 'Failed to file dispute');
     }
   };
 
@@ -1738,6 +1918,12 @@ const P2P = () => {
       return () => clearTimeout(timer);
     }
   }, [offerCreationStatus]);
+
+  // Add console log to debug admin status
+  useEffect(() => {
+    console.log('Current user:', currentUser);
+    console.log('Is admin:', isAdmin);
+  }, [currentUser, isAdmin]);
 
   return (
     <>
@@ -2776,7 +2962,7 @@ const P2P = () => {
 
       {/* Transaction Modal */}
       <AnimatePresence>
-        {showTransactionModal && selectedOffer && (
+        {showTransactionModal && selectedOffer && transactionStep !== 2 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -2789,70 +2975,87 @@ const P2P = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={e => e.stopPropagation()}
-              className="w-full max-w-md bg-gray-900/50 border border-white/10 rounded-xl backdrop-blur-xl overflow-hidden"
+              className="w-full max-w-md bg-gray-900/50 border border-white/10 rounded-xl backdrop-blur-xl overflow-hidden relative"
             >
-              {/* Modal Header */}
               <div className="p-6 border-b border-white/10">
-                <h2 className="text-xl font-semibold text-white">{t('orderChat.verifyPayment')}</h2>
-                <p className="text-sm text-gray-400 mt-1">{t('orderChat.uploadProof')}</p>
+                <h2 className="text-xl font-semibold text-white">{t('p2p.transactionModal.title')}</h2>
+                <p className="text-sm text-gray-400 mt-1">{t('p2p.transactionModal.subtitle')}</p>
               </div>
-
               {/* Modal Content */}
               <div className="p-6 space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">{t('orderChat.paymentProof')}</label>
-                  <div className="flex items-center gap-4">
-                    <input
-                      id="payment-proof-upload"
-                      type="file"
-                      accept="image/*,.pdf"
-                      onChange={(e) => setPaymentProof(e.target.files[0])}
-                      className="hidden"
-                    />
-                    <label
-                      htmlFor="payment-proof-upload"
-                      className="cursor-pointer px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition font-medium"
-                    >
-                      {paymentProof ? paymentProof.name : t('orderChat.chooseFile')}
-                    </label>
-                    {paymentProof && (
-                      <button
-                        type="button"
-                        onClick={() => setPaymentProof(null)}
-                        className="ml-2 text-red-400 hover:text-red-600 transition text-sm"
-                      >
-                        Remove
-                      </button>
-                    )}
-                  </div>
-                </div>
-
-                <div className="flex gap-4 mt-6">
-                  <button
-                    onClick={() => setShowPaymentVerification(false)}
-                    className="flex-1 px-4 py-3 rounded-lg bg-gray-700 text-gray-300 hover:bg-gray-600 transition font-medium"
-                  >
-                    {t('orderChat.cancel')}
-                  </button>
-                  <button
-                    onClick={() => {
-                      if (paymentProof) {
-                        handlePaymentVerification(selectedOrderForAction._id, paymentProof);
-                        setShowPaymentVerification(false);
-                        setPaymentProof(null);
-                      } else {
-                        toast.error('Please upload payment proof');
+                  <label className="block text-sm font-medium text-gray-400 mb-2">{t('p2p.transactionModal.amount')}</label>
+                  <input
+                    type="text"
+                    inputMode="decimal"
+                    pattern="[0-9]*"
+                    value={amount}
+                    onChange={e => {
+                      const newAmount = e.target.value;
+                      setAmount(newAmount);
+                      if (selectedOffer) {
+                        const tndEquivalent = (parseFloat(newAmount) * parseFloat(selectedOffer.price)).toFixed(2);
+                        setTndAmountInput(tndEquivalent);
                       }
                     }}
-                    className="flex-1 px-4 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-50"
-                    disabled={!paymentProof}
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-blue-500/50 transition-colors"
+                    placeholder={t('p2p.transactionModal.amountPlaceholder')}
+                  />
+                  {amount && selectedOffer && (
+                    <div className="mt-2 text-sm text-gray-400">
+                      {t('p2p.transactionModal.equivalent')}: {(parseFloat(amount) * parseFloat(selectedOffer.price)).toFixed(2)} TND
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-2">{t('p2p.transactionModal.equivalentinTND')}</label>
+                  <input
+                    type="text"
+                    inputMode="decimal"
+                    pattern="[0-9]*"
+                    value={tndAmountInput}
+                    onChange={e => setTndAmountInput(e.target.value)}
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-blue-500/50 transition-colors"
+                    placeholder="Enter TND amount"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-2">{t('p2p.transactionModal.paymentMethod')}</label>
+                  <select
+                    value={modalSelectedPaymentMethod}
+                    onChange={e => setModalSelectedPaymentMethod(e.target.value)}
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-blue-500/50 transition-colors"
                   >
-                    {t('orderChat.submitProof')}
+                    <option value="">{t('p2p.transactionModal.selectPaymentMethod')}</option>
+                    {selectedOffer.paymentMethods.map(method => (
+                      <option key={method} value={method}>
+                        {t(`p2p.paymentMethodNames.${method}`)}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="flex gap-4 mt-6">
+                  <button
+                    onClick={() => setShowTransactionModal(false)}
+                    className="flex-1 px-4 py-3 rounded-lg bg-gray-700 text-gray-300 hover:bg-gray-600 transition font-medium"
+                    disabled={transactionStep === 2}
+                  >
+                    {t('common.cancel')}
+                  </button>
+                  <button
+                    onClick={handleConfirmTransaction}
+                    className="flex-1 px-4 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-50"
+                    disabled={!amount || !tndAmountInput || !modalSelectedPaymentMethod || transactionStep === 2}
+                  >
+                    {t('p2p.transactionModal.confirm')}
                   </button>
                 </div>
               </div>
             </motion.div>
           </motion.div>
+        )}
+        {transactionStep === 2 && (
+          <ActionLoader isLoading={true} />
         )}
       </AnimatePresence>
 
@@ -2871,19 +3074,20 @@ const P2P = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={e => e.stopPropagation()}
-              className="w-full max-w-md bg-gray-900/50 border border-white/10 rounded-xl backdrop-blur-xl overflow-hidden"
+              className={`w-full max-w-md ${isDark ? 'bg-gray-900/50' : 'bg-white/50'} border ${isDark ? 'border-white/10' : 'border-gray-200'} rounded-xl backdrop-blur-xl overflow-hidden`}
             >
               <div className="p-6 border-b border-white/10">
-                <h2 className="text-xl font-semibold text-white">File Dispute</h2>
-                <p className="text-sm text-gray-400 mt-1">Report an issue with this order</p>
+                <h2 className={`text-xl font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>File Dispute</h2>
+                <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'} mt-1`}>Report an issue with this order</p>
               </div>
 
               <div className="p-6 space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">Reason</label>
+                  <label className={`block text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-500'} mb-2`}>Reason</label>
                   <select
                     className={`w-full px-4 py-3 rounded-xl backdrop-blur-xl focus:outline-none transition-colors ${isDark ? 'bg-white/5 border border-white/10 text-white focus:border-blue-500/50' : 'bg-gray-100 border border-gray-300 text-gray-900 focus:border-blue-400'}`}
                     onChange={(e) => setDisputeReason(e.target.value)}
+                    value={disputeReason}
                   >
                     <option value="" className={`${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}>Select a reason</option>
                     <option value="payment_not_received" className={`${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}>Payment Not Received</option>
@@ -2894,19 +3098,24 @@ const P2P = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">Details</label>
+                  <label className={`block text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-500'} mb-2`}>Details</label>
                   <textarea
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl backdrop-blur-xl focus:outline-none focus:border-blue-500/50 transition-colors"
+                    className={`w-full px-4 py-3 ${isDark ? 'bg-white/5 border-white/10' : 'bg-gray-50 border-gray-200'} border rounded-xl backdrop-blur-xl focus:outline-none focus:border-blue-500/50 transition-colors`}
                     rows={4}
                     placeholder="Please provide more details about the issue..."
                     onChange={(e) => setDisputeDetails(e.target.value)}
+                    value={disputeDetails}
                   />
                 </div>
 
                 <div className="flex gap-4">
                   <button
-                    onClick={() => setShowDisputeModal(false)}
-                    className="flex-1 px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-gray-400 transition-colors"
+                    onClick={() => {
+                      setShowDisputeModal(false);
+                      setDisputeReason('');
+                      setDisputeDetails('');
+                    }}
+                    className={`flex-1 px-4 py-3 ${isDark ? 'bg-white/5 hover:bg-white/10 border-white/10' : 'bg-gray-100 hover:bg-gray-200 border-gray-200'} border rounded-xl ${isDark ? 'text-gray-400' : 'text-gray-600'} transition-colors`}
                   >
                     Cancel
                   </button>
@@ -2914,14 +3123,11 @@ const P2P = () => {
                     onClick={() => {
                       if (disputeReason && disputeDetails) {
                         handleDispute(selectedOrderForAction._id, disputeReason, disputeDetails);
-                        setShowDisputeModal(false);
-                        setDisputeReason('');
-                        setDisputeDetails('');
                       } else {
                         toast.error('Please provide both reason and details');
                       }
                     }}
-                    className="flex-1 px-4 py-3 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 rounded-xl text-red-400 transition-all"
+                    className={`flex-1 px-4 py-3 ${isDark ? 'bg-red-500/10 hover:bg-red-500/20 border-red-500/20 text-red-400' : 'bg-red-50 hover:bg-red-100 border-red-200 text-red-600'} border rounded-xl transition-all`}
                   >
                     Submit Dispute
                   </button>
@@ -2992,6 +3198,26 @@ const P2P = () => {
               <p className="text-gray-400">{offerCreationMessage}</p>
             </div>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Add Disputes button for admins */}
+      {isAdmin && (
+        <motion.button
+          onClick={() => setShowDisputes(true)}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className={`fixed bottom-6 right-6 ${isDark ? 'bg-red-500/10 hover:bg-red-500/20 border-red-500/20 text-red-400' : 'bg-red-50 hover:bg-red-100 border-red-200 text-red-600'} border rounded-xl p-4 transition-all flex items-center gap-2 shadow-lg cursor-pointer z-50`}
+        >
+          <AlertOctagon className="w-5 h-5" />
+          <span>Disputes</span>
+        </motion.button>
+      )}
+
+      {/* Add Disputes Modal */}
+      <AnimatePresence>
+        {showDisputes && (
+          <DisputesModal onClose={() => setShowDisputes(false)} />
         )}
       </AnimatePresence>
     </>

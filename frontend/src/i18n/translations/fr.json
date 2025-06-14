@@ -988,7 +988,8 @@
       "availableAmountPlaceholder": "Entrez le montant disponible",
       "available": "Disponible",
       "max": "MAX",
-      "equivalent": "Équivalent",
+      "equivalentinTND": "Équivalent en TND",
+      "equivalent": "Équivalent en TND",
       "description": "Description (Optionnel)",
       "descriptionPlaceholder": "Ajoutez des détails supplémentaires sur votre offre...",
       "paymentMethods": "Méthodes de paiement",
@@ -1003,6 +1004,7 @@
     },
     "order": {
       "status.disputed": "En litige",
+      "timeRemaining": "Temps restant",
       "status": "Statut",
       "status.completed": "Terminé",
       "status.cancelled": "Annulé",
@@ -1122,6 +1124,16 @@
     "orders": "ordres",
     "currency": {
       "TND": "TND"
+    },
+    "transactionModal": {
+      "title": "Démarrer la transaction",
+      "subtitle": "Entrez le montant et sélectionnez une méthode de paiement pour commencer votre commande.",
+      "amount": "Montant (USDT)",
+      "amountPlaceholder": "Entrez le montant en USDT",
+      "equivalent": "Équivalent",
+      "paymentMethod": "Méthode de paiement",
+      "selectPaymentMethod": "Sélectionnez une méthode de paiement",
+      "confirm": "Confirmer la commande"
     }
   },
   "orderChat": {
@@ -1305,6 +1317,15 @@
       "replyPlaceholder": "Écrivez votre message...",
       "closedWarning": "Cette discussion est fermée.",
       "selectDescription": "Sélectionnez un ticket pour voir la conversation."
+    },
+    "diputes": {
+      "title": "Disputes",
+      "description": "Disputes",
+      "status": {
+        "open": "Ouvert",
+        "pending": "En attente",
+        "closed": "Fermé"
+      }
     },
     "contactSupport": "Contacter le support",
     "knowledgeBase": "Base de connaissances",

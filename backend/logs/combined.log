@@ -6308,3 +6308,244 @@
   "type": "system",
   "title": "Support Replied"
 }
+2025-06-13T22:33:05.152Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-06-13T22:33:24.738Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-06-14T11:44:32.832Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-06-14T12:36:50.409Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-14T12:57:09.536Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-14T13:24:38.981Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-06-14T13:25:49.209Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-06-14T13:25:54.225Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-06-14T13:28:55.654Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-06-14T13:34:02.924Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-06-14T13:35:01.266Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-06-14T13:35:05.611Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-06-14T13:45:04.016Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-06-14T14:27:32.055Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T14:27:32.859Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T14:27:32.987Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T14:27:33.108Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T14:27:33.240Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T14:27:33.392Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T14:27:34.586Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T14:27:35.466Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T14:27:35.586Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T14:27:35.715Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T14:27:35.868Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T14:27:36.423Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T14:27:37.468Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T14:27:38.214Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T14:27:38.278Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T14:27:38.471Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T14:27:38.506Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T14:27:40.676Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T14:27:41.772Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T14:27:41.773Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T14:27:41.780Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T14:27:41.782Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T14:59:46.397Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T14:59:49.244Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T15:03:16.183Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T15:03:18.788Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T15:08:38.938Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T15:08:41.441Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T15:09:19.435Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T15:09:21.865Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T15:12:19.725Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T15:12:22.169Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T15:14:47.511Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T15:14:57.395Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T15:15:02.078Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T15:16:20.040Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T15:16:22.512Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T15:18:01.873Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T15:18:04.546Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T15:18:31.468Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T15:18:33.861Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T15:20:28.418Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T15:20:30.935Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T15:20:36.449Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}

@@ -1045,4 +1045,162 @@ export const updateOrderStatus = async (req, res) => {
         console.error('Error updating order status:', error);
         res.status(500).json({ message: 'Error updating order status' });
     }
+};
+
+// Get all disputes (admin only)
+export const getDisputes = async (req, res) => {
+    try {
+        // Check if user is admin
+        if (!['admin', 'superadmin'].includes(req.user.role)) {
+            return res.status(403).json({ message: 'Unauthorized' });
+        }
+
+        const disputes = await Order.find({ status: 'disputed' })
+            .populate('buyer', 'username')
+            .populate('seller', 'username')
+            .populate('offer', 'currency')
+            .sort({ disputedAt: -1 })
+            .lean();
+
+        res.json(disputes);
+    } catch (error) {
+        console.error('Error fetching disputes:', error);
+        res.status(500).json({ message: 'Error fetching disputes' });
+    }
+};
+
+// Resolve a dispute (admin only)
+export const resolveDispute = async (req, res) => {
+    try {
+        // Check if user is admin
+        if (!['admin', 'superadmin'].includes(req.user.role)) {
+            return res.status(403).json({ message: 'Unauthorized' });
+        }
+
+        const { orderId } = req.params;
+        const { resolution } = req.body;
+
+        if (!['refund_buyer', 'release_seller'].includes(resolution)) {
+            return res.status(400).json({ message: 'Invalid resolution type' });
+        }
+
+        const order = await Order.findById(orderId)
+            .populate('buyer', 'walletBalance')
+            .populate('seller', 'walletBalance');
+
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+
+        if (order.status !== 'disputed') {
+            return res.status(400).json({ message: 'Order is not in dispute' });
+        }
+
+        // Handle the resolution
+        if (resolution === 'refund_buyer') {
+            // Refund the buyer
+            await User.findByIdAndUpdate(order.buyer._id, {
+                $inc: { walletBalance: order.total }
+            });
+            order.status = 'cancelled';
+            order.cancelledAt = Date.now();
+        } else {
+            // Release funds to seller
+            await User.findByIdAndUpdate(order.seller._id, {
+                $inc: { walletBalance: order.total }
+            });
+            order.status = 'completed';
+            order.completedAt = Date.now();
+        }
+
+        await order.save();
+
+        // Notify both parties
+        await notificationService.sendNotification(order.buyer._id, {
+            type: 'dispute_resolved',
+            title: 'Dispute Resolved',
+            message: `Your dispute for order #${order._id} has been resolved. ${resolution === 'refund_buyer' ? 'You have been refunded.' : 'The seller has received the funds.'}`,
+            data: { orderId: order._id }
+        });
+
+        await notificationService.sendNotification(order.seller._id, {
+            type: 'dispute_resolved',
+            title: 'Dispute Resolved',
+            message: `The dispute for order #${order._id} has been resolved. ${resolution === 'refund_buyer' ? 'The buyer has been refunded.' : 'You have received the funds.'}`,
+            data: { orderId: order._id }
+        });
+
+        res.json({ message: 'Dispute resolved successfully' });
+    } catch (error) {
+        console.error('Error resolving dispute:', error);
+        res.status(500).json({ message: 'Error resolving dispute' });
+    }
+};
+
+// Create a dispute for an order
+export const createDispute = async (req, res) => {
+    try {
+        const { orderId } = req.params;
+        const { reason, details } = req.body;
+        const userId = req.user.id;
+
+        // Find the order
+        const order = await Order.findById(orderId)
+            .populate('buyer', 'username')
+            .populate('seller', 'username');
+
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+
+        // Check if user is part of the order
+        if (order.buyer._id.toString() !== userId && order.seller._id.toString() !== userId) {
+            return res.status(403).json({ message: 'Not authorized to dispute this order' });
+        }
+
+        // Check if order can be disputed
+        if (!['pending', 'paid'].includes(order.status)) {
+            return res.status(400).json({ message: 'This order cannot be disputed' });
+        }
+
+        // Update order status and add dispute details
+        order.status = 'disputed';
+        order.disputedAt = Date.now();
+        order.disputeReason = reason;
+        order.disputeDetails = details;
+        order.disputedBy = userId;
+
+        await order.save();
+
+        // Notify both parties
+        await notificationService.sendNotification(order.buyer._id, {
+            type: 'dispute_created',
+            title: 'Order Disputed',
+            message: `Order #${order._id.slice(-6)} has been disputed`,
+            data: { orderId: order._id }
+        });
+
+        await notificationService.sendNotification(order.seller._id, {
+            type: 'dispute_created',
+            title: 'Order Disputed',
+            message: `Order #${order._id.slice(-6)} has been disputed`,
+            data: { orderId: order._id }
+        });
+
+        // Notify admins
+        const admins = await User.find({ role: { $in: ['admin', 'superadmin'] } });
+        for (const admin of admins) {
+            await notificationService.sendNotification(admin._id, {
+                type: 'admin_dispute_created',
+                title: 'New Dispute Filed',
+                message: `A new dispute has been filed for order #${order._id.slice(-6)}`,
+                data: { orderId: order._id }
+            });
+        }
+
+        res.json({ message: 'Dispute created successfully', order });
+    } catch (error) {
+        console.error('Error creating dispute:', error);
+        res.status(500).json({ message: 'Error creating dispute' });
+    }
 }; 

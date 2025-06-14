@@ -34,6 +34,7 @@ router.get('/orders/:orderId', authenticate, p2pController.getOrder);
 router.post('/orders', authenticate, p2pController.createOrder);
 router.put('/orders/:orderId', authenticate, p2pController.updateOrder);
 router.put('/orders/:orderId', authenticate, p2pController.updateOrderStatus);
+router.post('/orders/:orderId/dispute', authenticate, p2pController.createDispute);
 
 // Chat routes
 router.get('/orders/:orderId/messages', authenticate, p2pController.getOrderMessages);
@@ -42,6 +43,10 @@ router.post('/orders/:orderId/messages', authenticate, p2pController.createOrder
 // Review routes
 router.get('/reviews/:userId', authenticate, p2pController.getReviews);
 router.post('/reviews', authenticate, p2pController.createReview);
+
+// Disputes routes (admin only)
+router.get('/disputes', authenticate, p2pController.getDisputes);
+router.post('/disputes/:orderId/resolve', authenticate, p2pController.resolveDispute);
 
 const p2pRoutes = router;
 export { p2pRoutes as default }; 
