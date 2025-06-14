@@ -29,6 +29,7 @@ export class NotificationService {
             // Emit WebSocket event for real-time notification
             const io = getIO();
             if (io) {
+                logger.info(`Emitting notification to user ${userId}`, { type, title });
                 io.to(`user:${userId}`).emit('notification:received', {
                     notification: {
                         _id: notification._id,
@@ -41,6 +42,8 @@ export class NotificationService {
                         createdAt: notification.createdAt
                     }
                 });
+            } else {
+                logger.error('WebSocket instance not available for notification');
             }
 
             return notification;
@@ -89,11 +92,11 @@ export class NotificationService {
     getEmailTemplateForType(type) {
         switch (type) {
             case 'transaction':
-                return 'transaction-notification.html';
+                return 'transaction.html';
             case 'alert':
-                return 'alert-notification.html';
+                return 'alert.html';
             default:
-                return 'system-notification.html';
+                return 'default.html';
         }
     }
 

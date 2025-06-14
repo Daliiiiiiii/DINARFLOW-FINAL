@@ -1116,14 +1116,14 @@ export const resolveDispute = async (req, res) => {
         await order.save();
 
         // Notify both parties
-        await notificationService.sendNotification(order.buyer._id, {
+        await notificationService.createNotification(order.buyer._id, {
             type: 'dispute_resolved',
             title: 'Dispute Resolved',
             message: `Your dispute for order #${order._id} has been resolved. ${resolution === 'refund_buyer' ? 'You have been refunded.' : 'The seller has received the funds.'}`,
             data: { orderId: order._id }
         });
 
-        await notificationService.sendNotification(order.seller._id, {
+        await notificationService.createNotification(order.seller._id, {
             type: 'dispute_resolved',
             title: 'Dispute Resolved',
             message: `The dispute for order #${order._id} has been resolved. ${resolution === 'refund_buyer' ? 'The buyer has been refunded.' : 'You have received the funds.'}`,
@@ -1173,29 +1173,32 @@ export const createDispute = async (req, res) => {
         await order.save();
 
         // Notify both parties
-        await notificationService.sendNotification(order.buyer._id, {
-            type: 'dispute_created',
-            title: 'Order Disputed',
-            message: `Order #${order._id.slice(-6)} has been disputed`,
-            data: { orderId: order._id }
-        });
+        await notificationService.createNotification(
+            order.buyer._id,
+            'alert',
+            'Order Disputed',
+            `Order #${order._id.toString().slice(-6)} has been disputed`,
+            { orderId: order._id }
+        );
 
-        await notificationService.sendNotification(order.seller._id, {
-            type: 'dispute_created',
-            title: 'Order Disputed',
-            message: `Order #${order._id.slice(-6)} has been disputed`,
-            data: { orderId: order._id }
-        });
+        await notificationService.createNotification(
+            order.seller._id,
+            'alert',
+            'Order Disputed',
+            `Order #${order._id.toString().slice(-6)} has been disputed`,
+            { orderId: order._id }
+        );
 
         // Notify admins
         const admins = await User.find({ role: { $in: ['admin', 'superadmin'] } });
         for (const admin of admins) {
-            await notificationService.sendNotification(admin._id, {
-                type: 'admin_dispute_created',
-                title: 'New Dispute Filed',
-                message: `A new dispute has been filed for order #${order._id.slice(-6)}`,
-                data: { orderId: order._id }
-            });
+            await notificationService.createNotification(
+                admin._id,
+                'alert',
+                'New Dispute Filed',
+                `A new dispute has been filed for order #${order._id.toString().slice(-6)}`,
+                { orderId: order._id }
+            );
         }
 
         res.json({ message: 'Dispute created successfully', order });

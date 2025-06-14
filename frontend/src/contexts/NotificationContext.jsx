@@ -2,6 +2,7 @@ import { createContext, useContext, useCallback, useRef, useState, useEffect } f
 import { toast } from 'react-toastify'
 import PropTypes from 'prop-types'
 import { useAuth } from './AuthContext'
+import api from '../lib/axios'
 
 const NotificationContext = createContext()
 
@@ -26,25 +27,8 @@ export const NotificationProvider = ({ children }) => {
   // Function to refresh notifications
   const refreshNotifications = useCallback(async () => {
     try {
-      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-      if (!token) {
-        console.error('No authentication token found');
-        return;
-      }
-
-      const response = await fetch('/api/notifications', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      // Handle both array and object response formats
-      const notificationsArray = Array.isArray(data) ? data : (data.notifications || []);
+      const response = await api.get('/api/notifications');
+      const notificationsArray = Array.isArray(response.data) ? response.data : (response.data.notifications || []);
       setNotifications(notificationsArray);
       setUnreadCount(notificationsArray.filter(n => !n.read).length);
     } catch (error) {
@@ -77,6 +61,16 @@ export const NotificationProvider = ({ children }) => {
     })
   }, [])
 
+  // Function to show success notification
+  const showSuccess = useCallback((message) => {
+    showNotification('success', message)
+  }, [showNotification])
+
+  // Function to show error notification
+  const showError = useCallback((message) => {
+    showNotification('error', message)
+  }, [showNotification])
+
   useEffect(() => {
     if (!userProfile) return
 
@@ -85,6 +79,7 @@ export const NotificationProvider = ({ children }) => {
 
     // Listen for real-time notifications
     const handleNewNotification = (data) => {
+      console.log('[DEBUG] Received notification:', data);
       const { notification } = data
       
       // Update notifications state
@@ -109,10 +104,16 @@ export const NotificationProvider = ({ children }) => {
     }
 
     // Subscribe to notification events
-    window.socket?.on('notification:received', handleNewNotification)
+    if (window.socket) {
+      console.log('[DEBUG] Setting up notification listener');
+      window.socket.on('notification:received', handleNewNotification);
+    }
 
     return () => {
-      window.socket?.off('notification:received', handleNewNotification)
+      if (window.socket) {
+        console.log('[DEBUG] Cleaning up notification listener');
+        window.socket.off('notification:received', handleNewNotification);
+      }
     }
   }, [userProfile, playNotificationSound, showNotification, refreshNotifications])
 
@@ -122,6 +123,8 @@ export const NotificationProvider = ({ children }) => {
     unreadCount,
     setUnreadCount,
     showNotification,
+    showSuccess,
+    showError,
     playNotificationSound,
     refreshNotifications
   }

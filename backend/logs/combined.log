@@ -6549,3 +6549,1245 @@
   "type": "transaction",
   "title": "New Message in Order"
 }
+2025-06-14T15:25:03.397Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T15:25:06.040Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T15:30:47.279Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-06-14T15:35:32.057Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T15:35:34.533Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T15:37:42.432Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-06-14T15:47:20.936Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-06-14T15:47:47.778Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-06-14T15:54:21.523Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T15:54:24.088Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T15:54:29.135Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T15:54:40.732Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "stringValue": "\"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #21e371 has been disputed',\n  data: { orderId: new ObjectId(\"684d9b2df8bd3246e321e371\") }\n}\"",
+        "valueType": "Object",
+        "kind": "string",
+        "value": {
+          "type": "dispute_created",
+          "title": "Order Disputed",
+          "message": "Order #21e371 has been disputed",
+          "data": {
+            "orderId": "684d9b2df8bd3246e321e371"
+          }
+        },
+        "path": "type",
+        "reason": null,
+        "name": "CastError",
+        "message": "Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #21e371 has been disputed',\n  data: { orderId: new ObjectId(\"684d9b2df8bd3246e321e371\") }\n}\" (type Object) at path \"type\""
+      },
+      "title": {
+        "name": "ValidatorError",
+        "message": "Path `title` is required.",
+        "properties": {
+          "message": "Path `title` is required.",
+          "type": "required",
+          "path": "title"
+        },
+        "kind": "required",
+        "path": "title"
+      },
+      "message": {
+        "name": "ValidatorError",
+        "message": "Path `message` is required.",
+        "properties": {
+          "message": "Path `message` is required.",
+          "type": "required",
+          "path": "message"
+        },
+        "kind": "required",
+        "path": "message"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #21e371 has been disputed',\n  data: { orderId: new ObjectId(\"684d9b2df8bd3246e321e371\") }\n}\" (type Object) at path \"type\", title: Path `title` is required., message: Path `message` is required."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": {
+    "type": "dispute_created",
+    "title": "Order Disputed",
+    "message": "Order #21e371 has been disputed",
+    "data": {
+      "orderId": "684d9b2df8bd3246e321e371"
+    }
+  }
+}
+2025-06-14T15:57:41.152Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T15:57:44.773Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T15:57:53.776Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "stringValue": "\"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #2209c6 has been disputed',\n  data: { orderId: new ObjectId(\"684d9bf5f8bd3246e32209c6\") }\n}\"",
+        "valueType": "Object",
+        "kind": "string",
+        "value": {
+          "type": "dispute_created",
+          "title": "Order Disputed",
+          "message": "Order #2209c6 has been disputed",
+          "data": {
+            "orderId": "684d9bf5f8bd3246e32209c6"
+          }
+        },
+        "path": "type",
+        "reason": null,
+        "name": "CastError",
+        "message": "Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #2209c6 has been disputed',\n  data: { orderId: new ObjectId(\"684d9bf5f8bd3246e32209c6\") }\n}\" (type Object) at path \"type\""
+      },
+      "title": {
+        "name": "ValidatorError",
+        "message": "Path `title` is required.",
+        "properties": {
+          "message": "Path `title` is required.",
+          "type": "required",
+          "path": "title"
+        },
+        "kind": "required",
+        "path": "title"
+      },
+      "message": {
+        "name": "ValidatorError",
+        "message": "Path `message` is required.",
+        "properties": {
+          "message": "Path `message` is required.",
+          "type": "required",
+          "path": "message"
+        },
+        "kind": "required",
+        "path": "message"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #2209c6 has been disputed',\n  data: { orderId: new ObjectId(\"684d9bf5f8bd3246e32209c6\") }\n}\" (type Object) at path \"type\", title: Path `title` is required., message: Path `message` is required."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": {
+    "type": "dispute_created",
+    "title": "Order Disputed",
+    "message": "Order #2209c6 has been disputed",
+    "data": {
+      "orderId": "684d9bf5f8bd3246e32209c6"
+    }
+  }
+}
+2025-06-14T15:58:14.049Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-06-14T15:59:22.186Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T15:59:24.638Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T15:59:33.463Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "stringValue": "\"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #b4be25 has been disputed',\n  data: { orderId: new ObjectId(\"684d9c5a959ca06e63b4be25\") }\n}\"",
+        "valueType": "Object",
+        "kind": "string",
+        "value": {
+          "type": "dispute_created",
+          "title": "Order Disputed",
+          "message": "Order #b4be25 has been disputed",
+          "data": {
+            "orderId": "684d9c5a959ca06e63b4be25"
+          }
+        },
+        "path": "type",
+        "reason": null,
+        "name": "CastError",
+        "message": "Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #b4be25 has been disputed',\n  data: { orderId: new ObjectId(\"684d9c5a959ca06e63b4be25\") }\n}\" (type Object) at path \"type\""
+      },
+      "title": {
+        "name": "ValidatorError",
+        "message": "Path `title` is required.",
+        "properties": {
+          "message": "Path `title` is required.",
+          "type": "required",
+          "path": "title"
+        },
+        "kind": "required",
+        "path": "title"
+      },
+      "message": {
+        "name": "ValidatorError",
+        "message": "Path `message` is required.",
+        "properties": {
+          "message": "Path `message` is required.",
+          "type": "required",
+          "path": "message"
+        },
+        "kind": "required",
+        "path": "message"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #b4be25 has been disputed',\n  data: { orderId: new ObjectId(\"684d9c5a959ca06e63b4be25\") }\n}\" (type Object) at path \"type\", title: Path `title` is required., message: Path `message` is required."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": {
+    "type": "dispute_created",
+    "title": "Order Disputed",
+    "message": "Order #b4be25 has been disputed",
+    "data": {
+      "orderId": "684d9c5a959ca06e63b4be25"
+    }
+  }
+}
+2025-06-14T16:01:28.892Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:01:31.505Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:01:39.900Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "stringValue": "\"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #b4d358 has been disputed',\n  data: { orderId: new ObjectId(\"684d9cd8959ca06e63b4d358\") }\n}\"",
+        "valueType": "Object",
+        "kind": "string",
+        "value": {
+          "type": "dispute_created",
+          "title": "Order Disputed",
+          "message": "Order #b4d358 has been disputed",
+          "data": {
+            "orderId": "684d9cd8959ca06e63b4d358"
+          }
+        },
+        "path": "type",
+        "reason": null,
+        "name": "CastError",
+        "message": "Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #b4d358 has been disputed',\n  data: { orderId: new ObjectId(\"684d9cd8959ca06e63b4d358\") }\n}\" (type Object) at path \"type\""
+      },
+      "title": {
+        "name": "ValidatorError",
+        "message": "Path `title` is required.",
+        "properties": {
+          "message": "Path `title` is required.",
+          "type": "required",
+          "path": "title"
+        },
+        "kind": "required",
+        "path": "title"
+      },
+      "message": {
+        "name": "ValidatorError",
+        "message": "Path `message` is required.",
+        "properties": {
+          "message": "Path `message` is required.",
+          "type": "required",
+          "path": "message"
+        },
+        "kind": "required",
+        "path": "message"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #b4d358 has been disputed',\n  data: { orderId: new ObjectId(\"684d9cd8959ca06e63b4d358\") }\n}\" (type Object) at path \"type\", title: Path `title` is required., message: Path `message` is required."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": {
+    "type": "dispute_created",
+    "title": "Order Disputed",
+    "message": "Order #b4d358 has been disputed",
+    "data": {
+      "orderId": "684d9cd8959ca06e63b4d358"
+    }
+  }
+}
+2025-06-14T16:03:21.314Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:03:23.820Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:03:32.575Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "stringValue": "\"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #b4e938 has been disputed',\n  data: { orderId: new ObjectId(\"684d9d49959ca06e63b4e938\") }\n}\"",
+        "valueType": "Object",
+        "kind": "string",
+        "value": {
+          "type": "dispute_created",
+          "title": "Order Disputed",
+          "message": "Order #b4e938 has been disputed",
+          "data": {
+            "orderId": "684d9d49959ca06e63b4e938"
+          }
+        },
+        "path": "type",
+        "reason": null,
+        "name": "CastError",
+        "message": "Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #b4e938 has been disputed',\n  data: { orderId: new ObjectId(\"684d9d49959ca06e63b4e938\") }\n}\" (type Object) at path \"type\""
+      },
+      "title": {
+        "name": "ValidatorError",
+        "message": "Path `title` is required.",
+        "properties": {
+          "message": "Path `title` is required.",
+          "type": "required",
+          "path": "title"
+        },
+        "kind": "required",
+        "path": "title"
+      },
+      "message": {
+        "name": "ValidatorError",
+        "message": "Path `message` is required.",
+        "properties": {
+          "message": "Path `message` is required.",
+          "type": "required",
+          "path": "message"
+        },
+        "kind": "required",
+        "path": "message"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #b4e938 has been disputed',\n  data: { orderId: new ObjectId(\"684d9d49959ca06e63b4e938\") }\n}\" (type Object) at path \"type\", title: Path `title` is required., message: Path `message` is required."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": {
+    "type": "dispute_created",
+    "title": "Order Disputed",
+    "message": "Order #b4e938 has been disputed",
+    "data": {
+      "orderId": "684d9d49959ca06e63b4e938"
+    }
+  }
+}
+2025-06-14T16:03:57.534Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-06-14T16:04:00.040Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:04:02.547Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:04:10.482Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "stringValue": "\"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #5381fc has been disputed',\n  data: { orderId: new ObjectId(\"684d9d6f9ee37a79675381fc\") }\n}\"",
+        "valueType": "Object",
+        "kind": "string",
+        "value": {
+          "type": "dispute_created",
+          "title": "Order Disputed",
+          "message": "Order #5381fc has been disputed",
+          "data": {
+            "orderId": "684d9d6f9ee37a79675381fc"
+          }
+        },
+        "path": "type",
+        "reason": null,
+        "name": "CastError",
+        "message": "Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #5381fc has been disputed',\n  data: { orderId: new ObjectId(\"684d9d6f9ee37a79675381fc\") }\n}\" (type Object) at path \"type\""
+      },
+      "title": {
+        "name": "ValidatorError",
+        "message": "Path `title` is required.",
+        "properties": {
+          "message": "Path `title` is required.",
+          "type": "required",
+          "path": "title"
+        },
+        "kind": "required",
+        "path": "title"
+      },
+      "message": {
+        "name": "ValidatorError",
+        "message": "Path `message` is required.",
+        "properties": {
+          "message": "Path `message` is required.",
+          "type": "required",
+          "path": "message"
+        },
+        "kind": "required",
+        "path": "message"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #5381fc has been disputed',\n  data: { orderId: new ObjectId(\"684d9d6f9ee37a79675381fc\") }\n}\" (type Object) at path \"type\", title: Path `title` is required., message: Path `message` is required."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": {
+    "type": "dispute_created",
+    "title": "Order Disputed",
+    "message": "Order #5381fc has been disputed",
+    "data": {
+      "orderId": "684d9d6f9ee37a79675381fc"
+    }
+  }
+}
+2025-06-14T16:05:22.875Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:05:25.637Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:05:36.874Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "stringValue": "\"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #539191 has been disputed',\n  data: { orderId: new ObjectId(\"684d9dc29ee37a7967539191\") }\n}\"",
+        "valueType": "Object",
+        "kind": "string",
+        "value": {
+          "type": "dispute_created",
+          "title": "Order Disputed",
+          "message": "Order #539191 has been disputed",
+          "data": {
+            "orderId": "684d9dc29ee37a7967539191"
+          }
+        },
+        "path": "type",
+        "reason": null,
+        "name": "CastError",
+        "message": "Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #539191 has been disputed',\n  data: { orderId: new ObjectId(\"684d9dc29ee37a7967539191\") }\n}\" (type Object) at path \"type\""
+      },
+      "title": {
+        "name": "ValidatorError",
+        "message": "Path `title` is required.",
+        "properties": {
+          "message": "Path `title` is required.",
+          "type": "required",
+          "path": "title"
+        },
+        "kind": "required",
+        "path": "title"
+      },
+      "message": {
+        "name": "ValidatorError",
+        "message": "Path `message` is required.",
+        "properties": {
+          "message": "Path `message` is required.",
+          "type": "required",
+          "path": "message"
+        },
+        "kind": "required",
+        "path": "message"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #539191 has been disputed',\n  data: { orderId: new ObjectId(\"684d9dc29ee37a7967539191\") }\n}\" (type Object) at path \"type\", title: Path `title` is required., message: Path `message` is required."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": {
+    "type": "dispute_created",
+    "title": "Order Disputed",
+    "message": "Order #539191 has been disputed",
+    "data": {
+      "orderId": "684d9dc29ee37a7967539191"
+    }
+  }
+}
+2025-06-14T16:05:49.494Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-06-14T16:05:52.833Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:05:55.437Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:06:05.434Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "stringValue": "\"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #0846f5 has been disputed',\n  data: { orderId: new ObjectId(\"684d9de0302fe48cf00846f5\") }\n}\"",
+        "valueType": "Object",
+        "kind": "string",
+        "value": {
+          "type": "dispute_created",
+          "title": "Order Disputed",
+          "message": "Order #0846f5 has been disputed",
+          "data": {
+            "orderId": "684d9de0302fe48cf00846f5"
+          }
+        },
+        "path": "type",
+        "reason": null,
+        "name": "CastError",
+        "message": "Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #0846f5 has been disputed',\n  data: { orderId: new ObjectId(\"684d9de0302fe48cf00846f5\") }\n}\" (type Object) at path \"type\""
+      },
+      "title": {
+        "name": "ValidatorError",
+        "message": "Path `title` is required.",
+        "properties": {
+          "message": "Path `title` is required.",
+          "type": "required",
+          "path": "title"
+        },
+        "kind": "required",
+        "path": "title"
+      },
+      "message": {
+        "name": "ValidatorError",
+        "message": "Path `message` is required.",
+        "properties": {
+          "message": "Path `message` is required.",
+          "type": "required",
+          "path": "message"
+        },
+        "kind": "required",
+        "path": "message"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #0846f5 has been disputed',\n  data: { orderId: new ObjectId(\"684d9de0302fe48cf00846f5\") }\n}\" (type Object) at path \"type\", title: Path `title` is required., message: Path `message` is required."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": {
+    "type": "dispute_created",
+    "title": "Order Disputed",
+    "message": "Order #0846f5 has been disputed",
+    "data": {
+      "orderId": "684d9de0302fe48cf00846f5"
+    }
+  }
+}
+2025-06-14T16:07:07.800Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:07:10.438Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:07:39.595Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "stringValue": "\"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #0859d9 has been disputed',\n  data: { orderId: new ObjectId(\"684d9e2b302fe48cf00859d9\") }\n}\"",
+        "valueType": "Object",
+        "kind": "string",
+        "value": {
+          "type": "dispute_created",
+          "title": "Order Disputed",
+          "message": "Order #0859d9 has been disputed",
+          "data": {
+            "orderId": "684d9e2b302fe48cf00859d9"
+          }
+        },
+        "path": "type",
+        "reason": null,
+        "name": "CastError",
+        "message": "Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #0859d9 has been disputed',\n  data: { orderId: new ObjectId(\"684d9e2b302fe48cf00859d9\") }\n}\" (type Object) at path \"type\""
+      },
+      "title": {
+        "name": "ValidatorError",
+        "message": "Path `title` is required.",
+        "properties": {
+          "message": "Path `title` is required.",
+          "type": "required",
+          "path": "title"
+        },
+        "kind": "required",
+        "path": "title"
+      },
+      "message": {
+        "name": "ValidatorError",
+        "message": "Path `message` is required.",
+        "properties": {
+          "message": "Path `message` is required.",
+          "type": "required",
+          "path": "message"
+        },
+        "kind": "required",
+        "path": "message"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #0859d9 has been disputed',\n  data: { orderId: new ObjectId(\"684d9e2b302fe48cf00859d9\") }\n}\" (type Object) at path \"type\", title: Path `title` is required., message: Path `message` is required."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": {
+    "type": "dispute_created",
+    "title": "Order Disputed",
+    "message": "Order #0859d9 has been disputed",
+    "data": {
+      "orderId": "684d9e2b302fe48cf00859d9"
+    }
+  }
+}
+2025-06-14T16:09:11.853Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:09:14.321Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:09:26.175Z [ERROR]: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "stringValue": "\"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #086fe6 has been disputed',\n  data: { orderId: new ObjectId(\"684d9ea7302fe48cf0086fe6\") }\n}\"",
+        "valueType": "Object",
+        "kind": "string",
+        "value": {
+          "type": "dispute_created",
+          "title": "Order Disputed",
+          "message": "Order #086fe6 has been disputed",
+          "data": {
+            "orderId": "684d9ea7302fe48cf0086fe6"
+          }
+        },
+        "path": "type",
+        "reason": null,
+        "name": "CastError",
+        "message": "Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #086fe6 has been disputed',\n  data: { orderId: new ObjectId(\"684d9ea7302fe48cf0086fe6\") }\n}\" (type Object) at path \"type\""
+      },
+      "title": {
+        "name": "ValidatorError",
+        "message": "Path `title` is required.",
+        "properties": {
+          "message": "Path `title` is required.",
+          "type": "required",
+          "path": "title"
+        },
+        "kind": "required",
+        "path": "title"
+      },
+      "message": {
+        "name": "ValidatorError",
+        "message": "Path `message` is required.",
+        "properties": {
+          "message": "Path `message` is required.",
+          "type": "required",
+          "path": "message"
+        },
+        "kind": "required",
+        "path": "message"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: Cast to string failed for value \"{\n  type: 'dispute_created',\n  title: 'Order Disputed',\n  message: 'Order #086fe6 has been disputed',\n  data: { orderId: new ObjectId(\"684d9ea7302fe48cf0086fe6\") }\n}\" (type Object) at path \"type\", title: Path `title` is required., message: Path `message` is required."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": {
+    "type": "dispute_created",
+    "title": "Order Disputed",
+    "message": "Order #086fe6 has been disputed",
+    "data": {
+      "orderId": "684d9ea7302fe48cf0086fe6"
+    }
+  }
+}
+2025-06-14T16:10:07.319Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-06-14T16:10:18.785Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:10:21.329Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:10:28.171Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:10:30.752Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:10:33.314Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:10:35.765Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:11:55.878Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:11:58.485Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:12:07.138Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:12:09.628Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:12:12.278Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:12:14.822Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:12:17.227Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:12:47.262Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:12:49.656Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:12:49.700Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:12:52.125Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:12:58.976Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:13:01.389Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T16:13:01.442Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:13:03.624Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:13:03.743Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:13:06.046Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T16:13:06.089Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:13:08.416Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:14:05.567Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:14:07.891Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:14:07.935Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:14:10.384Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:14:15.456Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:14:18.017Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T16:14:18.059Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:14:20.418Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:14:20.536Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:14:22.886Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T16:14:22.928Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:14:25.205Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:15:23.200Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:15:25.576Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:15:25.618Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:15:28.020Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:15:33.993Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:15:36.369Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T16:15:36.413Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:15:38.812Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:15:38.899Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:15:41.203Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T16:15:41.245Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:15:43.653Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:16:59.494Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-06-14T16:17:26.600Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-06-14T16:17:58.979Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-06-14T16:18:49.786Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-06-14T16:19:44.030Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:19:46.757Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:19:46.799Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:19:49.440Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:20:00.023Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:20:02.340Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T16:20:02.384Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:20:04.668Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {
+    "code": "EMESSAGE",
+    "response": "550 5.4.6 Unusual sending activity detected. Please try after sometime. <a href=https://www.zoho.com/mail/help/usage-policy.html target=_blank>Learn more.</a>",
+    "responseCode": 550,
+    "command": "DATA"
+  },
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:20:04.813Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:20:10.170Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-06-14T16:21:14.844Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:21:14.888Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:21:14.889Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:21:14.932Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:21:14.985Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:21:14.985Z [INFO]: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:21:19.070Z [INFO]: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:21:19.154Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T16:21:19.154Z [INFO]: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:21:19.196Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:21:19.238Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:21:19.239Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:21:19.326Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:21:19.370Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T16:21:19.371Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:21:19.413Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:21:19.454Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:21:19.454Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}

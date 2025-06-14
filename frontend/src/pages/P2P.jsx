@@ -480,6 +480,80 @@ const DisputesModal = ({ onClose }) => {
   );
 };
 
+const DisputeAnimation = ({ status, onClose }) => {
+  const { t } = useTranslation();
+  const isSuccess = status === 'success';
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+    >
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.8, opacity: 0 }}
+        transition={{ type: "spring", duration: 0.5 }}
+        className="bg-gray-900/90 border border-white/10 rounded-2xl p-8 max-w-md w-full mx-4 text-center"
+      >
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.2, type: "spring" }}
+          className={`w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center ${
+            isSuccess ? 'bg-green-500/20' : 'bg-red-500/20'
+          }`}
+        >
+          {isSuccess ? (
+            <CheckCircle className="w-12 h-12 text-green-400" />
+          ) : (
+            <XCircle className="w-12 h-12 text-red-400" />
+          )}
+        </motion.div>
+
+        <motion.h3
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="text-2xl font-semibold mb-2"
+        >
+          {isSuccess ? t('p2p.dispute.success') : t('p2p.dispute.error')}
+        </motion.h3>
+
+        <motion.p
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="text-gray-400 mb-6"
+        >
+          {isSuccess 
+            ? t('p2p.dispute.successMessage')
+            : t('p2p.dispute.errorMessage')}
+        </motion.p>
+
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          <button
+            onClick={onClose}
+            className={`px-6 py-3 ${
+              isSuccess 
+                ? 'bg-green-500/10 hover:bg-green-500/20 border-green-500/20 text-green-400'
+                : 'bg-red-500/10 hover:bg-red-500/20 border-red-500/20 text-red-400'
+            } border rounded-xl transition-all`}
+          >
+            {t('common.close')}
+          </button>
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
 const P2P = () => {
   const { theme } = useTheme();
   const { currentUser } = useAuth();
@@ -549,6 +623,8 @@ const P2P = () => {
   const { t } = useTranslation();
   const isAdmin = currentUser?.role === 'admin' || currentUser?.role === 'superadmin';
   const [showDisputes, setShowDisputes] = useState(false);
+  const [showDisputeAnimation, setShowDisputeAnimation] = useState(false);
+  const [disputeAnimationStatus, setDisputeAnimationStatus] = useState(null);
 
   const orderLengthOptions = [
     { value: '0.25', label: '15 minutes' },
@@ -1664,37 +1740,62 @@ const P2P = () => {
 
   const handleDispute = async (orderId, reason, details) => {
     try {
-      await axios.post(`/api/p2p/orders/${orderId}/dispute`, {
+      // Check if the order exists and can be disputed
+      const order = userOrders.find(o => o._id === orderId);
+      if (!order) {
+        toast.error('Order not found');
+        return;
+      }
+
+      // Check if the order can be disputed
+      if (!['pending', 'paid'].includes(order.status)) {
+        toast.error('This order cannot be disputed');
+        return;
+      }
+
+      // Show loading animation
+      setShowDisputeModal(false);
+      setTransactionStep(2);
+
+      // Make the dispute request - backend will handle notifications
+      const response = await axios.post(`/api/p2p/orders/${orderId}/dispute`, {
         reason,
         details
       });
 
-      // Refresh orders
-      const response = await axios.get('/api/p2p/orders');
-      setUserOrders(response.data);
-
-      // Show success message
-      toast.success('Dispute filed successfully');
-
-      // Close the dispute modal
-      setShowDisputeModal(false);
+      // Hide loading animation and show success animation
+      setTransactionStep(0);
+      setShowDisputeAnimation(true);
+      setDisputeAnimationStatus('success');
       setDisputeReason('');
       setDisputeDetails('');
 
-      // Emit socket event for real-time update
-      window.socket.emit('notification:update', {
-        orderId,
-        type: 'dispute',
-        title: 'New Dispute Filed',
-        message: `A dispute has been filed for order #${orderId.slice(-6)}`,
-        data: {
-          orderId,
-          type: 'dispute_created'
-        }
-      });
+      // Refresh orders list
+      const ordersResponse = await axios.get('/api/p2p/orders');
+      setUserOrders(ordersResponse.data);
+
+      // Hide animation after 2 seconds
+      setTimeout(() => {
+        setShowDisputeAnimation(false);
+        setDisputeAnimationStatus(null);
+      }, 2000);
+
     } catch (error) {
       console.error('Error filing dispute:', error);
-      toast.error(error.response?.data?.message || 'Failed to file dispute');
+      // Hide loading animation and show error animation
+      setTransactionStep(0);
+      setShowDisputeAnimation(true);
+      setDisputeAnimationStatus('error');
+      
+      // Hide animation after 2 seconds
+      setTimeout(() => {
+        setShowDisputeAnimation(false);
+        setDisputeAnimationStatus(null);
+      }, 2000);
+      
+      // Show more specific error message
+      const errorMessage = error.response?.data?.message || 'Error filing dispute';
+      toast.error(errorMessage);
     }
   };
 
@@ -3218,6 +3319,19 @@ const P2P = () => {
       <AnimatePresence>
         {showDisputes && (
           <DisputesModal onClose={() => setShowDisputes(false)} />
+        )}
+      </AnimatePresence>
+
+      {/* Dispute Success Animation */}
+      <AnimatePresence>
+        {showDisputeAnimation && (
+          <DisputeAnimation 
+            status={disputeAnimationStatus} 
+            onClose={() => {
+              setShowDisputeAnimation(false);
+              setDisputeAnimationStatus(null);
+            }} 
+          />
         )}
       </AnimatePresence>
     </>
