@@ -683,8 +683,14 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
                             : 'text-purple-400'
                         }`}>
                           {(() => {
+                            console.log('Message sender:', message.sender);
                             const isCurrentUserSeller = currentOrder?.seller?._id === currentUser?._id;
                             const isMessageFromSeller = message.sender._id === currentOrder?.seller?._id;
+                            
+                            // First check if sender is admin
+                            if (message.sender.role === 'admin' || message.sender.role === 'superadmin') {
+                              return 'Admin';
+                            }
                             
                             if (message.sender._id === currentUser._id) {
                               return isCurrentUserSeller ? t('p2p.chat.seller') : t('p2p.chat.buyer');

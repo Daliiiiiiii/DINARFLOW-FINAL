@@ -679,31 +679,7 @@ const DashboardLayout = () => {
                               </div>
                               <div className="flex-1">
                                 <div className="font-medium flex items-center gap-2">
-                                  {t(notification.title, {
-                                    amount: notification.data?.amount,
-                                    currency: notification.data?.currency,
-                                    recipient: notification.data?.recipientName ? ` to ${notification.data.recipientName}` : '',
-                                    sender: notification.data?.senderName ? ` from ${notification.data.senderName}` : '',
-                                    location: notification.data?.location,
-                                    device: notification.data?.device,
-                                    status: notification.data?.enabled ? t('common.enabled') : t('common.disabled'),
-                                    type: notification.data?.type,
-                                    date: notification.data?.date,
-                                    message: notification.data?.message,
-                                    featureName: notification.data?.featureName
-                                  }) !== notification.title ? t(notification.title, {
-                                    amount: notification.data?.amount,
-                                    currency: notification.data?.currency,
-                                    recipient: notification.data?.recipientName ? ` to ${notification.data.recipientName}` : '',
-                                    sender: notification.data?.senderName ? ` from ${notification.data.senderName}` : '',
-                                    location: notification.data?.location,
-                                    device: notification.data?.device,
-                                    status: notification.data?.enabled ? t('common.enabled') : t('common.disabled'),
-                                    type: notification.data?.type,
-                                    date: notification.data?.date,
-                                    message: notification.data?.message,
-                                    featureName: notification.data?.featureName
-                                  }) : t('notifications.unknown')}
+                                  {notification.title || notification.message || t('notifications.unknown')}
                                   {!notification.read && (
                                     <span className="ml-2 px-2 py-0.5 bg-blue-500/10 text-blue-400 text-xs rounded-full">{t('notifications.new')}</span>
                                   )}

@@ -9865,3 +9865,1584 @@
   "type": "alert",
   "title": "New Dispute Filed"
 }
+2025-06-14T16:21:57.978Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T16:23:20.687Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T16:25:03.905Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T16:26:18.141Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:26:18.236Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:26:18.237Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:26:30.262Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:26:30.304Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:26:30.305Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:27:15.766Z [INFO] RATE LIMIT: Deleted notification: 684da2b6a8241970cf60c243
+	Metadata: {
+  "userId": "682e6bde755cf136feedc20b"
+}
+2025-06-14T16:27:24.183Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:27:24.266Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:27:24.267Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:28:14.014Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:28:14.057Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:28:14.058Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:28:20.154Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T16:28:21.213Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:28:21.281Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:28:21.281Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:28:26.843Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:28:26.932Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:28:26.933Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:29:10.422Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T16:29:24.734Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T16:29:31.454Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T16:29:37.772Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T16:29:41.356Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:29:41.399Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:29:41.400Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:29:45.315Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:29:45.368Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:29:45.368Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:29:51.854Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:29:51.943Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:29:51.944Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:30:18.299Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "stringValue": "\"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684da17a6bc8ed6c10539bf6 has been resolved. The seller has received the funds.',\n  data: { orderId: new ObjectId(\"684da17a6bc8ed6c10539bf6\") }\n}\"",
+        "valueType": "Object",
+        "kind": "string",
+        "value": {
+          "type": "dispute_resolved",
+          "title": "Dispute Resolved",
+          "message": "Your dispute for order #684da17a6bc8ed6c10539bf6 has been resolved. The seller has received the funds.",
+          "data": {
+            "orderId": "684da17a6bc8ed6c10539bf6"
+          }
+        },
+        "path": "type",
+        "reason": null,
+        "name": "CastError",
+        "message": "Cast to string failed for value \"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684da17a6bc8ed6c10539bf6 has been resolved. The seller has received the funds.',\n  data: { orderId: new ObjectId(\"684da17a6bc8ed6c10539bf6\") }\n}\" (type Object) at path \"type\""
+      },
+      "title": {
+        "name": "ValidatorError",
+        "message": "Path `title` is required.",
+        "properties": {
+          "message": "Path `title` is required.",
+          "type": "required",
+          "path": "title"
+        },
+        "kind": "required",
+        "path": "title"
+      },
+      "message": {
+        "name": "ValidatorError",
+        "message": "Path `message` is required.",
+        "properties": {
+          "message": "Path `message` is required.",
+          "type": "required",
+          "path": "message"
+        },
+        "kind": "required",
+        "path": "message"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: Cast to string failed for value \"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684da17a6bc8ed6c10539bf6 has been resolved. The seller has received the funds.',\n  data: { orderId: new ObjectId(\"684da17a6bc8ed6c10539bf6\") }\n}\" (type Object) at path \"type\", title: Path `title` is required., message: Path `message` is required."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": {
+    "type": "dispute_resolved",
+    "title": "Dispute Resolved",
+    "message": "Your dispute for order #684da17a6bc8ed6c10539bf6 has been resolved. The seller has received the funds.",
+    "data": {
+      "orderId": "684da17a6bc8ed6c10539bf6"
+    }
+  }
+}
+2025-06-14T16:30:24.653Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "stringValue": "\"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684da11facc9b63ea2b7c274 has been resolved. You have been refunded.',\n  data: { orderId: new ObjectId(\"684da11facc9b63ea2b7c274\") }\n}\"",
+        "valueType": "Object",
+        "kind": "string",
+        "value": {
+          "type": "dispute_resolved",
+          "title": "Dispute Resolved",
+          "message": "Your dispute for order #684da11facc9b63ea2b7c274 has been resolved. You have been refunded.",
+          "data": {
+            "orderId": "684da11facc9b63ea2b7c274"
+          }
+        },
+        "path": "type",
+        "reason": null,
+        "name": "CastError",
+        "message": "Cast to string failed for value \"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684da11facc9b63ea2b7c274 has been resolved. You have been refunded.',\n  data: { orderId: new ObjectId(\"684da11facc9b63ea2b7c274\") }\n}\" (type Object) at path \"type\""
+      },
+      "title": {
+        "name": "ValidatorError",
+        "message": "Path `title` is required.",
+        "properties": {
+          "message": "Path `title` is required.",
+          "type": "required",
+          "path": "title"
+        },
+        "kind": "required",
+        "path": "title"
+      },
+      "message": {
+        "name": "ValidatorError",
+        "message": "Path `message` is required.",
+        "properties": {
+          "message": "Path `message` is required.",
+          "type": "required",
+          "path": "message"
+        },
+        "kind": "required",
+        "path": "message"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: Cast to string failed for value \"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684da11facc9b63ea2b7c274 has been resolved. You have been refunded.',\n  data: { orderId: new ObjectId(\"684da11facc9b63ea2b7c274\") }\n}\" (type Object) at path \"type\", title: Path `title` is required., message: Path `message` is required."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": {
+    "type": "dispute_resolved",
+    "title": "Dispute Resolved",
+    "message": "Your dispute for order #684da11facc9b63ea2b7c274 has been resolved. You have been refunded.",
+    "data": {
+      "orderId": "684da11facc9b63ea2b7c274"
+    }
+  }
+}
+2025-06-14T16:30:53.598Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:30:53.640Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:30:53.641Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:30:53.684Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:30:53.737Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:30:53.737Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:30:56.687Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:30:56.728Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:30:56.729Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:31:04.313Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:31:04.415Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:31:04.415Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:31:09.834Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:31:09.918Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T16:31:09.918Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:31:09.960Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:31:10.002Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:31:10.002Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:31:10.090Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:31:10.135Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T16:31:10.136Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:31:10.177Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:31:10.219Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:31:10.219Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:31:15.665Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:31:15.747Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:31:15.748Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:31:29.589Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:31:29.644Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:31:29.644Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:32:07.658Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:32:07.744Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:32:07.745Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:32:13.771Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:32:13.814Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:32:13.814Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:32:15.864Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:32:15.906Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:32:15.906Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:36:39.233Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T16:40:59.918Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T16:43:38.576Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:43:38.622Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:43:38.622Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:43:38.668Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:43:38.722Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:43:38.722Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:43:46.098Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:43:46.184Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T16:43:46.184Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:43:46.226Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:43:46.268Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:43:46.268Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:43:46.357Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:43:46.406Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T16:43:46.406Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:43:46.449Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:43:46.491Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:43:46.492Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:45:45.798Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:45:45.839Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:45:45.839Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:45:45.886Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:45:45.941Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:45:45.941Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:45:48.434Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:45:48.478Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:45:48.478Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T16:46:58.707Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T16:50:01.083Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T16:50:16.240Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:50:16.333Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T16:50:16.334Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:50:16.379Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:50:16.421Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:50:16.422Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:50:16.511Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:50:16.555Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T16:50:16.556Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:50:16.598Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:50:16.643Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:50:16.644Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:52:17.727Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T16:52:25.158Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "stringValue": "\"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684da739c8800482c65851b0 has been resolved. You have been refunded.',\n  data: { orderId: new ObjectId(\"684da739c8800482c65851b0\") }\n}\"",
+        "valueType": "Object",
+        "kind": "string",
+        "value": {
+          "type": "dispute_resolved",
+          "title": "Dispute Resolved",
+          "message": "Your dispute for order #684da739c8800482c65851b0 has been resolved. You have been refunded.",
+          "data": {
+            "orderId": "684da739c8800482c65851b0"
+          }
+        },
+        "path": "type",
+        "reason": null,
+        "name": "CastError",
+        "message": "Cast to string failed for value \"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684da739c8800482c65851b0 has been resolved. You have been refunded.',\n  data: { orderId: new ObjectId(\"684da739c8800482c65851b0\") }\n}\" (type Object) at path \"type\""
+      },
+      "title": {
+        "name": "ValidatorError",
+        "message": "Path `title` is required.",
+        "properties": {
+          "message": "Path `title` is required.",
+          "type": "required",
+          "path": "title"
+        },
+        "kind": "required",
+        "path": "title"
+      },
+      "message": {
+        "name": "ValidatorError",
+        "message": "Path `message` is required.",
+        "properties": {
+          "message": "Path `message` is required.",
+          "type": "required",
+          "path": "message"
+        },
+        "kind": "required",
+        "path": "message"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: Cast to string failed for value \"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684da739c8800482c65851b0 has been resolved. You have been refunded.',\n  data: { orderId: new ObjectId(\"684da739c8800482c65851b0\") }\n}\" (type Object) at path \"type\", title: Path `title` is required., message: Path `message` is required."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": {
+    "type": "dispute_resolved",
+    "title": "Dispute Resolved",
+    "message": "Your dispute for order #684da739c8800482c65851b0 has been resolved. You have been refunded.",
+    "data": {
+      "orderId": "684da739c8800482c65851b0"
+    }
+  }
+}
+2025-06-14T16:52:31.077Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "stringValue": "\"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684da3bd20cfedd850bb0a4c has been resolved. You have been refunded.',\n  data: { orderId: new ObjectId(\"684da3bd20cfedd850bb0a4c\") }\n}\"",
+        "valueType": "Object",
+        "kind": "string",
+        "value": {
+          "type": "dispute_resolved",
+          "title": "Dispute Resolved",
+          "message": "Your dispute for order #684da3bd20cfedd850bb0a4c has been resolved. You have been refunded.",
+          "data": {
+            "orderId": "684da3bd20cfedd850bb0a4c"
+          }
+        },
+        "path": "type",
+        "reason": null,
+        "name": "CastError",
+        "message": "Cast to string failed for value \"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684da3bd20cfedd850bb0a4c has been resolved. You have been refunded.',\n  data: { orderId: new ObjectId(\"684da3bd20cfedd850bb0a4c\") }\n}\" (type Object) at path \"type\""
+      },
+      "title": {
+        "name": "ValidatorError",
+        "message": "Path `title` is required.",
+        "properties": {
+          "message": "Path `title` is required.",
+          "type": "required",
+          "path": "title"
+        },
+        "kind": "required",
+        "path": "title"
+      },
+      "message": {
+        "name": "ValidatorError",
+        "message": "Path `message` is required.",
+        "properties": {
+          "message": "Path `message` is required.",
+          "type": "required",
+          "path": "message"
+        },
+        "kind": "required",
+        "path": "message"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: Cast to string failed for value \"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684da3bd20cfedd850bb0a4c has been resolved. You have been refunded.',\n  data: { orderId: new ObjectId(\"684da3bd20cfedd850bb0a4c\") }\n}\" (type Object) at path \"type\", title: Path `title` is required., message: Path `message` is required."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": {
+    "type": "dispute_resolved",
+    "title": "Dispute Resolved",
+    "message": "Your dispute for order #684da3bd20cfedd850bb0a4c has been resolved. You have been refunded.",
+    "data": {
+      "orderId": "684da3bd20cfedd850bb0a4c"
+    }
+  }
+}
+2025-06-14T16:52:38.596Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "stringValue": "\"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684d9d49959ca06e63b4e938 has been resolved. The seller has received the funds.',\n  data: { orderId: new ObjectId(\"684d9d49959ca06e63b4e938\") }\n}\"",
+        "valueType": "Object",
+        "kind": "string",
+        "value": {
+          "type": "dispute_resolved",
+          "title": "Dispute Resolved",
+          "message": "Your dispute for order #684d9d49959ca06e63b4e938 has been resolved. The seller has received the funds.",
+          "data": {
+            "orderId": "684d9d49959ca06e63b4e938"
+          }
+        },
+        "path": "type",
+        "reason": null,
+        "name": "CastError",
+        "message": "Cast to string failed for value \"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684d9d49959ca06e63b4e938 has been resolved. The seller has received the funds.',\n  data: { orderId: new ObjectId(\"684d9d49959ca06e63b4e938\") }\n}\" (type Object) at path \"type\""
+      },
+      "title": {
+        "name": "ValidatorError",
+        "message": "Path `title` is required.",
+        "properties": {
+          "message": "Path `title` is required.",
+          "type": "required",
+          "path": "title"
+        },
+        "kind": "required",
+        "path": "title"
+      },
+      "message": {
+        "name": "ValidatorError",
+        "message": "Path `message` is required.",
+        "properties": {
+          "message": "Path `message` is required.",
+          "type": "required",
+          "path": "message"
+        },
+        "kind": "required",
+        "path": "message"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: Cast to string failed for value \"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684d9d49959ca06e63b4e938 has been resolved. The seller has received the funds.',\n  data: { orderId: new ObjectId(\"684d9d49959ca06e63b4e938\") }\n}\" (type Object) at path \"type\", title: Path `title` is required., message: Path `message` is required."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": {
+    "type": "dispute_resolved",
+    "title": "Dispute Resolved",
+    "message": "Your dispute for order #684d9d49959ca06e63b4e938 has been resolved. The seller has received the funds.",
+    "data": {
+      "orderId": "684d9d49959ca06e63b4e938"
+    }
+  }
+}
+2025-06-14T16:53:14.057Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:53:14.101Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:53:14.101Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:53:14.145Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:53:14.201Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:53:14.202Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:53:20.294Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:53:20.345Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T16:53:20.345Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:53:20.387Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:53:20.430Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:53:20.430Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:53:20.518Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:53:20.563Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T16:53:20.563Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:53:20.605Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:53:20.647Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:53:20.648Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:53:34.605Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "stringValue": "\"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684da8f91050c5bee0b3f5e0 has been resolved. You have been refunded.',\n  data: { orderId: new ObjectId(\"684da8f91050c5bee0b3f5e0\") }\n}\"",
+        "valueType": "Object",
+        "kind": "string",
+        "value": {
+          "type": "dispute_resolved",
+          "title": "Dispute Resolved",
+          "message": "Your dispute for order #684da8f91050c5bee0b3f5e0 has been resolved. You have been refunded.",
+          "data": {
+            "orderId": "684da8f91050c5bee0b3f5e0"
+          }
+        },
+        "path": "type",
+        "reason": null,
+        "name": "CastError",
+        "message": "Cast to string failed for value \"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684da8f91050c5bee0b3f5e0 has been resolved. You have been refunded.',\n  data: { orderId: new ObjectId(\"684da8f91050c5bee0b3f5e0\") }\n}\" (type Object) at path \"type\""
+      },
+      "title": {
+        "name": "ValidatorError",
+        "message": "Path `title` is required.",
+        "properties": {
+          "message": "Path `title` is required.",
+          "type": "required",
+          "path": "title"
+        },
+        "kind": "required",
+        "path": "title"
+      },
+      "message": {
+        "name": "ValidatorError",
+        "message": "Path `message` is required.",
+        "properties": {
+          "message": "Path `message` is required.",
+          "type": "required",
+          "path": "message"
+        },
+        "kind": "required",
+        "path": "message"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: Cast to string failed for value \"{\n  type: 'dispute_resolved',\n  title: 'Dispute Resolved',\n  message: 'Your dispute for order #684da8f91050c5bee0b3f5e0 has been resolved. You have been refunded.',\n  data: { orderId: new ObjectId(\"684da8f91050c5bee0b3f5e0\") }\n}\" (type Object) at path \"type\", title: Path `title` is required., message: Path `message` is required."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": {
+    "type": "dispute_resolved",
+    "title": "Dispute Resolved",
+    "message": "Your dispute for order #684da8f91050c5bee0b3f5e0 has been resolved. You have been refunded.",
+    "data": {
+      "orderId": "684da8f91050c5bee0b3f5e0"
+    }
+  }
+}
+2025-06-14T16:55:08.362Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T16:55:26.645Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:55:26.691Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:55:26.692Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:55:26.734Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:55:26.847Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:55:26.848Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:55:33.223Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:55:33.315Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T16:55:33.316Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:55:33.362Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:55:33.405Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:55:33.405Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:55:33.494Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:55:33.540Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T16:55:33.540Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:55:33.583Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:55:33.626Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:55:33.626Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:55:38.347Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`dispute_resolved` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`dispute_resolved` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "dispute_resolved"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "dispute_resolved"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `dispute_resolved` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "dispute_resolved"
+}
+2025-06-14T16:59:06.559Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:59:06.604Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:59:06.604Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:59:06.647Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:59:06.705Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:59:06.706Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:59:13.230Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:59:13.313Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T16:59:13.314Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:59:13.355Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:59:13.397Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:59:13.398Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:59:13.485Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:59:13.529Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T16:59:13.529Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:59:13.571Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:59:13.612Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:59:13.612Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:59:17.131Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`dispute_resolved` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`dispute_resolved` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "dispute_resolved"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "dispute_resolved"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `dispute_resolved` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "dispute_resolved"
+}
+2025-06-14T16:59:33.967Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T16:59:42.908Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:59:42.953Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T16:59:42.953Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T16:59:42.998Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:59:43.054Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T16:59:43.055Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T16:59:54.767Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:59:54.854Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T16:59:54.855Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:59:54.896Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:59:54.939Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:59:54.939Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T16:59:55.031Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:59:55.077Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T16:59:55.078Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:59:55.141Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:59:55.183Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T16:59:55.184Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T16:59:58.709Z [ERROR] RATE LIMIT: Error creating notification:
+	Metadata: {
+  "error": {
+    "errors": {
+      "type": {
+        "name": "ValidatorError",
+        "message": "`dispute_resolved` is not a valid enum value for path `type`.",
+        "properties": {
+          "message": "`dispute_resolved` is not a valid enum value for path `type`.",
+          "type": "enum",
+          "enumValues": [
+            "transaction",
+            "system",
+            "alert",
+            "feature"
+          ],
+          "path": "type",
+          "value": "dispute_resolved"
+        },
+        "kind": "enum",
+        "path": "type",
+        "value": "dispute_resolved"
+      }
+    },
+    "_message": "Notification validation failed",
+    "name": "ValidationError",
+    "message": "Notification validation failed: type: `dispute_resolved` is not a valid enum value for path `type`."
+  },
+  "userId": "68376e817a03729259c9a14a",
+  "type": "dispute_resolved"
+}
+2025-06-14T17:01:19.342Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T17:01:41.900Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T17:01:41.944Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T17:01:41.946Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T17:01:41.990Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T17:01:42.047Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T17:01:42.048Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T17:01:47.237Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T17:01:47.326Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T17:01:47.327Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T17:01:47.369Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T17:01:47.411Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T17:01:47.412Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T17:01:47.499Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T17:01:47.543Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T17:01:47.543Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T17:01:47.588Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T17:01:47.630Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T17:01:47.630Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T17:01:55.486Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-14T17:01:55.542Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T17:01:55.542Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-14T17:01:55.585Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-14T17:01:55.626Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T17:01:55.627Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-14T17:03:31.319Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T17:03:31.366Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T17:03:31.367Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T17:03:31.416Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T17:03:31.469Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "transaction"
+}
+2025-06-14T17:03:31.470Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}

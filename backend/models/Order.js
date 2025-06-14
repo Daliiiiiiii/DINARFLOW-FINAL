@@ -56,7 +56,10 @@ const orderSchema = new mongoose.Schema({
     paidAt: Date,
     completedAt: Date,
     cancelledAt: Date,
-    disputedAt: Date
+    disputedAt: Date,
+    disputeReason: { type: String },
+    disputeDetails: { type: String },
+    disputedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
 // Update the updatedAt timestamp before saving

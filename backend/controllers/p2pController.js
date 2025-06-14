@@ -638,12 +638,16 @@ export const getOrderMessages = async (req, res) => {
         }
 
         if (order.buyer.toString() !== req.user.id &&
-            order.seller.toString() !== req.user.id) {
+            order.seller.toString() !== req.user.id &&
+            !['admin', 'superadmin'].includes(req.user.role)) {
             return res.status(403).json({ message: 'Not authorized to view these messages' });
         }
 
         const messages = await Message.find({ orderId })
-            .populate('sender', 'username')
+            .populate({
+                path: 'sender',
+                select: 'username role'
+            })
             .sort({ createdAt: 1 })
             .lean();
 
@@ -666,8 +670,10 @@ export const createOrderMessage = async (req, res) => {
             return res.status(404).json({ message: 'Order not found' });
         }
 
+        // Allow admins and superadmins to send messages
         if (order.buyer.toString() !== req.user.id &&
-            order.seller.toString() !== req.user.id) {
+            order.seller.toString() !== req.user.id &&
+            !['admin', 'superadmin'].includes(req.user.role)) {
             return res.status(403).json({ message: 'Not authorized to send messages for this order' });
         }
 
@@ -682,7 +688,10 @@ export const createOrderMessage = async (req, res) => {
         await message.save();
 
         // Populate sender info
-        await message.populate('sender', 'username');
+        await message.populate({
+            path: 'sender',
+            select: 'username role'
+        });
 
         // Send notification to the other party
         const recipientId = req.user.id === order.buyer.toString() ? order.seller : order.buyer;
@@ -1056,13 +1065,40 @@ export const getDisputes = async (req, res) => {
         }
 
         const disputes = await Order.find({ status: 'disputed' })
-            .populate('buyer', 'username')
-            .populate('seller', 'username')
+            .populate({
+                path: 'buyer',
+                select: 'username',
+                populate: {
+                    path: 'p2pProfile',
+                    select: 'nickname'
+                }
+            })
+            .populate({
+                path: 'seller',
+                select: 'username',
+                populate: {
+                    path: 'p2pProfile',
+                    select: 'nickname'
+                }
+            })
             .populate('offer', 'currency')
             .sort({ disputedAt: -1 })
             .lean();
 
-        res.json(disputes);
+        // Transform to include nickname fallback
+        const transformedDisputes = disputes.map(dispute => ({
+            ...dispute,
+            buyer: {
+                ...dispute.buyer,
+                username: dispute.buyer?.p2pProfile?.nickname || dispute.buyer?.username || 'Unknown Buyer'
+            },
+            seller: {
+                ...dispute.seller,
+                username: dispute.seller?.p2pProfile?.nickname || dispute.seller?.username || 'Unknown Seller'
+            }
+        }));
+
+        res.json(transformedDisputes);
     } catch (error) {
         console.error('Error fetching disputes:', error);
         res.status(500).json({ message: 'Error fetching disputes' });
@@ -1116,19 +1152,34 @@ export const resolveDispute = async (req, res) => {
         await order.save();
 
         // Notify both parties
-        await notificationService.createNotification(order.buyer._id, {
-            type: 'dispute_resolved',
-            title: 'Dispute Resolved',
-            message: `Your dispute for order #${order._id} has been resolved. ${resolution === 'refund_buyer' ? 'You have been refunded.' : 'The seller has received the funds.'}`,
-            data: { orderId: order._id }
-        });
+        await notificationService.createNotification(
+            order.buyer._id,
+            'alert',
+            'Dispute Resolved',
+            `Your dispute for order #${order._id} has been resolved. ${resolution === 'refund_buyer' ? 'You have been refunded.' : 'The seller has received the funds.'}`,
+            { orderId: order._id }
+        );
 
-        await notificationService.createNotification(order.seller._id, {
-            type: 'dispute_resolved',
-            title: 'Dispute Resolved',
-            message: `The dispute for order #${order._id} has been resolved. ${resolution === 'refund_buyer' ? 'The buyer has been refunded.' : 'You have received the funds.'}`,
-            data: { orderId: order._id }
-        });
+        await notificationService.createNotification(
+            order.seller._id,
+            'alert',
+            'Dispute Resolved',
+            `The dispute for order #${order._id} has been resolved. ${resolution === 'refund_buyer' ? 'The buyer has been refunded.' : 'You have received the funds.'}`,
+            { orderId: order._id }
+        );
+
+        // Real-time notification via socket
+        const wsService = req.app.get('wsService');
+        if (wsService) {
+            const notification = {
+                type: 'dispute_resolved',
+                title: 'Dispute Resolved',
+                message: `Order #${order._id.toString().slice(-6)} dispute resolved: ${resolution === 'refund_buyer' ? 'Buyer refunded' : 'Released to seller'}`,
+                data: { orderId: order._id, resolution }
+            };
+            wsService.io.to(`user:${order.buyer._id}`).emit('notification:received', { notification });
+            wsService.io.to(`user:${order.seller._id}`).emit('notification:received', { notification });
+        }
 
         res.json({ message: 'Dispute resolved successfully' });
     } catch (error) {
