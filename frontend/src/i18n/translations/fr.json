@@ -480,6 +480,7 @@
       "pendingDeletion": "Suppression en attente"
     },
     "kycStatus": {
+      "all": "Tous",
       "verified": "Vérifié",
       "pending": "En attente",
       "rejected": "Refusé",

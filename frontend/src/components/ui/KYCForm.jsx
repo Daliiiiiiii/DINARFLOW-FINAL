@@ -241,6 +241,14 @@ const KYCForm = ({ onClose, onSuccess }) => {
         });
         console.log('KYC submission response:', response.data);
         if (response.data) {
+          // Check the KYC status from the backend response
+          if (response.data.status === 'verified' || response.data.status === 'success') {
+            setIsSubmitted(true);
+            setCountdown(5);
+          } else {
+            setShowPendingAnimation(true);
+            setCountdown(5);
+          }
           toast.success(t('kycForm.submissionSuccessful'));
           if (onSuccess) {
             onSuccess(response.data);

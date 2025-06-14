@@ -11542,3 +11542,245 @@
 	Metadata: {
   "userId": "68376e817a03729259c9a14a"
 }
+2025-06-14T18:50:39.776Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:53:53.294Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}
+2025-06-14T18:56:27.420Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:58:50.832Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}
+2025-06-14T18:58:51.415Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T18:58:51.461Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T18:58:51.461Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T18:58:51.504Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T18:58:51.546Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T18:58:51.547Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T19:00:59.196Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T19:05:56.456Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}
+2025-06-14T19:05:57.096Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T19:05:57.142Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T19:05:57.143Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T19:05:57.184Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T19:05:57.225Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T19:05:57.226Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T19:05:57.268Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "KYC Declined"
+}
+2025-06-14T19:05:57.324Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T19:05:57.325Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "KYC Declined"
+}
+2025-06-14T19:07:28.948Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T19:09:20.741Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}
+2025-06-14T19:09:21.584Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T19:09:21.629Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T19:09:21.630Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T19:09:21.673Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T19:09:21.715Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T19:09:21.716Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T19:11:24.912Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T19:11:52.994Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}
+2025-06-14T19:11:53.602Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T19:11:53.649Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T19:11:53.650Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T19:11:53.692Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T19:11:53.733Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T19:11:53.733Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T19:12:08.002Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "KYC Declined"
+}
+2025-06-14T19:12:08.058Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T19:12:08.058Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "KYC Declined"
+}
+2025-06-14T19:12:33.345Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}
+2025-06-14T19:12:38.589Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T19:12:38.633Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T19:12:38.633Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T19:12:38.674Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T19:12:38.715Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T19:12:38.715Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New KYC Submission"
+}
+2025-06-14T19:12:38.757Z [INFO] RATE LIMIT: Created notification for user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "KYC Approved"
+}
+2025-06-14T19:12:38.810Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "68376e817a03729259c9a14a",
+  "type": "alert"
+}
+2025-06-14T19:12:38.810Z [INFO] RATE LIMIT: Emitting notification to user 68376e817a03729259c9a14a
+	Metadata: {
+  "type": "alert",
+  "title": "KYC Approved"
+}

@@ -557,6 +557,7 @@
       "pendingDeletion": "بانتظار الحذف"
     },
     "kycStatus": {
+      "all": "الكل",
       "verified": "تم التحقق",
       "pending": "قيد الانتظار",
       "rejected": "مرفوض",

@@ -6,9 +6,11 @@ import User from '../models/User.js';
 import mongoose from 'mongoose';
 import { generateTestRIB } from '../utils/bankUtils.js';
 import BankAccount from '../models/BankAccount.js';
+import KycService from '../services/kycService.js';
 
 const router = express.Router();
 const notificationService = new NotificationService();
+const kycService = new KycService();
 
 // Admin middleware
 const adminAuth = async (req, res, next) => {
@@ -321,6 +323,8 @@ router.post('/kyc/:userId/reject', [auth, adminAuth], async (req, res) => {
         });
 
         await user.save();
+
+        await kycService.verifyKyc(user._id, 'rejected', req.body.notes);
 
         res.json({
             message: 'KYC request rejected successfully',

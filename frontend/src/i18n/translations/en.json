@@ -145,7 +145,13 @@
     "perPage": "Per Page",
     "transactionType": "Transaction Type",
     "transactionSubtype": "Transaction Subtype",
-    "dateRange": "Date Range",
+    "dateRange": {
+      "all": "All",
+      "today": "Today",
+      "week": "Last 7 Days",
+      "month": "Last 30 Days",
+      "year": "Last 12 Months"
+    },
     "amountRange": "Amount Range",
     "allTypes": "All Types",
     "allSubtypes": "All Subtypes",
@@ -484,9 +490,6 @@
     "maxAmount": "Maximum Amount",
     "allTypes": "All Types",
     "lastSeen": "Last seen: {{date}}",
-    "status.active": "Active",
-    "status.suspended": "Suspended",
-    "status.pendingDeletion": "Pending Deletion",
     "resetTransactionLimitsUsage": "Reset Transaction Limits Usage",
     "lastSeen": "Last Seen: {{date}}",
     "lastLogin": "Last Login: {{date}}",
@@ -535,11 +538,14 @@
     "usersTitle": "Users",
     "searchPlaceholder": "Search users...",
     "status": {
+      "all": "All",
       "active": "Active",
       "suspended": "Suspended",
       "pendingDeletion": "Pending Deletion"
     },
     "kycStatus": {
+      "all": "All",
+      "unverified": "Unverified",
       "pending": "Pending",
       "verified": "Verified",
       "rejected": "Rejected",

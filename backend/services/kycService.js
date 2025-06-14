@@ -195,6 +195,55 @@ export default class KycService {
                     console.error('AI verification failed:', err.message);
                 }
 
+                // Notify all admins and superadmins of new KYC submission
+                try {
+                    const notificationService = (await import('./notificationService.js')).default;
+                    const User = (await import('../models/User.js')).default;
+                    const admins = await User.find({ role: { $in: ['admin', 'superadmin'] }, notificationsEnabled: true });
+                    const submittingUser = await User.findById(userId);
+                    const title = 'New KYC Submission';
+                    const message = `A new KYC has been submitted by ${submittingUser.displayName || submittingUser.email}.`;
+                    for (const admin of admins) {
+                        await notificationService.createNotification(
+                            admin._id,
+                            'alert',
+                            title,
+                            message,
+                            {
+                                submittedBy: submittingUser.displayName || submittingUser.email,
+                                submittedByEmail: submittingUser.email,
+                                userId: submittingUser._id.toString()
+                            }
+                        );
+                    }
+                } catch (notifErr) {
+                    console.error('Failed to send admin KYC notification:', notifErr);
+                }
+
+                // Notify user of KYC approval or rejection (not for pending)
+                try {
+                    if (user.kyc.status === 'verified' || user.kyc.status === 'rejected') {
+                        const notificationService = (await import('./notificationService.js')).default;
+                        const title = user.kyc.status === 'verified' ? 'KYC Approved' : 'KYC Declined';
+                        const message = user.kyc.status === 'verified'
+                            ? 'Your KYC submission has been approved. You now have full access.'
+                            : 'Your KYC submission has been declined. Please review your documents and try again.';
+                        await notificationService.createNotification(
+                            user._id,
+                            'alert',
+                            title,
+                            message,
+                            {
+                                kycStatus: user.kyc.status,
+                                reviewedAt: new Date(),
+                                notes: ''
+                            }
+                        );
+                    }
+                } catch (notifErr) {
+                    console.error('Failed to send user KYC notification:', notifErr);
+                }
+
                 return {
                     message: 'KYC documents submitted successfully',
                     // status: 'pending'
@@ -247,6 +296,30 @@ export default class KycService {
             });
 
             await user.save();
+
+            // Notify user of KYC approval or rejection (not for pending)
+            try {
+                if (status === 'verified' || status === 'rejected') {
+                    const notificationService = (await import('./notificationService.js')).default;
+                    const title = status === 'verified' ? 'KYC Approved' : 'KYC Declined';
+                    const message = status === 'verified'
+                        ? 'Your KYC submission has been approved. You now have full access.'
+                        : 'Your KYC submission has been declined. Please review your documents and try again.';
+                    await notificationService.createNotification(
+                        user._id,
+                        'alert',
+                        title,
+                        message,
+                        {
+                            kycStatus: status,
+                            reviewedAt: currentSubmission.verifiedAt,
+                            notes: notes || ''
+                        }
+                    );
+                }
+            } catch (notifErr) {
+                console.error('Failed to send user KYC notification:', notifErr);
+            }
 
             return {
                 message: `KYC ${status} successfully`,
