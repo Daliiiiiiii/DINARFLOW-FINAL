@@ -354,6 +354,7 @@
     "reset": "إعادة تعيين"
   },
   "profile": {
+    "resubmitKyc": "إعادة إرسال التحقق من الهوية",
     "kycVerification": "التحقق من الهوية",
     "pending": "قيد الانتظار",
     "verifyIdentity": "التحقق من الهوية للوصول إلى جميع الميزات وزيادة الحدود المتاحة",
@@ -401,6 +402,7 @@
     "cancel": "إلغاء"
   },
   "kycForm": {
+    "faceVerificationPending": "يتطلب التحقق من الوجه مراجعة يدوية",
     "kycVerification": "التحقق من الهوية",
     "step": "الخطوة",
     "of": "من",
@@ -461,7 +463,6 @@
       "networkError": "خطأ في الشبكة. يرجى المحاولة مرة أخرى",
       "faceVerificationFailed": "فشل التحقق من الوجه. يرجى التأكد من تطابق صورتك الشخصية مع صورة الهوية."
     },
-    "faceVerificationPending": "يتطلب التحقق من الوجه مراجعة يدوية",
     "submissionPendingManualVerification": "تم استلام طلب التحقق من هويتك وهو في انتظار المراجعة اليدوية"
   },
   "kycOverlay": {
@@ -490,6 +491,7 @@
     "pending": "قيد الانتظار"
   },
   "admin": {
+    "signature": "التوقيع",
     "applyFilters": "تطبيق الفلاتر",
     "reset": "إعادة تعيين",
     "startDate": "تاريخ البداية",

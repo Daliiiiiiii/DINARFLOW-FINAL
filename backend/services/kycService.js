@@ -149,6 +149,52 @@ export default class KycService {
 
                 await user.save();
 
+                // --- AI Verification (Python backend) ---
+                try {
+                    const axios = await import('axios').then(m => m.default || m);
+                    const fs = await import('fs').then(m => m.default || m);
+                    const path = await import('path').then(m => m.default || m);
+
+                    const selfieWithIdPath = path.join(process.cwd(), 'uploads', storedFiles.selfieWithId);
+                    const frontIdPath = path.join(process.cwd(), 'uploads', storedFiles.frontId);
+
+                    console.log('Reading files for AI:', selfieWithIdPath, frontIdPath);
+                    console.log('Files exist:', fs.existsSync(selfieWithIdPath), fs.existsSync(frontIdPath));
+
+                    const selfieWithIdBase64 = fs.readFileSync(selfieWithIdPath, { encoding: 'base64' });
+                    const frontIdBase64 = fs.readFileSync(frontIdPath, { encoding: 'base64' });
+
+                    console.log('Base64 selfie length:', selfieWithIdBase64.length);
+                    console.log('Base64 frontId length:', frontIdBase64.length);
+
+                    // Generate a real JWT for the user
+                    const jwt = await import('jsonwebtoken').then(m => m.default || m);
+                    const JWT_SECRET = process.env.JWT_SECRET || 'dinarflow_jwt_secret_key_2024_secure_and_unique_key_for_auth';
+                    const token = jwt.sign({ userId: user._id.toString() }, JWT_SECRET, { expiresIn: '1h' });
+
+                    const aiResponse = await axios.post('http://localhost:8000/verify-faces', {
+                        selfie_with_id: `data:image/jpeg;base64,${selfieWithIdBase64}`,
+                        id_image: `data:image/jpeg;base64,${frontIdBase64}`,
+                        personalInfo: newSubmission.personalInfo,
+                        documents: storedFiles
+                    }, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    });
+
+                    // Optionally update KYC status based on AI result
+                    if (aiResponse.data && aiResponse.data.match === true) {
+                        user.kyc.status = 'verified';
+                        await user.save();
+                    } else {
+                        user.kyc.status = 'pending';
+                        await user.save();
+                    }
+                } catch (err) {
+                    console.error('AI verification failed:', err.message);
+                }
+
                 return {
                     message: 'KYC documents submitted successfully',
                     // status: 'pending'

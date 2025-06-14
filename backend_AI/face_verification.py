@@ -504,10 +504,11 @@ async def verify_faces_endpoint(request: VerificationRequest, token: str = Depen
             
             # Add base URL to document names
             documents = request.documents.copy()
-            base_url = "http://localhost:3000/uploads/"  # Adjust this to your actual upload URL
+            base_url = "http://localhost:3000/uploads/"
             for key in documents:
                 if documents[key]:
-                    documents[key] = f"{base_url}{documents[key]}"
+                    if not documents[key].startswith("http"):
+                        documents[key] = f"{base_url}{documents[key]}"
             
             # Get current submission index
             current_submission = user['kyc'].get('currentSubmission', -1)

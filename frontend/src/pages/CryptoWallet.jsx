@@ -50,6 +50,7 @@ import QRCodeModal from '../components/QRCodeModal';
 import SendModal from '../components/SendModal';
 import { ethers } from 'ethers';
 import { useTranslation } from 'react-i18next';
+import KYCOverlay from '../layouts/KYCOverlay';
 
 const networks = [
   { 
@@ -1464,6 +1465,11 @@ const initiateSend = useCallback(async () => {
     }
   }, [selectedNetwork, userProfile?._id, fetchCryptoTransactions]); // Add fetchCryptoTransactions to dependencies
 
+  // Show KYCOverlay if user is not verified
+  const showKycOverlay = userProfile && userProfile.kyc?.status !== 'verified';
+  const kycStatus = userProfile?.kyc?.status || 'unverified';
+  const rejectionReason = userProfile?.kyc?.verificationNotes || '';
+
   // ** Conditional Renders based on state **
   if (!walletData) {
     return <PendingWallet />;
@@ -1476,6 +1482,12 @@ const initiateSend = useCallback(async () => {
   // ** Render main UI (now using memoized components) **
   return (
     <>
+      {showKycOverlay && (
+        <KYCOverlay 
+          status={kycStatus}
+          rejectionReason={rejectionReason}
+        />
+      )}
       <div className="space-y-6">
         {/* Help Button */}
         <motion.button

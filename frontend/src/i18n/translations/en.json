@@ -240,6 +240,7 @@
     }
   },
   "kycForm": {
+    "faceVerificationPending": "Face verification requires manual review",
     "kycVerification": "KYC Verification",
     "step": "Step",
     "of": "of",
@@ -327,6 +328,7 @@
     "pending": "Pending"
   },
   "profile": {
+    "resubmitKyc": "Resubmit KYC",
     "title": "Profile",
     "subtitle": "Manage your personal information and account settings",
     "photo": "Profile Photo",
@@ -473,6 +475,7 @@
     "noRecentTransfers": "No recent transfers"
   },
   "admin": {
+    "signature": "Signature",
     "applyFilters": "Apply Filters",
     "reset": "Reset",
     "startDate": "Start Date",

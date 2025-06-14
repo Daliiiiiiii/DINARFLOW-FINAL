@@ -14,6 +14,7 @@ import { io } from 'socket.io-client';
 import { useTranslation } from 'react-i18next';
 import LoadingSpinner from '../assets/animations/LoadingSpinner';
 import ActionLoader from '../assets/animations/ActionLoader';
+import KYCOverlay from '../layouts/KYCOverlay';
 
 // Add new OrderStatusAnimation component
 const OrderStatusAnimation = ({ status, onComplete }) => {
@@ -623,6 +624,10 @@ const P2P = () => {
   const [showDisputes, setShowDisputes] = useState(false);
   const [showDisputeAnimation, setShowDisputeAnimation] = useState(false);
   const [disputeAnimationStatus, setDisputeAnimationStatus] = useState(null);
+  // Show KYCOverlay if user is not verified
+  const showKycOverlay = currentUser && currentUser.kyc?.status !== 'verified';
+  const kycStatus = currentUser?.kyc?.status || 'unverified';
+  const rejectionReason = currentUser?.kyc?.verificationNotes || '';
 
   const orderLengthOptions = [
     { value: '0.25', label: '15 minutes' },
@@ -2026,6 +2031,12 @@ const P2P = () => {
 
   return (
     <>
+      {showKycOverlay && (
+        <KYCOverlay 
+          status={kycStatus}
+          rejectionReason={rejectionReason}
+        />
+      )}
       <div className={`${isDark ? '' : 'bg-[#f4f8ff]'} h-full min-h-screen`}>
         {/* Enhanced Interactive Background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">

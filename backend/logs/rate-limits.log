@@ -11446,3 +11446,99 @@
   "type": "transaction",
   "title": "Order Created"
 }
+2025-06-14T17:43:28.478Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T17:54:40.337Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T17:54:46.458Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:10:16.643Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-14T18:10:16.688Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T18:10:16.688Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-14T18:10:45.601Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:15:41.115Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}
+2025-06-14T18:15:45.190Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:18:27.384Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}
+2025-06-14T18:18:31.229Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:21:16.055Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}
+2025-06-14T18:21:20.000Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:21:55.271Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}
+2025-06-14T18:21:59.595Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:24:23.810Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}
+2025-06-14T18:24:27.894Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:25:47.350Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}
+2025-06-14T18:25:51.578Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:26:27.132Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:28:31.428Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:28:57.979Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:29:22.024Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}
+2025-06-14T18:39:31.352Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:39:45.489Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:42:17.040Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:42:38.484Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}
+2025-06-14T18:45:16.267Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}
+2025-06-14T18:46:53.815Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:48:09.430Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-14T18:48:36.728Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}
+2025-06-14T18:49:37.763Z [INFO] RATE LIMIT: Processing KYC submission
+	Metadata: {
+  "userId": "68376e817a03729259c9a14a"
+}

@@ -2433,3 +2433,9 @@
   "userId": "68376e817a03729259c9a14a",
   "type": "transaction"
 }
+2025-06-14T18:10:16.688Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}

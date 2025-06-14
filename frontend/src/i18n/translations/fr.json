@@ -248,6 +248,7 @@
     "startVerification": "Commencer la vérification"
   },
   "kycForm": {
+    "faceVerificationPending": "La vérification faciale nécessite une vérification manuelle",
     "kycVerification": "Vérification KYC",
     "step": "Étape",
     "of": "de",
@@ -309,7 +310,6 @@
       "faceVerificationFailed": "La vérification faciale a échoué. Veuillez vous assurer que votre selfie correspond à votre photo d'identité."
     },
     "redirectingIn": "Vous serez redirigé dans {{seconds}} secondes...",
-    "faceVerificationPending": "La vérification faciale nécessite une vérification manuelle",
     "submissionPendingManualVerification": "Votre soumission KYC a été reçue et est en attente de vérification manuelle"
   },
   "settings": {
@@ -363,6 +363,7 @@
     }
   },
   "profile": {
+    "resubmitKyc": "Renvoyer la vérification KYC",
     "title": "Profil",
     "subtitle": "Gérez vos informations personnelles et paramètres de compte",
     "photo": "Photo de profil",
@@ -416,6 +417,7 @@
     "pending": "En attente"
   },
   "admin": {
+    "signature": "Signature",
     "applyFilters": "Appliquer les filtres",
     "reset": "Réinitialiser",
     "startDate": "Date de début",

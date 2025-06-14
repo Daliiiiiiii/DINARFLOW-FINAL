@@ -205,81 +205,8 @@ const KYCForm = ({ onClose, onSuccess }) => {
 
     setIsSubmitting(true);
     try {
-      // First, verify faces
-      const selfieImage = await fileToBase64(formData.selfieWithId);  // Person holding ID
-      const idImage = await fileToBase64(formData.frontId);  // Just the ID card
-
-      console.log('Sending face verification request with:');
-      console.log('- Selfie with ID:', formData.selfieWithId?.name);
-      console.log('- Front ID:', formData.frontId?.name);
-
-      // Prepare personal info and documents for face verification
-      const personalInfo = {
-        idType: formData.idType,
-        idNumber: formData.idNumber,
-        dateOfBirth: formData.dateOfBirth,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        address: formData.address,
-        city: formData.city,
-        province: formData.province,
-        zipCode: formData.zipCode
-      };
-
-      const documents = {
-        frontId: formData.frontId?.name,
-        backId: formData.backId?.name,
-        selfieWithId: formData.selfieWithId?.name,
-        signature: formData.signature?.name
-      };
-
-      const verificationResponse = await api.post('http://localhost:8000/verify-faces', {
-        selfie_with_id: selfieImage,  // Person holding ID
-        id_image: idImage,  // Just the ID card
-        personalInfo,
-        documents
-      });
-
-      console.log('Face verification response:', verificationResponse.data);
-
-      const { match, message, details } = verificationResponse.data;
-
-      if (!match) {
-        // Show pending animation if confidence is below threshold
-        if (details?.verification_status === 'pending') {
-          setShowPendingAnimation(true);
-          setCountdown(5);
-          setIsSubmitting(false);
-          return;
-        }
-        
-        // Show error toast for other failures
-        toast.error(message || t('kycForm.errors.faceVerificationFailed'));
-        
-        // Reset the selfie field
-        handleFileDelete('selfieWithId');
-        
-        // Show error state in the UI
-        setError(t('kycForm.errors.faceVerificationFailed'));
-        
-        // Add visual feedback to the selfie upload field
-        const selfieField = document.getElementById('selfieWithId');
-        if (selfieField) {
-          selfieField.closest('.border-2').classList.add('border-red-500');
-          selfieField.closest('.border-2').classList.add('animate-shake');
-        }
-        
-        setIsSubmitting(false);
-          return;
-      }
-
-      // If face verification passes, show success animation immediately
-      setIsSubmitted(true);
-      setCountdown(5);
-
-      // Then proceed with KYC submission
+      // Remove face verification call from frontend. Only submit to Node backend.
       const formDataToSend = new FormData();
-      
       // Add personal information
       formDataToSend.append('idType', formData.idType);
       formDataToSend.append('idNumber', formData.idNumber);
@@ -290,7 +217,6 @@ const KYCForm = ({ onClose, onSuccess }) => {
       formDataToSend.append('city', formData.city);
       formDataToSend.append('province', formData.province);
       formDataToSend.append('zipCode', formData.zipCode);
-
       // Add files
       const fileFields = ['frontId', 'backId', 'selfieWithId', 'signature'];
       for (const field of fileFields) {
@@ -298,40 +224,36 @@ const KYCForm = ({ onClose, onSuccess }) => {
           formDataToSend.append(field, formData[field]);
         }
       }
-
       console.log('Submitting KYC data to backend...');
-      
       try {
-      const response = await api.post('/api/kyc/submit', formDataToSend, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: (progressEvent) => {
-          const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-          setUploadProgress(prev => ({
-            ...prev,
-            total: percentCompleted
-          }));
-        },
-        timeout: 60000
-      });
-
+        const response = await api.post('/api/kyc/submit', formDataToSend, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          onUploadProgress: (progressEvent) => {
+            const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            setUploadProgress(prev => ({
+              ...prev,
+              total: percentCompleted
+            }));
+          },
+          timeout: 60000
+        });
         console.log('KYC submission response:', response.data);
-
-      if (response.data) {
+        if (response.data) {
           toast.success(t('kycForm.submissionSuccessful'));
-        if (onSuccess) {
-          onSuccess(response.data);
+          if (onSuccess) {
+            onSuccess(response.data);
           }
-      }
-    } catch (error) {
+        }
+      } catch (error) {
         console.error('Error submitting KYC:', error);
-          toast.error(t('kycForm.errors.submissionFailed'));
+        toast.error(t('kycForm.errors.submissionFailed'));
         setIsSubmitting(false);
       }
     } catch (error) {
-      console.error('Error during face verification:', error);
-      toast.error(t('kycForm.errors.faceVerificationFailed'));
+      console.error('Error during KYC submission:', error);
+      toast.error(t('kycForm.errors.submissionFailed'));
       setIsSubmitting(false);
     }
   };

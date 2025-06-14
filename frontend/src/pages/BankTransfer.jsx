@@ -8,7 +8,6 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import ActionLoader from '../assets/animations/ActionLoader';
-import KYCOverlay from '../layouts/KYCOverlay';
 import ComingSoonOverlay from '../components/ui/ComingSoonOverlay';
 
 const BankTransfer = () => {
@@ -32,11 +31,6 @@ const BankTransfer = () => {
     account.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
   const [fieldErrors, setFieldErrors] = useState({});
-
-  // Show KYCOverlay if user is not verified
-  const showKycOverlay = userProfile && userProfile.kyc?.status !== 'verified';
-  const kycStatus = userProfile?.kyc?.status || 'unverified';
-  const rejectionReason = userProfile?.kyc?.verificationNotes || '';
 
   useEffect(() => {
     fetchBankAccounts();
@@ -205,12 +199,6 @@ const BankTransfer = () => {
         onClose={() => navigate('/dashboard')}
       />
       <div className="space-y-6">
-        {showKycOverlay && (
-          <KYCOverlay 
-            status={kycStatus}
-            rejectionReason={rejectionReason}
-          />
-        )}
         <h1 className={`text-2xl font-bold ${isDark ? 'text-gray-100' : 'text-gray-900'}`}>{t('bankTransfer.title')}</h1>
 
         <div className="grid md:grid-cols-2 gap-6">
