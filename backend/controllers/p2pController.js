@@ -710,9 +710,17 @@ export const createOrderMessage = async (req, res) => {
         // Emit socket event for real-time updates
         const wsService = req.app.get('wsService');
         if (wsService) {
-            console.log('Emitting new message to room:', orderId);
-            // Emit to the order room
-            wsService.io.to(orderId).emit('newMessage', message);
+            console.log('Emitting new message to room:', `order:${orderId}`);
+            // Emit to the order room with proper message format
+            wsService.io.to(`order:${orderId}`).emit('newMessage', {
+                ...message.toObject(),
+                orderId,
+                sender: {
+                    _id: req.user.id,
+                    username: req.user.username,
+                    role: req.user.role
+                }
+            });
         }
 
         res.status(201).json(message);

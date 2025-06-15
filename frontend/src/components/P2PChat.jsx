@@ -172,116 +172,9 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
   const [showCancelConfirmation, setShowCancelConfirmation] = useState(false);
   const [showReleaseConfirmation, setShowReleaseConfirmation] = useState(false);
 
-  // Function to safely add a message
-  const addMessage = (message) => {
-    const messageKey = `${message._id}-${message.createdAt}`;
-    if (processedMessageIds.current.has(messageKey)) {
-      console.log('Message already processed:', messageKey);
-      return false;
-    }
-    
-    processedMessageIds.current.add(messageKey);
-    setMessages(prev => [...prev, message]);
-    return true;
-  };
-
+  // Initialize socket connection
   useEffect(() => {
-    // Initialize currentOrder with the prop value whenever the order prop changes
-    if (propOrder) {
-      console.log('Initializing from propOrder:', propOrder);
-      setCurrentOrder(propOrder);
-      // Initialize messages from propOrder if available
-      if (propOrder.messages?.length > 0) {
-        console.log('Setting initial messages from propOrder:', propOrder.messages.length);
-        setMessages(propOrder.messages);
-        // Initialize processedMessageIds
-        processedMessageIds.current.clear();
-        propOrder.messages.forEach(msg => {
-          const messageKey = `${msg._id}-${msg.createdAt}`;
-          processedMessageIds.current.add(messageKey);
-        });
-      }
-    } else if (orderId) {
-      // If we have an orderId but no order prop, fetch the order
-      const fetchOrder = async () => {
-        try {
-          const response = await axios.get(`/api/p2p/orders/${orderId}`);
-          setCurrentOrder(response.data);
-          if (response.data.messages?.length > 0) {
-            console.log('Setting messages from API response:', response.data.messages.length);
-            setMessages(response.data.messages);
-            // Initialize processedMessageIds
-            processedMessageIds.current.clear();
-            response.data.messages.forEach(msg => {
-              const messageKey = `${msg._id}-${msg.createdAt}`;
-              processedMessageIds.current.add(messageKey);
-            });
-          }
-        } catch (error) {
-          console.error('Error fetching order:', error);
-          toast.error('Failed to load order');
-        } finally {
-          setLoading(false);
-        }
-      };
-      fetchOrder();
-    } else {
-      console.log('No order or orderId provided');
-      setLoading(false);
-      return;
-    }
-
-    const fetchOrderAndMessages = async () => {
-      if (!currentOrder?._id) {
-        console.log('No currentOrder._id available, skipping fetch');
-        setLoading(false);
-        return;
-      }
-
-      try {
-        setLoading(true);
-        console.log('Fetching order and messages for ID:', currentOrder._id);
-        
-        // Fetch messages directly from the messages endpoint
-        const messagesResponse = await axios.get(`/api/p2p/orders/${currentOrder._id}/messages`);
-        console.log('Messages API Response:', messagesResponse.data);
-        
-        if (messagesResponse.data?.length > 0) {
-          // Clear and rebuild the processed messages Set
-          processedMessageIds.current.clear();
-          messagesResponse.data.forEach(msg => {
-            const messageKey = `${msg._id}-${msg.createdAt}`;
-            processedMessageIds.current.add(messageKey);
-          });
-          
-          // Set messages with the fetched data
-          setMessages(messagesResponse.data);
-          console.log('fetchOrderAndMessages - Loaded messages:', messagesResponse.data.length);
-        } else {
-          console.log('No messages found in response');
-          // Keep existing messages if we have any
-          if (messages.length > 0) {
-            console.log('Keeping existing messages:', messages.length);
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching messages:', error);
-        console.error('Error details:', error.response?.data || error.message);
-        toast.error('Failed to load messages');
-        // Keep existing messages if we have any
-        if (messages.length > 0) {
-          console.log('Keeping existing messages after error:', messages.length);
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    // Fetch messages when component mounts or when order changes
-    if (currentOrder?._id) {
-      console.log('Triggering fetchOrderAndMessages for order:', currentOrder._id);
-      fetchOrderAndMessages();
-    }
+    if (!currentUser || !currentOrder) return;
 
     // Only initialize socket for active orders
     if (currentOrder?._id && currentOrder?.status !== 'completed' && currentOrder?.status !== 'cancelled') {
@@ -391,7 +284,120 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
       // Clean up listeners when component unmounts or dependencies change
       return () => cleanupSocketListeners(window.socket);
     }
-  }, [propOrder?._id, orderId, currentUser?._id]);
+  }, [currentUser, currentOrder]);
+
+  // Initialize order and messages
+  useEffect(() => {
+    // Initialize currentOrder with the prop value whenever the order prop changes
+    if (propOrder) {
+      console.log('Initializing from propOrder:', propOrder);
+      setCurrentOrder(propOrder);
+      // Initialize messages from propOrder if available
+      if (propOrder.messages?.length > 0) {
+        console.log('Setting initial messages from propOrder:', propOrder.messages.length);
+        setMessages(propOrder.messages);
+        // Initialize processedMessageIds
+        processedMessageIds.current.clear();
+        propOrder.messages.forEach(msg => {
+          const messageKey = `${msg._id}-${msg.createdAt}`;
+          processedMessageIds.current.add(messageKey);
+        });
+      }
+      setLoading(false);
+    } else if (orderId) {
+      // If we have an orderId but no order prop, fetch the order
+      const fetchOrder = async () => {
+        try {
+          const response = await axios.get(`/api/p2p/orders/${orderId}`);
+          setCurrentOrder(response.data);
+          if (response.data.messages?.length > 0) {
+            console.log('Setting messages from API response:', response.data.messages.length);
+            setMessages(response.data.messages);
+            // Initialize processedMessageIds
+            processedMessageIds.current.clear();
+            response.data.messages.forEach(msg => {
+              const messageKey = `${msg._id}-${msg.createdAt}`;
+              processedMessageIds.current.add(messageKey);
+            });
+          }
+        } catch (error) {
+          console.error('Error fetching order:', error);
+          toast.error('Failed to load order');
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchOrder();
+    } else {
+      console.log('No order or orderId provided');
+      setLoading(false);
+    }
+  }, [propOrder, orderId]);
+
+  // Fetch messages when order changes
+  useEffect(() => {
+    const fetchMessages = async () => {
+      if (!currentOrder?._id) {
+        console.log('No currentOrder._id available, skipping fetch');
+        return;
+      }
+
+      try {
+        setLoading(true);
+        console.log('Fetching messages for order:', currentOrder._id);
+        
+        // Fetch messages directly from the messages endpoint
+        const messagesResponse = await axios.get(`/api/p2p/orders/${currentOrder._id}/messages`);
+        console.log('Messages API Response:', messagesResponse.data);
+        
+        if (messagesResponse.data?.length > 0) {
+          // Clear and rebuild the processed messages Set
+          processedMessageIds.current.clear();
+          messagesResponse.data.forEach(msg => {
+            const messageKey = `${msg._id}-${msg.createdAt}`;
+            processedMessageIds.current.add(messageKey);
+          });
+          
+          // Set messages with the fetched data
+          setMessages(messagesResponse.data);
+          console.log('Loaded messages:', messagesResponse.data.length);
+        } else {
+          console.log('No messages found in response');
+        }
+      } catch (error) {
+        console.error('Error fetching messages:', error);
+        console.error('Error details:', error.response?.data || error.message);
+        toast.error('Failed to load messages');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (currentOrder?._id) {
+      fetchMessages();
+    }
+  }, [currentOrder?._id]);
+
+  // Join order room when currentOrder changes
+  useEffect(() => {
+    if (socketRef.current && currentOrder?._id) {
+      console.log('Joining order room on order change:', currentOrder._id);
+      socketRef.current.emit('join:room', currentOrder._id);
+    }
+  }, [currentOrder?._id]);
+
+  // Function to safely add a message
+  const addMessage = (message) => {
+    const messageKey = `${message._id}-${message.createdAt}`;
+    if (processedMessageIds.current.has(messageKey)) {
+      console.log('Message already processed:', messageKey);
+      return false;
+    }
+    
+    processedMessageIds.current.add(messageKey);
+    setMessages(prev => [...prev, message]);
+    return true;
+  };
 
   // Scroll to bottom when new messages arrive
   useEffect(() => {
@@ -419,7 +425,6 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
     e.preventDefault();
     if (!newMessage.trim() && !selectedImage) return;
 
-    // Remove the status check to allow messages in all order statuses
     if (!currentOrder) {
       toast.error(t('p2p.chat.errors.noActiveOrder'));
       return;
@@ -454,16 +459,13 @@ const P2PChat = ({ order: propOrder, orderId, onClose, currentUser }) => {
       
       // Emit socket event for real-time notification
       if (window.socket) {
-        window.socket.emit('notification:update', {
+        window.socket.emit('newMessage', {
+          ...response.data,
           orderId: currentOrder._id,
-          type: 'transaction',
-          title: t('p2p.chat.messages.newMessage'),
-          message: `New message in order #${currentOrder._id.slice(-6)}`,
-          data: {
-            orderId: currentOrder._id,
-            messageId: response.data._id,
-            senderId: currentUser._id,
-            type: 'new_message'
+          sender: {
+            _id: currentUser._id,
+            username: currentUser.username,
+            profilePicture: currentUser.profilePicture
           }
         });
       }

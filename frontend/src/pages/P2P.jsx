@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSpring, animated } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
-import { Search, Filter, ChevronDown, X, Send, Clock, CheckCircle, AlertTriangle, Shield, DollarSign, CreditCard, Ban as Bank, Wallet, ArrowRight, Plus, MessageSquare, Star, ThumbsUp, User, ArrowUpRight, Building2, Smartphone, Cast as Cash, XCircle, AlertOctagon } from 'lucide-react';
+import { Search, Filter, ChevronDown, X, Send, Clock, CheckCircle, AlertTriangle, Shield, DollarSign, CreditCard, Ban as Bank, Wallet, ArrowRight, Plus, MessageSquare, Star, ThumbsUp, User, ArrowUpRight, Building2, Smartphone, Cast as Cash, XCircle, AlertOctagon, Image as ImageIcon } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
@@ -378,10 +378,16 @@ const DisputesModal = ({ onClose, setActiveOrder, setShowChat }) => {
     }
   };
 
-  const handleJoinChat = (order) => {
-    setActiveOrder(order);
-    setShowChat(true);
-    onClose(); // Close the disputes modal
+  const handleJoinChat = async (order) => {
+    try {
+      // Fetch the full order details
+      const response = await axios.get(`/api/p2p/orders/${order._id}`);
+      setActiveOrder(response.data);
+      setShowChat(true);
+    } catch (error) {
+      console.error('Error joining chat:', error);
+      toast.error('Failed to join chat');
+    }
   };
 
   return (
@@ -553,6 +559,144 @@ const DisputeAnimation = ({ status, onClose }) => {
   );
 };
 
+const PaymentVerificationModal = ({ onClose, onConfirm, orderId, setMessages }) => {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const fileInputRef = useRef(null);
+
+  const handleFileSelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleConfirm = async () => {
+    if (!selectedFile) {
+      toast.error('Please select a payment proof image');
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        try {
+          await onConfirm(orderId, reader.result, setMessages);
+          onClose();
+        } catch (error) {
+          console.error('Error in handleConfirm:', error);
+          toast.error('Failed to verify payment');
+        }
+      };
+      reader.readAsDataURL(selectedFile);
+    } catch (error) {
+      console.error('Error reading file:', error);
+      toast.error('Failed to process image');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+    >
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.8, opacity: 0 }}
+        transition={{ type: "spring", duration: 0.5 }}
+        className="bg-gray-900/90 border border-white/10 rounded-2xl p-8 max-w-md w-full mx-4"
+      >
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.2, type: "spring" }}
+          className="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center bg-blue-500/20"
+        >
+          <ImageIcon className="w-8 h-8 text-blue-400" />
+        </motion.div>
+
+        <motion.h3
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="text-xl font-semibold mb-4 text-center"
+        >
+          Upload Payment Proof
+        </motion.h3>
+
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="mb-6"
+        >
+          <div
+            onClick={() => fileInputRef.current?.click()}
+            className="border-2 border-dashed border-gray-600 rounded-xl p-6 text-center cursor-pointer hover:border-blue-500/50 transition-colors"
+          >
+            {preview ? (
+              <div className="relative">
+                <img src={preview} alt="Preview" className="max-h-48 mx-auto rounded-lg" />
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedFile(null);
+                    setPreview(null);
+                  }}
+                  className="absolute top-2 right-2 p-1 bg-red-500/20 rounded-full hover:bg-red-500/30 transition-colors"
+                >
+                  <X className="w-4 h-4 text-red-400" />
+                </button>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center gap-2">
+                <ImageIcon className="w-8 h-8 text-gray-400" />
+                <p className="text-gray-400">Click to upload payment proof</p>
+                <p className="text-sm text-gray-500">Supported formats: JPG, PNG</p>
+              </div>
+            )}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleFileSelect}
+              className="hidden"
+            />
+          </div>
+        </motion.div>
+
+        <div className="flex gap-4">
+          <button
+            onClick={onClose}
+            className="flex-1 px-4 py-3 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-xl text-gray-300 transition-all"
+          >
+            Close
+          </button>
+          <button
+            onClick={handleConfirm}
+            disabled={!selectedFile || isSubmitting}
+            className="flex-1 px-4 py-3 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 rounded-xl text-blue-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? 'Uploading...' : 'Upload and Verify'}
+          </button>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
 const P2P = () => {
   const { theme } = useTheme();
   const { currentUser } = useAuth();
@@ -628,6 +772,11 @@ const P2P = () => {
   const showKycOverlay = currentUser && currentUser.kyc?.status !== 'verified';
   const kycStatus = currentUser?.kyc?.status || 'unverified';
   const rejectionReason = currentUser?.kyc?.verificationNotes || '';
+  const [messages, setMessages] = useState([
+    { id: 1, type: 'seller', content: "Hello! I see you're interested in buying USDT.", time: '2:30 PM' },
+    { id: 2, type: 'buyer', content: 'Yes, I\'d like to buy 500 USDT.', time: '2:31 PM' },
+    { id: 3, type: 'seller', content: 'Great! I can process that for you. Please confirm the amount and rate.', time: '2:32 PM' }
+  ]);
 
   const orderLengthOptions = [
     { value: '0.25', label: '15 minutes' },
@@ -762,100 +911,15 @@ const P2P = () => {
         });
       });
 
-      // Handle order status updates specifically
-      socket.on('orderStatusUpdate', (data) => {
-        console.log('Order status update received:', data);
-        const { orderId, status } = data;
-
-        // Always refresh the main user orders list in the background
-        const refreshUserOrdersList = async () => {
-          try {
-            const response = await axios.get('/api/p2p/orders');
-            setUserOrders(response.data);
-          } catch (error) {
-            console.error('Error refreshing user orders list:', error);
-          }
-        };
-        refreshUserOrdersList();
-
-        // Check if this update is for the currently active order (the one in chat)
-        if (activeOrder && activeOrder._id === orderId) {
-          console.log(`Status update for active order ${orderId}: ${status}. Updating active order state and chat messages.`);
-
-          // Update the active order state immediately
-          setActiveOrder(prevOrder => ({
-            ...prevOrder,
-            status: status
-          }));
-
-          // Add a system message about the status change directly to chat messages
-          const statusMessage = {
-            content: `Order status updated to: ${status}`,
-            type: 'system',
-            timestamp: new Date().toISOString(),
-            orderId: orderId
-          };
-          setMessages(prev => [...prev, statusMessage]);
-
-          // Show animation for completed or cancelled status for the active order
-          if (status === 'completed' || status === 'cancelled') {
-            setStatusAnimationType(status);
-            setShowStatusAnimation(true);
-          }
-        }
-
-        // If the update is for an order not currently active in chat, 
-        // the background refresh of userOrders will handle the list update.
-        console.log(`Status update for non-active order ${orderId}: ${status}. Checking if user order for animation.`);
-
-        if (status === 'completed' || status === 'cancelled') {
-          const isUserOrder = userOrders.some(order => order._id === orderId);
-          if (isUserOrder) {
-            setStatusAnimationType(status);
-            setShowStatusAnimation(true);
-          }
-        }
-      });
-
-      // Handle new messages
-      socket.on('newMessage', (message) => {
-        console.log('Received new message in P2P:', message);
-        if (activeOrder && message.orderId === activeOrder._id) {
-          // Skip if this is our own message that we just sent
-          if (message.sender._id === currentUser._id) {
-            console.log('Skipping own message from socket');
-            return;
-          }
-          setMessages(prev => [...prev, message]);
-        }
-      });
-
       // Handle notifications
       socket.on('notification:received', (data) => {
         console.log('Received notification in P2P:', data);
         if (data.notification.type === 'transaction') {
           // If it's a message notification, we don't need to do anything
-          // as the message will be handled by the newMessage event
+          // as the message will be handled by P2PChat component
           if (data.notification.data?.type === 'new_message') {
             return;
           }
-          // For other notifications, we can handle them here if needed
-        }
-      });
-
-      // Update socket event handlers
-      socket.on('orderStatusChanged', ({ orderId, status }) => {
-        console.log('Order status changed:', { orderId, status });
-        // Update the order in userOrders
-        setUserOrders(prevOrders => 
-          prevOrders.map(order => 
-            order._id === orderId ? { ...order, status } : order
-          )
-        );
-
-        // If this is the active order, update it too
-        if (activeOrder?._id === orderId) {
-          setActiveOrder(prev => ({ ...prev, status }));
         }
       });
     };
@@ -864,9 +928,6 @@ const P2P = () => {
     const cleanupSocketListeners = (socket) => {
       if (socket) {
         socket.off('orderUpdate');
-        socket.off('orderStatusUpdate');
-        socket.off('newMessage');
-        socket.off('orderStatusChanged');
         socket.off('notification:received');
       }
     };
@@ -925,12 +986,6 @@ const P2P = () => {
   const bind = useDrag(({ movement: [mx, my] }) => {
     set({ xy: [mx, my] });
   });
-
-  const messages = [
-    { id: 1, type: 'seller', content: "Hello! I see you're interested in buying USDT.", time: '2:30 PM' },
-    { id: 2, type: 'buyer', content: 'Yes, I\'d like to buy 500 USDT.', time: '2:31 PM' },
-    { id: 3, type: 'seller', content: 'Great! I can process that for you. Please confirm the amount and rate.', time: '2:32 PM' }
-  ];
 
   const paymentMethods = [
     {
@@ -1714,8 +1769,13 @@ const P2P = () => {
     }
   };
 
-  const handlePaymentVerification = async (orderId, proof) => {
+  const handlePaymentVerification = async (orderId, proof, setMessages) => {
     try {
+      if (!orderId) {
+        toast.error('Order ID is missing');
+        return;
+      }
+
       await axios.put(`/api/p2p/orders/${orderId}`, { 
         status: 'paid',
         paymentProof: proof 
@@ -1733,8 +1793,41 @@ const P2P = () => {
         }
       });
 
+      // Send payment proof as a message in the chat
+      try {
+        const messageResponse = await axios.post(`/api/p2p/orders/${orderId}/messages`, {
+          content: 'Payment proof submitted',
+          imageUrl: proof
+        });
+
+        // Emit socket event for real-time chat update
+        window.socket.emit('chat:message', {
+          orderId: orderId,
+          message: {
+            ...messageResponse.data,
+            sender: currentUser
+          }
+        });
+
+        // Update local messages state
+        setMessages(prevMessages => [...prevMessages, {
+          ...messageResponse.data,
+          sender: currentUser
+        }]);
+      } catch (error) {
+        console.error('Error sending payment proof to chat:', error);
+      }
+
       toast.success('Payment marked as paid');
-      refreshOrders();
+      setShowPaymentVerification(false);
+      
+      // Refresh the active order
+      try {
+        const response = await axios.get(`/api/p2p/orders/${orderId}`);
+        setActiveOrder(response.data);
+      } catch (error) {
+        console.error('Error refreshing order:', error);
+      }
     } catch (error) {
       console.error('Error verifying payment:', error);
       toast.error(error.response?.data?.message || 'Failed to verify payment');
@@ -2981,15 +3074,19 @@ const P2P = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     {/* Show payment verification button for buyers when order is pending */}
-                    {activeOrder.status === 'pending' && activeOrder.buyer?._id === currentUser?._id && (
+                    {activeOrder?.status === 'pending' && activeOrder?.buyer?._id === currentUser?._id && (
                       <button
                         onClick={() => {
-                          setSelectedOrderForAction(activeOrder);
+                          if (!activeOrder?._id) {
+                            toast.error('Order ID is missing');
+                            return;
+                          }
+                          setSelectedOrderId(activeOrder._id);
                           setShowPaymentVerification(true);
                         }}
-                        className="px-4 py-2 bg-green-500/10 hover:bg-green-500/20 border border-green-500/20 rounded-lg text-green-400 transition-all"
+                        className="px-6 py-2 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 rounded-lg text-blue-400 font-semibold transition-all"
                       >
-                        {t('orderChat.verifyPayment')}
+                        {t('p2p.order.verifyPayment')}
                       </button>
                     )}
                     {/* Show release funds button for sellers when order is paid */}
@@ -3347,6 +3444,18 @@ const P2P = () => {
           />
         )}
       </AnimatePresence>
+
+      {showPaymentVerification && selectedOrderId && (
+        <PaymentVerificationModal
+          onClose={() => {
+            setShowPaymentVerification(false);
+            setSelectedOrderId(null);
+          }}
+          onConfirm={handlePaymentVerification}
+          orderId={selectedOrderId}
+          setMessages={setMessages}
+        />
+      )}
     </>
   );
 };

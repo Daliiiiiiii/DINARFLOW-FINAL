@@ -88,58 +88,99 @@ class WebSocketService {
                     this.emitToUser(socket.user._id, 'balance:updated', data);
                 });
 
-                // Handle notification updates
-                socket.on('notification:update', (data) => {
-                    // Emit to both buyer and seller if it's an order notification
-                    if (data.type === 'transaction' && data.orderId) {
-                        // Get the order to find buyer and seller
-                        Order.findById(data.orderId)
-                            .then(order => {
-                                if (order) {
-                                    // Emit to buyer
-                                    this.emitToUser(order.buyer.toString(), 'notification:received', {
-                                        notification: {
-                                            type: data.type,
-                                            title: data.title,
-                                            message: data.message,
-                                            data: data.data,
-                                            read: false,
-                                            createdAt: new Date()
-                                        }
-                                    });
-                                    // Emit to seller
-                                    this.emitToUser(order.seller.toString(), 'notification:received', {
-                                        notification: {
-                                            type: data.type,
-                                            title: data.title,
-                                            message: data.message,
-                                            data: data.data,
-                                            read: false,
-                                            createdAt: new Date()
-                                        }
-                                    });
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Error finding order for notification:', error);
-                            });
-                    } else {
-                        // For non-order notifications, emit to the user's room
-                        this.emitToUser(socket.user._id, 'notification:received', data);
+                // Handle joining order rooms
+                socket.on('join:room', async (orderId) => {
+                    try {
+                        const user = socket.user;
+                        console.log(`User ${user.email} joining order room:`, orderId);
+
+                        // Join the order room
+                        socket.join(`order:${orderId}`);
+
+                        // Also join user's personal room for notifications
+                        socket.join(`user:${user._id}`);
+                    } catch (error) {
+                        console.error('Error joining room:', error);
                     }
                 });
 
-                // Handle order room joining
-                socket.on('join:room', (orderId) => {
-                    console.log(`User ${socket.user.email} joining order room: ${orderId}`);
-                    socket.join(orderId);
+                // Handle new messages
+                socket.on('newMessage', async (message) => {
+                    try {
+                        console.log('Received new message:', message);
+                        const { orderId, sender } = message;
+
+                        // Broadcast to the order room with proper message format
+                        this.io.to(`order:${orderId}`).emit('newMessage', {
+                            ...message,
+                            orderId,
+                            sender: {
+                                _id: sender._id,
+                                username: sender.username,
+                                role: sender.role
+                            }
+                        });
+
+                        // Also emit notification to both buyer and seller
+                        const order = await Order.findById(orderId).populate('buyer seller');
+                        if (order) {
+                            const recipientId = order.buyer._id.toString() === sender._id ? order.seller._id : order.buyer._id;
+                            this.io.to(`user:${recipientId}`).emit('notification:received', {
+                                notification: {
+                                    type: 'transaction',
+                                    title: 'New Message',
+                                    message: `New message in order #${orderId.slice(-6)}`,
+                                    data: {
+                                        orderId,
+                                        messageId: message._id,
+                                        senderId: sender._id,
+                                        type: 'new_message'
+                                    }
+                                }
+                            });
+                        }
+                    } catch (error) {
+                        console.error('Error handling new message:', error);
+                    }
                 });
 
-                // Handle order messages
-                socket.on('newMessage', (message) => {
-                    console.log('New message received:', message);
-                    // Broadcast to the order room
-                    this.io.to(message.orderId).emit('newMessage', message);
+                // Handle notification updates
+                socket.on('notification:update', async (data) => {
+                    try {
+                        console.log('Received notification update:', data);
+                        const { orderId, type, title, message, notificationData } = data;
+
+                        // Find the order to get buyer and seller
+                        const order = await Order.findById(orderId).populate('buyer seller');
+                        if (order) {
+                            // Emit to both buyer and seller
+                            this.io.to(`user:${order.buyer._id}`).emit('notification:received', {
+                                notification: {
+                                    type,
+                                    title,
+                                    message,
+                                    data: {
+                                        orderId,
+                                        ...notificationData
+                                    }
+                                }
+                            });
+
+                            this.io.to(`user:${order.seller._id}`).emit('notification:received', {
+                                notification: {
+                                    type,
+                                    title,
+                                    message,
+                                    data: {
+                                        orderId,
+                                        ...notificationData
+                                    }
+                                }
+                            });
+                        }
+                    } catch (error) {
+                        console.error('Error handling notification update:', error);
+                    }
                 });
 
                 // Handle support ticket message updates

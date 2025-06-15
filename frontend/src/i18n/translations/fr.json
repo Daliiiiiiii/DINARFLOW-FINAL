@@ -906,6 +906,7 @@
       "pending": "En attente"
     },
     "order": {
+      "fileDispute": "Fichier de litige",
       "title": "Détails de la commande",
       "buyer": "Acheteur",
       "seller": "Vendeur",
@@ -1038,7 +1039,12 @@
       "cash": "Espèces"
     },
     "order": {
+      "uploadPaymentProof": "Télécharger la preuve de paiement",
+      "uploadAndVerify": "Télécharger et vérifier",
+      "supportedFormats": "Formats supportés : JPG, PNG, PDF",
+      "clickToUpload": "Cliquez ici pour télécharger",
       "status.disputed": "En litige",
+      "status.paid": "Payé",
       "timeRemaining": "Temps restant",
       "status": "Statut",
       "status.completed": "Terminé",
@@ -1354,6 +1360,9 @@
       "selectDescription": "Sélectionnez un ticket pour voir la conversation."
     },
     "diputes": {
+      "success": "Litige résolu avec succès",
+      "successMessage": "Un administrateur examinera votre litige et vous contactera sous peu.",
+      "message": "Un administrateur examinera votre litige et vous contactera sous peu.",
       "title": "Disputes",
       "description": "Disputes",
       "status": {

@@ -783,6 +783,11 @@
       "pending": "قيد الانتظار"
     },
     "order": {
+      "uploadPaymentProof": "رفع إثبات الدفع",
+      "uploadAndVerify": "رفع وتحقق",
+      "supportedFormats": "التنسيقات المدعومة: JPG, PNG, PDF",
+      "clickToUpload": "انقر هنا لرفع",
+      "fileDispute": "ملف النزاع",
       "title": "تفاصيل الطلب",
       "buyer": "المشتري",
       "seller": "البائع",
@@ -917,6 +922,7 @@
       "status.cancelled": "ملغي",
       "status.pending": "قيد الانتظار",
       "status.disputed": "متنازع عليه",
+      "status.paid": "مدفوع",
       "price": "السعر",
       "total": "المجموع",
       "tradingWith": "العميل",
@@ -1191,6 +1197,9 @@
     "faq": "الأسئلة الشائعة"
   },
   "diputes": {
+    "success": "تم النزاع بنجاح",
+    "successMessage": "سيقوم المسؤول بمراجعة النزاع وسيتم الاتصال بك قريبًا.",
+    "message": "سيقوم المسؤول بمراجعة النزاع وسيتم الاتصال بك قريبًا.",
     "title": "المنازعات",
     "description": "المنازعات",
     "status": {

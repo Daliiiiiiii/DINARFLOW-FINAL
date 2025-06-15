@@ -10295,3 +10295,1597 @@
   "type": "system",
   "title": "Wallet Unfrozen"
 }
+2025-06-14T22:57:04.790Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-14T22:57:04.834Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T22:57:04.834Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "notifications.types.security.title.new_login"
+}
+2025-06-14T23:00:48.492Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T23:00:48.535Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T23:00:48.536Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T23:00:48.578Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T23:00:48.622Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-14T23:00:48.623Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T23:03:07.337Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T23:03:07.379Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T23:03:07.379Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T23:06:03.061Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T23:06:03.102Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T23:06:03.103Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T23:06:03.144Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T23:06:03.190Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-14T23:06:03.190Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T23:06:11.547Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T23:06:11.589Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T23:06:11.589Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T23:06:30.914Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T23:06:30.955Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T23:06:30.955Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T23:06:30.997Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T23:06:31.040Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-14T23:06:31.040Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T23:06:55.221Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T23:06:55.262Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T23:06:55.263Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T23:06:55.304Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T23:06:55.349Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-14T23:06:55.350Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T23:06:58.053Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T23:06:58.094Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T23:06:58.095Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T23:17:44.247Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T23:17:44.292Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T23:17:44.292Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T23:17:44.335Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T23:17:44.377Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T23:17:44.378Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-14T23:17:44.468Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T23:17:44.511Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T23:17:44.512Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T23:17:44.553Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T23:17:44.594Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T23:17:44.594Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-14T23:19:42.414Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-14T23:19:42.457Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-14T23:19:42.458Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-14T23:19:42.500Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-14T23:19:42.542Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-14T23:19:42.543Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-14T23:20:05.982Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T23:20:06.024Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T23:20:06.025Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T23:20:06.066Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T23:20:06.109Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-14T23:20:06.110Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T23:23:23.831Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+2025-06-14T23:43:02.777Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-06-14T23:45:37.401Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T23:45:37.443Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T23:45:37.444Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T23:46:38.720Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T23:46:38.761Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T23:46:38.762Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T23:46:38.803Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T23:46:38.847Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-14T23:46:38.848Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T23:46:45.018Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T23:46:45.060Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T23:46:45.060Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T23:47:01.493Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T23:47:01.535Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T23:47:01.535Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T23:48:57.437Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T23:48:57.479Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T23:48:57.480Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-14T23:48:57.521Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T23:48:57.564Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-14T23:48:57.564Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-14T23:49:00.335Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T23:49:00.377Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T23:49:00.378Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T23:49:14.752Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-14T23:49:14.794Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-14T23:49:14.794Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:09:28.586Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:09:28.639Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:09:28.640Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:09:28.689Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:09:28.731Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:09:28.731Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:09:31.107Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:09:31.148Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:09:31.148Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:18:55.472Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:18:55.513Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:18:55.513Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:20:59.181Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-15T00:20:59.225Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-15T00:20:59.226Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-15T00:20:59.269Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-15T00:20:59.310Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-15T00:20:59.310Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-15T00:20:59.398Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-15T00:20:59.440Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-15T00:20:59.441Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-15T00:20:59.483Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-15T00:20:59.523Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-15T00:20:59.523Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-15T00:22:52.051Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:22:52.093Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:22:52.093Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:22:52.135Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:22:52.179Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:22:52.179Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:22:54.321Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:22:54.363Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:22:54.363Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:23:02.328Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:23:02.368Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:23:02.369Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:23:38.975Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-15T00:23:39.018Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-15T00:23:39.018Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-15T00:23:39.060Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-15T00:23:39.101Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-15T00:23:39.101Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-15T00:23:39.187Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-15T00:23:39.230Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-15T00:23:39.231Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-15T00:23:39.272Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-15T00:23:39.313Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-15T00:23:39.314Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-15T00:25:16.665Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:25:16.707Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:25:16.708Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:25:16.751Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:25:16.796Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:25:16.796Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:26:31.628Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:26:31.715Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:26:31.715Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:26:44.824Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:26:44.865Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:26:44.865Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:26:50.846Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:26:50.889Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:26:50.890Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:26:54.837Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:26:54.880Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:26:54.880Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:27:37.205Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:27:37.247Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:27:37.247Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:27:43.153Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:27:43.196Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:27:43.196Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:27:48.492Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:27:48.535Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:27:48.536Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:29:33.726Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:29:33.796Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:29:33.797Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:29:38.813Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:29:38.853Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:29:38.854Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:31:11.472Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:31:11.513Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:31:11.514Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:31:11.556Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:31:11.600Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:31:11.601Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:31:13.897Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:31:13.937Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:31:13.937Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:31:18.121Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:31:18.164Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:31:18.164Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:31:23.583Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:31:23.624Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:31:23.625Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:33:52.654Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:33:52.697Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:33:52.698Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:33:56.811Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:33:56.852Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:33:56.852Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:34:36.789Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:34:36.832Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:34:36.832Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:35:39.031Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:35:39.072Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:35:39.072Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:35:42.569Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:35:42.613Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:35:42.614Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:35:46.517Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:35:46.558Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:35:46.558Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:35:54.662Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:35:54.706Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:35:54.706Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:36:00.752Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:36:00.794Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:36:00.795Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:36:03.780Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:36:03.823Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:36:03.824Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:37:11.028Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-06-15T00:37:17.679Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:37:17.722Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:37:17.723Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:37:25.089Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:37:25.132Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:37:25.132Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:37:30.631Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:37:30.672Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:37:30.673Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:38:10.128Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:38:10.173Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:38:10.174Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:38:13.450Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:38:13.512Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:38:13.514Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:38:17.443Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:38:17.488Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:38:17.488Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:38:23.852Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-06-15T00:38:29.886Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:38:29.928Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:38:29.928Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:38:36.918Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:38:36.963Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:38:36.963Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:39:24.347Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-06-15T00:39:40.618Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:39:40.665Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:39:40.666Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:39:52.053Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-15T00:39:52.097Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-15T00:39:52.098Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-15T00:39:52.140Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-15T00:39:52.182Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-15T00:39:52.182Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Order Disputed"
+}
+2025-06-15T00:39:52.272Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-15T00:39:52.315Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-15T00:39:52.316Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-15T00:39:52.358Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-15T00:39:52.400Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-15T00:39:52.400Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "New Dispute Filed"
+}
+2025-06-15T00:40:03.410Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:40:03.457Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:40:03.459Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:40:03.503Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:40:03.547Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:40:03.547Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:40:09.063Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:40:09.104Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:40:09.105Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:40:13.613Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:40:13.657Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:40:13.657Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:40:17.619Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:40:17.660Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:40:17.660Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:40:43.838Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+2025-06-15T00:41:07.384Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-06-15T00:41:10.440Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:41:10.482Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:41:10.483Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:41:21.677Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:41:21.722Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:41:21.723Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:41:26.790Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:41:26.832Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:41:26.832Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:41:31.409Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:41:31.452Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:41:31.453Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:42:18.703Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-06-15T00:42:27.827Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-06-15T00:42:34.392Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:42:34.435Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:42:34.436Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:46:19.417Z [INFO]: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+2025-06-15T00:47:03.403Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:47:03.447Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:47:03.448Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:47:06.891Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:47:06.937Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:47:06.938Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:49:23.333Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:49:23.378Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:49:23.379Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:49:27.155Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:49:27.198Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:49:27.199Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:50:15.848Z [INFO]: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:50:15.889Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:50:15.889Z [INFO]: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:50:18.233Z [INFO]: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:50:18.276Z [ERROR]: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:50:18.276Z [INFO]: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
