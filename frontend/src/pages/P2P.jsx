@@ -699,7 +699,7 @@ const PaymentVerificationModal = ({ onClose, onConfirm, orderId, setMessages }) 
 
 const P2P = () => {
   const { theme } = useTheme();
-  const { currentUser } = useAuth();
+  const { currentUser, setCurrentUser } = useAuth();
   const isDark = theme === 'dark';
   const [activeTab, setActiveTab] = useState('buy');
   const [showChat, setShowChat] = useState(false);
@@ -1186,6 +1186,43 @@ const P2P = () => {
       const response = await axios.post('/api/p2p/orders', orderData, config);
 
       if (response.data) {
+        // If payment method is DinarFlow wallet, automatically process the payment
+        if (modalSelectedPaymentMethod === 'tnd_wallet') {
+          try {
+            console.log('Starting automatic payment process...');
+            
+            // Process the automatic payment
+            const paymentResponse = await axios.post(`/api/p2p/orders/${response.data._id}/process-payment`);
+            console.log('Payment process response:', paymentResponse.data);
+
+            // Update the current user's balances
+            if (paymentResponse.data.buyerBalance) {
+              setCurrentUser(prev => ({
+                ...prev,
+                walletBalance: paymentResponse.data.buyerBalance.tnd,
+                wallet: {
+                  ...prev.wallet,
+                  globalUsdtBalance: paymentResponse.data.buyerBalance.usdt
+                }
+              }));
+            }
+
+            // Update the response data with completed status
+            response.data.status = 'completed';
+            console.log('Automatic payment process completed successfully');
+          } catch (error) {
+            console.error('Error processing automatic payment:', error);
+            console.error('Error details:', {
+              message: error.message,
+              response: error.response?.data,
+              status: error.response?.status
+            });
+            toast.error(error.response?.data?.message || 'Failed to process automatic payment');
+            setTransactionStep(1);
+            return;
+          }
+        }
+
         setTransactionStep(3);
         setActiveOrder(response.data);
         setShowChat(true);
@@ -3221,7 +3258,14 @@ const P2P = () => {
                     inputMode="decimal"
                     pattern="[0-9]*"
                     value={tndAmountInput}
-                    onChange={e => setTndAmountInput(e.target.value)}
+                    onChange={e => {
+                      setTndAmountInput(e.target.value);
+                      // Also update USDT amount if possible
+                      if (selectedOffer && e.target.value && !isNaN(parseFloat(e.target.value))) {
+                        const usdt = parseFloat(e.target.value) / parseFloat(selectedOffer.price);
+                        setAmount(usdt ? usdt.toFixed(6) : '');
+                      }
+                    }}
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-blue-500/50 transition-colors"
                     placeholder="Enter TND amount"
                   />
@@ -3231,14 +3275,21 @@ const P2P = () => {
                   <select
                     value={modalSelectedPaymentMethod}
                     onChange={e => setModalSelectedPaymentMethod(e.target.value)}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-blue-500/50 transition-colors"
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-blue-500/50 transition-colors"
                   >
-                    <option value="">{t('p2p.transactionModal.selectPaymentMethod')}</option>
-                    {selectedOffer.paymentMethods.map(method => (
-                      <option key={method} value={method}>
-                        {t(`p2p.paymentMethodNames.${method}`)}
-                      </option>
-                    ))}
+                    <option value="" className="bg-gray-800 text-gray-400">{t('p2p.transactionModal.selectPaymentMethod')}</option>
+                    {selectedOffer.paymentMethods.map(method => {
+                      // Find the payment method object for fallback
+                      const pm = paymentMethods.find(pm => pm.id === method);
+                      // Try translation, fallback to pm.name or method id
+                      const label = t(`p2p.paymentMethodNames.${method}`);
+                      const displayLabel = label.startsWith('p2p.paymentMethodNames.') ? (pm ? pm.name : method) : label;
+                      return (
+                        <option key={method} value={method} className="bg-gray-800 text-white">
+                          {displayLabel}
+                        </option>
+                      );
+                    })}
                   </select>
                 </div>
                 <div className="flex gap-4 mt-6">

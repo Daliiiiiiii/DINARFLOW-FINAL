@@ -8,6 +8,9 @@ import Report from '../models/Report.js';
 import { NotificationService } from '../services/notificationService.js';
 import path from 'path';
 import fs from 'fs/promises';
+import mongoose from 'mongoose';
+import Wallet from '../models/Wallet.js';
+import Transaction from '../models/Transaction.js';
 
 const notificationService = new NotificationService();
 
@@ -1264,5 +1267,198 @@ export const createDispute = async (req, res) => {
     } catch (error) {
         console.error('Error creating dispute:', error);
         res.status(500).json({ message: 'Error creating dispute' });
+    }
+};
+
+// Process automatic payment for P2P order
+export const processAutomaticPayment = async (req, res) => {
+    try {
+        const { orderId } = req.params;
+        const userId = req.user.id;
+
+        // Find the order
+        const order = await Order.findById(orderId)
+            .populate('buyer', 'username email')
+            .populate('seller', 'username email')
+            .populate('offer');
+
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+
+        // Verify the user is the buyer
+        if (order.buyer._id.toString() !== userId) {
+            return res.status(403).json({ message: 'Only the buyer can process automatic payment' });
+        }
+
+        // Verify the order is pending
+        if (order.status !== 'pending') {
+            return res.status(400).json({ message: 'Order is not in pending status' });
+        }
+
+        // Verify payment method is TND wallet
+        if (order.paymentMethod !== 'tnd_wallet') {
+            return res.status(400).json({ message: 'Invalid payment method for automatic processing' });
+        }
+
+        // Get buyer's wallet
+        const buyerWallet = await Wallet.findOne({ userId: order.buyer._id });
+        if (!buyerWallet) {
+            return res.status(404).json({ message: 'Buyer wallet not found' });
+        }
+
+        // Get seller's wallet
+        const sellerWallet = await Wallet.findOne({ userId: order.seller._id });
+        if (!sellerWallet) {
+            return res.status(404).json({ message: 'Seller wallet not found' });
+        }
+
+        // Verify seller has enough USDT
+        if (parseFloat(sellerWallet.globalUsdtBalance || '0') < order.amount) {
+            return res.status(400).json({ message: 'Seller has insufficient USDT balance' });
+        }
+
+        // Start a session for transaction
+        const session = await mongoose.startSession();
+        session.startTransaction();
+
+        try {
+            // 1. Transfer TND from buyer to seller
+            const tndTransfer = await Transaction.create([{
+                userId: order.buyer._id,
+                type: 'transfer',
+                subtype: 'send',
+                amount: -order.total,
+                currency: 'TND',
+                status: 'completed',
+                description: `P2P trade for ${order.amount} USDT`,
+                reference: `TND-P2P-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+            }], { session });
+
+            // Update buyer's TND balance
+            const buyerUser = await User.findById(order.buyer._id);
+            buyerUser.walletBalance = (parseFloat(buyerUser.walletBalance || '0') - order.total).toFixed(2);
+            await buyerUser.save({ session });
+
+            // Update seller's TND balance
+            const sellerUser = await User.findById(order.seller._id);
+            sellerUser.walletBalance = (parseFloat(sellerUser.walletBalance || '0') + order.total).toFixed(2);
+            await sellerUser.save({ session });
+
+            // 2. Transfer USDT from seller to buyer
+            // Update seller's USDT balance
+            sellerWallet.globalUsdtBalance = (parseFloat(sellerWallet.globalUsdtBalance || '0') - order.amount).toFixed(6);
+            await sellerWallet.save({ session });
+
+            // Update buyer's USDT balance
+            buyerWallet.globalUsdtBalance = (parseFloat(buyerWallet.globalUsdtBalance || '0') + order.amount).toFixed(6);
+            await buyerWallet.save({ session });
+
+            // Create USDT transaction records
+            const timestamp = Date.now();
+            const randomStr = Math.random().toString(36).substr(2, 9);
+
+            await Transaction.create([{
+                userId: order.seller._id,
+                type: 'crypto',
+                subtype: 'send',
+                amount: -order.amount,
+                currency: 'USDT',
+                status: 'completed',
+                reference: `USDT-SEND-${timestamp}-${randomStr}`,
+                metadata: {
+                    network: 'ethereum',
+                    fee: 0,
+                    fromAddress: sellerWallet.address,
+                    toAddress: buyerWallet.address
+                }
+            }, {
+                userId: order.buyer._id,
+                type: 'crypto',
+                subtype: 'receive',
+                amount: order.amount,
+                currency: 'USDT',
+                status: 'completed',
+                reference: `USDT-RECV-${timestamp}-${randomStr}`,
+                metadata: {
+                    network: 'ethereum',
+                    fee: 0,
+                    fromAddress: sellerWallet.address,
+                    toAddress: buyerWallet.address
+                }
+            }], { session });
+
+            // 3. Update order status to completed
+            order.status = 'completed';
+            order.completedAt = Date.now();
+            await order.save({ session });
+
+            // Commit the transaction
+            await session.commitTransaction();
+
+            // Get WebSocket service
+            const wsService = req.app.get('wsService');
+
+            // Send notifications
+            await notificationService.createNotification(
+                order.buyer._id,
+                'transaction',
+                'Order Completed',
+                `Your order for ${order.amount} USDT has been completed`,
+                {
+                    orderId: order._id,
+                    amount: order.amount,
+                    type: 'order_completed'
+                }
+            );
+
+            await notificationService.createNotification(
+                order.seller._id,
+                'transaction',
+                'Order Completed',
+                `Order for ${order.amount} USDT has been completed`,
+                {
+                    orderId: order._id,
+                    amount: order.amount,
+                    type: 'order_completed'
+                }
+            );
+
+            // Emit socket events
+            if (wsService) {
+                wsService.io.to(`user:${order.buyer._id}`).emit('balance:updated', {
+                    userId: order.buyer._id,
+                    walletBalance: buyerUser.walletBalance,
+                    usdtBalance: buyerWallet.globalUsdtBalance
+                });
+
+                wsService.io.to(`user:${order.seller._id}`).emit('balance:updated', {
+                    userId: order.seller._id,
+                    walletBalance: sellerUser.walletBalance,
+                    usdtBalance: sellerWallet.globalUsdtBalance
+                });
+            }
+
+            res.json({
+                message: 'Payment processed successfully',
+                order,
+                buyerBalance: {
+                    tnd: buyerUser.walletBalance,
+                    usdt: buyerWallet.globalUsdtBalance
+                },
+                sellerBalance: {
+                    tnd: sellerUser.walletBalance,
+                    usdt: sellerWallet.globalUsdtBalance
+                }
+            });
+        } catch (error) {
+            await session.abortTransaction();
+            throw error;
+        } finally {
+            session.endSession();
+        }
+    } catch (error) {
+        console.error('Error processing automatic payment:', error);
+        res.status(500).json({ message: error.message || 'Error processing payment' });
     }
 }; 

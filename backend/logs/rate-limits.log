@@ -14034,3 +14034,1631 @@
   "type": "transaction",
   "title": "New Message in Order"
 }
+2025-06-15T00:52:05.218Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:52:05.260Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:52:05.261Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:52:08.907Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:52:08.950Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:52:08.951Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:52:14.607Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:52:14.648Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:52:14.648Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T00:53:05.354Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-15T00:53:05.398Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-15T00:53:05.399Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-15T00:53:05.441Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-15T00:53:05.483Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-15T00:53:05.484Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-15T00:53:06.792Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-15T00:53:06.836Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-15T00:53:06.837Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-15T00:53:06.880Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-15T00:53:06.922Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-15T00:53:06.923Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-15T00:53:08.179Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-15T00:53:08.223Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "alert"
+}
+2025-06-15T00:53:08.223Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-15T00:53:08.264Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-15T00:53:08.305Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "alert"
+}
+2025-06-15T00:53:08.306Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "alert",
+  "title": "Dispute Resolved"
+}
+2025-06-15T00:53:41.022Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:53:41.065Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:53:41.065Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:53:41.109Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:53:41.153Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:53:41.153Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:53:49.823Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-02.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-15T00:55:39.830Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:55:39.877Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:55:39.878Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:55:39.921Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:55:39.967Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:55:39.968Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:56:40.913Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:56:40.958Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:56:40.958Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:56:41.002Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:56:41.047Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:56:41.048Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:58:04.832Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:58:04.875Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:58:04.876Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:58:04.920Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:58:04.965Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:58:04.965Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:59:07.748Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:59:07.793Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:59:07.794Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:59:07.843Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:59:07.887Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:59:07.887Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:59:09.336Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T00:59:09.338Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T00:59:09.392Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:59:09.392Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T00:59:09.396Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:59:09.396Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T00:59:47.110Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:59:47.151Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:59:47.151Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T00:59:47.195Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:59:47.238Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:59:47.238Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T00:59:48.756Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T00:59:48.758Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T00:59:48.806Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T00:59:48.807Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T00:59:48.814Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T00:59:48.815Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:00:35.135Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:00:35.179Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:00:35.179Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:00:35.222Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:00:35.268Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:00:35.269Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:01:35.985Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:01:36.027Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:01:36.027Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:01:36.075Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:01:36.120Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:01:36.120Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:01:37.800Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:01:37.803Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:01:37.864Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:01:37.865Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:01:37.875Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:01:37.876Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:03:21.342Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:03:21.387Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:03:21.387Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:03:21.432Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:03:21.475Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:03:21.475Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:03:23.222Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:03:23.224Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:03:23.270Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:03:23.271Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:03:23.285Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:03:23.285Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:04:56.835Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:04:56.877Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:04:56.877Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:04:56.919Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:04:56.964Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:04:56.964Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:04:58.625Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:04:58.627Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:04:58.679Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:04:58.679Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:04:58.682Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:04:58.683Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:05:39.658Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:05:39.699Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:05:39.700Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:05:39.742Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:05:39.787Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:05:39.787Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:05:41.455Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:05:41.458Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:05:41.501Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:05:41.501Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:05:41.511Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:05:41.511Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:06:13.857Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:06:13.898Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:06:13.898Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:06:13.940Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:06:13.985Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:06:13.986Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:06:16.115Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:06:16.117Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:06:16.159Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:06:16.160Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:06:16.163Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:06:16.163Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:08:17.019Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:08:17.061Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:08:17.061Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:08:17.103Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:08:17.147Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:08:17.148Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:08:18.920Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:08:18.922Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:08:18.966Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:08:18.967Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:08:18.983Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:08:18.983Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:10:03.215Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:10:03.258Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:10:03.258Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:10:03.301Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:10:03.347Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:10:03.348Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:10:05.256Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:10:05.259Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:10:05.308Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:10:05.309Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:10:05.315Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:10:05.316Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:11:05.809Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:11:05.850Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:11:05.850Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:11:05.893Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:11:05.936Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:11:05.937Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:11:07.746Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:11:07.748Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:11:07.801Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:11:07.802Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:11:07.806Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:11:07.807Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:11:20.068Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:11:20.110Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:11:20.110Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:11:20.151Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:11:20.194Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:11:20.195Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:11:21.983Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:11:21.986Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:11:22.030Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:11:22.031Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:11:22.033Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:11:22.034Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:12:37.816Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:12:37.858Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:12:37.858Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:12:37.901Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:12:37.945Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:12:37.945Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:12:39.760Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:12:39.762Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:12:39.843Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:12:39.843Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:12:39.852Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:12:39.852Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:14:34.700Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:14:34.741Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:14:34.741Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:14:34.792Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:14:34.837Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:14:34.837Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:14:36.545Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:14:36.549Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:14:36.599Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:14:36.599Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:14:36.614Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:14:36.614Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:15:50.349Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:15:50.390Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:15:50.390Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:15:50.432Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:15:50.480Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:15:50.480Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:16:11.966Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T01:16:12.007Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:16:12.007Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T01:16:12.569Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T01:16:12.612Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:16:12.614Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T01:16:31.210Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T01:16:31.253Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:16:31.253Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T01:16:34.005Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T01:16:34.047Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:16:34.048Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Message in Order"
+}
+2025-06-15T01:18:16.945Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:18:17.057Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:18:17.058Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:18:17.103Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:18:17.147Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:18:17.148Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:18:19.042Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:18:19.048Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:18:19.101Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:18:19.101Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:18:19.115Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:18:19.115Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:19:32.166Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:19:32.208Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:19:32.209Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:19:32.251Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:19:32.297Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:19:32.298Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:19:34.082Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:19:34.086Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:19:34.140Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:19:34.141Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.sent"
+}
+2025-06-15T01:19:34.147Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:19:34.148Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "notifications.types.transaction.title.received"
+}
+2025-06-15T01:20:26.333Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-00.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-15T01:20:32.425Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-15T01:20:56.922Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:20:56.972Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:20:56.977Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:20:57.022Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:20:57.068Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:20:57.068Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:21:31.018Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-15T01:21:53.080Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:21:53.168Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:21:53.169Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:21:53.271Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:21:53.389Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:21:53.390Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:22:30.649Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-15T01:22:38.251Z [INFO] RATE LIMIT: MongoDB Connected: ac-gplmpmj-shard-00-01.u32xgcm.mongodb.net
+	Metadata: {}
+2025-06-15T01:23:08.695Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:23:08.745Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:23:08.746Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:23:08.804Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:23:08.860Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:23:08.860Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:23:09.549Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Completed"
+}
+2025-06-15T01:23:09.595Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:23:09.595Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Completed"
+}
+2025-06-15T01:23:09.639Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Completed"
+}
+2025-06-15T01:23:09.680Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:23:09.680Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Completed"
+}
+2025-06-15T01:23:24.239Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:23:24.282Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:23:24.282Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:23:24.325Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:23:24.370Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:23:24.370Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:23:25.095Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Completed"
+}
+2025-06-15T01:23:25.143Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:23:25.144Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Completed"
+}
+2025-06-15T01:23:25.191Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Completed"
+}
+2025-06-15T01:23:25.232Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:23:25.232Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Completed"
+}
+2025-06-15T01:24:05.082Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:24:05.140Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:24:05.148Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "New Order Created"
+}
+2025-06-15T01:24:05.209Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:24:05.262Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:24:05.262Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Created"
+}
+2025-06-15T01:24:06.082Z [INFO] RATE LIMIT: Created notification for user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Completed"
+}
+2025-06-15T01:24:06.127Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "6823e6cad294b1e0b640077b",
+  "type": "transaction"
+}
+2025-06-15T01:24:06.127Z [INFO] RATE LIMIT: Emitting notification to user 6823e6cad294b1e0b640077b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Completed"
+}
+2025-06-15T01:24:06.170Z [INFO] RATE LIMIT: Created notification for user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Completed"
+}
+2025-06-15T01:24:06.211Z [ERROR] RATE LIMIT: Error sending email notification:
+	Metadata: {
+  "error": {},
+  "userId": "682e6bde755cf136feedc20b",
+  "type": "transaction"
+}
+2025-06-15T01:24:06.211Z [INFO] RATE LIMIT: Emitting notification to user 682e6bde755cf136feedc20b
+	Metadata: {
+  "type": "transaction",
+  "title": "Order Completed"
+}

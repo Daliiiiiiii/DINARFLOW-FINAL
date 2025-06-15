@@ -34,6 +34,7 @@ router.get('/orders/:orderId', authenticate, p2pController.getOrder);
 router.post('/orders', authenticate, p2pController.createOrder);
 router.put('/orders/:orderId', authenticate, p2pController.updateOrder);
 router.put('/orders/:orderId', authenticate, p2pController.updateOrderStatus);
+router.post('/orders/:orderId/process-payment', authenticate, p2pController.processAutomaticPayment);
 router.post('/orders/:orderId/dispute', authenticate, p2pController.createDispute);
 
 // Chat routes
